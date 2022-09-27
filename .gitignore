@@ -1,0 +1,4 @@
+/application/database/target/
+/application/schr-service/schr-service-domain/target/
+/application/schr-service/schr-service-infrastructure/target/
+/application/schr-service/schr-service-application/target/

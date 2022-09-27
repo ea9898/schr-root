@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+	<groupId>moscow.ptnl.schregister</groupId>
+        <artifactId>schr-root</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>moscow.ptnl.schregister</groupId>
+    <artifactId>database</artifactId>
+    <version>1.0.0</version>
+
+    <build>
+        <finalName>liquibase</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>4.16.1</version>
+                <configuration>
+                    <changeLogFile>${db.target.master}</changeLogFile>
+                    <driver>${db.target.driver}</driver>
+                    <url>${db.target.url}</url>
+                    <username>${db.target.username}</username>
+                    <password>${db.target.password}</password>
+                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>postgresql</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <db.target.driver>org.postgresql.Driver</db.target.driver>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <version>42.5.0</version>
+                    <scope>compile</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
+
+</project>
