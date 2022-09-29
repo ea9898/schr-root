@@ -19,6 +19,10 @@
             <artifactId>schr-service-domain</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-elasticsearch</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
