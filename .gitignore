@@ -3,3 +3,6 @@
 /application/schr-service/schr-service-infrastructure/target/
 /application/schr-service/schr-service-application/target/
 nb-configuration.xml
+/application/schr-mod-jpa/target/
+/application/schr-mod-health/target/
+/application/schr-mod-metrics/target/
