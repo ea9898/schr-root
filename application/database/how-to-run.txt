@@ -1,0 +1,2 @@
+### Для разработки
+mvn liquibase:update -Ppostgresql -Ddb.target.master=master.xml -Ddb.target.url=jdbc:postgresql://upk-db-t1.ptnl.moscow:5432/schregister -Ddb.target.username=schregister -Ddb.target.password=schregister -Dliquibase.databaseChangeLogTableName=SCHREGISTER_CHANGELOG -Dliquibase.databaseChangeLogLockTableName=SCHREGISTER_CHANGELOGLOCK

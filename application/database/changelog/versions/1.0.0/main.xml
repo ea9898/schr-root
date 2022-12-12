@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="1.0.0" author="ddryuchin">
+        <tagDatabase tag="1.0.0"/>
+    </changeSet>
+
+    <changeSet id="SCHREGISTER-17-1" author="ddryuchin" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ESU_INPUT"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ESU_INPUT" remarks="">
+            <column name="ID" type="BIGINT" remarks="Идентификатор записи, формируется автоматически">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="TOPIC" type="VARCHAR(1000)" remarks="Наименование топика">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ES_ID" type="VARCHAR(1000)" remarks="Наименование топика">
+                <constraints nullable="false" unique="true" uniqueConstraintName="esu_input_es_id_uniq"/>
+            </column>
+            <column name="ERROR" type="VARCHAR(4000)" remarks="Текст ошибки" />
+            <column name="STATUS" type="SMALLINT" remarks="Статус обработки сообщения">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DATE_CREATED" type="TIMESTAMP(6)"  remarks="Дата/время создания записи">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DATE_UPDATED" type="TIMESTAMP(6)"  remarks="Дата/время обновления записи">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="ESU_INPUT"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="SCHREGISTER-17-2" author="ddryuchin" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="SEQ_ESU_INPUT_ID"/>
+            </not>
+        </preConditions>
+        <comment>Создание сиквенса для таблицы ESU_INPUT</comment>
+        <createSequence sequenceName="SEQ_ESU_INPUT_ID" />
+        <rollback>
+            <dropSequence sequenceName="SEQ_ESU_INPUT_ID"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="SCHREGISTER-17-3" author="ddryuchin" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="PLANNERS_LOG"/>
+            </not>
+        </preConditions>
+        <createTable tableName="PLANNERS_LOG" remarks="">
+            <column name="ID" type="BIGINT" remarks="Идентификатор записи, формируется автоматически">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="PLANNER" type="VARCHAR(1000)" remarks="Название планировщика">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HOST" type="VARCHAR(1000)" remarks="Нода, на которой работал планировщик">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ERROR" type="VARCHAR(4000)" remarks="Ошибка, полученная при работе планировщика"/>
+            <column name="DATE_START" type="TIMESTAMP(6)" remarks="Дата/время начала работы">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DATE_END" type="TIMESTAMP(6)" remarks="Дата/время окончания работы"/>
+            <column name="DATE_MONITORING" type="TIMESTAMP(6)" remarks="Дата/время окончания работы"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="PLANNERS_LOG"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="SCHREGISTER-17-4" author="ddryuchin" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="SEQ_PLANNERS_LOG_ID"/>
+            </not>
+        </preConditions>
+        <comment>Создание сиквенса для таблицы PLANNERS_LOG</comment>
+        <createSequence sequenceName="SEQ_PLANNERS_LOG_ID"/>
+        <rollback>
+            <dropSequence sequenceName="SEQ_PLANNERS_LOG_ID"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="SCHREGISTER-17-5" author="ddryuchin" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="CONFIG"/>
+            </not>
+        </preConditions>
+        <createTable tableName="CONFIG" remarks="Системные параметры">
+            <column name="code" type="VARCHAR(100)" remarks="Код настройки (имя системного параметра)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="val" type="VARCHAR(1000)" remarks="Значение настройки">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)" remarks="Описание (бизнес название системного параметра)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_updated" type="TIMESTAMP(6)" remarks="Дата/время последнего изменения настройки">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="CONFIG"/>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
