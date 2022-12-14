@@ -15,17 +15,24 @@
         <module>schr-mod-jpa</module>
         <module>schr-mod-health</module>
         <module>schr-mod-metrics</module>
+        <module>schr-mod-domain</module>
+        <module>schr-mod-esu</module>
+        <module>schr-mod-schedule</module>
         <module>schr-service</module>
+        <module>schr-scheduler</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <javaee.version>8.0</javaee.version>
         <spring.boot.version>2.7.4</spring.boot.version>
+        <hibernate.version>5.6.11.Final</hibernate.version>
         <cxf.version>3.5.3</cxf.version>
         <mapstruct.version>1.5.2.Final</mapstruct.version>
         <esu.client.lib.version>4.4.1</esu.client.lib.version>
+        <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
     </properties>
 
 </project>
