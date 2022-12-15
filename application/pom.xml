@@ -12,6 +12,7 @@
 
     <modules>
         <module>database</module>
+        <module>schr-mod-utility</module>
         <module>schr-mod-jpa</module>
         <module>schr-mod-health</module>
         <module>schr-mod-metrics</module>
@@ -33,6 +34,7 @@
         <mapstruct.version>1.5.2.Final</mapstruct.version>
         <esu.client.lib.version>4.4.1</esu.client.lib.version>
         <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
+        <emias.errors.version>1.1.0</emias.errors.version>
     </properties>
 
 </project>

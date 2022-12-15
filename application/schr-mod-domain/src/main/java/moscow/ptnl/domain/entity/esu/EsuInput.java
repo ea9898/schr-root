@@ -24,14 +24,8 @@ public class EsuInput extends BaseEntity<Long> implements Serializable {
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="SEQ_ESU_INPUT_ID")
     private Long id;
 
-    @Column(name = "\"OFFSET\"", nullable = false)
-    private Long offset;
-
-    @Column(name = "TIMESTAMP", nullable = false)
-    private LocalDateTime timeStamp;
-
-    @Column(name = "KEY", nullable = false)
-    private String key;
+    @Column(name = "ES_ID", unique = true, nullable = false)
+    private String esId;
 
     @Column(name = "TOPIC", nullable = false)
     private String topic;
@@ -46,23 +40,21 @@ public class EsuInput extends BaseEntity<Long> implements Serializable {
     @Convert(converter = EsuStatusTypeConverter.class)
     private EsuStatusType status;
 
-    @Column(name = "CREATE_DATE", nullable = false)
-    private LocalDateTime createDate;
+    @Column(name = "DATE_CREATED", nullable = false)
+    private LocalDateTime dateCreated;
 
-    @Column(name = "UPDATE_DATE", nullable = false)
-    private LocalDateTime updateDate;
+    @Column(name = "DATE_UPDATED", nullable = false)
+    private LocalDateTime dateUpdated;
 
     public EsuInput() {
     }
 
-    public EsuInput(Long offset, LocalDateTime timeStamp, String key, String topic, String text, LocalDateTime createDate) {
-        this.offset = offset;
-        this.timeStamp = timeStamp;
-        this.key = key;
+    public EsuInput(String esId, String topic, String text, LocalDateTime dateCreated) {
+        this.esId = esId;
         this.topic = topic;
         this.text = text;
-        this.createDate = createDate;
-        this.updateDate = createDate;
+        this.dateCreated = dateCreated;
+        this.dateUpdated = dateCreated;
         this.status = EsuStatusType.NEW;
     }
 
@@ -75,28 +67,12 @@ public class EsuInput extends BaseEntity<Long> implements Serializable {
         this.id = id;
     }
 
-    public Long getOffset() {
-        return offset;
+    public String getEsId() {
+        return esId;
     }
 
-    public void setOffset(Long offset) {
-        this.offset = offset;
-    }
-
-    public LocalDateTime getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(LocalDateTime timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
+    public void setEsId(String esId) {
+        this.esId = esId;
     }
 
     public String getTopic() {
@@ -131,19 +107,19 @@ public class EsuInput extends BaseEntity<Long> implements Serializable {
         this.status = status;
     }
 
-    public LocalDateTime getCreateDate() {
-        return createDate;
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
-        this.createDate = createDate;
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public LocalDateTime getUpdateDate() {
-        return updateDate;
+    public LocalDateTime getDateUpdated() {
+        return dateUpdated;
     }
 
-    public void setUpdateDate(LocalDateTime updateDate) {
-        this.updateDate = updateDate;
+    public void setDateUpdated(LocalDateTime dateUpdated) {
+        this.dateUpdated = dateUpdated;
     }
 }

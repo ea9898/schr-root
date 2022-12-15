@@ -1,14 +1,17 @@
 package moscow.ptnl.app.esu;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import moscow.ptnl.app.config.PersistenceConstraint;
 import moscow.ptnl.app.model.TopicType;
 import moscow.ptnl.domain.entity.esu.EsuInput;
 import moscow.ptnl.domain.entity.esu.EsuStatusType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.support.TransactionTemplate;
+
 import ru.mos.emias.esu.lib.consumer.message.EsuConsumerMessageProcessor;
 import ru.mos.emias.esu.lib.consumer.message.EsuMessage;
 import ru.mos.emias.esu.lib.exception.EsuConsumerDoNotRetryException;
@@ -16,12 +19,11 @@ import ru.mos.emias.esu.lib.exception.EsuConsumerDoNotRetryException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.lang.invoke.MethodHandles;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Optional;
+import java.util.Random;
 
-public abstract class EsuConsumerProcessor<TObject> extends EsuConsumerMessageProcessor {
+public abstract class EsuConsumerProcessor extends EsuConsumerMessageProcessor {
 
     protected static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass().getName());
     
@@ -37,23 +39,30 @@ public abstract class EsuConsumerProcessor<TObject> extends EsuConsumerMessagePr
     public abstract TopicType getTopicType();
 
     @Override
-    @SuppressWarnings("unchecked")
     public void process(EsuMessage esuMessage) throws EsuConsumerDoNotRetryException {
         LOG.info(String.format("Message received with key=%s, topic=%s", esuMessage.getKey(), esuMessage.getTopic()));
         final Optional<TopicType> topicType = TopicType.find(esuMessage.getTopic() == null ? null : esuMessage.getTopic().split("\\.")[0]);
         
-        if (!topicType.isPresent() || !getTopicType().equals(topicType.get())) {
-            throw new IllegalStateException("Имя топика в сообщении отстутствует или не соответствует имени топика в обработчике");
+        if (topicType.isEmpty() || !getTopicType().equals(topicType.get())) {
+            throw new IllegalArgumentException("Имя топика в сообщении отстутствует или не соответствует имени топика в обработчике");
         }
 
         try {
-            //Save the message
-            EsuInput input = new EsuInput(esuMessage.getOffset(),
-                    LocalDateTime.ofInstant(Instant.ofEpochMilli(esuMessage.getTimestamp()), ZoneId.systemDefault()),
-                    esuMessage.getKey(), esuMessage.getTopic(), esuMessage.getBody(), LocalDateTime.now());
+            Optional<String> errorMessage = validate(esuMessage.getBody());
+            //String esId = Elasticsearch.save(esuMessage.getBody());
+            String esId = esuMessage.getBody(); //FIXME
 
+            final EsuInput input = new EsuInput(esId, esuMessage.getTopic(), esuMessage.getBody(), LocalDateTime.now());
+
+            errorMessage.ifPresent(s -> {
+                input.setStatus(EsuStatusType.PROCESSED);
+                input.setError(s);
+            });
             transactions.executeWithoutResult((s) -> entityManager.persist(input));
 
+            if (errorMessage.isPresent()) {
+                throw new IllegalArgumentException(errorMessage.get());
+            }
         } catch (Throwable th) {
             String error = String.format("Unexpected error while processing ESU message with key=%s, topic=%s",
                     esuMessage.getKey(), esuMessage.getTopic());
@@ -62,9 +71,5 @@ public abstract class EsuConsumerProcessor<TObject> extends EsuConsumerMessagePr
         }
     }
 
-    private void setErrorProcessed(EsuInput input, String error) {
-        input.setError(error);
-        input.setUpdateDate(LocalDateTime.now());
-        input.setStatus(EsuStatusType.PROCESSED);
-    }
+    protected abstract Optional<String> validate(String message);
 }

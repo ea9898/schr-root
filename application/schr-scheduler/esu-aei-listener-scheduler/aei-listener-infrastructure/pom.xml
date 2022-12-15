@@ -16,6 +16,11 @@
             <artifactId>schr-mod-esu</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>moscow.ptnl.schregister</groupId>
+            <artifactId>aei-listener-domain</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>

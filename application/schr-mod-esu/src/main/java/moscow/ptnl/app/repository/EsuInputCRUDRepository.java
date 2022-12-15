@@ -23,7 +23,7 @@ public interface EsuInputCRUDRepository extends BaseCrudRepository<EsuInput, Lon
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @QueryHints({@QueryHint(name = "javax.persistence.lock.timeout", value = "-2")})//-2 это LockOptions.SKIP_LOCKED
-    @Query("SELECT e FROM EsuInput e WHERE (e.topic = :topic OR e.topic = :topicPrivate) AND (e.status = :statusWaiting OR e.status = :statusWorking AND e.updateDate < :stuckBeforeTime)")
+    @Query("SELECT e FROM EsuInput e WHERE (e.topic = :topic OR e.topic = :topicPrivate) AND (e.status = :statusWaiting OR e.status = :statusWorking AND e.dateUpdated < :stuckBeforeTime)")
     List<EsuInput> find(@Param("topic") String topic, @Param("topicPrivate") String topicPrivate, @Param("statusWaiting") EsuStatusType statusWaiting,
                         @Param("statusWorking") EsuStatusType statusWorking, @Param("stuckBeforeTime") LocalDateTime stuckBeforeTime,
                         Pageable pageable);

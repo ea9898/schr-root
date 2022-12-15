@@ -1,0 +1,173 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://emias.mos.ru/erp/AttachmentEvent/v1",
+  "description": "Уведомление об изменении прикрепления пациента",
+  "type": "object",
+  "properties": {
+    "event": {
+      "$ref": "#/definitions/Event",
+      "description": "Cобытие изменения прикрепления"
+    },
+    "attachmentNewValue": {
+      "$ref": "#/definitions/Attachment",
+      "description": "Атрибуты прикрепления после выполнения операции по событию"
+    },
+    "attachmentOldValue": {
+      "$ref": "#/definitions/Attachment",
+      "description": "Атрибуты прикрепления до выполнения операции по событию. Требуется для обработки на стороне потребителей, которые не хранят предыдущее состояние."
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "event",
+    "attachmentNewValue"
+  ],
+  "definitions": {
+    "Event": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Идентификатор сообщения"
+        },
+        "dateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Дата события. Соответствует дате последнего изменения прикрепления"
+        },
+        "eventType": {
+          "$ref": "#/definitions/EventType"
+        }
+      },
+      "required": [
+        "id",
+        "dateTime",
+        "eventType"
+      ],
+      "description": "Cобытие изменения прикрепления",
+      "additionalProperties": false
+    },
+    "Attachment": {
+      "type": "object",
+      "properties": {
+        "attachId": {
+          "type": "integer",
+          "description": "Идентификатор прикрепления"
+        },
+        "patientId": {
+          "type": "integer",
+          "description": "Идентификатор пациента"
+        },
+        "isActual": {
+          "type": "boolean",
+          "description": "Признак актуальности"
+        },
+        "attachRequestId": {
+          "type": "integer",
+          "description": "Идентификатор заявления на прикрепление"
+        },
+        "attachPolType": {
+          "$ref": "#/definitions/NsiWithCode",
+          "description": "Тип полиса для прикрепления"
+        },
+        "noSelfAppointment": {
+          "type": "boolean",
+          "description": "Признак 'Не дает права самозаписи'"
+        },
+        "moId": {
+          "type": "integer",
+          "description": "Идентификатор медицинской организации (МО)"
+        },
+        "muId": {
+          "type": "integer",
+          "description": "Идентификатор медицинского учреждения (МУ)"
+        },
+        "areaId": {
+          "type": "integer",
+          "description": "Идентификатор участка"
+        },
+        "attachBeginDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Дата начала прикрепления"
+        },
+        "attachEndDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Дата окончания прикрепления"
+        },
+        "attachType": {
+          "$ref": "#/definitions/NsiWithCode",
+          "description": "Категория прикрепления. Определяет различия между прикреплениями в процессах оказании мед.помощи. Например: 0 - небазовое; 1 - базовое терапевтическое; 2 - базовое стоматологическое; 5 - зависимое; 6 - диспансерное."
+        },
+        "processOfAttachment": {
+          "$ref": "#/definitions/NsiWithCode",
+          "description": "Способ прикрепления. Определяет, как было создано прикрепления пациента. Например: 1 – По территориальному принципу, 2 – По заявлению, 3 – По заявлению в электронном виде."
+        },
+        "attachChangeType": {
+          "$ref": "#/definitions/NsiWithCode",
+          "description": "Идентификатор типа изменения прикрепления"
+        },
+        "attachEndCause": {
+          "$ref": "#/definitions/NsiWithCode",
+          "description": "Идентификатор причины закрытия прикрепления"
+        },
+        "attachForm": {
+          "$ref": "#/definitions/NsiWithCode",
+          "description": "Вид прикрепления"
+        },
+        "attachEndCauseErzl": {
+          "type": "integer",
+          "description": "Причина закрытия прикрепления в РС ЕРЗЛ"
+        },
+        "areaTypeCode": {
+          "type": "integer",
+          "description": "Код типа участка"
+        },
+        "areaNumber": {
+          "type": "integer",
+          "description": "Номер участка"
+        }
+      }, "required": [
+        "attachId",
+        "isActual",
+        "attachPolType",
+        "noSelfAppointment",
+        "moId",
+        "attachBeginDate",
+        "attachType"
+      ]
+    },
+    "EventType": {
+      "type": "string",
+      "enum": [
+        "CREATE",
+        "CHANGE",
+        "CLOSE",
+        "PATIENT_CHANGE"
+      ]
+    },
+    "NsiWithCode": {
+      "description": "Значение из справочника ЕМИАС.НСИ2, в котором имеется бизнес-код",
+      "type": "object",
+      "properties": {
+        "globalId": {
+          "type": "integer",
+          "description": "Глобальный идентификатор ЕМИАС.НСИ2"
+        },
+        "code": {
+          "type": "string",
+          "description": "Бизнес-код значения из справочника"
+        },
+        "title": {
+          "type": "string",
+          "description": "Наименование значения справочника"
+        }
+      }, "required": [
+        "globalId",
+        "code",
+        "title"
+      ]
+    }
+  }
+}

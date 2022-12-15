@@ -14,6 +14,7 @@
 
     <packaging>pom</packaging>
     <modules>
+        <module>aei-listener-domain</module>
         <module>aei-listener-infrastructure</module>
         <module>aei-listener-application</module>
     </modules>

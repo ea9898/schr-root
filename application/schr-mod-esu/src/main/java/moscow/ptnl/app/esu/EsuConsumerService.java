@@ -5,11 +5,13 @@ import moscow.ptnl.app.model.PlannersEnum;
 import moscow.ptnl.app.model.TopicType;
 import moscow.ptnl.app.service.PlannersService;
 import moscow.ptnl.app.service.TaskManagerService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
 import ru.mos.emias.esu.lib.consumer.EsuConsumerBuilder;
 import ru.mos.emias.esu.lib.consumer.EsuTopicConsumer;
 import ru.mos.emias.esu.lib.consumer.message.EsuConsumerMessageProcessor;
@@ -21,7 +23,6 @@ import javax.annotation.PreDestroy;
 import java.lang.invoke.MethodHandles;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +42,7 @@ public class EsuConsumerService {
     private final Map<String, ConsumerWrapper> consumers = new HashMap<>();
 
     @Autowired(required = false)
-    private List<? extends EsuConsumerProcessor<?>> esuConsumerProcessors;
+    private List<? extends EsuConsumerProcessor> esuConsumerProcessors;
 
     @Autowired(required = false)
     private EsuProperties esuProperties;

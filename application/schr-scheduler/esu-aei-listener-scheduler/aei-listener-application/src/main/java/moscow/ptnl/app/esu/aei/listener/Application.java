@@ -9,7 +9,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  *
  * @author ddryuchin
  */
-@SpringBootApplication(scanBasePackages = { "moscow.ptnl.app", "moscow.ptnl.domain" })
+@SpringBootApplication(scanBasePackages = { "moscow.ptnl.app", "moscow.ptnl.domain", "moscow.ptnl.schr.repository" })
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

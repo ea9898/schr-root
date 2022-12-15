@@ -15,6 +15,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>moscow.ptnl.schregister</groupId>
+            <artifactId>schr-mod-domain</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-elasticsearch</artifactId>
         </dependency>

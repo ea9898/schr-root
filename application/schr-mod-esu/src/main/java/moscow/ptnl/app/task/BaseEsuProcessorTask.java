@@ -2,7 +2,6 @@ package moscow.ptnl.app.task;
 
 import moscow.ptnl.app.config.PersistenceConstraint;
 import moscow.ptnl.domain.entity.PlannersLog;
-import moscow.ptnl.app.model.PlannersEnum;
 import moscow.ptnl.app.model.TopicType;
 import moscow.ptnl.app.repository.EsuInputCRUDRepository;
 import moscow.ptnl.app.scheduling.BaseTask;
@@ -59,7 +58,8 @@ public abstract class BaseEsuProcessorTask extends BaseTask {
                         PageRequest paging = PageRequest.of(0,
                                 settingService.getSettingProperty(getPlanner().getPlannerName()
                                         + ".numberMsg", Integer.class, false),
-                                Sort.by(Sort.Direction.ASC, EsuInput_.TIME_STAMP));
+//                                Sort.by(Sort.Direction.ASC, EsuInput_.TIME_STAMP)
+                        null); //FIXME
                         //3. Выполняет отбор (SELECT FOR UPDATE) первых N (*.numberMsg) записей,
                         // отсортированных в порядке возрастания по полю DATE_UPDATED в ESU_INPUT по условию
                         List<EsuInput> messages = esuInputCRUDRepository.find(getTopic().getName(),
@@ -69,7 +69,7 @@ public abstract class BaseEsuProcessorTask extends BaseTask {
                             //Если найдена хотя бы одна запись, то Система обновляет статус отобранных записей
                             m.setStatus(EsuStatusType.IN_PROGRESS);
                             m.setError(null);
-                            m.setUpdateDate(LocalDateTime.now());
+                            m.setDateUpdated(LocalDateTime.now());
                         });
                         return messages;
                     });
@@ -92,7 +92,7 @@ public abstract class BaseEsuProcessorTask extends BaseTask {
                                     input.setError(null);
                                     input.setStatus(EsuStatusType.PROCESSED);
                                 }
-                                input.setUpdateDate(LocalDateTime.now());
+                                input.setDateUpdated(LocalDateTime.now());
                             } finally {
                                 transactions.executeWithoutResult(status -> esuInputCRUDRepository.save(input));
                             }
