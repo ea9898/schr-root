@@ -1,5 +1,6 @@
 package moscow.ptnl.app.esu;
 
+import moscow.ptnl.app.error.CustomErrorReason;
 import moscow.ptnl.domain.entity.PlannersLog;
 import moscow.ptnl.app.model.PlannersEnum;
 import moscow.ptnl.app.model.TopicType;
@@ -117,7 +118,7 @@ public class EsuConsumerService {
                     }
                 } catch (Exception ex) {
                     LOG.error("Ошибка запуска подписчика топика : " + topic, ex);
-                    plannersService.savePlannerError(planner, ex.getMessage());
+                    plannersService.savePlannerError(planner, CustomErrorReason.ESU_UNREACHABLE.format(ex.getMessage()));
                 }
             } else {
                 boolean result = true;
@@ -170,6 +171,11 @@ public class EsuConsumerService {
             .withProcessor(processor) // Объект класса, унаследованного от EsuConsumerMessageProcessor. NOT THREAD SAFE
             .withPollingInterval(esuProperties.getPollingInterval()) // Интервал между запросами в Kafka в мс (по-умолчанию 300)
             .withPollingTimeout(esuProperties.getPollingTimeout()) // Таймаут чтения сообщений из Kafka в мс (по-умолчанию 300)
+            .withRetriesLimit(esuProperties.getRetriesLimit()) // Количество попыток повторной обработки полученного сообщения при возникновении ошибок в ходе обработки
+            /* Максимальное количество сообщений, получаемых из топика за одно обращение.
+            Значение, отличное от 1 , запрещено, т.к. в этом случае библиотека ЕСУ использует пакетный режим обработки,
+            не применимый в рамках текущих алгоритмов работы продукта */
+            .withMaxPollRecords(esuProperties.getMaxPollRecords()) //
             .withCustomErrorProducerProperties(new EsuErrorProducerPropertiesBuilder().withRequestTimeout(esuProperties.getProducerTimeout()).build())  // Таймаут продюсера, при отправке сообщений в топик ConsumerErrors
             /*
                 Боремся с ошибкой: 

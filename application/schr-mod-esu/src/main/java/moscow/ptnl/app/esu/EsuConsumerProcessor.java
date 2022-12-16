@@ -50,9 +50,9 @@ public abstract class EsuConsumerProcessor extends EsuConsumerMessageProcessor {
         try {
             Optional<String> errorMessage = validate(esuMessage.getBody());
             //String esId = Elasticsearch.save(esuMessage.getBody());
-            String esId = esuMessage.getBody(); //FIXME
+            String esId = esuMessage.getBody().substring(0, Math.min(1000, esuMessage.getBody().length())); //FIXME
 
-            final EsuInput input = new EsuInput(esId, esuMessage.getTopic(), esuMessage.getBody(), LocalDateTime.now());
+            final EsuInput input = new EsuInput(esId, esuMessage.getTopic(), LocalDateTime.now());
 
             errorMessage.ifPresent(s -> {
                 input.setStatus(EsuStatusType.PROCESSED);
@@ -61,8 +61,10 @@ public abstract class EsuConsumerProcessor extends EsuConsumerMessageProcessor {
             transactions.executeWithoutResult((s) -> entityManager.persist(input));
 
             if (errorMessage.isPresent()) {
-                throw new IllegalArgumentException(errorMessage.get());
+                throw new EsuConsumerDoNotRetryException(errorMessage.get());
             }
+        } catch (EsuConsumerDoNotRetryException ex) {
+            throw ex;
         } catch (Throwable th) {
             String error = String.format("Unexpected error while processing ESU message with key=%s, topic=%s",
                     esuMessage.getKey(), esuMessage.getTopic());

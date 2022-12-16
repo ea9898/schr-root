@@ -11,7 +11,7 @@ import ru.mos.emias.errors.domain.ErrorReason;
 public enum CustomErrorReason implements ErrorReason {
 
     UNEXPECTED_ERROR("SCHR_000", "Непредвиденная ошибка. %s"),
-    ESU_UNREACHABLE("SCHR_100", "ЕСУ недоступна или вернула ошибку"),
+    ESU_UNREACHABLE("SCHR_100", "ЕСУ недоступна или вернула ошибку: %s"),
     INCORRECT_FORMAT_ESU_MESSAGE("SCHR_101", "Некорректный формат сообщения ЕСУ: %s"),
     ;
 

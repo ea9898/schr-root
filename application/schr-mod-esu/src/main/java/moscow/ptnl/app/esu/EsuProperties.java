@@ -17,17 +17,23 @@ public class EsuProperties {
     @Value("${esu.consumer.group.id}")
     private String consumerGroupId;
 
-    @Value("${esu.consumer.topic.threads.number}")
+    @Value("${esu.consumer.topic.threads.number:1}")
     private Integer topicThreadsNumber;
 
-    @Value("${esu.consumer.polling.interval}")
+    @Value("${esu.consumer.polling.interval:300}")
     private Integer pollingInterval;
 
-    @Value("${esu.consumer.polling.timeout}")
+    @Value("${esu.consumer.polling.timeout:300}")
     private Integer pollingTimeout;
 
-    @Value("${esu.consumer.error.producer.timeout}")
+    @Value("${esu.consumer.error.producer.timeout:600}")
     private Integer producerTimeout;
+
+    @Value("${esu.consumer.max.poll.records:1}")
+    private Integer maxPollRecords;
+
+    @Value("${esu.consumer.retries.limit:5}")
+    private Integer retriesLimit;
 
     @Value("${esu.bootstrap.servers}")
     private String esuServers;
@@ -76,5 +82,13 @@ public class EsuProperties {
 
     public String getMetricMessageProduct() {
         return metricMessageProduct;
+    }
+
+    public int getRetriesLimit() {
+        return retriesLimit;
+    }
+
+    public int getMaxPollRecords() {
+        return maxPollRecords;
     }
 }

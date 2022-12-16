@@ -30,9 +30,6 @@ public class EsuInput extends BaseEntity<Long> implements Serializable {
     @Column(name = "TOPIC", nullable = false)
     private String topic;
 
-    @Column(name = "TEXT", nullable = false)
-    private String text;
-
     @Column(name = "ERROR")
     private String error;
 
@@ -49,10 +46,9 @@ public class EsuInput extends BaseEntity<Long> implements Serializable {
     public EsuInput() {
     }
 
-    public EsuInput(String esId, String topic, String text, LocalDateTime dateCreated) {
+    public EsuInput(String esId, String topic, LocalDateTime dateCreated) {
         this.esId = esId;
         this.topic = topic;
-        this.text = text;
         this.dateCreated = dateCreated;
         this.dateUpdated = dateCreated;
         this.status = EsuStatusType.NEW;
@@ -81,14 +77,6 @@ public class EsuInput extends BaseEntity<Long> implements Serializable {
 
     public void setTopic(String topic) {
         this.topic = topic;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 
     public String getError() {

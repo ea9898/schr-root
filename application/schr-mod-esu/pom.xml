@@ -14,6 +14,11 @@
     <dependencies>
         <dependency>
             <groupId>moscow.ptnl.schregister</groupId>
+            <artifactId>schr-mod-utility</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>moscow.ptnl.schregister</groupId>
             <artifactId>schr-mod-schedule</artifactId>
             <version>${project.version}</version>
         </dependency>

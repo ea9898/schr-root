@@ -33,6 +33,7 @@ public class TaskManagerService {
      */
     public boolean checkConsumerIsOn(String taskName) {
         //настройка прослушивания конкретного топика
+        taskName = Character.toLowerCase(taskName.charAt(0)) + taskName.substring(1);
         boolean runMode = Boolean.TRUE.equals(settingService.getListenerRunMode(taskName));
 
         if (!runMode) {
