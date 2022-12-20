@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import moscow.ptnl.app.config.PersistenceConstraint;
 import moscow.ptnl.app.model.TopicType;
+import moscow.ptnl.app.model.es.IndexEsuInput;
+import moscow.ptnl.app.repository.es.IndexEsuInputRepository;
 import moscow.ptnl.domain.entity.esu.EsuInput;
 import moscow.ptnl.domain.entity.esu.EsuStatusType;
 
@@ -19,9 +21,10 @@ import ru.mos.emias.esu.lib.exception.EsuConsumerDoNotRetryException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.lang.invoke.MethodHandles;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Optional;
-import java.util.Random;
 
 public abstract class EsuConsumerProcessor extends EsuConsumerMessageProcessor {
 
@@ -36,6 +39,9 @@ public abstract class EsuConsumerProcessor extends EsuConsumerMessageProcessor {
     @Autowired
     protected ObjectMapper mapper;
 
+    @Autowired
+    protected IndexEsuInputRepository indexEsuInputRepository;
+
     public abstract TopicType getTopicType();
 
     @Override
@@ -49,8 +55,11 @@ public abstract class EsuConsumerProcessor extends EsuConsumerMessageProcessor {
 
         try {
             Optional<String> errorMessage = validate(esuMessage.getBody());
-            //String esId = Elasticsearch.save(esuMessage.getBody());
-            String esId = esuMessage.getBody().substring(0, Math.min(1000, esuMessage.getBody().length())); //FIXME
+
+            final IndexEsuInput indexEsuInput = new IndexEsuInput(esuMessage.getOffset(),
+                    LocalDateTime.ofInstant(Instant.ofEpochMilli(esuMessage.getTimestamp()), ZoneId.systemDefault()),
+                    esuMessage.getKey(), esuMessage.getTopic(), esuMessage.getBody());
+            String esId = transactions.execute((s) -> indexEsuInputRepository.save(indexEsuInput)).getId();
 
             final EsuInput input = new EsuInput(esId, esuMessage.getTopic(), LocalDateTime.now());
 

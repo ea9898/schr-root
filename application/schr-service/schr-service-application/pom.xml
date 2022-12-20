@@ -36,6 +36,11 @@
         </dependency>
         <dependency>
             <groupId>moscow.ptnl.schregister</groupId>
+            <artifactId>schr-mod-elastic</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>moscow.ptnl.schregister</groupId>
             <artifactId>schr-service-infrastructure</artifactId>
             <version>${project.version}</version>
         </dependency>

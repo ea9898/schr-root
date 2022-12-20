@@ -14,6 +14,7 @@
         <module>database</module>
         <module>schr-mod-utility</module>
         <module>schr-mod-jpa</module>
+        <module>schr-mod-elastic</module>
         <module>schr-mod-health</module>
         <module>schr-mod-metrics</module>
         <module>schr-mod-domain</module>

@@ -1,6 +1,6 @@
 package moscow.ptnl.schr.test;
 
-import moscow.ptnl.schr.configuration.ESConfiguration;
+import moscow.ptnl.app.config.ESConfiguration;
 import moscow.ptnl.schr.model.es.TestObject;
 import moscow.ptnl.schr.repository.es.TestObjectRepository;
 import static org.junit.Assert.assertEquals;

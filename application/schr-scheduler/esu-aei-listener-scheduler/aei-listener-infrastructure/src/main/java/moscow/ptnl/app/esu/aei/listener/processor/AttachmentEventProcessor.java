@@ -2,7 +2,7 @@ package moscow.ptnl.app.esu.aei.listener.processor;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import moscow.ptnl.app.aei.handler.validator.AttachmentEventValidator;
+import moscow.ptnl.app.esu.aei.listener.validator.AttachmentEventValidator;
 import moscow.ptnl.app.error.CustomErrorReason;
 import moscow.ptnl.app.esu.EsuConsumerProcessor;
 import moscow.ptnl.app.model.TopicType;

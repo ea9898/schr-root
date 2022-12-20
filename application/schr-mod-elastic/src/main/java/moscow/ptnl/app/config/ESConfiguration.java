@@ -1,4 +1,4 @@
-package moscow.ptnl.schr.configuration;
+package moscow.ptnl.app.config;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
@@ -21,7 +21,7 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
  */
 @Configuration
 @EnableElasticsearchRepositories(
-    basePackages = "moscow.ptnl.schr.repository.es"
+    basePackages = { "moscow.ptnl.schr.repository.es", "moscow.ptnl.app.repository.es" }
 )
 @PropertySource("classpath:elasticsearch.properties")
 public class ESConfiguration extends ElasticsearchConfigurationSupport {
@@ -32,7 +32,6 @@ public class ESConfiguration extends ElasticsearchConfigurationSupport {
     @Value("${elasticsearch.port:9200}")
     private int esPort;
 
-    
     @Bean
     public ElasticsearchTransport elasticsearchTransport() {
         RestClient restClient = RestClient.builder(
