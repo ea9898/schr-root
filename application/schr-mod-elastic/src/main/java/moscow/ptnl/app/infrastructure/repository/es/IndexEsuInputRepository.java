@@ -1,6 +1,6 @@
-package moscow.ptnl.app.esu.aei.listener.repository.es;
+package moscow.ptnl.app.infrastructure.repository.es;
 
-import moscow.ptnl.app.esu.aei.listener.model.es.IndexEsuInput;
+import moscow.ptnl.app.domain.model.es.IndexEsuInput;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 /**

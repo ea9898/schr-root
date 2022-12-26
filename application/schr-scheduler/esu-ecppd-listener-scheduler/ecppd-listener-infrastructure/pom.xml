@@ -2,35 +2,37 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    
-    <modelVersion>4.0.0</modelVersion>
-
     <parent>
+        <artifactId>esu-ecppd-listener-scheduler</artifactId>
         <groupId>moscow.ptnl.schregister</groupId>
-        <artifactId>schr-root</artifactId>
         <version>1.0.0</version>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>ecppd-listener-infrastructure</artifactId>
 
-    <artifactId>schr-mod-elastic</artifactId>
-    <packaging>jar</packaging>
-    
     <dependencies>
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-elasticsearch</artifactId>
+            <groupId>moscow.ptnl.schregister</groupId>
+            <artifactId>schr-mod-esu</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>moscow.ptnl.schregister</groupId>
+            <artifactId>ecppd-listener-domain</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
-    
+
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot.version}</version>
                 <type>pom</type>
+                <version>${spring.boot.version}</version>
                 <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
-    
+
 </project>

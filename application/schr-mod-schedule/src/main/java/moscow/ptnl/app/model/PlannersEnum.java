@@ -3,7 +3,8 @@ package moscow.ptnl.app.model;
 public enum PlannersEnum {
 
     I_SCHR_1(1, "attachmentEventImportService"),
-    I_SCHR_2(2, "attachmentEventHandlerService")
+    I_SCHR_2(2, "attachmentEventHandlerService"),
+    I_SCHR_3(3, "erpChangePatientPersonalDataImportService")
     ;
 
     private final Integer plannerId;

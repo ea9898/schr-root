@@ -2,6 +2,7 @@ package moscow.ptnl.app.esu.aei.listener.processor;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import moscow.ptnl.app.esu.aei.listener.validator.AttachmentEventValidator;
 import moscow.ptnl.app.error.CustomErrorReason;
 import moscow.ptnl.app.esu.EsuConsumerProcessor;
@@ -25,6 +26,9 @@ import java.util.Optional;
  */
 @Component
 public class AttachmentEventProcessor extends EsuConsumerProcessor {
+
+    @Autowired
+    protected ObjectMapper mapper;
 
     @Autowired
     private AttachmentEventValidator attachmentEventValidator;

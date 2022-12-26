@@ -30,6 +30,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <javaee.version>8.0</javaee.version>
         <spring.boot.version>2.7.4</spring.boot.version>
+        <jakarta.json.version>2.1.1</jakarta.json.version>
         <hibernate.version>5.6.11.Final</hibernate.version>
         <cxf.version>3.5.3</cxf.version>
         <mapstruct.version>1.5.2.Final</mapstruct.version>

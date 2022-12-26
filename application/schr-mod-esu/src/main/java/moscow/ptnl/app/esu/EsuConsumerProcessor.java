@@ -1,7 +1,5 @@
 package moscow.ptnl.app.esu;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import moscow.ptnl.app.config.PersistenceConstraint;
 import moscow.ptnl.app.model.TopicType;
 import moscow.ptnl.app.model.es.IndexEsuInput;
@@ -35,9 +33,6 @@ public abstract class EsuConsumerProcessor extends EsuConsumerMessageProcessor {
 
     @Autowired
     protected TransactionTemplate transactions;
-
-    @Autowired
-    protected ObjectMapper mapper;
 
     @Autowired
     protected IndexEsuInputRepository indexEsuInputRepository;

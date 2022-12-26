@@ -1,4 +1,4 @@
-package moscow.ptnl.app.esu.aei.listener.model.es;
+package moscow.ptnl.app.domain.model.es;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
