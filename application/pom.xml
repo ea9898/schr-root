@@ -34,7 +34,7 @@
         <hibernate.version>5.6.11.Final</hibernate.version>
         <cxf.version>3.5.3</cxf.version>
         <mapstruct.version>1.5.2.Final</mapstruct.version>
-        <esu.client.lib.version>4.4.1</esu.client.lib.version>
+        <esu.client.lib.version>4.5.1</esu.client.lib.version>
         <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
         <emias.errors.version>1.1.0</emias.errors.version>
     </properties>

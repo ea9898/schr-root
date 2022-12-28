@@ -176,7 +176,9 @@ public class EsuConsumerService {
             Значение, отличное от 1 , запрещено, т.к. в этом случае библиотека ЕСУ использует пакетный режим обработки,
             не применимый в рамках текущих алгоритмов работы продукта */
             .withMaxPollRecords(esuProperties.getMaxPollRecords()) //
-            .withCustomErrorProducerProperties(new EsuErrorProducerPropertiesBuilder().withRequestTimeout(esuProperties.getProducerTimeout()).build())  // Таймаут продюсера, при отправке сообщений в топик ConsumerErrors
+            .withCustomErrorProducerProperties(
+                    new EsuErrorProducerPropertiesBuilder(esuProperties.getBootstrapServersESU(), esuProperties.getConsumerGroupId())
+                            .withRequestTimeout(esuProperties.getProducerTimeout()).build())  // Таймаут продюсера, при отправке сообщений в топик ConsumerErrors
             /*
                 Боремся с ошибкой: 
                 Commit cannot be completed since the group has already rebalanced and assigned the partitions to another member

@@ -1,0 +1,1 @@
+docker build --target schregister-service -t docker.artifactory.emias.mos.ru/schregister/schregister-service:1.0.0 .
