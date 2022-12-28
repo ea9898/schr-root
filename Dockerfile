@@ -13,9 +13,33 @@ RUN mvn install:install-file -Dfile=/opt/src/libs/emias-errors-1.1.0.jar -Dgroup
 RUN mvn -f /opt/src/pom.xml validate clean install -DskipTests=true -e -T 2
 
 #
-# Package stage НСИ
+# Веб-сервис "Поиск и возвращение актуальных данных об учащихся и данных реестра по учащимся" (searchService)
 #
-FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:11.0.7 as schregister-service
+FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:11.0.7 as schregister-searchservice
 ARG JAR_FILE=schr-service/schr-service-application/target/schr-service-*.jar
 COPY --from=build /opt/src/${JAR_FILE} /opt/schr-service.jar
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/schr-service.jar"]
+
+#
+# I_SCHR_1 - Получение сообщений из топика AttachmentEvent
+#
+FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:11.0.7 as schregister-attachmenteventimportservice
+ARG JAR_FILE=schr-scheduler/esu-aei-listener-scheduler/aei-listener-application/target/esu-aei-listener-scheduler-*.jar
+COPY --from=build /opt/src/${JAR_FILE} /opt/esu-aei-listener-scheduler.jar
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/esu-aei-listener-scheduler.jar"]
+
+#
+# I_SCHR_3 - Получение сообщений из топика ErpChangePatientPersonalData
+#
+FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:11.0.7 as schregister-erpchangepatientpersonaldataimportservice
+ARG JAR_FILE=schr-scheduler/esu-ecppd-listener-scheduler/ecppd-listener-application/target/esu-ecppd-listener-scheduler-*.jar
+COPY --from=build /opt/src/${JAR_FILE} /opt/esu-ecppd-listener-scheduler.jar
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/esu-ecppd-listener-scheduler.jar"]
+
+#
+# I_SCHR_5 - Получение сообщений из топика ErpChangePatientPolicies
+#
+FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:11.0.7 as schregister-erpchangepatientpoliciesimportservice
+ARG JAR_FILE=schr-scheduler/erp-change-patient-policies-import-service/erp-change-patient-application/target/erp-change-patient-policies-*.jar
+COPY --from=build /opt/src/${JAR_FILE} /opt/erp-change-patient-policies.jar
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/erp-change-patient-policies.jar"]

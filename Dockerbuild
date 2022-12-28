@@ -1,1 +1,7 @@
-docker build --target schregister-service -t docker.artifactory.emias.mos.ru/schregister/schregister-service:1.0.0 .
+docker build --target schregister-searchservice -t docker.artifactory.emias.mos.ru/schregister/schregister-searchservice:1.0.0 .
+
+docker build --target schregister-erpchangepatientpolicies -t docker.artifactory.emias.mos.ru/schregister/schregister-erpchangepatientpolicies:1.0.0 .
+
+docker build --target schregister-erpchangepatientpersonaldataimportservice -t docker.artifactory.emias.mos.ru/schregister/schregister-erpchangepatientpersonaldataimportservice:1.0.0 .
+
+docker build --target schregister-attachmenteventimportservice -t docker.artifactory.emias.mos.ru/schregister/schregister-attachmenteventimportservice:1.0.0 .

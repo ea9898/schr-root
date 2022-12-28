@@ -203,4 +203,25 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="SCHREGISTER-21-3" author="sevgeniy" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="CONFIG"/>
+                <sqlCheck expectedResult="0">select count(*) from CONFIG where CODE = 'erpChangePatientPoliciesImportService.run.mode'</sqlCheck>
+            </and>
+        </preConditions>
+        <comment>CONFIG - Режим работы слушателя топика ErpChangePatientPoliciesImportService</comment>
+        <insert tableName="CONFIG">
+            <column name="CODE" value="erpChangePatientPoliciesImportService.run.mode"/>
+            <column name="DESCRIPTION" value="Режим работы планировщика ErpChangePatientPoliciesImportService (false - выключен; true – включен)"/>
+            <column name="VAL" value="1"/>
+            <column name="DATE_UPDATED" valueDate="now()"/>
+        </insert>
+        <rollback>
+            <delete tableName="CONFIG">
+                <where>CODE='erpChangePatientPoliciesImportService.run.mode'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>

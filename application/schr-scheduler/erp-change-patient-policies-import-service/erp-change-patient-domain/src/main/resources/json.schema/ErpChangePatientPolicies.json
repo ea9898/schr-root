@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://emias.mos.ru/erp/ErpChangePatient/v1",
+  "description": "Универсальная схема топиков сведений сущности пациента",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "ИД события в ЕРП"
+    },
+    "operationDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Дата и время создания сообщения"
+    },
+    "emiasId": {
+      "type": "integer",
+      "description": "Идентификатор пациента в ЕМИАС"
+    },
+    "uklErp": {
+      "type": "string",
+      "description": "Уникальный идентификатор застрахованного лица в ЕМИАС.ЕРП"
+    },
+    "patientType": {
+      "$ref": "#/definitions/PatientType",
+      "description": "Тип пациента. Возможные значения: I - идентифицированный (пациент с действующим и/или недействующим полисом ОМС в Системе); P - неполные данные (пациент без полиса ОМС в Системе)"
+    },
+    "systemCode": {
+      "type": "string",
+      "description": "Код системы источника данных. Указывается для пациента с типом P - неполные данные"
+    },
+    "patientRecStatus": {
+      "$ref": "#/definitions/PatientRecStatus",
+      "description": "Статус записи пациента. Возможные значения: Y – Актуальная, N – Не актуальная"
+    },
+    "entityName": {
+      "type": "string",
+      "description": "Наименование сущности. Возможные значения см. в RF_ENTITY.NAME"
+    },
+    "entityData": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/EntityData"
+      },
+      "description": "Сведения сущности. Может отсутствовать в случае архивирования последней записи сущности"
+    }
+  },
+  "required": [
+    "id",
+    "operationDate",
+    "uklErp",
+    "patientType",
+    "patientRecStatus",
+    "entityName"
+  ],
+  "definitions": {
+    "PatientType": {
+      "type": "string",
+      "enum": [
+        "I",
+        "P"
+      ]
+    },
+    "PatientRecStatus": {
+      "type": "string",
+      "enum": [
+        "Y",
+        "N"
+      ]
+    },
+    "Value": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Идентификатор значения. Может быть заполнен только для атрибута с типом dictionary"
+        },
+        "code": {
+          "type": "string",
+          "description": "Код значения. Может быть заполнен только для атрибута с типом dictionary"
+        },
+        "value": {
+          "type": "string",
+          "description": "Значение"
+        }
+      }
+    },
+    "Attribute": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Наименование атрибута записи"
+        },
+        "type": {
+          "type": "string",
+          "description": "Тип атрибута записи. Возможные значения (жестко не фиксированы): string; integer; date ('YYYY-MM-DD'); dateTime ('YYYY-MM-DD'T'HH24:MI:SS.SSSZ'); double; boolean; dictionary; guid"
+        },
+        "value": {
+          "$ref": "#/definitions/Value",
+          "description": "Значение атрибута"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "EntityData": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          },
+          "description": "Сведения записи сущности"
+        }
+      },
+      "required": [
+        "attributes"
+      ]
+    }
+  }
+}
