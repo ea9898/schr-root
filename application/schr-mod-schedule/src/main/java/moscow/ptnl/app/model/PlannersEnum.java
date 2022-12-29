@@ -5,7 +5,8 @@ public enum PlannersEnum {
     I_SCHR_1(1, "attachmentEventImportService"),
     I_SCHR_2(2, "attachmentEventHandlerService"),
     I_SCHR_3(3, "erpChangePatientPersonalDataImportService"),
-    I_SCHR_5(3, "erpChangePatientPoliciesImportService")
+    I_SCHR_5(5, "erpChangePatientPoliciesImportService"),
+    I_SCHR_11(11, "schoolAttachmentEventImportService")
     ;
 
     private final Integer plannerId;

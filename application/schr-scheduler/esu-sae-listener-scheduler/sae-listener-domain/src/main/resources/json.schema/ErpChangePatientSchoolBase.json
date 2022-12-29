@@ -1,0 +1,141 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://emias.mos.ru/erpschool/ErpChangePatient/v1",
+  "description": "Универсальная схема топиков сущностей пациента",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "ИД события в ЕРП"
+    },
+    "operationDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Дата и время создания сообщения"
+    },
+    "emiasId": {
+      "type": "integer",
+      "description": "Идентификатор пациента в ЕМИАС"
+    },
+    "uklErp": {
+      "type": "string",
+      "description": "Уникальный идентификатор застрахованного лица в ЕМИАС.ЕРП"
+    },
+    "studentId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Идентификатор учащегося в ЕМИАС.Учащиеся (ранее - person_uuid в КИС ГУСОЭВ). Формат: GUID"
+    },
+    "studentPersonId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Идентификатор персоны-учащегося в МЭШ. Формат: GUID"
+    },
+    "patientStudentLinkStatus": {
+      "$ref": "#/definitions/RecStatus",
+      "description": "Статус записи связи пациента и учащегося. Возможные значения: Y – Актуальная; N – Не актуальная"
+    },
+    "patientType": {
+      "$ref": "#/definitions/PatientType",
+      "description": "Тип пациента. Возможные значения: I - идентифицированный (пациент с действующим и/или недействующим полисом ОМС в Системе); P - неполные данные (пациент без полиса ОМС в Системе)"
+    },
+    "patientSystemCode": {
+      "type": "string",
+      "description": "Код системы источника данных. Указывается для пациента с типом P - неполные данные"
+    },
+    "patientRecStatus": {
+      "$ref": "#/definitions/RecStatus",
+      "description": "Статус записи пациента. Возможные значения: Y – Актуальная, N – Не актуальная"
+    },
+    "entityName": {
+      "type": "string",
+      "description": "Наименование сущности. Возможные значения: schoolAttachment"
+    },
+    "entityData": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/EntityData"
+      },
+      "description": "Сведения записи сущности"
+    }
+  },
+  "required": [
+    "id",
+    "operationDate",
+    "uklErp",
+    "studentId",
+    "patientStudentLinkStatus",
+    "patientType",
+    "patientRecStatus",
+    "entityName"
+  ],
+  "definitions": {
+    "RecStatus": {
+      "type": "string",
+      "enum": [
+        "Y",
+        "N"
+      ]
+    },
+    "PatientType": {
+      "type": "string",
+      "enum": [
+        "I",
+        "P"
+      ]
+    },
+    "Value": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Идентификатор значения. Может быть заполнен только для атрибута с типом dictionary"
+        },
+        "code": {
+          "type": "string",
+          "description": "Код значения. Может быть заполнен только для атрибута с типом dictionary"
+        },
+        "value": {
+          "type": "string",
+          "description": "Значение. Для типа dictionary заполняется наименованием значения из справочника. При этом, если в соответствующем справочнике будет несколько наименований, то будет указываться полное"
+        }
+      }
+    },
+    "Attribute": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Наименование атрибута записи"
+        },
+        "type": {
+          "type": "string",
+          "description": "Возможные значения (жестко не фиксированы): string; integer; date (формат данных 'YYYY-MM-DD'); dateTime (формат данных 'YYYY-MM-DD'T'HH24:MI:SS.SSSZ', миллисекунды не обязательные); double; boolean; dictionary; guid"
+        },
+        "value": {
+          "$ref": "#/definitions/Value",
+          "description": "Значение атрибута"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "EntityData": {
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          },
+          "description": "Сведения записи сущности"
+        }
+      },
+      "required": [
+        "attributes"
+      ]
+    }
+  }
+}
