@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://emias.mos.ru/esu/topic/LastAnthropometry/v1/schema#",
+  "title": "LastAnthropometryV1",
+  "type": "object",
+  "description": "Топик LastAnthropometry предназначен для передачи актуальных антропометрических данных пациентов из ЕМИАС.Антропометрия подсистемам-потребителям ЕМИАС.",
+  "properties": {
+    "patientId": {
+      "type": "string",
+      "description": "Идентификатор пациента ЕМИАС"
+    },
+    "measurements": {
+      "type": "array",
+      "description": "Актуальные данные об измерениях пациента",
+      "items": {
+        "type": "object",
+        "properties": {
+          "measurementDate": {
+            "type": "string",
+            "format": "date",
+            "description": "Дата проведения измерения"
+          },
+          "documentId": {
+            "type": "string",
+            "description": "Идентификатор документа СИМИ"
+          },
+          "measurementType": {
+            "type": "number",
+            "description": "Тип показателя"
+          },
+          "measurementValue": {
+            "type": "number",
+            "description": "Значение показателя"
+          },
+          "centility": {
+            "type": "string",
+            "description": "Центильность (если применимо к показателю)"
+          },
+          "resultAssessmentId": {
+            "type": "number",
+            "description": "Идентификатор результата оценки антропометрического показателя"
+          }
+        },
+        "required": [
+          "measurementDate", "documentId", "measurementType", "measurementValue"
+        ]
+      },
+      "annuledMeasurementsTypeId": {
+        "type": "array",
+        "description": "Массив идентификаторов аннулированных показателей",
+        "items": {
+          "type": "number"
+        }
+      },
+      "required": "patientId"
+    }
+  }
+}

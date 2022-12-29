@@ -12,7 +12,8 @@ public enum TopicType {
 
     ATTACHMENT_EVENT(1, "AttachmentEvent", PlannersEnum.I_SCHR_1),
     ERP_CHANGE_PATIENT_PERSONAL_DATA(3, "ErpChangePatientPersonalData", PlannersEnum.I_SCHR_3),
-    ERP_CHANGE_PATIENT_POLICIES(5, "ErpChangePatientPolicies", PlannersEnum.I_SCHR_5)
+    ERP_CHANGE_PATIENT_POLICIES(5, "ErpChangePatientPolicies", PlannersEnum.I_SCHR_5),
+    LAST_ANTHROPOMETRY(7, "LastAnthropometry", PlannersEnum.I_SCHR_7)
     ;
 
     private final String topic;
