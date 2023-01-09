@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  *
  * @author sorlov
  */
-@Document(indexName = IndexEsuInput.INDEX_NAME)
+@Document(indexName = IndexEsuInput.INDEX_NAME, createIndex = false)
 public class IndexEsuInput {
     
     public static final String INDEX_NAME = "index_esu_input";
