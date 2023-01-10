@@ -10,15 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <packaging>pom</packaging>
-    <artifactId>schr-scheduler</artifactId>
+    <artifactId>patient-consents-topic-import-service</artifactId>
 
     <modules>
-        <module>esu-aei-listener-scheduler</module>
-        <module>esu-ecppd-listener-scheduler</module>
-        <module>erp-change-patient-policies-import-service</module>
-        <module>esu-sae-listener-scheduler</module>
-        <module>patient-consents-topic-import-service</module>
-<!--        <module>esu-aei-handler-scheduler</module>-->
+        <module>patient-consents-topic-application</module>
+        <module>patient-consents-topic-domain</module>
+        <module>patient-consents-topic-infrastructure</module>
     </modules>
-
 </project>

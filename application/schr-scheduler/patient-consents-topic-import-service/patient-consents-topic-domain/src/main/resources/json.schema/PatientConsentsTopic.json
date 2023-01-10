@@ -1,0 +1,265 @@
+{
+  "$schema":"http://json-schema.org/draft-07/schema#",
+  "id":"http://example.com/example.json",
+  "type":"object",
+  "title":"Сообщение, публикуемое в топик PatientConsentsTopic",
+  "description":"Схема, описывающая структуру данных о согласиях пациента",
+  "properties":{
+    "message":{
+      "required":[
+        "patientId",
+        "consentDetails",
+        "issueDate",
+        "consentFormId",
+        "consentTypeId"
+      ],
+      "patientId":{
+        "id":"#/properties/patientId",
+        "type":"number",
+        "title":"идентификатор пациента"
+      },
+      "consentDetails":{
+        "id":"#/properties/consentDetails",
+        "type":"object",
+        "title":"Сведения о согласии (решении) пациента",
+        "required":[
+          "consentId",
+          "issueDate",
+          "consentFormId",
+          "consentTypeId"
+        ],
+        "properties":{
+          "consentId":{
+            "id":"#/properties/consentDetails/properties/consentId",
+            "type":"number",
+            "title":"Идентификатор согласия (решения)"
+          },
+          "documentedConsent":{
+            "id":"#/properties/consentDetails/properties/documentedConsent",
+            "type":"object",
+            "title":"Сведения о документе согласия",
+            "required":[
+              "documentId",
+              "createDate",
+              "allMedicalIntervention",
+              "signedByPatient",
+              "moId",
+              "moName"
+            ],
+            "properties":{
+              "documentId":{
+                "id":"#/properties/consentDetails/properties/documentedConsent/properties/documentId",
+                "type":"string",
+                "title":"Идентификатор документа согласия"
+              },
+              "createDate":{
+                "id":"#/properties/consentDetails/properties/documentedConsent/properties/createDate",
+                "type":"string",
+                "format":"date-time",
+                "title":"Дата создания документа"
+              },
+              "locationId":{
+                "id":"#/properties/consentDetails/properties/documentedConsent/properties/locationId",
+                "type":"number",
+                "title":"Идентификатор Локации"
+              },
+              "locationName":{
+                "id":"#/properties/consentDetails/properties/documentedConsent/properties/locationName",
+                "type":"string",
+                "title":"Наименование локации"
+              },
+              "allMedicalIntervention":{
+                "id":"#/properties/consentDetails/properties/documentedConsent/properties/allMedicalIntervention",
+                "type":"boolean",
+                "title":"Признак 'На весь перечень'"
+              },
+              "interventionDetails":{
+                "id":"#/properties/consentDetails/properties/documentedConsent/properties/interventionDetails",
+                "type":"object",
+                "title":"Список видов мед. вмешательств",
+                "required":[
+                  "medInterventionId"
+                ],
+                "properties":{
+                  "medInterventionId":{
+                    "id":"#/properties/consentDetails/properties/documentedConsent/properties/interventionDetails/properties/medInterventionId",
+                    "type":"array",
+                    "title":"Идентификатор вида медицинского вмешательства",
+                    "contains":{
+                      "type":"number"
+                    }
+                  }
+                }
+              },
+              "Immunodiagnostics":{
+                "id":"#/properties/consentDetails/properties/documentedConsent/properties/Immunodiagnostics",
+                "type":"object",
+                "title":"Перечень иммунодиагностик",
+                "required":[
+                  "immunodiagnostic"
+                ],
+                "properties":{
+                  "immunodiagnostic":{
+                    "id":"#/properties/consentDetails/properties/documentedConsent/properties/Immunodiagnostics/properties/immunodiagnostic",
+                    "type":"array",
+                    "title":"Набор данных об иммунодиагностике, на которую дано согласие",
+                    "contains":{
+                      "type":"object"
+                    },
+                    "required":[
+                      "immunoTestKind"
+                    ],
+                    "properties":{
+                      "immunoTestKind":{
+                        "id":"#/properties/consentDetails/properties/documentedConsent/properties/Immunodiagnostics/properties/immunodiagnostic/properties/immunoTestKind",
+                        "type":"object",
+                        "title":"Сведения о виде иммунодиагностики",
+                        "required":[
+                          "immunoKindCode",
+                          "infectionCode"
+                        ],
+                        "properties":{
+                          "immunoKindCode":{
+                            "id":"#/properties/consentDetails/properties/documentedConsent/properties/Immunodiagnostics/properties/immunodiagnostic/properties/immunoTestKind/properties/immunoKindCode",
+                            "type":"number",
+                            "title":"Идентификатор Вид иммунодиагностики"
+                          },
+                          "infectionCode":{
+                            "id":"#/properties/consentDetails/properties/documentedConsent/properties/Immunodiagnostics/properties/immunodiagnostic/properties/immunoTestKind/properties/infectionCode",
+                            "type":"number",
+                            "title":"Код инфекции"
+                          }
+                        }
+                      },
+                      "immunoDrugsTns":{
+                        "id":"#/properties/consentDetails/properties/documentedConsent/properties/Immunodiagnostics/properties/immunodiagnostic/properties/immunoDrugsTns",
+                        "type":"object",
+                        "title":"Сведения о препарате",
+                        "required":[
+                          "immunoDrugsTnCode"
+                        ],
+                        "properties":{
+                          "immunoDrugsTnCode":{
+                            "id":"#/properties/consentDetails/properties/documentedConsent/properties/Immunodiagnostics/properties/immunodiagnostic/properties/immunoDrugsTns/properties/immunoDrugsTnCode",
+                            "type":"number",
+                            "title":"Идентификатор наименования препарата"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "representativeDocumentId":{
+              "id":"#/properties/consentDetails/properties/documentedConsent/properties/representativeDocumentId",
+              "type":"string",
+              "title":"Идентификатор документа законного представителя"
+            },
+            "scanDocumentId":{
+              "id":"#/properties/consentDetails/properties/documentedConsent/properties/scanDocumentId",
+              "type":"string",
+              "title":"Идентификатор скана документа согласия"
+            },
+            "templateId":{
+              "id":"#/properties/consentDetails/properties/documentedConsent/properties/scanDocumentId",
+              "type":"string",
+              "title":"Наименование шаблона документа"
+            },
+            "signedByPatient":{
+              "id":"#/properties/consentDetails/properties/documentedConsent/properties/signedByPatient",
+              "type":"boolean",
+              "title":"Признак 'Пациент сам подписал согласие'"
+            },
+            "cancelReasonId":{
+              "id":"#/properties/consentDetails/properties/documentedConsent/properties/cancelReasonId",
+              "type":"number",
+              "title":"Идентификатор причина отказа"
+            },
+            "cancelReasonOther":{
+              "id":"#/properties/consentDetails/properties/documentedConsent/properties/cancelReasonOther",
+              "type":"string",
+              "title":"Причина отказа (другое)"
+            },
+            "revisionDate":{
+              "id":"#/properties/consentDetails/properties/documentedConsent/properties/revisionDate",
+              "type":"date",
+              "title":"Дата пересмотра"
+            },
+            "documentFormId":{
+              "id":"#/properties/consentDetails/properties/documentedConsent/properties/documentFormId",
+              "type":"number",
+              "title":"Идентификатор форма полученного документа"
+            },
+            "moId":{
+              "id":"#/properties/consentDetails/properties/documentedConsent/properties/moId",
+              "type":"number",
+              "title":"Идентификатор МО, которому дается согласие"
+            },
+            "moName":{
+              "id":"#/properties/consentDetails/properties/documentedConsent/properties/moName",
+              "type":"string",
+              "title":"Наименование мед. организации"
+            }
+          },
+          "issueDate":{
+            "id":"#/properties/consentDetails/properties/issueDate",
+            "type":"string",
+            "format":"date-time",
+            "title":"Дата и время принятия решения"
+          },
+          "consentFormId":{
+            "id":"#/properties/consentDetails/properties/consentFormId",
+            "type":"number",
+            "title":"Идентификатор Вид информированного добровольного согласия"
+          },
+          "consentTypeId":{
+            "id":"#/properties/consentDetails/properties/consentTypeId",
+            "type":"number",
+            "title":"Идентификатор тип согласия (решения)"
+          },
+          "representativeId":{
+            "id":"#/properties/consentDetails/properties/representativeId",
+            "type":"number",
+            "title":"Идентификатор законного представителя"
+          },
+          "authorDetails":{
+            "id":"#/properties/consentDetails/properties/authorDetails",
+            "type":"object",
+            "title":"Сведения об авторе изменений",
+            "required":[
+              "muId"
+            ],
+            "properties":{
+              "medEmployeeLogin":{
+                "id":"#/properties/consentDetails/properties/medEmployeeLogin",
+                "type":"string",
+                "title":"Логин ЕМИАС автора изменений"
+              },
+              "medEmployeeName":{
+                "id":"#/properties/consentDetails/properties/medEmployeeName",
+                "type":"string",
+                "title":"ФИО ЕМИАС автора изменений"
+              },
+              "medEmployeeSpeciality":{
+                "id":"#/properties/consentDetails/properties/medEmployeeSpeciality",
+                "type":"string",
+                "title":"Специальность автора изменений"
+              },
+              "muId":{
+                "id":"#/properties/consentDetails/properties/muId",
+                "type":"string",
+                "title":"Идентификатор МУ автора"
+              },
+              "host":{
+                "id":"#/properties/consentDetails/properties/host",
+                "type":"string",
+                "title":"Хост АРМа, с которого произведены изменения"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

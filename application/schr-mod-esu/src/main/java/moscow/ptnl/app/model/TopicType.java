@@ -13,7 +13,8 @@ public enum TopicType {
     ATTACHMENT_EVENT(1, "AttachmentEvent", PlannersEnum.I_SCHR_1),
     ERP_CHANGE_PATIENT_PERSONAL_DATA(3, "ErpChangePatientPersonalData", PlannersEnum.I_SCHR_3),
     ERP_CHANGE_PATIENT_POLICIES(5, "ErpChangePatientPolicies", PlannersEnum.I_SCHR_5),
-    SCHOOL_ATTACHMENT_EVENT(11, "SchoolAttachmentEvent", PlannersEnum.I_SCHR_11)
+    SCHOOL_ATTACHMENT_EVENT(11, "SchoolAttachmentEvent", PlannersEnum.I_SCHR_11),
+    PATIENT_CONSENTS_TOPIC(9, "PatientConsentsTopic", PlannersEnum.I_SCHR_9)
     ;
 
     private final String topic;
