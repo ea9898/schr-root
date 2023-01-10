@@ -245,4 +245,55 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="SCHREGISTER-35-1" author="ddryuchin" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ES_JOURNAL_REQUESTS"/>
+            </not>
+        </preConditions>
+        <createTable tableName="ES_JOURNAL_REQUESTS" remarks="Журнал с историей запросов к методам">
+            <column name="ID" type="BIGINT" remarks="Идентификатор записи, формируется автоматически">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="METHOD_NAME" type="VARCHAR(1000)" remarks="Наименование метода">
+                <constraints nullable="false"/>
+            </column>
+            <column name="URI" type="VARCHAR(1000)" remarks="Идентификатор ресурса, куда обращается клиент">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SYSTEM_NAME" type="VARCHAR(1000)" remarks="Шифр системы-потребителя">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_NAME" type="VARCHAR(1000)" remarks="Имя пользователя">
+                <constraints nullable="false"/>
+            </column>
+            <column name="REQUEST" type="VARCHAR(4000)" remarks="Текст запроса к методу">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HTTP_STATUS_CODE" type="BIGINT" remarks="Код ответа метода">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ERROR_MESSAGE" type="VARCHAR(4000)" remarks="Текст ошибки метода"/>
+            <column name="DATE_REQUEST" type="TIMESTAMP(6)"  remarks="Дата/время создания записи">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="ES_JOURNAL_REQUESTS"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="SCHREGISTER-35-2" author="ddryuchin" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="SEQ_ES_JR_ID"/>
+            </not>
+        </preConditions>
+        <comment>Создание сиквенса для таблицы ES_JOURNAL_REQUESTS</comment>
+        <createSequence sequenceName="SEQ_ES_JR_ID" />
+        <rollback>
+            <dropSequence sequenceName="SEQ_ES_JR_ID"/>
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>
