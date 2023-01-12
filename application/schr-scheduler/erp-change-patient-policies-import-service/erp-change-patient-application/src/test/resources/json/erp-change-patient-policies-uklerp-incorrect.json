@@ -1,0 +1,118 @@
+{
+  "id": 17237685,
+  "operationDate": "2022-10-18T14:36:36.124+03:00",
+  "emiasId": 333,
+  "uklErp": 22,
+  "patientType": "I",
+  "patientRecStatus": "Y",
+  "entityName": "policies",
+  "entityData": [
+    {
+      "attributes": [
+        {
+          "name": "policyOMSType",
+          "type": "dictionary",
+          "value": {
+            "code": "S",
+            "value": "полис ОМС старого образца"
+          }
+        },
+        {
+          "name": "policyNumber",
+          "type": "string",
+          "value": {
+            "value": "770000 8184090530"
+          }
+        },
+        {
+          "name": "policyBeginDate",
+          "type": "date",
+          "value": {
+            "value": "2002-04-11"
+          }
+        },
+        {
+          "name": "policyEndDate",
+          "type": "date",
+          "value": {
+            "value": "2022-10-15"
+          }
+        },
+        {
+          "name": "policySMO",
+          "type": "dictionary",
+          "value": {
+            "id": 134750147,
+            "code": "38",
+            "value": "Акционерное общество \"Медицинская акционерная страховая компания\""
+          }
+        },
+        {
+          "name": "isExternalSMO",
+          "type": "boolean",
+          "value": {
+            "value": "false"
+          }
+        },
+        {
+          "name": "policyInsuranceTerritoryName",
+          "type": "string",
+          "value": {
+            "value": "г.Москва"
+          }
+        },
+        {
+          "name": "policyInsuranceTerritoryCode",
+          "type": "string",
+          "value": {
+            "value": "45000"
+          }
+        },
+        {
+          "name": "policySMOOGRN",
+          "type": "string",
+          "value": {
+            "value": "1027739099772"
+          }
+        },
+        {
+          "name": "policySMOBeginDate",
+          "type": "date",
+          "value": {
+            "value": "2002-04-11"
+          }
+        },
+        {
+          "name": "policySMOEndDate",
+          "type": "date",
+          "value": {
+            "value": "2022-10-15"
+          }
+        },
+        {
+          "name": "policyStatus",
+          "type": "dictionary",
+          "value": {
+            "code": "D",
+            "value": "погашен по смерти"
+          }
+        },
+        {
+          "name": "policyErzlStatus",
+          "type": "dictionary",
+          "value": {
+            "code": "3",
+            "value": "погашен по смерти"
+          }
+        },
+        {
+          "name": "policyChangeDate",
+          "type": "dateTime",
+          "value": {
+            "value": "2022-10-18T14:24:56+03:00"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "id": 17235576,
+  "operationDate": "2022-10-18T14:21:56.641+03:00",
+  "emiasId": 30000012424839,
+  "uklErp": "F4491681",
+  "patientType": "I",
+  "entityName": "policies",
+  "entityData": [
+    {
+      "attributes": [
+        {
+          "name": "policyOMSType",
+          "type": "dictionary",
+          "value": {
+            "code": "V",
+            "value": "временное свидетельство ОМС"
+          }
+        },
+        {
+          "name": "policyNumber",
+          "type": "string",
+          "value": {
+            "value": "700131518"
+          }
+        },
+        {
+          "name": "policyBeginDate",
+          "type": "date",
+          "value": {
+            "value": "2022-10-10"
+          }
+        },
+        {
+          "name": "policyEndDate",
+          "type": "date",
+          "value": {
+            "value": "2022-12-12"
+          }
+        },
+        {
+          "name": "policySMO",
+          "type": "dictionary",
+          "value": {
+            "id": 134750064,
+            "code": "1",
+            "value": "Не определено"
+          }
+        },
+        {
+          "name": "isExternalSMO",
+          "type": "boolean",
+          "value": {
+            "value": "true"
+          }
+        },
+        {
+          "name": "policyInsuranceTerritoryName",
+          "type": "string",
+          "value": {
+            "value": "Не определено"
+          }
+        },
+        {
+          "name": "policyInsuranceTerritoryCode",
+          "type": "string",
+          "value": {
+            "value": "00000"
+          }
+        },
+        {
+          "name": "policySMOOGRN",
+          "type": "string",
+          "value": {
+            "value": "0000000000000"
+          }
+        },
+        {
+          "name": "policySMOBeginDate",
+          "type": "date",
+          "value": {
+            "value": "2022-10-10"
+          }
+        },
+        {
+          "name": "policySMOEndDate",
+          "type": "date",
+          "value": {
+            "value": "2022-12-12"
+          }
+        },
+        {
+          "name": "policyStatus",
+          "type": "dictionary",
+          "value": {
+            "code": "Y",
+            "value": "действует"
+          }
+        },
+        {
+          "name": "policyChangeDate",
+          "type": "dateTime",
+          "value": {
+            "value": "2022-10-18T14:07:04+03:00"
+          }
+        }
+      ]
+    }
+  ]
+}
