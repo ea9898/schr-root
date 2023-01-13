@@ -16,6 +16,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 import java.util.ResourceBundle;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.repository.support.Repositories;
 
@@ -100,8 +101,9 @@ public class PersistenceConfiguration {
         factory.afterPropertiesSet();
         return factory.getObject();
     }
-    
-    @Bean @Lazy
+
+    @Bean
+    @Lazy
     public Repositories repositories(ApplicationContext context) {
         return new Repositories(context);
     }

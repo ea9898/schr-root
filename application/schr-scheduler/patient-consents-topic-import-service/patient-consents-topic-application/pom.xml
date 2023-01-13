@@ -3,26 +3,26 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>erp-change-patient-policies-import-service</artifactId>
+        <artifactId>patient-consents-topic-import-service</artifactId>
         <groupId>moscow.ptnl.schregister</groupId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <packaging>jar</packaging>
-    <artifactId>erp-change-patient-application</artifactId>
+    <artifactId>patient-consents-topic-application</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>moscow.ptnl.schregister</groupId>
-            <artifactId>erp-change-patient-infrastructure</artifactId>
+            <artifactId>patient-consents-topic-infrastructure</artifactId>
             <version>${project.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>moscow.ptnl.schregister</groupId>-->
-<!--            <artifactId>schr-mod-info</artifactId>-->
-<!--            <version>${project.version}</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>moscow.ptnl.schregister</groupId>-->
+        <!--            <artifactId>schr-mod-info</artifactId>-->
+        <!--            <version>${project.version}</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>moscow.ptnl.schregister</groupId>
             <artifactId>schr-mod-jpa</artifactId>
@@ -86,26 +86,6 @@
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-test</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -121,7 +101,7 @@
     </dependencyManagement>
 
     <build>
-        <finalName>erp-change-patient-policies-${project.version}</finalName>
+        <finalName>patient-consents-topic-${project.version}</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -144,7 +124,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
                 <configuration>
-                    <mainClass>moscow.ptnl.app.erp.change.patient.policies.Application</mainClass>
+                    <mainClass>moscow.ptnl.app.patient.consents.topic.Application</mainClass>
                 </configuration>
                 <executions>
                     <execution>
@@ -189,23 +169,23 @@
                                 <tstamp>
                                     <format property="buildTime" pattern="yyyy-MM-dd HH:mm:ss"/>
                                 </tstamp>
-                                <property name="buildTime" value="${maven.build.timestamp}" />
+                                <property name="buildTime" value="${maven.build.timestamp}"/>
                                 <exec dir="${basedir}" executable="git"
                                       outputProperty="scmCurrentBranch">
-                                    <arg value="rev-parse" />
-                                    <arg value="--abbrev-ref" />
-                                    <arg value="HEAD" />
+                                    <arg value="rev-parse"/>
+                                    <arg value="--abbrev-ref"/>
+                                    <arg value="HEAD"/>
                                 </exec>
                                 <exec dir="${basedir}" executable="git"
                                       outputProperty="scmUrl">
-                                    <arg value="config" />
-                                    <arg value="--get" />
-                                    <arg value="remote.origin.url" />
+                                    <arg value="config"/>
+                                    <arg value="--get"/>
+                                    <arg value="remote.origin.url"/>
                                 </exec>
                                 <exec dir="${basedir}" executable="git"
                                       outputProperty="buildNumber">
-                                    <arg value="rev-parse" />
-                                    <arg value="HEAD" />
+                                    <arg value="rev-parse"/>
+                                    <arg value="HEAD"/>
                                 </exec>
                             </target>
                         </configuration>
@@ -215,7 +195,7 @@
                         <configuration>
                             <target>
                                 <copy file="${project.build.outputDirectory}/info.json"
-                                      tofile="${project.build.directory}/${project.build.finalName}/info.json" />
+                                      tofile="${project.build.directory}/${project.build.finalName}/info.json"/>
                             </target>
                         </configuration>
                         <goals>

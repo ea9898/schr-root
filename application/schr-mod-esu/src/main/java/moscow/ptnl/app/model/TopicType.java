@@ -14,6 +14,7 @@ public enum TopicType {
     ERP_CHANGE_PATIENT_PERSONAL_DATA(3, "ErpChangePatientPersonalData", PlannersEnum.I_SCHR_3),
     ERP_CHANGE_PATIENT_POLICIES(5, "ErpChangePatientPolicies", PlannersEnum.I_SCHR_5),
     LAST_ANTHROPOMETRY(7, "LastAnthropometry", PlannersEnum.I_SCHR_7),
+    PATIENT_CONSENTS_TOPIC(9, "PatientConsentsTopic", PlannersEnum.I_SCHR_9),
     SCHOOL_ATTACHMENT_EVENT(11, "SchoolAttachmentEvent", PlannersEnum.I_SCHR_11)
     ;
 
