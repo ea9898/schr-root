@@ -11,7 +11,7 @@ import static org.springframework.data.elasticsearch.annotations.FieldType.Neste
 @Document(indexName = StudentPatientData.INDEX_NAME, createIndex = false)
 public class StudentPatientData {
 
-    public static final String INDEX_NAME = "student_patient_registry";
+    public static final String INDEX_NAME = "student_patient_registry_alias";
 
     @Id
     private String id;

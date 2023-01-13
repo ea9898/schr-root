@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Document(indexName = IndexEsuInput.INDEX_NAME, createIndex = false)
 public class IndexEsuInput {
     
-    public static final String INDEX_NAME = "index_esu_input";
+    public static final String INDEX_NAME = "esu_input_alias";
 
     @Id
     private String id;
