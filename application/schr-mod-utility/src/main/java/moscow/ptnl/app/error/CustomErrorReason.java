@@ -13,6 +13,8 @@ public enum CustomErrorReason implements ErrorReason {
     UNEXPECTED_ERROR("SCHR_000", "Непредвиденная ошибка. %s"),
     ESU_UNREACHABLE("SCHR_100", "ЕСУ недоступна или вернула ошибку: %s"),
     INCORRECT_FORMAT_ESU_MESSAGE("SCHR_101", "Некорректный формат сообщения ЕСУ: %s"),
+    PATIENT_NOT_FOUND("SCHR_104", "Пациент с идентификатором %s не найден в системе"),
+    INFORMATION_IS_OUTDATED("SCHR_107", "Получена более старая информация, чем содержится в индексе"),
     ;
 
     private final String description;

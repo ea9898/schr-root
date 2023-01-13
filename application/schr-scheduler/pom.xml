@@ -17,6 +17,7 @@
         <module>esu-ecppd-listener-scheduler</module>
         <module>erp-change-patient-policies-import-service</module>
         <module>esu-sae-listener-scheduler</module>
+        <module>esu-ecppd-handler-scheduler</module>
 <!--        <module>esu-aei-handler-scheduler</module>-->
     </modules>
 

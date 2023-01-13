@@ -1,5 +1,6 @@
 package moscow.ptnl.app.domain.model.es;
 
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
@@ -28,7 +29,7 @@ public class StudentAttachInfo {
     @Field(type = FieldType.Keyword, name = "academicYearName")
     private String academicYearName;
 
-    @Field(type = FieldType.Date, name = "studChangeDate")
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second_millis, name = "studChangeDate")
     private LocalDateTime studChangeDate;
 
     public Long getAttachId() {
