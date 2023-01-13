@@ -1,5 +1,6 @@
 package moscow.ptnl.app.domain.model.es;
 
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
@@ -17,8 +18,8 @@ public class Attachment {
     @Field(type = FieldType.Long, name = "areaTypeCode")
     private Long areaTypeCode;
 
-    @Field(type = FieldType.Long, name = "attachBeginDate")
-    private Long attachBeginDate;
+    @Field(type = FieldType.Date, format = DateFormat.date, name = "attachBeginDate")
+    private LocalDate attachBeginDate;
 
     @Field(type = FieldType.Long, name = "moId")
     private Long moId;
@@ -38,7 +39,7 @@ public class Attachment {
     @Field(type = FieldType.Keyword, name = "processOfAttachmentName")
     private String processOfAttachmentName;
 
-    @Field(type = FieldType.Date, name = "updateDate")
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second_millis, name = "updateDate")
     private LocalDateTime updateDate;
 
     public Long getId() {
@@ -65,11 +66,11 @@ public class Attachment {
         this.areaTypeCode = areaTypeCode;
     }
 
-    public Long getAttachBeginDate() {
+    public LocalDate getAttachBeginDate() {
         return attachBeginDate;
     }
 
-    public void setAttachBeginDate(Long attachBeginDate) {
+    public void setAttachBeginDate(LocalDate attachBeginDate) {
         this.attachBeginDate = attachBeginDate;
     }
 

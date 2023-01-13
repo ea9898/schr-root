@@ -1,8 +1,10 @@
 package moscow.ptnl.app.model.es;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.time.LocalDateTime;
 
@@ -10,7 +12,7 @@ import java.time.LocalDateTime;
  *
  * @author sorlov
  */
-@Document(indexName = IndexEsuInput.INDEX_NAME)
+@Document(indexName = IndexEsuInput.INDEX_NAME, createIndex = false)
 public class IndexEsuInput {
     
     public static final String INDEX_NAME = "index_esu_input";
@@ -20,6 +22,7 @@ public class IndexEsuInput {
 
     private Long offset;
 
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second_millis, name = "timestamp")
     private LocalDateTime timeStamp;
 
     private String key;
@@ -28,7 +31,7 @@ public class IndexEsuInput {
 
     private String message;
 
-    @Field(name = "date_created")
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second_millis, name = "date_created")
     private LocalDateTime dateCreated;
 
     public IndexEsuInput() {

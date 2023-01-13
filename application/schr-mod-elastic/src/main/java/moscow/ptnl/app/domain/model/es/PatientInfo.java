@@ -1,5 +1,6 @@
 package moscow.ptnl.app.domain.model.es;
 
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
@@ -32,10 +33,10 @@ public class PatientInfo {
     @Field(type = FieldType.Keyword, name = "genderCode")
     private String genderCode;
 
-    @Field(type = FieldType.Date, name = "deathDate")
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second_millis, name = "deathDate")
     private LocalDate deathDate;
 
-    @Field(type = FieldType.Date, name = "updateDate")
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second_millis, name = "updateDate")
     private LocalDateTime updateDate;
 
     public Long getPatientId() {
