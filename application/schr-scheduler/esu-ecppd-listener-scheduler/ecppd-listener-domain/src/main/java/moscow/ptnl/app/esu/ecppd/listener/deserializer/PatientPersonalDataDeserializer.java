@@ -10,7 +10,7 @@ import moscow.ptnl.app.esu.ecppd.listener.model.erp.PatientPersonalData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;

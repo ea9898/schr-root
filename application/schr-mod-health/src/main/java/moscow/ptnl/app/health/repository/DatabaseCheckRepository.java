@@ -3,9 +3,9 @@ package moscow.ptnl.app.health.repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Query;
+import jakarta.persistence.Query;
 import java.math.BigInteger;
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 import org.springframework.data.repository.NoRepositoryBean;
 
 /**
@@ -24,6 +24,6 @@ public interface DatabaseCheckRepository {
         query.setHint("javax.persistence.query.timeout", timeout);
         query.setHint("javax.persistence.lock.timeout", timeout);
 
-        return ((BigInteger) query.getSingleResult()).longValue();
+        return (Long) query.getSingleResult();
     }
 }

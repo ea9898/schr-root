@@ -28,11 +28,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <javaee.version>8.0</javaee.version>
-        <spring.boot.version>2.7.7</spring.boot.version>
+        <javaee.version>9.1.0</javaee.version>
+        <spring.boot.version>3.0.1</spring.boot.version>
         <jakarta.json.version>2.1.1</jakarta.json.version>
-        <hibernate.version>5.6.11.Final</hibernate.version>
-        <cxf.version>3.5.3</cxf.version>
+        <hibernate.version>6.1.6.Final</hibernate.version>
+        <cxf.version>4.0.0</cxf.version>
         <mapstruct.version>1.5.2.Final</mapstruct.version>
         <esu.client.lib.version>4.5.1</esu.client.lib.version>
         <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>

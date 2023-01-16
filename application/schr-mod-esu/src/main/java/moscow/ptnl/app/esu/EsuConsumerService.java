@@ -19,8 +19,8 @@ import ru.mos.emias.esu.lib.consumer.message.EsuConsumerMessageProcessor;
 import ru.mos.emias.esu.lib.property.EsuErrorProducerPropertiesBuilder;
 import ru.mos.emias.esu.lib.property.EsuLogProducerPropertiesBuilder;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import java.lang.invoke.MethodHandles;
 import java.net.InetAddress;
 import java.net.UnknownHostException;

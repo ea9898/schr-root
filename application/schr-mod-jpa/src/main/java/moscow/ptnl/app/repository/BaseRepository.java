@@ -2,8 +2,8 @@ package moscow.ptnl.app.repository;
 
 import moscow.ptnl.app.config.PersistenceConstraint;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 
 public class BaseRepository {
 

@@ -6,3 +6,5 @@ nb-configuration.xml
 /application/schr-mod-jpa/target/
 /application/schr-mod-health/target/
 /application/schr-mod-metrics/target/
+target
+nbactions.xml

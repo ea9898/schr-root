@@ -2,8 +2,8 @@ package moscow.ptnl.domain.converter;
 
 import moscow.ptnl.domain.entity.esu.EsuStatusType;
 
-import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
+import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Converter;
 
 /**
  * @author sorlov

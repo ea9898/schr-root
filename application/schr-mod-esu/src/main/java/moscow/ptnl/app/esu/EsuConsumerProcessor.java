@@ -16,8 +16,8 @@ import ru.mos.emias.esu.lib.consumer.message.EsuConsumerMessageProcessor;
 import ru.mos.emias.esu.lib.consumer.message.EsuMessage;
 import ru.mos.emias.esu.lib.exception.EsuConsumerDoNotRetryException;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.lang.invoke.MethodHandles;
 import java.time.Instant;
 import java.time.LocalDateTime;
