@@ -1,0 +1,81 @@
+{
+  "event": {
+    "id": 49093978,
+    "dateTime": "2022-10-20T15:50:56",
+    "eventType": "CHANGE"
+  },
+  "attachmentNewValue": {
+    "attachId": 30696071,
+    "patientId": 3987621809,
+    "isActual": true,
+    "attachPolType": {
+      "globalId": 125694322,
+      "code": "1",
+      "title": "Обязательное медицинское страхование"
+    },
+    "noSelfAppointment": false,
+    "moId": 10000399,
+    "muId": 180,
+    "areaId": 17735426,
+    "attachBeginDate": "2014-12-16",
+    "attachType": {
+      "globalId": 128619861,
+      "code": "1",
+      "title": "базовое терапевтическое"
+    },
+    "processOfAttachment": {
+      "globalId": 135857403,
+      "code": "2",
+      "title": "По заявлению"
+    },
+    "attachChangeType": {
+      "globalId": 128619926,
+      "code": "50",
+      "title": "По причине переприкрепления (или при реорганизации участков)"
+    },
+    "attachForm": {
+      "globalId": 128620009,
+      "code": "10",
+      "title": "По участковому принципу (основное)"
+    },
+    "areaTypeCode": 10,
+    "areaNumber": 14
+  },
+  "attachmentOldValue": {
+    "attachId": 30696071,
+    "patientId": 17222525,
+    "isActual": true,
+    "attachPolType": {
+      "globalId": 125694322,
+      "code": "1",
+      "title": "Обязательное медицинское страхование"
+    },
+    "noSelfAppointment": false,
+    "moId": 10000399,
+    "muId": 180,
+    "areaId": 1298,
+    "attachBeginDate": "2014-12-16",
+    "attachType": {
+      "globalId": 128619861,
+      "code": "1",
+      "title": "базовое терапевтическое"
+    },
+    "processOfAttachment": {
+      "globalId": 135857403,
+      "code": "2",
+      "title": "По заявлению"
+    },
+    "attachChangeType": {
+      "globalId": 128619920,
+      "code": "20",
+      "title": "Выбор мед. организации пациентом"
+    },
+    "attachForm": {
+      "globalId": 128620009,
+      "code": "10",
+      "title": "По участковому принципу (основное)"
+    },
+    "areaTypeCode": 10,
+    "areaNumber": 12
+  }
+}

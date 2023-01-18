@@ -1,0 +1,37 @@
+{
+  "event": {
+    "id": 49093989,
+    "dateTime": "2022-10-20T15:51:15",
+    "eventType": "CREATE"
+  },
+  "attachmentNewValue": {
+    "attachId": 136904704,
+    "patientId": 18029439,
+    "isActual": true,
+    "attachPolType": {
+      "globalId": 125694322,
+      "code": "1",
+      "title": "Обязательное медицинское страхование"
+    },
+    "noSelfAppointment": false,
+    "moId": 10485053,
+    "muId": 11057003,
+    "areaId": 20242576,
+    "attachBeginDate": "2022-10-20",
+    "attachType": {
+      "globalId": 128619858,
+      "code": "0",
+      "title": "небазовое"
+    },
+    "processOfAttachment": {
+      "globalId": 135857403,
+      "code": "2",
+      "title": "По заявлению"
+    },
+    "attachForm": {
+      "globalId": 128620009,
+      "code": "10",
+      "title": "По участковому принципу (основное)"
+    }
+  }
+}

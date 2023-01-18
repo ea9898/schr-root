@@ -1,0 +1,87 @@
+{
+  "event": {
+    "id": 49093982,
+    "dateTime": "2022-10-20T15:51:11",
+    "eventType": "CLOSE"
+  },
+  "attachmentNewValue": {
+    "attachId": 47707006,
+    "patientId": 3987621809,
+    "isActual": false,
+    "attachPolType": {
+      "globalId": 125694322,
+      "code": "1",
+      "title": "Обязательное медицинское страхование"
+    },
+    "noSelfAppointment": false,
+    "moId": 204,
+    "muId": 10000375,
+    "areaId": 174057149,
+    "attachBeginDate": "2018-06-06",
+    "attachEndDate": "2022-10-20",
+    "attachType": {
+      "globalId": 128619861,
+      "code": "1",
+      "title": "базовое терапевтическое"
+    },
+    "processOfAttachment": {
+      "globalId": 135857403,
+      "code": "2",
+      "title": "По заявлению"
+    },
+    "attachChangeType": {
+      "globalId": 128619920,
+      "code": "20",
+      "title": "Выбор мед. организации пациентом"
+    },
+    "attachEndCause": {
+      "globalId": 128619959,
+      "code": "10",
+      "title": "Выбор другой мед. организации пациентом"
+    },
+    "attachForm": {
+      "globalId": 128620009,
+      "code": "10",
+      "title": "По участковому принципу (основное)"
+    },
+    "areaTypeCode": 20,
+    "areaNumber": 6
+  },
+  "attachmentOldValue": {
+    "attachId": 47707006,
+    "patientId": 2544843228036,
+    "isActual": true,
+    "attachPolType": {
+      "globalId": 125694322,
+      "code": "1",
+      "title": "Обязательное медицинское страхование"
+    },
+    "noSelfAppointment": false,
+    "moId": 10000332,
+    "muId": 10000332,
+    "areaId": 10006051,
+    "attachBeginDate": "2018-06-06",
+    "attachType": {
+      "globalId": 128619861,
+      "code": "1",
+      "title": "базовое терапевтическое"
+    },
+    "processOfAttachment": {
+      "globalId": 135857403,
+      "code": "2",
+      "title": "По заявлению"
+    },
+    "attachChangeType": {
+      "globalId": 128619920,
+      "code": "20",
+      "title": "Выбор мед. организации пациентом"
+    },
+    "attachForm": {
+      "globalId": 128620009,
+      "code": "10",
+      "title": "По участковому принципу (основное)"
+    },
+    "areaTypeCode": 20,
+    "areaNumber": 6
+  }
+}
