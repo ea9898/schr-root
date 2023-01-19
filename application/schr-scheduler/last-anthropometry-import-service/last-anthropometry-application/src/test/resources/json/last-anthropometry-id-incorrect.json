@@ -1,0 +1,37 @@
+{
+	"patientId": 4362304728036,
+	"measurement": [
+		{
+			"measurementDate": "2022-12-15",
+			"documentID": "872c407e-cbae-4db7-b8c9-34d2c5596253",
+			"measurementType": 3,
+			"measurementValue": 55,
+			"centility": null,
+			"resultAssessmentID": null
+		},
+		{
+			"measurementDate": "2022-12-15",
+			"documentID": "872c407e-cbae-4db7-b8c9-34d2c5596253",
+			"measurementType": 1,
+			"measurementValue": 55,
+			"centility": "низкорослость",
+			"resultAssessmentID": 162628369
+		},
+		{
+			"measurementDate": "2022-12-15",
+			"documentID": "872c407e-cbae-4db7-b8c9-34d2c5596253",
+			"measurementType": 2,
+			"measurementValue": 55,
+			"centility": "ожирение",
+			"resultAssessmentID": 162628376
+		},
+		{
+			"measurementDate": "2022-12-15",
+			"documentID": "872c407e-cbae-4db7-b8c9-34d2c5596253",
+			"measurementType": 4,
+			"measurementValue": 181.8,
+			"centility": null,
+			"resultAssessmentID": null
+		}
+	]
+}
