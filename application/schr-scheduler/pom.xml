@@ -16,9 +16,11 @@
         <module>esu-aei-listener-scheduler</module>
         <module>esu-ecppd-listener-scheduler</module>
         <module>erp-change-patient-policies-import-service</module>
-        <module>esu-sae-listener-scheduler</module>
         <module>last-anthropometry-import-service</module>
-<!--        <module>esu-aei-handler-scheduler</module>-->
+        <module>esu-ecppd-handler-scheduler</module>
+        <module>esu-ae-handler-scheduler</module>
+        <module>patient-consents-topic-import-service</module>
+        <module>esu-sae-listener-scheduler</module>
     </modules>
 
 </project>

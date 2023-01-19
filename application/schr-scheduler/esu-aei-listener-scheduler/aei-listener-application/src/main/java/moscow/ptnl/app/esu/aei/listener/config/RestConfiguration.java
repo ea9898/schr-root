@@ -26,7 +26,7 @@ public class RestConfiguration {
     public ObjectMapper buildObjectMapper() {
         JavaTimeModule dateTimeModule = new JavaTimeModule();
         dateTimeModule.addSerializer(LocalDateTime.class, LocalDateTimeSerializer.INSTANCE);
-        dateTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+        dateTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
         ObjectMapper mapper = new ObjectMapper();
         mapper.disable(MapperFeature.IGNORE_DUPLICATE_MODULE_REGISTRATIONS);
         mapper.registerModule(dateTimeModule);

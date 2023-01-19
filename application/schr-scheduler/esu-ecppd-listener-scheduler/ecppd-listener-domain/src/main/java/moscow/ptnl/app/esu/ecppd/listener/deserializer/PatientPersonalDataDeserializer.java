@@ -34,14 +34,14 @@ public class PatientPersonalDataDeserializer implements Function<String, Patient
     public PatientPersonalData apply(String json) {
         Object value = configuration.jsonProvider().parse(json);
 
-        return PatientPersonalData.build(JsonPath.read(value, "$.emiasId"),
+        return PatientPersonalData.build(mapper.convertValue(JsonPath.read(value, "$.emiasId"), Long.class),
                 JsonPath.read(value, "$.uklErp"),
                 extractSingleArray(value, "$.entityData[0].attributes[?(@.name==\"lastName\")].value.value", String.class),
                 extractSingleArray(value, "$.entityData[0].attributes[?(@.name==\"firstName\")].value.value", String.class),
                 extractSingleArray(value, "$.entityData[0].attributes[?(@.name==\"middleName\")].value.value", String.class),
                 extractSingleArray(value, "$.entityData[0].attributes[?(@.name==\"birthDate\")].value.value", LocalDate.class),
                 extractSingleArray(value, "$.entityData[0].attributes[?(@.name==\"gender\")].value.code", String.class),
-                extractSingleArray(value, "$.entityData[0].attributes[?(@.name==\"deathDateTime\")].value.value", LocalDateTime.class),
+                extractSingleArray(value, "$.entityData[0].attributes[?(@.name==\"deathDateTime\")].value.value", LocalDate.class),
                 mapper.convertValue(JsonPath.read(value, "$.operationDate"), LocalDateTime.class));
     }
 

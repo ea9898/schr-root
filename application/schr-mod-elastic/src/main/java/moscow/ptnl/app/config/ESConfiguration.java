@@ -21,7 +21,7 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
  */
 @Configuration
 @EnableElasticsearchRepositories(
-    basePackages = { "moscow.ptnl.schr.repository.es", "moscow.ptnl.app.repository.es" }
+    basePackages = { "moscow.ptnl.schr.repository.es", "moscow.ptnl.app.repository.es", "moscow.ptnl.app.infrastructure.repository.es" }
 )
 @PropertySource("classpath:elasticsearch.properties")
 public class ESConfiguration extends ElasticsearchConfigurationSupport {

@@ -7,6 +7,6 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
  *
  * @author sorlov
  */
-public interface IndexEsuInputRepository extends ElasticsearchRepository<IndexEsuInput, Long> {
+public interface IndexEsuInputRepository extends ElasticsearchRepository<IndexEsuInput, String> {
     
 }

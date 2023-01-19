@@ -1,6 +1,8 @@
 package moscow.ptnl.app.task;
 
 import moscow.ptnl.app.config.PersistenceConstraint;
+import moscow.ptnl.app.model.es.IndexEsuInput;
+import moscow.ptnl.app.repository.es.IndexEsuInputRepository;
 import moscow.ptnl.domain.entity.PlannersLog;
 import moscow.ptnl.app.model.TopicType;
 import moscow.ptnl.app.repository.EsuInputCRUDRepository;
@@ -23,6 +25,7 @@ import java.lang.invoke.MethodHandles;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public abstract class BaseEsuProcessorTask extends BaseTask {
 
@@ -40,9 +43,12 @@ public abstract class BaseEsuProcessorTask extends BaseTask {
     @Autowired
     protected EsuInputCRUDRepository esuInputCRUDRepository;
 
+    @Autowired
+    protected IndexEsuInputRepository indexEsuInputRepository;
+
     protected abstract TopicType getTopic();
 
-    protected abstract String processMessage(EsuInput input);
+    protected abstract Optional<String> processMessage(String inputMsg);
 
     @Override
     protected final boolean work(PlannersLog plannerLog) {
@@ -58,8 +64,7 @@ public abstract class BaseEsuProcessorTask extends BaseTask {
                         PageRequest paging = PageRequest.of(0,
                                 settingService.getSettingProperty(getPlanner().getPlannerName()
                                         + ".numberMsg", Integer.class, false),
-//                                Sort.by(Sort.Direction.ASC, EsuInput_.TIME_STAMP)
-                        null); //FIXME
+                                Sort.by(Sort.Direction.ASC, EsuInput_.DATE_CREATED));
                         //3. Выполняет отбор (SELECT FOR UPDATE) первых N (*.numberMsg) записей,
                         // отсортированных в порядке возрастания по полю DATE_UPDATED в ESU_INPUT по условию
                         List<EsuInput> messages = esuInputCRUDRepository.find(getTopic().getName(),
@@ -81,11 +86,16 @@ public abstract class BaseEsuProcessorTask extends BaseTask {
                         //4.
                         for (EsuInput input : inputs) {
                             try {
-                                String processingError = processMessage(input);
+                                //4.1 Система по значению ESU_INPUT.ES_ID из обрабатываемой записи получает документ
+                                // из индекса index_esu_input и забирает сообщение из поля _source.message
+                                IndexEsuInput indexEsuInput = indexEsuInputRepository.findById(input.getEsId())
+                                        .orElseThrow(() -> new IllegalStateException("Не найдено сообщение в индексе с id=" + input.getEsId()));
 
-                                if (processingError != null) {
+                                Optional<String> processingError = processMessage(indexEsuInput.getMessage());
+
+                                if (processingError.isPresent()) {
                                     //АС.2
-                                    input.setError(processingError);
+                                    input.setError(processingError.get());
                                     input.setStatus(EsuStatusType.PROCESSED);
                                 }
                                 else if (input.getStatus() == EsuStatusType.IN_PROGRESS) {

@@ -1,0 +1,1 @@
+{"build":{"date":"@buildTime@","revision":"@buildNumber@","version":"@scmCurrentBranch@","repo":"@scmUrl@"}}
