@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.repository.support.Repositories;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  *
