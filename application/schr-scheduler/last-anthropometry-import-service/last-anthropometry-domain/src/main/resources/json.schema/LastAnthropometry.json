@@ -44,15 +44,15 @@
         "required": [
           "measurementDate", "documentId", "measurementType", "measurementValue"
         ]
-      },
-      "annuledMeasurementsTypeId": {
-        "type": "array",
-        "description": "Массив идентификаторов аннулированных показателей",
-        "items": {
-          "type": "number"
-        }
-      },
-      "required": "patientId"
-    }
+      }
+    },
+    "annuledMeasurementsTypeId": {
+      "type": "array",
+      "description": "Массив идентификаторов аннулированных показателей",
+      "items": {
+        "type": "number"
+      }
+    },
+    "required": "patientId"
   }
 }

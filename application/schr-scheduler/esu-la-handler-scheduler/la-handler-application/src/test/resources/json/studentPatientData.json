@@ -1,0 +1,126 @@
+{
+  "patientInfo":                {
+    "patientId": 3987621809,
+    "ukl": "51970848",
+    "lastName": "Гегеев",
+    "firstName": "Пётр",
+    "patronymic": "Аркадиевич",
+    "fullName": "Гегеев Пётр Аркадиевич",
+    "birthDate": "2018-05-07",
+    "genderCode": 1,
+    "updateDate": "2022-03-19T00:00:00.000+00"
+  },
+  "anthropometryInfo":                [
+    {
+      "centity": "3",
+      "measurementValue": 35,
+      "measurementType": 2,
+      "documentId": 31354959,
+      "measurementDate": "2022-07-19",
+      "resultAssessmentId": 15750674
+    },
+    {
+      "measurementValue": 27,
+      "measurementType": 4,
+      "documentId": 74549320,
+      "measurementDate": "2022-10-23",
+      "resultAssessmentId": 90418095
+    }
+  ],
+  "attachments": [
+    {
+      "muId": 10000375,
+      "attachTypeName": "базовое терапевтическое",
+      "attachBeginDate": "2022-08-03",
+      "updateDate": "2022-05-26T00:00:00.000+00",
+      "areaId": 174057149,
+      "areaTypeCode": 10,
+      "processOfAttachmentName": "По заявлению в электронном виде",
+      "attachTypeCode": "1",
+      "processOfAttachmentCode": "3",
+      "id": 122742610,
+      "moId": 204
+    },
+    {
+      "muId": 10000375,
+      "attachTypeName": "небазовое",
+      "attachBeginDate": "2022-07-14",
+      "updateDate": "2022-11-16T00:00:00.000+00",
+      "areaId": 174058174,
+      "areaTypeCode": 10,
+      "processOfAttachmentName": "По заявлению в электронном виде",
+      "attachTypeCode": "0",
+      "processOfAttachmentCode": "3",
+      "id": 130744319,
+      "moId": 204
+    },
+    {
+      "muId": 141,
+      "attachTypeName": "базовое стоматологическое",
+      "attachBeginDate": "2023-01-04",
+      "updateDate": "2022-04-02T00:00:00.000+00",
+      "areaId": 10007112,
+      "areaTypeCode": 10,
+      "processOfAttachmentName": "По заявлению",
+      "attachTypeCode": "2",
+      "processOfAttachmentCode": "2",
+      "id": 131402664,
+      "moId": 141
+    }
+  ],
+  "consentsInfo": [               {
+    "representativePhysicalId": 23406840,
+    "documentedConsent":                   {
+      "allMedicalIntervention": true,
+      "cancelReasonId": 1,
+      "representativeDocumentId": "86940373",
+      "interventionDetails": {"medInterventionId":                      [
+        14,
+        8
+      ]},
+      "documentId": "19886579",
+      "immunodiagnostics": {"immunodiagnostic":                      [
+        {
+          "immunoDrugsTns": {"immunoDrugsTnCode": 313},
+          "immunoTestKind":                            {
+            "infectionCode": 229,
+            "immunoKindCode": 158
+          }
+        },
+        {
+          "immunoDrugsTns": {"immunoDrugsTnCode": 327},
+          "immunoTestKind":                            {
+            "infectionCode": 204,
+            "immunoKindCode": 158
+          }
+        }
+      ]},
+      "templateId": 21963889,
+      "cancelReasonOther": "препарат",
+      "moName": "ГБУЗ ГП 107 ДЗМ",
+      "signedByPatient": true,
+      "moId": 141,
+      "createDate": "2020-11-25"
+    },
+    "consentId": 50699767,
+    "consentTypeId": 1,
+    "consentFormId": 1,
+    "representativeLegalId": 57478855,
+    "issueDate": "2022-11-04T00:00:00.000+00"
+  }],
+  "policy":                {
+    "policyNumber": 8256330732032764,
+    "policyUpdateDate": "2022-07-01T00:00:00.000+00",
+    "policyStatus": "Y"
+  },
+  "studInfo": [               {
+    "organizationId": 141,
+    "studChangeDate": "2022-10-23T00:00:00.000+00",
+    "classIdMesh": "842ae5a5-2ed7-4eb5-8560-2dccdff0ad52",
+    "academicYearId": 19,
+    "attachId": 69762569,
+    "studentIdKis": "4170d974-7198-4e12-9a8c-3f0ca581b92d",
+    "academicYearName": "2018/2019",
+    "studentIdMesh": "0af44578-4425-4f74-b54d-4bb3ef934762"
+  }]
+}
