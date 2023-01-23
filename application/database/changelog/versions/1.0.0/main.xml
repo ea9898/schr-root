@@ -423,4 +423,88 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="SCHREGISTER-28" author="sevgeniy" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="CONFIG"/>
+                <sqlCheck expectedResult="0">select count(*) from CONFIG where CODE = 'erpChangePatientPoliciesHandlerService.run.mode'</sqlCheck>
+            </and>
+        </preConditions>
+        <comment>CONFIG - Режим работы слушателя топика ErpChangePatientPoliciesHandlerService</comment>
+        <insert tableName="CONFIG">
+            <column name="CODE" value="erpChangePatientPoliciesHandlerService.run.mode"/>
+            <column name="DESCRIPTION" value="Режим работы планировщика ErpChangePatientPoliciesHandlerService (false - выключен; true – включен)"/>
+            <column name="VAL" value="1"/>
+            <column name="DATE_UPDATED" valueDate="now()"/>
+        </insert>
+        <rollback>
+            <delete tableName="CONFIG">
+                <where>CODE='erpChangePatientPoliciesHandlerService.run.mode'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="SCHREGISTER-28-1" author="sevgeniy" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="CONFIG"/>
+                <sqlCheck expectedResult="0">select count(*) from CONFIG where CODE = 'erpChangePatientPoliciesHandlerService.numberMsg'</sqlCheck>
+            </and>
+        </preConditions>
+        <comment>CONFIG - Размер одной выборки для обработки из ЕСУ (для планировщика erpChangePatientPoliciesHandlerService)</comment>
+        <insert tableName="CONFIG">
+            <column name="CODE" value="erpChangePatientPoliciesHandlerService.numberMsg"/>
+            <column name="DESCRIPTION" value="Размер одной выборки для обработки из ЕСУ (для планировщика erpChangePatientPoliciesHandlerService)"/>
+            <column name="VAL" value="100"/>
+            <column name="DATE_UPDATED" valueDate="now()"/>
+        </insert>
+        <rollback>
+            <delete tableName="CONFIG">
+                <where>CODE='erpChangePatientPoliciesHandlerService.numberMsg'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="SCHREGISTER-28-2" author="sevgeniy" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="CONFIG"/>
+                <sqlCheck expectedResult="0">select count(*) from CONFIG where CODE = 'erpChangePatientPoliciesHandlerService'</sqlCheck>
+            </and>
+        </preConditions>
+        <comment>CONFIG - Интервал времени, по истечении которого сообщение в статусе "в обработке" считается "зависшим", в часах (для планировщика erpChangePatientPoliciesHandlerService)</comment>
+        <insert tableName="CONFIG">
+            <column name="CODE" value="erpChangePatientPoliciesHandlerService.resetInterval"/>
+            <column name="DESCRIPTION" value="Интервал времени, по истечении которого сообщение в статусе 'в обработке' считается 'зависшим', в часах (для планировщика erpChangePatientPoliciesHandlerService)"/>
+            <column name="VAL" value="24"/>
+            <column name="DATE_UPDATED" valueDate="now()"/>
+        </insert>
+        <rollback>
+            <delete tableName="CONFIG">
+                <where>CODE='erpChangePatientPoliciesHandlerService.resetInterval'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="SCHREGISTER-28-3" author="sevgeniy" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="CONFIG"/>
+                <sqlCheck expectedResult="0">select count(*) from CONFIG where CODE = 'erpChangePatientPoliciesHandlerService.emptyQueueWaitTime'</sqlCheck>
+            </and>
+        </preConditions>
+        <comment>CONFIG - Время ожидания при отсутствии записей в таблице ESU_INPUT, в мс (для планировщика erpChangePatientPoliciesHandlerService)</comment>
+        <insert tableName="CONFIG">
+            <column name="CODE" value="erpChangePatientPoliciesHandlerService.emptyQueueWaitTime"/>
+            <column name="DESCRIPTION" value="Время ожидания при отсутствии записей в таблице ESU_INPUT, в мс (для планировщика erpChangePatientPoliciesHandlerService)"/>
+            <column name="VAL" value="5000"/>
+            <column name="DATE_UPDATED" valueDate="now()"/>
+        </insert>
+        <rollback>
+            <delete tableName="CONFIG">
+                <where>CODE='erpChangePatientPoliciesHandlerService.emptyQueueWaitTime'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>

@@ -20,7 +20,8 @@
         <module>last-anthropometry-import-service</module>
         <module>esu-ecppd-handler-scheduler</module>
         <module>patient-consents-topic-import-service</module>
-<!--        <module>esu-aei-handler-scheduler</module>-->
+        <module>erp-change-patient-policies-handler-service</module>
+        <!--        <module>esu-aei-handler-scheduler</module>-->
     </modules>
 
 </project>

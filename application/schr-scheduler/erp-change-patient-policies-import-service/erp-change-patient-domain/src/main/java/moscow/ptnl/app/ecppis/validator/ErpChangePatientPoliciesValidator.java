@@ -1,10 +1,9 @@
-package moscow.ptnl.app.erp.change.patient.policies.validator;
+package moscow.ptnl.app.ecppis.validator;
 
 import moscow.ptnl.app.error.CustomErrorReason;
 import org.everit.json.schema.Schema;
 import org.everit.json.schema.ValidationException;
 import org.everit.json.schema.loader.SchemaLoader;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -14,8 +13,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
 import java.lang.invoke.MethodHandles;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
