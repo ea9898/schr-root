@@ -52,7 +52,7 @@
       "items": {
         "type": "number"
       }
-    },
-    "required": "patientId"
-  }
+    }
+  },
+  "required": ["patientId"]
 }

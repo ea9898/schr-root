@@ -37,6 +37,7 @@
         <esu.client.lib.version>4.5.1</esu.client.lib.version>
         <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
         <emias.errors.version>1.1.0</emias.errors.version>
+        <liquibase.version>4.16.1</liquibase.version>
     </properties>
 
 </project>

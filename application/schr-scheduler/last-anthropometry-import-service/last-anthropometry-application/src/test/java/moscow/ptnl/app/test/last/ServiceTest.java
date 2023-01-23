@@ -2,6 +2,7 @@ package moscow.ptnl.app.test.last;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import moscow.ptnl.app.last.anthropometry.validator.LastAnthropometryValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -72,6 +73,7 @@ public class ServiceTest {
         Optional<String> validate = validator.validate(json);
         int index = Integer.parseInt(validate.get().substring(61, 62));
 
+        mapper.registerModule(new JavaTimeModule());
         LastAnthropometry readValue = mapper.readValue(json, LastAnthropometry.class);
 
         Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurements/" + index + "/measurementDate: expected type: String, found: Integer", validate.get());
@@ -129,6 +131,7 @@ public class ServiceTest {
                 .collect(Collectors.joining("\n"));
         Optional<String> validate = validator.validate(json);
 
+        mapper.registerModule(new JavaTimeModule());
         LastAnthropometry readValue = mapper.readValue(json, LastAnthropometry.class);
 
         Assertions.assertTrue(validate.isPresent());
@@ -260,6 +263,7 @@ public class ServiceTest {
                 .collect(Collectors.joining("\n"));
         Optional<String> validate = validator.validate(json);
 
+        mapper.registerModule(new JavaTimeModule());
         LastAnthropometry readValue = mapper.readValue(json, LastAnthropometry.class);
 
         Assertions.assertTrue(validate.isPresent());

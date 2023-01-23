@@ -591,7 +591,7 @@
         </rollback>
     </changeSet>
 
-    <changeSet id="SCHREGISTER-34-1" author="mkachalov" labels="1.0.0.0">
+    <changeSet id="SCHREGISTER-34-1" author="mkachalov" labels="1.0.0.0" dbms="postgresql">
         <preConditions onFail="MARK_RAN">
             <and>
                 <tableExists tableName="CONFIG"/>
