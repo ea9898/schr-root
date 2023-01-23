@@ -507,4 +507,30 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="SCHREGISTER-34-1" author="mkachalov" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="CONFIG"/>
+                <sqlCheck expectedResult="0">select count(*) from CONFIG where CODE = 'services.security.settings'</sqlCheck>
+            </and>
+        </preConditions>
+        <comment>Настройка безопасности методов сервиса</comment>
+        <loadData
+            encoding="UTF-8"
+            file="changelog/versions/1.0.0/files/security.config.csv"
+            quotchar=""
+            separator="#"
+            tableName="CONFIG">
+            <column name="CODE" type="STRING"/>
+            <column name="VAL" type="STRING"/>
+            <column name="DESCRIPTION" type="STRING"/>
+            <column name="DATE_UPDATED" type="TIMESTAMP"/>
+        </loadData>
+        <rollback>
+            <delete tableName="CONFIG">
+                <where>CODE='services.security.settings'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>
