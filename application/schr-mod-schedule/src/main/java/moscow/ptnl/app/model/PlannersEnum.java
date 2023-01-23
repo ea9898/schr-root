@@ -9,7 +9,8 @@ public enum PlannersEnum {
     I_SCHR_5(5, "erpChangePatientPoliciesImportService"),
     I_SCHR_7(7, "lastAnthropometryImportService"),
     I_SCHR_9(9, "patientConsentsImportService"),
-    I_SCHR_11(11, "schoolAttachmentEventImportService")
+    I_SCHR_11(11, "schoolAttachmentEventImportService"),
+    I_SCHR_12(12, "schoolAttachmentEventHandlerService")
     ;
 
     private final Integer plannerId;

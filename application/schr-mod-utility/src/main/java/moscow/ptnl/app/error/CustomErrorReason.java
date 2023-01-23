@@ -14,7 +14,9 @@ public enum CustomErrorReason implements ErrorReason {
     ESU_UNREACHABLE("SCHR_100", "ЕСУ недоступна или вернула ошибку: %s"),
     INCORRECT_FORMAT_ESU_MESSAGE("SCHR_101", "Некорректный формат сообщения ЕСУ: %s"),
     PATIENT_NOT_FOUND("SCHR_104", "Пациент с идентификатором %s не найден в системе"),
+    RECORD_NOT_FOUND("SCHR_106", "Запись, которую необходимо удалить, не найдена"),
     INFORMATION_IS_OUTDATED("SCHR_107", "Получена более старая информация, чем содержится в индексе"),
+    CREATE_NEW_PATIENT_EXCEPTION("SCHR_108", "Ошибка при создании нового пациента %s: %s"),
     ;
 
     private final String description;

@@ -423,4 +423,109 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="SCHREGISTER-31-1" author="abelyaevsky" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="CONFIG"/>
+                <sqlCheck expectedResult="0">select count(*) from CONFIG where CODE = 'schoolAttachmentEventHandlerService.run.mode'</sqlCheck>
+            </and>
+        </preConditions>
+        <comment>CONFIG - Режим работы планировщика schoolAttachmentEventHandlerService</comment>
+        <insert tableName="CONFIG">
+            <column name="CODE" value="schoolAttachmentEventHandlerService.run.mode"/>
+            <column name="DESCRIPTION" value="Режим работы планировщика schoolAttachmentEventHandlerService (false - выключен; true – включен)"/>
+            <column name="VAL" value="1"/>
+            <column name="DATE_UPDATED" valueDate="now()"/>
+        </insert>
+        <rollback>
+            <delete tableName="CONFIG">
+                <where>CODE='schoolAttachmentEventHandlerService.run.mode'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="SCHREGISTER-31-2" author="abelyaevsky" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="CONFIG"/>
+                <sqlCheck expectedResult="0">select count(*) from CONFIG where CODE = 'schoolAttachmentEventHandlerService.numberMsg'</sqlCheck>
+            </and>
+        </preConditions>
+        <comment>CONFIG - Размер одной выборки для обработки из ЕСУ (для планировщика schoolAttachmentEventHandlerService)</comment>
+        <insert tableName="CONFIG">
+            <column name="CODE" value="schoolAttachmentEventHandlerService.numberMsg"/>
+            <column name="DESCRIPTION" value="Размер одной выборки для обработки из ЕСУ (для планировщика schoolAttachmentEventHandlerService)"/>
+            <column name="VAL" value="100"/>
+            <column name="DATE_UPDATED" valueDate="now()"/>
+        </insert>
+        <rollback>
+            <delete tableName="CONFIG">
+                <where>CODE='schoolAttachmentEventHandlerService.numberMsg'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="SCHREGISTER-31-3" author="abelyaevsky" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="CONFIG"/>
+                <sqlCheck expectedResult="0">select count(*) from CONFIG where CODE = 'schoolAttachmentEventHandlerService.resetInterval'</sqlCheck>
+            </and>
+        </preConditions>
+        <comment>CONFIG - Интервал времени, по истечении которого сообщение в статусе "в обработке" считается "зависшим", в часах (для планировщика schoolAttachmentEventHandlerService)</comment>
+        <insert tableName="CONFIG">
+            <column name="CODE" value="schoolAttachmentEventHandlerService.resetInterval"/>
+            <column name="DESCRIPTION" value="Интервал времени, по истечении которого сообщение в статусе 'в обработке' считается 'зависшим', в часах (для планировщика schoolAttachmentEventHandlerService)"/>
+            <column name="VAL" value="24"/>
+            <column name="DATE_UPDATED" valueDate="now()"/>
+        </insert>
+        <rollback>
+            <delete tableName="CONFIG">
+                <where>CODE='schoolAttachmentEventHandlerService.resetInterval'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="SCHREGISTER-31-4" author="abelyaevsky" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="CONFIG"/>
+                <sqlCheck expectedResult="0">select count(*) from CONFIG where CODE = 'schoolAttachmentEventHandlerService.emptyQueueWaitTime'</sqlCheck>
+            </and>
+        </preConditions>
+        <comment>CONFIG - Время ожидания при отсутствии записей в таблице ESU_INPUT, в мс (для планировщика schoolAttachmentEventHandlerService)</comment>
+        <insert tableName="CONFIG">
+            <column name="CODE" value="schoolAttachmentEventHandlerService.emptyQueueWaitTime"/>
+            <column name="DESCRIPTION" value="Время ожидания при отсутствии записей в таблице ESU_INPUT, в мс (для планировщика schoolAttachmentEventHandlerService)"/>
+            <column name="VAL" value="5000"/>
+            <column name="DATE_UPDATED" valueDate="now()"/>
+        </insert>
+        <rollback>
+            <delete tableName="CONFIG">
+                <where>CODE='schoolAttachmentEventHandlerService.emptyQueueWaitTime'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="SCHREGISTER-31-5" author="abelyaevsky" labels="1.0.0.0">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <tableExists tableName="CONFIG"/>
+                <sqlCheck expectedResult="0">select count(*) from CONFIG where CODE = 'schoolAttachmentEventHandlerService.ageMax'</sqlCheck>
+            </and>
+        </preConditions>
+        <comment>CONFIG - Возрастное ограничение для хранения данных о пациенте, лет (для планировщика schoolAttachmentEventHandlerService)</comment>
+        <insert tableName="CONFIG">
+            <column name="CODE" value="schoolAttachmentEventHandlerService.ageMax"/>
+            <column name="DESCRIPTION" value="Возрастное ограничение для хранения данных о пациенте, лет (для планировщика schoolAttachmentEventHandlerService)"/>
+            <column name="VAL" value="19"/>
+            <column name="DATE_UPDATED" valueDate="now()"/>
+        </insert>
+        <rollback>
+            <delete tableName="CONFIG">
+                <where>CODE='schoolAttachmentEventHandlerService.ageMax'</where>
+            </delete>
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>
