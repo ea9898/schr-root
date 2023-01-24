@@ -1,4 +1,4 @@
-package moscow.ptnl.app.erp.last.anthropometry.config;
+package moscow.ptnl.app.last.anthropometry.config;
 
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;

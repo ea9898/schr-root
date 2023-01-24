@@ -15,7 +15,7 @@ RUN mvn -f /opt/src/pom.xml validate clean install -DskipTests=true -e
 #
 # I_SCHR_1 - Получение сообщений из топика AttachmentEvent
 #
-FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.4.1 as schregister-attachmenteventimportservice
+FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.1 as schregister-attachmenteventimportservice
 ARG JAR_FILE=schr-scheduler/esu-aei-listener-scheduler/aei-listener-application/target/esu-aei-listener-scheduler-*.jar
 COPY --from=build /opt/src/${JAR_FILE} /opt/esu-aei-listener-scheduler.jar
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/esu-aei-listener-scheduler.jar"]
@@ -27,7 +27,7 @@ ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/esu-aei-listener-scheduler.ja
 #
 # I_SCHR_3 - Получение сообщений из топика ErpChangePatientPersonalData
 #
-FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.4.1 as schregister-erpchangepatientpersonaldataimportservice
+FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.1 as schregister-erpchangepatientpersonaldataimportservice
 ARG JAR_FILE=schr-scheduler/esu-ecppd-listener-scheduler/ecppd-listener-application/target/esu-ecppd-listener-scheduler-*.jar
 COPY --from=build /opt/src/${JAR_FILE} /opt/esu-ecppd-listener-scheduler.jar
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/esu-ecppd-listener-scheduler.jar"]
@@ -39,7 +39,7 @@ ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/esu-ecppd-listener-scheduler.
 #
 # I_SCHR_5 - Получение сообщений из топика ErpChangePatientPolicies
 #
-FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.4.1 as schregister-erpchangepatientpoliciesimportservice
+FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.1 as schregister-erpchangepatientpoliciesimportservice
 ARG JAR_FILE=schr-scheduler/erp-change-patient-policies-import-service/erp-change-patient-application/target/erp-change-patient-policies-*.jar
 COPY --from=build /opt/src/${JAR_FILE} /opt/erp-change-patient-policies.jar
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/erp-change-patient-policies.jar"]
@@ -51,7 +51,7 @@ ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/erp-change-patient-policies.j
 #
 # I_SCHR_7 - Получение сообщений из топика LastAnthropometry
 #
-FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.4.1 as schregister-lastanthropometryimportservice
+FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.1 as schregister-lastanthropometryimportservice
 ARG JAR_FILE=schr-scheduler/last-anthropometry-import-service/last-anthropometry-application/target/last-anthropometry-*.jar
 COPY --from=build /opt/src/${JAR_FILE} /opt/last-anthropometry.jar
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/last-anthropometry.jar"]
@@ -63,7 +63,7 @@ ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/last-anthropometry.jar"]
 #
 # I_SCHR_9 - Получение сообщений из топика PatientConsentsTopic
 #
-FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.4.1 as schregister-patientconsentstopicimportservice
+FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.1 as schregister-patientconsentstopicimportservice
 ARG JAR_FILE=schr-scheduler/patient-consents-topic-import-service/patient-consents-topic-application/target/patient-consents-topic-*.jar
 COPY --from=build /opt/src/${JAR_FILE} /opt/patient-consents-topic.jar
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/patient-consents-topic.jar"]
@@ -75,7 +75,7 @@ ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/patient-consents-topic.jar"]
 #
 # I_SCHR_11 - Получение сообщений из топика SchoolAttachmentEvent
 #
-FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.4.1 as schregister-schoolattachmenteventimportservice
+FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.1 as schregister-schoolattachmenteventimportservice
 ARG JAR_FILE=schr-scheduler/esu-sae-listener-scheduler/sae-listener-application/target/esu-sae-listener-scheduler-*.jar
 COPY --from=build /opt/src/${JAR_FILE} /opt/esu-sae-listener-scheduler.jar
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/esu-sae-listener-scheduler.jar"]
@@ -87,7 +87,7 @@ ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/esu-sae-listener-scheduler.ja
 #
 # Веб-сервис "Поиск и возвращение актуальных данных об учащихся и данных реестра по учащимся" (searchService)
 #
-FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.4.1 as schregister-searchservice
+FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.1 as schregister-searchservice
 ARG JAR_FILE=schr-service/schr-service-application/target/schr-service-*.jar
 COPY --from=build /opt/src/${JAR_FILE} /opt/schr-service.jar
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/schr-service.jar"]

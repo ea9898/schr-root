@@ -1,4 +1,4 @@
-package moscow.ptnl.app.erp.last.anthropometry.config;
+package moscow.ptnl.app.last.anthropometry.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;

@@ -1,4 +1,4 @@
-package moscow.ptnl.app.erp.last.anthropometry;
+package moscow.ptnl.app.last.anthropometry;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
