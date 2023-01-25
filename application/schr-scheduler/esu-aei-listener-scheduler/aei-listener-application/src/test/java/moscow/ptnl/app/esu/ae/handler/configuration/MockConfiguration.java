@@ -1,7 +1,6 @@
-package moscow.ptnl.app.esu.pct.handler.configuration;
+package moscow.ptnl.app.esu.ae.handler.configuration;
 
-import deserializer.PatientConsentsTopicDeserializer;
-import moscow.ptnl.app.pct.handler.task.PatientConsentsTopicProcessTask;
+import moscow.ptnl.app.esu.aei.listener.task.AttachmentEventProcessTask;
 import moscow.ptnl.domain.repository.SettingsRepository;
 import moscow.ptnl.domain.service.SettingService;
 import moscow.ptnl.domain.service.SettingServiceImpl;
@@ -13,7 +12,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.data.repository.support.Repositories;
 
 import jakarta.inject.Inject;
 
@@ -44,13 +42,8 @@ public class MockConfiguration {
     }
 
     @Bean
-    public PatientConsentsTopicDeserializer patientConsentsTopicDeserializer() {
-        return new PatientConsentsTopicDeserializer();
-    }
-
-    @Bean
-    public PatientConsentsTopicProcessTask patientConsentsTopicProcessTask() {
-        return new PatientConsentsTopicProcessTask();
+    public AttachmentEventProcessTask attachmentEventProcessTask() {
+        return new AttachmentEventProcessTask();
     }
 
 //    @Bean

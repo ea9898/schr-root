@@ -1,7 +1,7 @@
-package moscow.ptnl.app.esu.pct.handler.configuration;
+package moscow.ptnl.app.esu.ecppd.handler.configuration;
 
-import deserializer.PatientConsentsTopicDeserializer;
-import moscow.ptnl.app.pct.handler.task.PatientConsentsTopicProcessTask;
+import moscow.ptnl.app.esu.ecppd.listener.deserializer.PatientPersonalDataDeserializer;
+import moscow.ptnl.app.esu.ecppd.listener.task.ErpChangePatientPersonalDataProcessTask;
 import moscow.ptnl.domain.repository.SettingsRepository;
 import moscow.ptnl.domain.service.SettingService;
 import moscow.ptnl.domain.service.SettingServiceImpl;
@@ -13,7 +13,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.data.repository.support.Repositories;
 
 import jakarta.inject.Inject;
 
@@ -44,13 +43,13 @@ public class MockConfiguration {
     }
 
     @Bean
-    public PatientConsentsTopicDeserializer patientConsentsTopicDeserializer() {
-        return new PatientConsentsTopicDeserializer();
+    public PatientPersonalDataDeserializer patientPersonalDataDeserializer() {
+        return new PatientPersonalDataDeserializer();
     }
 
     @Bean
-    public PatientConsentsTopicProcessTask patientConsentsTopicProcessTask() {
-        return new PatientConsentsTopicProcessTask();
+    public ErpChangePatientPersonalDataProcessTask erpChangePatientDoublesProcessTask() {
+        return new ErpChangePatientPersonalDataProcessTask();
     }
 
 //    @Bean

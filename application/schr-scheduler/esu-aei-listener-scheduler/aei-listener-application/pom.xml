@@ -18,11 +18,11 @@
             <artifactId>aei-listener-infrastructure</artifactId>
             <version>${project.version}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>moscow.ptnl.schregister</groupId>-->
-<!--            <artifactId>schr-mod-info</artifactId>-->
-<!--            <version>${project.version}</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>moscow.ptnl.schregister</groupId>-->
+        <!--            <artifactId>schr-mod-info</artifactId>-->
+        <!--            <version>${project.version}</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>moscow.ptnl.schregister</groupId>
             <artifactId>schr-mod-jpa</artifactId>
@@ -85,6 +85,43 @@
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>4.16.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -169,23 +206,23 @@
                                 <tstamp>
                                     <format property="buildTime" pattern="yyyy-MM-dd HH:mm:ss"/>
                                 </tstamp>
-                                <property name="buildTime" value="${maven.build.timestamp}" />
+                                <property name="buildTime" value="${maven.build.timestamp}"/>
                                 <exec dir="${basedir}" executable="git"
                                       outputProperty="scmCurrentBranch">
-                                    <arg value="rev-parse" />
-                                    <arg value="--abbrev-ref" />
-                                    <arg value="HEAD" />
+                                    <arg value="rev-parse"/>
+                                    <arg value="--abbrev-ref"/>
+                                    <arg value="HEAD"/>
                                 </exec>
                                 <exec dir="${basedir}" executable="git"
                                       outputProperty="scmUrl">
-                                    <arg value="config" />
-                                    <arg value="--get" />
-                                    <arg value="remote.origin.url" />
+                                    <arg value="config"/>
+                                    <arg value="--get"/>
+                                    <arg value="remote.origin.url"/>
                                 </exec>
                                 <exec dir="${basedir}" executable="git"
                                       outputProperty="buildNumber">
-                                    <arg value="rev-parse" />
-                                    <arg value="HEAD" />
+                                    <arg value="rev-parse"/>
+                                    <arg value="HEAD"/>
                                 </exec>
                             </target>
                         </configuration>
@@ -195,7 +232,7 @@
                         <configuration>
                             <target>
                                 <copy file="${project.build.outputDirectory}/info.json"
-                                      tofile="${project.build.directory}/${project.build.finalName}/info.json" />
+                                      tofile="${project.build.directory}/${project.build.finalName}/info.json"/>
                             </target>
                         </configuration>
                         <goals>
