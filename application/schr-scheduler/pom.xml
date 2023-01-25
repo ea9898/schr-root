@@ -21,6 +21,7 @@
         <module>esu-ae-handler-scheduler</module>
         <module>patient-consents-topic-import-service</module>
         <module>esu-la-handler-scheduler</module>
+        <module>esu-pct-handler-scheduler</module>
     </modules>
 
 </project>
