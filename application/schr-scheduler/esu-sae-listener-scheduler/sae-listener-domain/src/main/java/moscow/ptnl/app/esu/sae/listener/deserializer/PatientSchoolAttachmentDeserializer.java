@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -32,13 +35,34 @@ public class PatientSchoolAttachmentDeserializer implements Function<String, Pat
     @Override
     public PatientSchoolAttachment apply(String json) {
         Object value = configuration.jsonProvider().parse(json);
+        return getPatientSchoolAttachment(value);
+    }
 
+    public List<PatientSchoolAttachment> getPatientSchoolAttachments(String json) {
+        Object value = configuration.jsonProvider().parse(json);
+
+        List<Object> entityDataList = mapper.convertValue(JsonPath.read(value, "$.entityData"), List.class);
+        List<PatientSchoolAttachment> attachmentDataList = new ArrayList<>();
+        for (Object entityData : entityDataList) {
+            PatientSchoolAttachment attachment = getPatientSchoolAttachment(entityData);
+            attachmentDataList.add(attachment);
+        }
+        return attachmentDataList;
+    }
+
+    private PatientSchoolAttachment getPatientSchoolAttachment(Object value) {
         return PatientSchoolAttachment.build(JsonPath.read(value, "$.emiasId"),
                 extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"attachId\")].value.value", Long.class),
                 extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"organizationId\")].value.value", Long.class),
+                extractSingleArray(value, "$.attributes[?(@.name==\"areaId\")].value.value", Long.class),
+                extractSingleArray(value, "$.attributes[?(@.name==\"attachStartDate\")].value.value", LocalDate.class),
                 JsonPath.read(value, "$.studentId"),
                 JsonPath.read(value, "$.studentPersonId"),
                 extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"classUid\")].value.value", String.class),
+                extractSingleArray(value, "$.attributes[?(@.name==\"educationForm\")].value.id", Long.class),
+                extractSingleArray(value, "$.attributes[?(@.name==\"educationForm\")].value.value", String.class),
+                extractSingleArray(value, "$.attributes[?(@.name==\"trainingBeginDate\")].value.value", LocalDate.class),
+                extractSingleArray(value, "$.attributes[?(@.name==\"trainingEndDate\")].value.value", LocalDate.class),
                 extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"academicYear\")].value.id", Long.class),
                 extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"academicYear\")].value.value", String.class),
                 extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"isActual\")].value.value", Boolean.class),

@@ -36,14 +36,14 @@
       "documentId": "19886579",
       "immunodiagnostics": {"immunodiagnostic":                      [
         {
-          "immunoDrugsTns": {"immunoDrugsTnCode": 313},
+          "immunoDrugsTns": {"immunoDrugsTnCode": [313]},
           "immunoTestKind":                            {
             "infectionCode": 229,
             "immunoKindCode": 158
           }
         },
         {
-          "immunoDrugsTns": {"immunoDrugsTnCode": 327},
+          "immunoDrugsTns": {"immunoDrugsTnCode": [327]},
           "immunoTestKind":                            {
             "infectionCode": 204,
             "immunoKindCode": 158

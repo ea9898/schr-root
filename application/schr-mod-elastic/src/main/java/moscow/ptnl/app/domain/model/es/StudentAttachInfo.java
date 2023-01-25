@@ -4,6 +4,7 @@ import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class StudentAttachInfo {
@@ -14,14 +15,32 @@ public class StudentAttachInfo {
     @Field(type = FieldType.Long, name = "organizationId")
     private Long organizationId;
 
-    @Field(type = FieldType.Keyword, name = "studentIdKis")
-    private String studentIdKis;
+    @Field(type = FieldType.Long, name = "areaId")
+    private Long areaId;
 
-    @Field(type = FieldType.Keyword, name = "studentIdMesh")
-    private String studentIdMesh;
+    @Field(type = FieldType.Date, name = "attachStartDate")
+    private LocalDate attachStartDate;
+
+    @Field(type = FieldType.Keyword, name = "studentId")
+    private String studentId;
+
+    @Field(type = FieldType.Keyword, name = "studentPersonIdMesh")
+    private String studentPersonIdMesh;
 
     @Field(type = FieldType.Keyword, name = "classIdMesh")
     private String classIdMesh;
+
+    @Field(type = FieldType.Long, name = "educationFormId")
+    private Long educationFormId;
+
+    @Field(type = FieldType.Keyword, name = "educationFormName")
+    private String educationFormName;
+
+    @Field(type = FieldType.Date, name = "trainingBeginDate")
+    private LocalDate trainingBeginDate;
+
+    @Field(type = FieldType.Date, name = "trainingEndDate")
+    private LocalDate trainingEndDate;
 
     @Field(type = FieldType.Long, name = "academicYearId")
     private Long academicYearId;
@@ -48,20 +67,36 @@ public class StudentAttachInfo {
         this.organizationId = organizationId;
     }
 
-    public String getStudentIdKis() {
-        return studentIdKis;
+    public Long getAreaId() {
+        return areaId;
     }
 
-    public void setStudentIdKis(String studentIdKis) {
-        this.studentIdKis = studentIdKis;
+    public void setAreaId(Long areaId) {
+        this.areaId = areaId;
     }
 
-    public String getStudentIdMesh() {
-        return studentIdMesh;
+    public LocalDate getAttachStartDate() {
+        return attachStartDate;
     }
 
-    public void setStudentIdMesh(String studentIdMesh) {
-        this.studentIdMesh = studentIdMesh;
+    public void setAttachStartDate(LocalDate attachStartDate) {
+        this.attachStartDate = attachStartDate;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    public String getStudentPersonIdMesh() {
+        return studentPersonIdMesh;
+    }
+
+    public void setStudentPersonIdMesh(String studentPersonIdMesh) {
+        this.studentPersonIdMesh = studentPersonIdMesh;
     }
 
     public String getClassIdMesh() {
@@ -70,6 +105,38 @@ public class StudentAttachInfo {
 
     public void setClassIdMesh(String classIdMesh) {
         this.classIdMesh = classIdMesh;
+    }
+
+    public Long getEducationFormId() {
+        return educationFormId;
+    }
+
+    public void setEducationFormId(Long educationFormId) {
+        this.educationFormId = educationFormId;
+    }
+
+    public String getEducationFormName() {
+        return educationFormName;
+    }
+
+    public void setEducationFormName(String educationFormName) {
+        this.educationFormName = educationFormName;
+    }
+
+    public LocalDate getTrainingBeginDate() {
+        return trainingBeginDate;
+    }
+
+    public void setTrainingBeginDate(LocalDate trainingBeginDate) {
+        this.trainingBeginDate = trainingBeginDate;
+    }
+
+    public LocalDate getTrainingEndDate() {
+        return trainingEndDate;
+    }
+
+    public void setTrainingEndDate(LocalDate trainingEndDate) {
+        this.trainingEndDate = trainingEndDate;
     }
 
     public Long getAcademicYearId() {

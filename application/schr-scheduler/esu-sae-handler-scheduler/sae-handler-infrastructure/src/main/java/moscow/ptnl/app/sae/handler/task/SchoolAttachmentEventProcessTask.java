@@ -1,11 +1,10 @@
-package moscow.ptnl.app.ecppd.handler.task;
+package moscow.ptnl.app.sae.handler.task;
 
 import moscow.ptnl.app.domain.model.es.StudentAttachInfo;
 import moscow.ptnl.app.domain.model.es.StudentPatientData;
 import moscow.ptnl.app.error.CustomErrorReason;
-import moscow.ptnl.app.esu.ecppd.listener.deserializer.SchoolAttachmentEventDeserializer;
-import moscow.ptnl.app.esu.ecppd.listener.model.erp.AttachmentData;
-import moscow.ptnl.app.esu.ecppd.listener.model.erp.SchoolAttachmentData;
+import moscow.ptnl.app.esu.sae.listener.deserializer.PatientSchoolAttachmentDeserializer;
+import moscow.ptnl.app.esu.sae.listener.model.erp.PatientSchoolAttachment;
 import moscow.ptnl.app.infrastructure.repository.es.StudentPatientDataRepository;
 import moscow.ptnl.app.model.PlannersEnum;
 import moscow.ptnl.app.model.TopicType;
@@ -29,7 +28,7 @@ import java.util.stream.Collectors;
 public class SchoolAttachmentEventProcessTask extends BaseEsuProcessorTask {
 
     @Autowired
-    private SchoolAttachmentEventDeserializer schoolAttachmentEventDeserializer;
+    private PatientSchoolAttachmentDeserializer patientSchoolAttachmentDeserializer;
 
     @Autowired
     private StudentPatientDataRepository studentPatientDataRepository;
@@ -38,16 +37,17 @@ public class SchoolAttachmentEventProcessTask extends BaseEsuProcessorTask {
     @Override
     protected Optional<String> processMessage(String inputMsg) {
         // 4.2 Система выполняет парсинг сообщения
-        SchoolAttachmentData content;
+        List<PatientSchoolAttachment> content;
         try {
-            content = schoolAttachmentEventDeserializer.apply(inputMsg);
+            content = patientSchoolAttachmentDeserializer.getPatientSchoolAttachments(inputMsg);
         } catch (Exception ex) {
             return Optional.of(CustomErrorReason.INCORRECT_FORMAT_ESU_MESSAGE.format(ex.getMessage()));
         }
 
         return transactions.execute(s -> {
+            Long patientId = content.get(0).getPatientId();
             // 4.3 Поиск документа в индексе student_patient_registry
-            Optional<StudentPatientData> studentPatientDataOptional = studentPatientDataRepository.findById(content.getPatientId().toString());
+            Optional<StudentPatientData> studentPatientDataOptional = studentPatientDataRepository.findById(patientId.toString());
 
             StudentPatientData studentPatientData;
 
@@ -56,7 +56,8 @@ public class SchoolAttachmentEventProcessTask extends BaseEsuProcessorTask {
                 try {
                     // TODO алгоритм A_SCHR_1 - пункты 1, 2
                 } catch (Exception e) {
-                    return Optional.of(CustomErrorReason.CREATE_NEW_PATIENT_EXCEPTION.format("КОД", e.getMessage())); // TODO Что за код???
+                    // TODO Вставить "КОД"
+                    return Optional.of(CustomErrorReason.CREATE_NEW_PATIENT_EXCEPTION.format("КОД", e.getMessage()));
                 }
 
                 // TODO алгоритм A_SCHR_1 - пункты 3, 4
@@ -68,18 +69,18 @@ public class SchoolAttachmentEventProcessTask extends BaseEsuProcessorTask {
             }
 
             // 4.4 Система для каждого значения из массива $.entityData[*]
-            for (AttachmentData attachmentData : content.getAttachmentDataList()) {
+            for (PatientSchoolAttachment attachment : content) {
                 // блок/блоки - имеется в виду, что должен быть 1 блок, но если их больше одного, то это всё дубли
                 List<StudentAttachInfo> studInfoList = studentPatientData.getStudInfo().stream()
-                        .filter(info -> info.getAttachId().equals(attachmentData.getAttachId()))
+                        .filter(info -> info.getAttachId().equals(attachment.getAttachmentId()))
                         .collect(Collectors.toList());
                 Long ageMax = settingService.getSettingProperty(getPlanner().getPlannerName() + ".ageMax", Long.class, false);
                 if (!studInfoList.isEmpty()) {
-                    if (studInfoList.get(0).getStudChangeDate().isBefore(content.getStudChangeDate())) {
-                        if (attachmentData.getActual()) {
+                    if (studInfoList.get(0).getStudChangeDate().isBefore(attachment.getUpdateDate())) {
+                        if (attachment.getActual()) {
                             // Система удаляет найденный блок (блоки) и переходит на следующий шаг (4.4.2 Система записывает блок в элемент индекса studInfo)
                             studentPatientData.getStudInfo().removeAll(studInfoList);
-                            applyData(content, attachmentData, studentPatientData);
+                            applyData(attachment, studentPatientData);
                         } else {
                             //Система удаляет найденный блок/блоки
                             studentPatientData.getStudInfo().removeAll(studInfoList);
@@ -106,9 +107,9 @@ public class SchoolAttachmentEventProcessTask extends BaseEsuProcessorTask {
                         return Optional.of(CustomErrorReason.INFORMATION_IS_OUTDATED.format());
                     }
                 } else {
-                    if (attachmentData.getActual()) {
+                    if (attachment.getActual()) {
                         // Система переходит на следующий шаг (4.4.2 Система записывает блок в элемент индекса studInfo)
-                        applyData(content, attachmentData, studentPatientData);
+                        applyData(attachment, studentPatientData);
                     } else {
                         // Система проверяет возраст пациента
                         if ((LocalDate.now().getYear() - studentPatientData.getPatientInfo().getBirthDate().getYear()) >= ageMax) {
@@ -126,16 +127,22 @@ public class SchoolAttachmentEventProcessTask extends BaseEsuProcessorTask {
         });
     }
 
-    private void applyData(SchoolAttachmentData newSchoolAttachData, AttachmentData newAttachData, StudentPatientData entity) {
+    private void applyData(PatientSchoolAttachment newPatientSchoolAttachment, StudentPatientData entity) {
         StudentAttachInfo studentAttachInfo = new StudentAttachInfo();
-        studentAttachInfo.setAttachId(newAttachData.getAttachId());
-        studentAttachInfo.setOrganizationId(newAttachData.getOrganizationId());
-//        studentAttachInfo.setStudentIdKis(newSchoolAttachData.getStudentIdKis());
-//        studentAttachInfo.setStudentIdMesh(newSchoolAttachData.getStudentIdMesh());
-//        studentAttachInfo.setClassIdMesh(newAttachData.getClassIdMesh());
-//        studentAttachInfo.setAcademicYearId(newAttachData.getAcademicYearId());
-//        studentAttachInfo.setAcademicYearName(newAttachData.getAcademicYearName());
-//        studentAttachInfo.setStudChangeDate(newSchoolAttachData.getStudChangeDate());
+        studentAttachInfo.setAttachId(newPatientSchoolAttachment.getAttachmentId());
+        studentAttachInfo.setOrganizationId(newPatientSchoolAttachment.getOrganizationId());
+        studentAttachInfo.setAreaId(newPatientSchoolAttachment.getAreaId());
+        studentAttachInfo.setAttachStartDate(newPatientSchoolAttachment.getAttachStartDate());
+        studentAttachInfo.setStudentId(newPatientSchoolAttachment.getStudentId());
+        studentAttachInfo.setStudentPersonIdMesh(newPatientSchoolAttachment.getStudentPersonId());
+        studentAttachInfo.setClassIdMesh(newPatientSchoolAttachment.getClassUid());
+        studentAttachInfo.setEducationFormId(newPatientSchoolAttachment.getEducationFormId());
+        studentAttachInfo.setEducationFormName(newPatientSchoolAttachment.getEducationForm());
+        studentAttachInfo.setTrainingBeginDate(newPatientSchoolAttachment.getTrainingBeginDate());
+        studentAttachInfo.setTrainingEndDate(newPatientSchoolAttachment.getTrainingEndDate());
+        studentAttachInfo.setAcademicYearId(Long.valueOf(newPatientSchoolAttachment.getAcademicYearId()));
+        studentAttachInfo.setAcademicYearName(newPatientSchoolAttachment.getAcademicYear());
+        studentAttachInfo.setStudChangeDate(newPatientSchoolAttachment.getUpdateDate());
 
         entity.getStudInfo().add(studentAttachInfo);
         studentPatientDataRepository.save(entity);

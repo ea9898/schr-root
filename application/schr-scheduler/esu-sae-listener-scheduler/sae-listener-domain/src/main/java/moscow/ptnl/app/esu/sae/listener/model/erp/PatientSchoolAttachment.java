@@ -1,5 +1,6 @@
 package moscow.ptnl.app.esu.sae.listener.model.erp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class PatientSchoolAttachment {
@@ -10,11 +11,23 @@ public class PatientSchoolAttachment {
 
     private Long organizationId;
 
+    private Long areaId;
+
+    private LocalDate attachStartDate;
+
     private String studentId;
 
     private String studentPersonId;
 
     private String classUid;
+
+    private Long educationFormId;
+
+    private String educationForm;
+
+    private LocalDate trainingBeginDate;
+
+    private LocalDate trainingEndDate;
 
     private Integer academicYearId;
 
@@ -24,16 +37,26 @@ public class PatientSchoolAttachment {
 
     private LocalDateTime updateDate;
 
-    public static PatientSchoolAttachment build(Long patientId, Long attachmentId, Long organizationId, String studentId, String studentPersonId,
-                                   String classUid, Long academicYearId, String academicYear, Boolean actual, LocalDateTime updateDate) {
+    public static PatientSchoolAttachment build(Long patientId, Long attachmentId, Long organizationId, Long areaId,
+                                                LocalDate attachStartDate, String studentId, String studentPersonId,
+                                                String classUid, Long educationFormId, String educationForm,
+                                                LocalDate trainingBeginDate, LocalDate trainingEndDate,
+                                                Long academicYearId, String academicYear, Boolean actual,
+                                                LocalDateTime updateDate) {
         PatientSchoolAttachment newAttachment = new PatientSchoolAttachment();
 
         newAttachment.patientId = patientId;
         newAttachment.attachmentId = attachmentId;
         newAttachment.organizationId = organizationId;
+        newAttachment.areaId = areaId;
+        newAttachment.attachStartDate = attachStartDate;
         newAttachment.studentId = studentId;
         newAttachment.studentPersonId = studentPersonId;
         newAttachment.classUid = classUid;
+        newAttachment.educationFormId = educationFormId;
+        newAttachment.educationForm = educationForm;
+        newAttachment.trainingBeginDate = trainingBeginDate;
+        newAttachment.trainingEndDate = trainingEndDate;
         newAttachment.academicYearId = academicYearId == null ? null : academicYearId.intValue();
         newAttachment.academicYear = academicYear;
         newAttachment.actual = actual;
@@ -54,6 +77,14 @@ public class PatientSchoolAttachment {
         return organizationId;
     }
 
+    public Long getAreaId() {
+        return areaId;
+    }
+
+    public LocalDate getAttachStartDate() {
+        return attachStartDate;
+    }
+
     public String getStudentId() {
         return studentId;
     }
@@ -64,6 +95,22 @@ public class PatientSchoolAttachment {
 
     public String getClassUid() {
         return classUid;
+    }
+
+    public Long getEducationFormId() {
+        return educationFormId;
+    }
+
+    public String getEducationForm() {
+        return educationForm;
+    }
+
+    public LocalDate getTrainingBeginDate() {
+        return trainingBeginDate;
+    }
+
+    public LocalDate getTrainingEndDate() {
+        return trainingEndDate;
     }
 
     public Integer getAcademicYearId() {
