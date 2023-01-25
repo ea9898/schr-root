@@ -19,8 +19,8 @@ public class AnthropometryInfo {
     @Field(type = FieldType.Float, name = "measurementValue")
     private Float measurementValue;
 
-    @Field(type = FieldType.Keyword, name = "centity")
-    private String centity;
+    @Field(type = FieldType.Keyword, name = "centility")
+    private String centility;
 
     @Field(type = FieldType.Long, name = "resultAssessmentId")
     private Long resultAssessmentId;
@@ -57,12 +57,12 @@ public class AnthropometryInfo {
         this.measurementValue = measurementValue;
     }
 
-    public String getCentity() {
-        return centity;
+    public String getCentility() {
+        return centility;
     }
 
-    public void setCentity(String centity) {
-        this.centity = centity;
+    public void setCentility(String centility) {
+        this.centility = centility;
     }
 
     public Long getResultAssessmentId() {

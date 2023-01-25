@@ -52,7 +52,6 @@ import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
@@ -156,7 +155,7 @@ public class IntegrationTest {
             StudentPatientData patientData = studentPatientDataList.get(0);
             Assertions.assertEquals(1, patientData.getAnthropometryInfo().size());
             patientData.getAnthropometryInfo().stream().findFirst().ifPresent(a -> {
-                Assertions.assertEquals("низкорослость", a.getCentity());
+                Assertions.assertEquals("низкорослость", a.getCentility());
                 Assertions.assertEquals("872c407e-cbae-4db7-b8c9-34d2c5596253", a.getDocumentId());
                 Assertions.assertEquals(LocalDate.of(2022, 12, 15), a.getMeasurementDate());
                 Assertions.assertEquals(1, a.getMeasurementType());

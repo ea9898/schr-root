@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%style{%d{ISO8601}}{black} %highlight{%-5level }[%style{%t}{bright,blue}] %style{%C{1.}}{bright,yellow}: %msg%n%throwable">
+            </PatternLayout>
+        </Console>
+
+    </Appenders>
+
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="Console" level="debug" />
+        </Root>
+
+        <AsyncLogger name="org.apache.cxf.services" level="info">
+            <AppenderRef ref="Console" level="info" />
+        </AsyncLogger>
+
+        <AsyncLogger name="org.apache.kafka.clients" level="info">
+            <AppenderRef ref="Console" level="info" />
+        </AsyncLogger>
+
+    </Loggers>
+
+</Configuration>

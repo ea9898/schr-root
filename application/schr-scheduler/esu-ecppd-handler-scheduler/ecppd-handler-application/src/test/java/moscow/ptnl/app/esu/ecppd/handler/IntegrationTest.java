@@ -163,7 +163,7 @@ public class IntegrationTest {
             StudentPatientData patientData = studentPatientDataList.get(0);
             Assertions.assertEquals("F4491668", patientData.getPatientInfo().getUkl());
             Assertions.assertEquals("Данг Ван Кхием", patientData.getPatientInfo().getFullName());
-            Assertions.assertEquals("MALE", patientData.getPatientInfo().getGenderCode());
+            Assertions.assertEquals(1L, patientData.getPatientInfo().getGenderCode());
             Assertions.assertEquals(LocalDate.of(1973, 9,10), patientData.getPatientInfo().getBirthDate());
         } finally {
             //Т.к. используем реальный сервис Elastic, нужно удалить созданные данные

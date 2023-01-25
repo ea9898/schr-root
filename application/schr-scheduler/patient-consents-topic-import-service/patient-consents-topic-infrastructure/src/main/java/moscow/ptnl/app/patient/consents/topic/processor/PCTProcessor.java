@@ -94,7 +94,7 @@ public class PCTProcessor extends EsuConsumerProcessor {
             errorFields.add(content.getConsentDetails().getDocumentedConsent().getCancelReasonOther() == null ? "cancelReasonOther" : null);
             errorFields.add(content.getConsentDetails().getDocumentedConsent().getMoId() == null ? "moId" : null);
             errorFields.add(content.getConsentDetails().getDocumentedConsent().getMoName() == null ? "moName" : null);
-            errorFields.add(content.getConsentDetails().getIssueDate() == null ? "issueDate" : null);
+            errorFields.add(content.getConsentDetails().getIssueDateTime() == null ? "issueDate" : null);
             errorFields.add(content.getConsentDetails().getConsentFormId() == null ? "consentFormId" : null);
             errorFields.add(content.getConsentDetails().getConsentTypeId() == null ? "consentTypeId" : null);
             errorFields.add(content.getConsentDetails().getRepresentativePhysicalId() == null ? "representativePhysicalId" : null);

@@ -31,8 +31,8 @@ public class StudentPatientData {
     @Field(type = Nested, name = "studInfo", includeInParent = true)
     private List<StudentAttachInfo> studInfo;
 
-    @Field(type = Nested, name = "сonsentsInfo", includeInParent = true)
-    private List<ConsentsInfo> сonsentsInfo;
+    @Field(type = Nested, name = "consentsInfo", includeInParent = true)
+    private List<ConsentInfo> consentsInfo;
 
     public String getId() {
         return id;
@@ -82,11 +82,11 @@ public class StudentPatientData {
         this.studInfo = studInfo;
     }
 
-    public List<ConsentsInfo> getСonsentsInfo() {
-        return сonsentsInfo;
+    public List<ConsentInfo> getConsentsInfo() {
+        return consentsInfo;
     }
 
-    public void setСonsentsInfo(List<ConsentsInfo> сonsentsInfo) {
-        this.сonsentsInfo = сonsentsInfo;
+    public void setConsentsInfo(List<ConsentInfo> consentsInfo) {
+        this.consentsInfo = consentsInfo;
     }
 }

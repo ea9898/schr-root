@@ -24,7 +24,7 @@ public class DocumentedConsent {
     public DocumentedConsent(String documentId, LocalDate createDate, Long locationId, String locationName,
                              Boolean allMedicalIntervention, InterventionDetails interventionDetails,
                              Immunodiagnostics immunodiagnostics, String representativeDocumentId,
-                             Long templateId, Boolean signedByPatient, Long cancelReasonId, String cancelReasonOther,
+                             Boolean signedByPatient, Long cancelReasonId, String cancelReasonOther,
                              Long moId, String moName) {
         this.documentId = documentId;
         this.createDate = createDate;
@@ -34,7 +34,6 @@ public class DocumentedConsent {
         this.interventionDetails = interventionDetails;
         this.immunodiagnostics = immunodiagnostics;
         this.representativeDocumentId = representativeDocumentId;
-        this.templateId = templateId;
         this.signedByPatient = signedByPatient;
         this.cancelReasonId = cancelReasonId;
         this.cancelReasonOther = cancelReasonOther;

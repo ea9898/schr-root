@@ -8,10 +8,7 @@
     "message":{
       "required":[
         "patientId",
-        "consentDetails",
-        "issueDate",
-        "consentFormId",
-        "consentTypeId"
+        "consentDetails"
       ],
       "patientId":{
         "id":"#/properties/patientId",
@@ -24,7 +21,7 @@
         "title":"Сведения о согласии (решении) пациента",
         "required":[
           "consentId",
-          "issueDate",
+          "issueDateTime",
           "consentFormId",
           "consentTypeId"
         ],
@@ -133,7 +130,7 @@
                       },
                       "immunoDrugsTns":{
                         "id":"#/properties/consentDetails/properties/documentedConsent/properties/Immunodiagnostics/properties/immunodiagnostic/properties/immunoDrugsTns",
-                        "type":"object",
+                        "type":"array",
                         "title":"Сведения о препарате",
                         "required":[
                           "immunoDrugsTnCode"
@@ -162,7 +159,7 @@
               "title":"Идентификатор скана документа согласия"
             },
             "templateId":{
-              "id":"#/properties/consentDetails/properties/documentedConsent/properties/scanDocumentId",
+              "id":"#/properties/consentDetails/properties/documentedConsent/properties/templateId",
               "type":"string",
               "title":"Наименование шаблона документа"
             },
@@ -202,8 +199,8 @@
               "title":"Наименование мед. организации"
             }
           },
-          "issueDate":{
-            "id":"#/properties/consentDetails/properties/issueDate",
+          "issueDateTime":{
+            "id":"#/properties/consentDetails/properties/issueDateTime",
             "type":"string",
             "format":"date-time",
             "title":"Дата и время принятия решения"

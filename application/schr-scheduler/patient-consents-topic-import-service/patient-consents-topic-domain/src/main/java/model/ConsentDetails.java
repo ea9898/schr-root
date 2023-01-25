@@ -1,11 +1,11 @@
 package model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ConsentDetails {
     private Long consentId;
     private DocumentedConsent documentedConsent;
-    private LocalDate issueDate;
+    private LocalDateTime issueDateTime;
     private Long consentFormId;
     private Long consentTypeId;
     private Long representativePhysicalId;
@@ -14,11 +14,11 @@ public class ConsentDetails {
     public ConsentDetails() {
     }
 
-    public ConsentDetails(Long consentId, DocumentedConsent documentedConsent, LocalDate issueDate, Long consentFormId, Long consentTypeId,
-                          Long representativePhysicalId, Long representativeLegalId) {
+    public ConsentDetails(Long consentId, DocumentedConsent documentedConsent, LocalDateTime issueDateTime, Long consentFormId,
+                          Long consentTypeId, Long representativePhysicalId, Long representativeLegalId) {
         this.consentId = consentId;
         this.documentedConsent = documentedConsent;
-        this.issueDate = issueDate;
+        this.issueDateTime = issueDateTime;
         this.consentFormId = consentFormId;
         this.consentTypeId = consentTypeId;
         this.representativePhysicalId = representativePhysicalId;
@@ -41,12 +41,12 @@ public class ConsentDetails {
         this.documentedConsent = documentedConsent;
     }
 
-    public LocalDate getIssueDate() {
-        return issueDate;
+    public LocalDateTime getIssueDateTime() {
+        return issueDateTime;
     }
 
-    public void setIssueDate(LocalDate issueDate) {
-        this.issueDate = issueDate;
+    public void setIssueDateTime(LocalDateTime issueDateTime) {
+        this.issueDateTime = issueDateTime;
     }
 
     public Long getConsentFormId() {

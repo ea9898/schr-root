@@ -1,20 +1,16 @@
 package model;
 
+import java.util.List;
+
 public class ImmunoDrugsTns {
-    private Long immunoDrugsTnCode;
 
-    public ImmunoDrugsTns() {
-    }
+    private List<Long> immunoDrugsTnCode;
 
-    public ImmunoDrugsTns(Long immunoDrugsTnCode) {
-        this.immunoDrugsTnCode = immunoDrugsTnCode;
-    }
-
-    public Long getImmunoDrugsTnCode() {
+    public List<Long> getImmunoDrugsTnCode() {
         return immunoDrugsTnCode;
     }
 
-    public void setImmunoDrugsTnCode(Long immunoDrugsTnCode) {
+    public void setImmunoDrugsTnCode(List<Long> immunoDrugsTnCode) {
         this.immunoDrugsTnCode = immunoDrugsTnCode;
     }
 }

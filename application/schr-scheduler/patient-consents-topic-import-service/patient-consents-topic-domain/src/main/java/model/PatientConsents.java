@@ -1,13 +1,25 @@
 package model;
 
 public class PatientConsents {
+
+    private Long patientId;
+
     private ConsentDetails consentDetails;
 
     public PatientConsents() {
     }
 
-    public PatientConsents(ConsentDetails consentDetails) {
+    public PatientConsents(Long patientId, ConsentDetails consentDetails) {
+        this.patientId = patientId;
         this.consentDetails = consentDetails;
+    }
+
+    public Long getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(Long patientId) {
+        this.patientId = patientId;
     }
 
     public ConsentDetails getConsentDetails() {
