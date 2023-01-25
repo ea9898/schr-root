@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import moscow.ptnl.app.domain.model.es.AnthropometryInfo;
-import moscow.ptnl.app.domain.model.es.Attachment;
 import moscow.ptnl.app.domain.model.es.StudentPatientData;
 import moscow.ptnl.app.error.CustomErrorReason;
 import moscow.ptnl.app.infrastructure.repository.es.StudentPatientDataRepository;
@@ -13,14 +12,11 @@ import moscow.ptnl.app.model.TopicType;
 import moscow.ptnl.app.task.BaseEsuProcessorTask;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import ru.mos.emias.esu.model.LastAnthropometry;
 import ru.mos.emias.esu.model.Measurement;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -113,7 +109,7 @@ public class LastAnthropometryProcessTask extends BaseEsuProcessorTask {
         newAnthropometryInfo.setMeasurementValue(newData.getMeasurementValue().floatValue());
         newAnthropometryInfo.setDocumentId(newData.getDocumentId());
         newAnthropometryInfo.setMeasurementDate(newData.getMeasurementDate());
-        newAnthropometryInfo.setCentity(newData.getCentility());
+        newAnthropometryInfo.setCentility(newData.getCentility());
         newAnthropometryInfo.setResultAssessmentId(newData.getResultAssessmentId() == null ? null : newData.getResultAssessmentId().longValue());
         entity.getAnthropometryInfo().add(newAnthropometryInfo);
     }

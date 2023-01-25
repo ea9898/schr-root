@@ -15,14 +15,14 @@
       "centity": "3",
       "measurementValue": 35,
       "measurementType": 2,
-      "documentId": 31354959,
+      "documentId": "a3ac4c70-6fd5-46c6-9f2a-bd796ba9e63c",
       "measurementDate": "2022-07-19",
       "resultAssessmentId": 15750674
     },
     {
       "measurementValue": 27,
       "measurementType": 4,
-      "documentId": 74549320,
+      "documentId": "084a0ad6-462f-4e80-b5b7-ee9d652090d6",
       "measurementDate": "2022-10-23",
       "resultAssessmentId": 90418095
     }
@@ -81,14 +81,14 @@
       "documentId": "19886579",
       "immunodiagnostics": {"immunodiagnostic":                      [
         {
-          "immunoDrugsTns": {"immunoDrugsTnCode": 313},
+          "immunoDrugsTns": {"immunoDrugsTnCode": [313]},
           "immunoTestKind":                            {
             "infectionCode": 229,
             "immunoKindCode": 158
           }
         },
         {
-          "immunoDrugsTns": {"immunoDrugsTnCode": 327},
+          "immunoDrugsTns": {"immunoDrugsTnCode": [327]},
           "immunoTestKind":                            {
             "infectionCode": 204,
             "immunoKindCode": 158

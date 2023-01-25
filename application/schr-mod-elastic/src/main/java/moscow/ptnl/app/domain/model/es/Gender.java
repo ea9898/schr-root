@@ -6,17 +6,17 @@ import java.util.Objects;
 
 public enum Gender {
 
-    MALE("1"),
-    FEMALE("2"),
-    UNDEFINED("3");
+    MALE(1L),
+    FEMALE(2L),
+    UNDEFINED(3L);
 
-    private String code;
+    private final Long code;
 
-    Gender(String code) {
+    Gender(Long code) {
         this.code = code;
     }
 
-    public String getCode() {
+    public Long getCode() {
         return code;
     }
 
@@ -24,7 +24,7 @@ public enum Gender {
         code = StringUtils.trimWhitespace(code);
 
         for (Gender gender : Gender.values()) {
-            if (Objects.equals(gender.code, code)) {
+            if (Objects.equals(gender.code.toString(), code)) {
                 return gender;
             }
         }
