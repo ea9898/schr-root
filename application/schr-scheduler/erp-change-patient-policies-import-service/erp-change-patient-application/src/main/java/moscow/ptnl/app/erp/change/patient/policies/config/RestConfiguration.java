@@ -1,4 +1,4 @@
-package moscow.ptnl.app.ecpphs.handler.config;
+package moscow.ptnl.app.erp.change.patient.policies.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;

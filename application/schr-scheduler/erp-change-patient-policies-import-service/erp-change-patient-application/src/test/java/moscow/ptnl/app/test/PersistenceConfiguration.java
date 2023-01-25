@@ -1,4 +1,4 @@
-package moscow.ptnl.app.erp.handler.configuration;
+package moscow.ptnl.app.test;
 
 import moscow.ptnl.app.config.PersistenceConstraint;
 import org.springframework.beans.factory.annotation.Qualifier;

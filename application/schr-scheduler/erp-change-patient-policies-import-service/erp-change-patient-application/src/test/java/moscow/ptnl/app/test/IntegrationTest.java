@@ -1,4 +1,4 @@
-package moscow.ptnl.app.erp.handler;
+package moscow.ptnl.app.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import liquibase.Liquibase;
@@ -11,11 +11,9 @@ import moscow.ptnl.app.config.ESConfiguration;
 import moscow.ptnl.app.config.PersistenceConstraint;
 import moscow.ptnl.app.domain.model.es.Policy;
 import moscow.ptnl.app.domain.model.es.StudentPatientData;
-import moscow.ptnl.app.ecphhs.handler.task.ErpChangePatientPoliciesProcessTask;
-import moscow.ptnl.app.ecpphs.handler.config.AsyncConfiguration;
-import moscow.ptnl.app.ecpphs.handler.config.RestConfiguration;
-import moscow.ptnl.app.erp.handler.configuration.MockConfiguration;
-import moscow.ptnl.app.erp.handler.configuration.PersistenceConfiguration;
+import moscow.ptnl.app.ecpp.task.ErpChangePatientPoliciesProcessTask;
+import moscow.ptnl.app.erp.change.patient.policies.config.AsyncConfiguration;
+import moscow.ptnl.app.erp.change.patient.policies.config.RestConfiguration;
 import moscow.ptnl.app.infrastructure.repository.es.StudentPatientDataRepository;
 import moscow.ptnl.app.model.PlannersEnum;
 import moscow.ptnl.app.model.TopicType;

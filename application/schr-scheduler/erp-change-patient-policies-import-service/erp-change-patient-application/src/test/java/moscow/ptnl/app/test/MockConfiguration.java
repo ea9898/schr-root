@@ -1,6 +1,6 @@
-package moscow.ptnl.app.erp.handler.configuration;
+package moscow.ptnl.app.test;
 
-import moscow.ptnl.app.ecphhs.handler.task.ErpChangePatientPoliciesProcessTask;
+import moscow.ptnl.app.ecpp.task.ErpChangePatientPoliciesProcessTask;
 import moscow.ptnl.app.ecppis.deserilizer.ErpChangePatientPoliciesDeserializer;
 import moscow.ptnl.app.service.PlannersService;
 import moscow.ptnl.app.service.PlannersServiceImpl;

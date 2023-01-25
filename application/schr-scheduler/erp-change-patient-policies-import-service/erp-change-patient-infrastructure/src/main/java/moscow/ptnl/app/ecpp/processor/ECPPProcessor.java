@@ -1,4 +1,4 @@
-package moscow.ptnl.app.erp.change.patient.policies.processor;
+package moscow.ptnl.app.ecpp.processor;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

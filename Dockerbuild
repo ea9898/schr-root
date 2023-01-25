@@ -5,9 +5,4 @@ docker build --target schregister-lastanthropometryimportservice -t docker.artif
 docker build --target schregister-patientconsentstopicimportservice -t docker.artifactory.emias.mos.ru/schregister/schregister-patientconsentstopicimportservice:1.0.0 .
 docker build --target schregister-schoolattachmenteventimportservice -t docker.artifactory.emias.mos.ru/schregister/schregister-schoolattachmenteventimportservice:1.0.0 .
 
-docker build --target schregister-attachmenteventhandlerservice -t docker.artifactory.emias.mos.ru/schregister/schregister-attachmenteventhandlerservice:1.0.0 .
-docker build --target schregister-erpchangepatientpersonaldatahandlerservice -t docker.artifactory.emias.mos.ru/schregister/schregister-erpchangepatientpersonaldatahandlerservice:1.0.0 .
-docker build --target schregister-lastanthropometryhandlerservice -t docker.artifactory.emias.mos.ru/schregister/schregister-lastanthropometryhandlerservice:1.0.0 .
-docker build --target schregister-erpchangepatientpolicieshandlerservice -t docker.artifactory.emias.mos.ru/schregister/schregister-erpchangepatientpolicieshandlerservice:1.0.0 .
-
 docker build --target schregister-searchservice -t docker.artifactory.emias.mos.ru/schregister/schregister-searchservice:1.0.0 .

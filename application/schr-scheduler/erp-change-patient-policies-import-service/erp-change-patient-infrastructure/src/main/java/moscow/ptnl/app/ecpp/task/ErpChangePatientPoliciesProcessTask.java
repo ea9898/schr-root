@@ -1,4 +1,4 @@
-package moscow.ptnl.app.ecphhs.handler.task;
+package moscow.ptnl.app.ecpp.task;
 
 import moscow.ptnl.app.domain.model.es.Policy;
 import moscow.ptnl.app.domain.model.es.StudentPatientData;
