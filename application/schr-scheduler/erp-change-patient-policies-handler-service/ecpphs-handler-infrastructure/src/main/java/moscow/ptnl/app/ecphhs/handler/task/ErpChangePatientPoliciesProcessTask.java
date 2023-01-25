@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -57,11 +58,24 @@ public class ErpChangePatientPoliciesProcessTask extends BaseEsuProcessorTask {
             // 4.4 Для документа найденного на шаге 4.3, выполняется проверка условия
             Policy newPolicy = extractPolicy(content);
 
-            if (!studentPatientData.get().getPolicy().getPolicyUpdateDate().isAfter(newPolicy.getPolicyUpdateDate())) {
+            // policy.policyUpdateDate >= $.entityData[0].attributes[?(@.name=="policyChangeDate")].value.value
+            if (studentPatientData.get().getPolicy().getPolicyUpdateDate().isAfter(newPolicy.getPolicyUpdateDate()) ||
+                    studentPatientData.get().getPolicy().getPolicyUpdateDate().isEqual(newPolicy.getPolicyUpdateDate())) {
                 return Optional.of(CustomErrorReason.INFORMATION_IS_OUTDATED.format());
             } else {
-                if (!newPolicy.getPolicyStatus().equals("N")) {
-                    //4.5
+                // policy.policyUpdateDate < $.entityData[0].attributes[?(@.name=="policyChangeDate")].value.value И
+                //$.entityData[0].attributes[?(@.name=="policyStatus")].value.code = 'N'
+                if (studentPatientData.get().getPolicy().getPolicyUpdateDate().isBefore(newPolicy.getPolicyUpdateDate())
+                        && newPolicy.getPolicyStatus().equals("N")) {
+                    StudentPatientData studentData = studentPatientData.get();
+                    studentData.setPolicy(null);
+                    studentPatientDataRepository.save(studentData);
+                }
+                // policy.policyUpdateDate < $.entityData[0].attributes[?(@.name=="policyChangeDate")].value.value И
+                //$.entityData[0].attributes[?(@.name=="policyStatus")].value.code != 'N'
+                if (studentPatientData.get().getPolicy().getPolicyUpdateDate().isBefore(newPolicy.getPolicyUpdateDate())
+                        && !newPolicy.getPolicyStatus().equals("N")) {
+                    //4.5 Система добавляет в документ элемент индекса policy
                     StudentPatientData studentData = studentPatientData.get();
                     studentData.setPolicy(newPolicy);
                     studentPatientDataRepository.save(studentData);

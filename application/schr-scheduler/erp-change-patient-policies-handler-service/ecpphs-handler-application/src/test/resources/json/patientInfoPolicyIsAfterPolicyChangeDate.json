@@ -1,0 +1,37 @@
+{
+  "id": 1,
+  "operationDate": "2022-10-18T14:36:36.124+03:00",
+  "emiasId": 1000,
+  "uklErp": "12547816",
+  "patientType": "I",
+  "patientRecStatus": "Y",
+  "entityName": "policies",
+  "entityData": [
+    {
+      "attributes": [
+        {
+          "name": "policyChangeDate",
+          "type": "dateTime",
+          "value": {
+            "value": "2019-01-17T14:09:50.827"
+          }
+        },
+        {
+          "name": "policyStatus",
+          "type": "dictionary",
+          "value": {
+            "code": "N",
+            "value": "погашен по смерти"
+          }
+        },
+        {
+          "name": "policyNumber",
+          "type": "string",
+          "value": {
+            "value": "7700008184090530"
+          }
+        }
+      ]
+    }
+  ]
+}

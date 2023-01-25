@@ -1,0 +1,155 @@
+{
+  "patientInfo": {
+    "patientId": 1000,
+    "ukl": "29672017",
+    "lastName": "Питонова",
+    "firstName": "Клара",
+    "patronymic": "Петровна",
+    "fullName": "Питонова Клара Петровна",
+    "birthDate": "2021-11-10",
+    "genderCode": 2,
+    "updateDate": "2022-01-25T00:00:00.000+00"
+  },
+  "anthropometryInfo": [
+    {
+      "measurementDate": "2022-07-19",
+      "documentId": 31354959,
+      "measurementType": 2,
+      "measurementValue": 35,
+      "centity": "3",
+      "resultAssessmentId": 15750674
+    },
+    {
+      "measurementDate": "2022-07-20",
+      "documentId": 31354960,
+      "measurementType": 1,
+      "measurementValue": 27,
+      "centity": "2",
+      "resultAssessmentId": 25750674
+    },
+    {
+      "measurementDate": "2022-07-21",
+      "documentId": 41374990,
+      "measurementType": 3,
+      "measurementValue": 33,
+      "centity": "3",
+      "resultAssessmentId": 15250772
+    }
+  ],
+  "attachments": [
+    {
+      "id": 122807623,
+      "areaId": 174057149,
+      "areaTypeCode": 10,
+      "attachBeginDate": "2022-01-29",
+      "moId": 204,
+      "muId": 10000375,
+      "attachTypeCode": "1",
+      "attachTypeName": "базовое терапевтическое",
+      "processOfAttachmentCode": "3",
+      "processOfAttachmentName": "По заявлению в электронном виде",
+      "updateDate": "2022-09-23T00:00:00.000+00"
+    },
+    {
+      "id": 130744319,
+      "areaId": 174058174,
+      "areaTypeCode": 10,
+      "attachBeginDate": "2022-07-14",
+      "moId": 204,
+      "muId": 10000375,
+      "attachTypeCode": "0",
+      "attachTypeName": "небазовое",
+      "processOfAttachmentCode": "3",
+      "processOfAttachmentName": "По заявлению в электронном виде",
+      "updateDate": "2022-11-16T00:00:00.000+00"
+    },
+    {
+      "id": 130744319,
+      "areaId": 174059199,
+      "areaTypeCode": 10,
+      "attachBeginDate": "2022-07-06",
+      "moId": 204,
+      "muId": 10000375,
+      "attachTypeCode": "0",
+      "attachTypeName": "небазовое",
+      "processOfAttachmentCode": "2",
+      "processOfAttachmentName": "По заявлению",
+      "updateDate": "2022-07-01T00:00:00.000+00"
+    }
+  ],
+  "policy": {
+    "policyNumber": 8611648205101698,
+    "policyUpdateDate": "2020-07-01T00:00:00.000+00",
+    "policyStatus": "Y"
+  },
+  "studInfo": [
+    {
+      "attachId": 64928750,
+      "organizationId": 141,
+      "studentIdKis": "cf673105-3d1e-4823-aa3d-8d0c982a79c9",
+      "studentIdMesh": "bf071598-8c53-4258-80ff-fe69ad1f638c",
+      "classIdMesh": "a2e80825-6284-4f3c-a1c6-f0bc2c476db3",
+      "academicYearId": 21,
+      "academicYearName": "2020/2021",
+      "studChangeDate": "2022-11-30T00:00:00.000+00"
+    },
+    {
+      "attachId": 66743248,
+      "organizationId": 204,
+      "studentIdKis": "93081af7-081d-4d86-a682-f0f8ba72680f",
+      "studentIdMesh": "86007e15-4685-415b-8fcc-14112469ead9",
+      "classIdMesh": "0ed9bb41-7c14-4cd6-ba9e-2da232c33ed1",
+      "academicYearId": 19,
+      "academicYearName": "20218/2019",
+      "studChangeDate": "2022-02-08T00:00:00.000+00"
+    }
+  ],
+  "consentsInfo": [
+    {
+      "consentId": 56851022,
+      "documentedConsent": {
+        "documentId": "22243592",
+        "createDate": "2021-05-12",
+        "locationId": 22,
+        "locationName": "Детская эндокринология",
+        "allMedicalIntervention": false,
+        "interventionDetails": {
+          "medInterventionId": [
+            6,
+            14
+          ]
+        },
+        "immunodiagnostics": {
+          "immunodiagnostic": [
+            {
+              "immunoTestKind": {
+                "infectionCode": 224,
+                "immunoKindCode": 135
+              },
+              "immunoDrugsTns": {
+                "immunoDrugsTnCode": 399
+              }
+            },
+            {
+              "immunoDrugsTns": {
+                "immunoDrugsTnCode": 311
+              }
+            }
+          ]
+        },
+        "representativeDocumentId": "90377581",
+        "templateId": 77621435,
+        "signedByPatient": false,
+        "cancelReasonId": 2,
+        "cancelReasonOther": "другая причина отказа",
+        "moId": 141,
+        "moName": "ГБУЗ ГП 107 ДЗМ"
+      },
+      "issueDate": "2021-07-03T00:00:00.000",
+      "consentFormId": 1,
+      "consentTypeId": 2,
+      "representativePhysicalId": 83938896,
+      "representativeLegalId": 41167266
+    }
+  ]
+}
