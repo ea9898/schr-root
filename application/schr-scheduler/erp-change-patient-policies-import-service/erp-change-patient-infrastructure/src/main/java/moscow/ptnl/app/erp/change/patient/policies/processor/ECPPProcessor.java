@@ -2,7 +2,7 @@ package moscow.ptnl.app.erp.change.patient.policies.processor;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import moscow.ptnl.app.erp.change.patient.policies.validator.ErpChangePatientPoliciesValidator;
+import moscow.ptnl.app.ecppis.validator.ErpChangePatientPoliciesValidator;
 import moscow.ptnl.app.error.CustomErrorReason;
 import moscow.ptnl.app.esu.EsuConsumerProcessor;
 import moscow.ptnl.app.model.TopicType;

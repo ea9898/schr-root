@@ -22,6 +22,7 @@
         <module>esu-ae-handler-scheduler</module>
         <module>patient-consents-topic-import-service</module>
         <module>esu-la-handler-scheduler</module>
+        <module>erp-change-patient-policies-handler-service</module>
     </modules>
 
 </project>

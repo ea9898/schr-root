@@ -1,6 +1,6 @@
 package moscow.ptnl.app.test.erp;
 
-import moscow.ptnl.app.erp.change.patient.policies.validator.ErpChangePatientPoliciesValidator;
+import moscow.ptnl.app.ecppis.validator.ErpChangePatientPoliciesValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
