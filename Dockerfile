@@ -1,7 +1,7 @@
 #
 # Build stage
 #
-FROM maven:3.8.3-openjdk-17-slim AS build
+FROM maven:3.6.3-openjdk-17-slim AS build
 COPY application/ /opt/src
 COPY libs/ /opt/src/libs
 COPY .git /opt/src
