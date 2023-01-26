@@ -23,10 +23,6 @@ ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/esu-aei-listener-scheduler.ja
 #
 # I_SCHR_2 - Обработка сообщений топика AttachmentEvent
 #
-FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.4.1 as schregister-attachmenteventhandlerservice
-ARG JAR_FILE=schr-scheduler/esu-ae-handler-scheduler/ae-handler-application/target/esu-ae-handler-scheduler-*.jar
-COPY --from=build /opt/src/${JAR_FILE} /opt/esu-ae-handler-scheduler.jar
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/esu-ae-handler-scheduler.jar"]
 
 #
 # I_SCHR_3 - Получение сообщений из топика ErpChangePatientPersonalData
@@ -39,10 +35,6 @@ ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/esu-ecppd-listener-scheduler.
 #
 # I_SCHR_4 - Обработка сообщений из топика ErpChangePatientPersonalData
 #
-FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.4.1 as schregister-erpchangepatientpersonaldatahandlerservice
-ARG JAR_FILE=schr-scheduler/esu-ecppd-handler-scheduler/ecppd-handler-application/target/esu-ecppd-handler-scheduler-*.jar
-COPY --from=build /opt/src/${JAR_FILE} /opt/esu-ecppd-handler-scheduler.jar
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/esu-ecppd-handler-scheduler.jar"]
 
 #
 # I_SCHR_5 - Получение сообщений из топика ErpChangePatientPolicies
@@ -55,10 +47,6 @@ ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/erp-change-patient-policies.j
 #
 # I_SCHR_6 - Обработка сообщений топика ErpChangePatientPolicies
 #
-FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.4.1 as schregister-erpchangepatientpolicieshandlerservice
-ARG JAR_FILE=schr-scheduler/erp-change-patient-policies-handler-service/ecpphs-handler-application/target/erp-change-patient-policies-handler-*.jar
-COPY --from=build /opt/src/${JAR_FILE} /opt/erp-change-patient-policies-handler.jar
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/erp-change-patient-policies-handler.jar"]
 
 #
 # I_SCHR_7 - Получение сообщений из топика LastAnthropometry
@@ -71,10 +59,6 @@ ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/last-anthropometry.jar"]
 #
 # I_SCHR_8 - Обработка сообщений топика LastAnthropometry
 #
-FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.4.1 as schregister-lastanthropometryhandlerservice
-ARG JAR_FILE=schr-scheduler/esu-la-handler-scheduler/la-handler-application/target/esu-la-handler-scheduler-*.jar
-COPY --from=build /opt/src/${JAR_FILE} /opt/esu-la-handler-scheduler.jar
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/esu-la-handler-scheduler.jar"]
 
 #
 # I_SCHR_9 - Получение сообщений из топика PatientConsentsTopic
