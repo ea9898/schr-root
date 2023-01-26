@@ -4,6 +4,7 @@ import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class StudentAttachInfo {
@@ -14,14 +15,32 @@ public class StudentAttachInfo {
     @Field(type = FieldType.Long, name = "organizationId")
     private Long organizationId;
 
-    @Field(type = FieldType.Keyword, name = "studentIdKis")
+    @Field(type = FieldType.Long, name = "areaId")
+    private Long areaId;
+
+    @Field(type = FieldType.Date, name = "attachStartDate")
+    private LocalDate attachStartDate;
+
+    @Field(type = FieldType.Keyword, name = "studentId")
     private String studentIdKis;
 
-    @Field(type = FieldType.Keyword, name = "studentIdMesh")
+    @Field(type = FieldType.Keyword, name = "studentPersonIdMesh")
     private String studentIdMesh;
 
     @Field(type = FieldType.Keyword, name = "classIdMesh")
     private String classIdMesh;
+
+    @Field(type = FieldType.Long, name = "educationFormId")
+    private Long educationFormId;
+
+    @Field(type = FieldType.Keyword, name = "educationFormName")
+    private String educationFormName;
+
+    @Field(type = FieldType.Date, name = "trainingBeginDate")
+    private LocalDate trainingBeginDate;
+
+    @Field(type = FieldType.Date, name = "trainingEndDate")
+    private LocalDate trainingEndDate;
 
     @Field(type = FieldType.Long, name = "academicYearId")
     private Long academicYearId;
@@ -95,4 +114,28 @@ public class StudentAttachInfo {
     public void setStudChangeDate(LocalDateTime studChangeDate) {
         this.studChangeDate = studChangeDate;
     }
+
+    public Long getAreaId() { return areaId; }
+
+    public void setAreaId(Long areaId) { this.areaId = areaId; }
+
+    public LocalDate getAttachStartDate() { return attachStartDate; }
+
+    public void setAttachStartDate(LocalDate attachStartDate) { this.attachStartDate = attachStartDate; }
+
+    public Long getEducationFormId() { return educationFormId; }
+
+    public void setEducationFormId(Long educationFormId) { this.educationFormId = educationFormId; }
+
+    public String getEducationFormName() { return educationFormName; }
+
+    public void setEducationFormName(String educationFormName) { this.educationFormName = educationFormName; }
+
+    public LocalDate getTrainingBeginDate() { return trainingBeginDate; }
+
+    public void setTrainingBeginDate(LocalDate trainingBeginDate) { this.trainingBeginDate = trainingBeginDate; }
+
+    public LocalDate getTrainingEndDate() { return trainingEndDate; }
+
+    public void setTrainingEndDate(LocalDate trainingEndDate) { this.trainingEndDate = trainingEndDate; }
 }

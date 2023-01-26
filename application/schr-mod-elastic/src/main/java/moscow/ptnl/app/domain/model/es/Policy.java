@@ -17,6 +17,9 @@ public class Policy {
     @Field(type = FieldType.Keyword, name = "policyStatus")
     private String policyStatus;
 
+    @Field(type = FieldType.Keyword, name = "policyOMSType")
+    private String policyOMSType;
+
     public String getPolicyNumber() {
         return policyNumber;
     }
@@ -40,4 +43,8 @@ public class Policy {
     public void setPolicyStatus(String policyStatus) {
         this.policyStatus = policyStatus;
     }
+
+    public String getPolicyOMSType() { return policyOMSType; }
+
+    public void setPolicyOMSType(String policyOMSType) { this.policyOMSType = policyOMSType; }
 }

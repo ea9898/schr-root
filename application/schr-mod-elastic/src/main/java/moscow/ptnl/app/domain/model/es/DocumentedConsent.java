@@ -23,11 +23,8 @@ public class DocumentedConsent {
     @Field(type = FieldType.Nested, name = "interventionDetails", includeInParent = true)
     private InterventionDetails interventionDetails;
 
-    @Field(type = FieldType.Keyword, name = "documentId")
-    private String documentId;
-
-    @Field(type = FieldType.Nested, name = "immunodiagnostics", includeInParent = true)
-    private Immunodiagnostics Immunodiagnostics;
+    @Field(type = FieldType.Nested, name = "Immunodiagnostics", includeInParent = true)
+    private Immunodiagnostics immunodiagnostics;
 
     @Field(type = FieldType.Keyword, name = "representativeDocumentId")
     private String representativeDocumentId;
@@ -87,20 +84,12 @@ public class DocumentedConsent {
         this.interventionDetails = interventionDetails;
     }
 
-    public String getDocumentId() {
-        return documentId;
-    }
-
-    public void setDocumentId(String documentId) {
-        this.documentId = documentId;
-    }
-
     public Immunodiagnostics getImmunodiagnostics() {
-        return Immunodiagnostics;
+        return immunodiagnostics;
     }
 
     public void setImmunodiagnostics(Immunodiagnostics immunodiagnostics) {
-        Immunodiagnostics = immunodiagnostics;
+        this.immunodiagnostics = immunodiagnostics;
     }
 
     public String getRepresentativeDocumentId() {
