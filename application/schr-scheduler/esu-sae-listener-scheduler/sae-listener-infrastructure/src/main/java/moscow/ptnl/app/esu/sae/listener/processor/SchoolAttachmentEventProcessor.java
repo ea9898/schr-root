@@ -1,5 +1,8 @@
 package moscow.ptnl.app.esu.sae.listener.processor;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import moscow.ptnl.app.error.CustomErrorReason;
 import moscow.ptnl.app.esu.EsuConsumerProcessor;
 import moscow.ptnl.app.esu.sae.listener.deserializer.PatientSchoolAttachmentDeserializer;
@@ -9,8 +12,10 @@ import moscow.ptnl.app.model.TopicType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.mos.emias.esu.model.ErpChangePatientSchoolBase;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -32,8 +37,11 @@ public class SchoolAttachmentEventProcessor extends EsuConsumerProcessor {
         return TopicType.SCHOOL_ATTACHMENT_EVENT;
     }
 
+    @Autowired
+    protected ObjectMapper mapper;
+
     @Override
-    protected Optional<String> validate(String message) {
+    public Optional<String> validate(String message) {
         //4.1. Система проверяет, что сообщение соответствует формату JSON и возможно произвести его парсинг
         Optional<String> errorMsg = erpChangePatientSchoolBaseValidator.validate(message);
 
@@ -48,15 +56,20 @@ public class SchoolAttachmentEventProcessor extends EsuConsumerProcessor {
                 return Optional.of(CustomErrorReason.INCORRECT_FORMAT_ESU_MESSAGE.format(ex.getMessage()));
             }
             errorFields.add(content.getPatientId() == null || content.getPatientId() < 0 ? "emiasId" : null);
-            errorFields.add(content.getAttachmentId() == null ? "attachId" : null);
-            errorFields.add(content.getOrganizationId() == null ? "organizationId" : null);
             errorFields.add(content.getStudentId() == null ? "studentId" : null);
             errorFields.add(content.getStudentPersonId() == null ? "studentPersonId" : null);
-            errorFields.add(content.getAcademicYearId() == null ? "academicYear.id" : null);
-            errorFields.add(content.getAcademicYear() == null ? "academicYear" : null);
-            errorFields.add(content.getClassUid() == null ? "classUid" : null);
-            errorFields.add(content.getActual() == null ? "isActual" : null);
             errorFields.add(content.getUpdateDate() == null ? "operationDate" : null);
+
+            errorFields.add(!content.getAttachmentId() ? "attachId" : null);
+            errorFields.add(!content.getOrganizationId() ? "organizationId" : null);
+            errorFields.add(!content.getAreaId() ? "areaId" : null);
+            errorFields.add(!content.getAttachStartDate() ? "attachStartDate" : null);
+            errorFields.add(!content.getClassUid() ? "classUid" : null);
+            errorFields.add(!content.getEducationForm() ? "educationForm.id" : null);
+            errorFields.add(!content.getEducationFormName() ? "educationForm" : null);
+            errorFields.add(!content.getAcademicYearId() ? "academicYear.id" : null);
+            errorFields.add(!content.getAcademicYear() ? "academicYear" : null);
+            errorFields.add(!content.getActual() ? "isActual" : null);
 
             errorFields.remove(null);
 

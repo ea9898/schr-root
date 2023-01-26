@@ -39,6 +39,7 @@ public class RestConfiguration {
         mapper.configure(JsonParser.Feature.ALLOW_COMMENTS, true);
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        mapper.configure(DeserializationFeature.USE_LONG_FOR_INTS, true);
         mapper.setTimeZone(TimeZone.getDefault());
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 

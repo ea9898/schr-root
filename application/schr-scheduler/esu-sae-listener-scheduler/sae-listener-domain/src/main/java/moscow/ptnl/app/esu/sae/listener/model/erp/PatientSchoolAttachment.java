@@ -1,57 +1,71 @@
 package moscow.ptnl.app.esu.sae.listener.model.erp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class PatientSchoolAttachment {
 
     private Long patientId;
 
-    private Long attachmentId;
-
-    private Long organizationId;
-
     private String studentId;
 
     private String studentPersonId;
 
-    private String classUid;
+    private LocalDateTime updateDate;
 
-    private Integer academicYearId;
+    private Boolean attachmentId;
 
-    private String academicYear;
+    private Boolean organizationId;
+
+    private Boolean areaId;
+
+    private Boolean attachStartDate;
+
+    private Boolean classUid;
+
+    private Boolean educationForm;
+
+    private Boolean educationFormName;
+
+    private Boolean trainingBeginDate;
+
+    private Boolean trainingEndDate;
+
+    private Boolean academicYearId;
+
+    private Boolean academicYear;
 
     private Boolean actual;
 
-    private LocalDateTime updateDate;
+    public static PatientSchoolAttachment build(Long patientId, String studentId, String studentPersonId, LocalDateTime updateDate,
+                                                Boolean attachmentId, Boolean organizationId, Boolean areaId, Boolean attachStartDate,
+                                                Boolean classUid, Boolean educationForm, Boolean educationFormName,
+                                                Boolean trainingBeginDate, Boolean trainingEndDate, Boolean academicYearId,
+                                                Boolean academicYear, Boolean actual) {
+        PatientSchoolAttachment patientSchoolAttachment = new PatientSchoolAttachment();
 
-    public static PatientSchoolAttachment build(Long patientId, Long attachmentId, Long organizationId, String studentId, String studentPersonId,
-                                   String classUid, Long academicYearId, String academicYear, Boolean actual, LocalDateTime updateDate) {
-        PatientSchoolAttachment newAttachment = new PatientSchoolAttachment();
+        patientSchoolAttachment.patientId = patientId;
+        patientSchoolAttachment.studentId = studentId;
+        patientSchoolAttachment.studentPersonId = studentPersonId;
+        patientSchoolAttachment.updateDate = updateDate;
+        patientSchoolAttachment.attachmentId = attachmentId;
+        patientSchoolAttachment.organizationId = organizationId;
+        patientSchoolAttachment.areaId = areaId;
+        patientSchoolAttachment.attachStartDate = attachStartDate;
+        patientSchoolAttachment.classUid = classUid;
+        patientSchoolAttachment.educationForm = educationForm;
+        patientSchoolAttachment.educationFormName = educationFormName;
+        patientSchoolAttachment.trainingBeginDate = trainingBeginDate;
+        patientSchoolAttachment.trainingEndDate = trainingEndDate;
+        patientSchoolAttachment.academicYearId = academicYearId;
+        patientSchoolAttachment.academicYear = academicYear;
+        patientSchoolAttachment.actual = actual;
 
-        newAttachment.patientId = patientId;
-        newAttachment.attachmentId = attachmentId;
-        newAttachment.organizationId = organizationId;
-        newAttachment.studentId = studentId;
-        newAttachment.studentPersonId = studentPersonId;
-        newAttachment.classUid = classUid;
-        newAttachment.academicYearId = academicYearId == null ? null : academicYearId.intValue();
-        newAttachment.academicYear = academicYear;
-        newAttachment.actual = actual;
-        newAttachment.updateDate = updateDate;
-
-        return newAttachment;
+        return patientSchoolAttachment;
     }
 
     public Long getPatientId() {
         return patientId;
-    }
-
-    public Long getAttachmentId() {
-        return attachmentId;
-    }
-
-    public Long getOrganizationId() {
-        return organizationId;
     }
 
     public String getStudentId() {
@@ -62,23 +76,55 @@ public class PatientSchoolAttachment {
         return studentPersonId;
     }
 
-    public String getClassUid() {
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
+    }
+
+    public Boolean getAttachmentId() {
+        return attachmentId;
+    }
+
+    public Boolean getOrganizationId() {
+        return organizationId;
+    }
+
+    public Boolean getAreaId() {
+        return areaId;
+    }
+
+    public Boolean getAttachStartDate() {
+        return attachStartDate;
+    }
+
+    public Boolean getClassUid() {
         return classUid;
     }
 
-    public Integer getAcademicYearId() {
+    public Boolean getEducationForm() {
+        return educationForm;
+    }
+
+    public Boolean getEducationFormName() {
+        return educationFormName;
+    }
+
+    public Boolean getTrainingBeginDate() {
+        return trainingBeginDate;
+    }
+
+    public Boolean getTrainingEndDate() {
+        return trainingEndDate;
+    }
+
+    public Boolean getAcademicYearId() {
         return academicYearId;
     }
 
-    public String getAcademicYear() {
+    public Boolean getAcademicYear() {
         return academicYear;
     }
 
     public Boolean getActual() {
         return actual;
-    }
-
-    public LocalDateTime getUpdateDate() {
-        return updateDate;
     }
 }

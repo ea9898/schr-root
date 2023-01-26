@@ -1,0 +1,484 @@
+{
+   "id": 29,
+   "operationDate": "2022-06-23T18:47:30.868+03:00",
+   "emiasId": 18027361,
+   "uklErp": "30416317",
+   "studentId": "e5c9b68a-a3c7-6688-e043-a2997e0ac8c8",
+   "studentPersonId": "7445b4ed-f762-49c1-a58d-2edd164c95e3",
+   "patientStudentLinkStatus": "Y",
+   "patientType": "I",
+   "patientRecStatus": "Y",
+   "entityName": "schoolAttachment",
+   "entityData": [
+      {
+         "attributes": [
+            {
+               "name": "attachType",
+               "type": "dictionary",
+               "value": {
+                  "id": 128619874,
+                  "code": "9",
+                  "value": "школьное"
+               }
+            },
+            {
+               "name": "attachForm",
+               "type": "dictionary",
+               "value": {
+                  "id": 128620020,
+                  "code": "60",
+                  "value": "Прикрепление к классу"
+               }
+            },
+            {
+               "name": "organizationId",
+               "type": "integer",
+               "value": {
+                  "value": "200001011762"
+               }
+            },
+            {
+               "name": "areaId",
+               "type": "integer",
+               "value": {
+                  "value": "175740969"
+               }
+            },
+            {
+               "name": "attachStartDate",
+               "type": "date",
+               "value": {
+                  "value": "2019-08-16"
+               }
+            },
+            {
+               "name": "attachEndDate",
+               "type": "date",
+               "value": {
+                  "value": "2021-06-17"
+               }
+            },
+            {
+               "name": "isActual",
+               "type": "long",
+               "value": {
+                  "value": "false"
+               }
+            },
+            {
+               "name": "attachEndCause",
+               "type": "dictionary",
+               "value": {
+                  "id": 128619975,
+                  "code": "40",
+                  "value": "Другие причины"
+               }
+            }
+         ]
+      },
+      {
+         "attributes": [
+            {
+               "name": "attachId",
+               "type": "integer",
+               "value": {
+                  "value": "123889380"
+               }
+            },
+            {
+               "name": "attachType",
+               "type": "dictionary",
+               "value": {
+                  "id": 128619874,
+                  "code": "9",
+                  "value": "школьное"
+               }
+            },
+            {
+               "name": "attachForm",
+               "type": "dictionary",
+               "value": {
+                  "id": 128620020,
+                  "code": "60",
+                  "value": "Прикрепление к классу"
+               }
+            },
+            {
+               "name": "organizationId",
+               "type": "integer",
+               "value": {
+                  "value": "200001512253"
+               }
+            },
+            {
+               "name": "areaId",
+               "type": "integer",
+               "value": {
+                  "value": "17411873956"
+               }
+            },
+            {
+               "name": "attachStartDate",
+               "type": "date",
+               "value": {
+                  "value": "2021-07-26"
+               }
+            },
+            {
+               "name": "attachEndDate",
+               "type": "date",
+               "value": {
+                  "value": "2021-08-23"
+               }
+            },
+            {
+               "name": "isActual",
+               "type": "long",
+               "value": {
+                  "value": "false"
+               }
+            },
+            {
+               "name": "attachEndCause",
+               "type": "dictionary",
+               "value": {
+                  "id": 128619975,
+                  "code": "40",
+                  "value": "Другие причины"
+               }
+            },
+            {
+               "name": "classUid",
+               "type": "guid",
+               "value": {
+                  "value": "9d9d7e5e-78b7-4a0c-b2f1-704af93701a6"
+               }
+            },
+            {
+               "name": "academicYear",
+               "type": "dictionary",
+               "value": {
+                  "id": 22,
+                  "value": "2021/2022"
+               }
+            },
+            {
+               "name": "educationForm",
+               "type": "dictionary",
+               "value": {
+                  "id": 1,
+                  "value": "Очная"
+               }
+            },
+            {
+               "name": "deductionReason",
+               "type": "dictionary",
+               "value": {
+                  "id": 1554,
+                  "value": "Перевод в другое ОУ"
+               }
+            },
+            {
+               "name": "trainingBeginDate",
+               "type": "date",
+               "value": {
+                  "value": "2021-07-26T00:00"
+               }
+            },
+            {
+               "name": "trainingEndDate",
+               "type": "date",
+               "value": {
+                  "value": "2021-08-23T00:00"
+               }
+            }
+         ]
+      },
+      {
+         "attributes": [
+            {
+               "name": "attachId",
+               "type": "integer",
+               "value": {
+                  "value": "124922913"
+               }
+            },
+            {
+               "name": "attachType",
+               "type": "dictionary",
+               "value": {
+                  "id": 128619874,
+                  "code": "9",
+                  "value": "школьное"
+               }
+            },
+            {
+               "name": "attachForm",
+               "type": "dictionary",
+               "value": {
+                  "id": 128620020,
+                  "code": "60",
+                  "value": "Прикрепление к классу"
+               }
+            },
+            {
+               "name": "organizationId",
+               "type": "integer",
+               "value": {
+                  "value": "200001512243"
+               }
+            },
+            {
+               "name": "areaId",
+               "type": "integer",
+               "value": {
+                  "value": "17411929190"
+               }
+            },
+            {
+               "name": "attachStartDate",
+               "type": "date",
+               "value": {
+                  "value": "2021-08-23"
+               }
+            },
+            {
+               "name": "attachEndDate",
+               "type": "date",
+               "value": {}
+            },
+            {
+               "name": "isActual",
+               "type": "long",
+               "value": {
+                  "value": "true"
+               }
+            },
+            {
+               "name": "classUid",
+               "type": "guid",
+               "value": {
+                  "value": "43fdbd33-0766-40a2-a84c-d0b4492499ab"
+               }
+            },
+            {
+               "name": "academicYear",
+               "type": "dictionary",
+               "value": {
+                  "id": 22,
+                  "value": "2021/2022"
+               }
+            },
+            {
+               "name": "educationForm",
+               "type": "dictionary",
+               "value": {
+                  "id": 1,
+                  "value": "Очная"
+               }
+            },
+            {
+               "name": "deductionReason",
+               "type": "dictionary",
+               "value": {}
+            },
+            {
+               "name": "trainingBeginDate",
+               "type": "date",
+               "value": {
+                  "value": "2021-08-23T00:00"
+               }
+            },
+            {
+               "name": "trainingEndDate",
+               "type": "date",
+               "value": {
+                  "value": "2099-01-01T00:00"
+               }
+            }
+         ]
+      },
+      {
+         "attributes": [
+            {
+               "name": "attachId",
+               "type": "integer",
+               "value": {
+                  "value": "112562787"
+               }
+            },
+            {
+               "name": "attachType",
+               "type": "dictionary",
+               "value": {
+                  "id": 128619874,
+                  "code": "9",
+                  "value": "школьное"
+               }
+            },
+            {
+               "name": "attachForm",
+               "type": "dictionary",
+               "value": {
+                  "id": 128620020,
+                  "code": "60",
+                  "value": "Прикрепление к классу"
+               }
+            },
+            {
+               "name": "organizationId",
+               "type": "integer",
+               "value": {
+                  "value": "200001011762"
+               }
+            },
+            {
+               "name": "areaId",
+               "type": "integer",
+               "value": {
+                  "value": "17411871168"
+               }
+            },
+            {
+               "name": "attachStartDate",
+               "type": "date",
+               "value": {
+                  "value": "2021-06-18"
+               }
+            },
+            {
+               "name": "attachEndDate",
+               "type": "date",
+               "value": {
+                  "value": "2021-07-23"
+               }
+            },
+            {
+               "name": "isActual",
+               "type": "long",
+               "value": {
+                  "value": "true"
+               }
+            },
+            {
+               "name": "classUid",
+               "type": "guid",
+               "value": {
+                  "value": "9999b5c0-bff8-44eb-92e6-6c75d73aa14e"
+               }
+            },
+            {
+               "name": "academicYear",
+               "type": "dictionary",
+               "value": {
+                  "id": 22,
+                  "value": "2021/2022"
+               }
+            },
+            {
+               "name": "educationForm",
+               "type": "dictionary",
+               "value": {
+                  "id": 1,
+                  "value": "Очная"
+               }
+            },
+            {
+               "name": "deductionReason",
+               "type": "dictionary",
+               "value": {
+                  "id": 1554,
+                  "value": "Перевод в другое ОУ"
+               }
+            },
+            {
+               "name": "trainingBeginDate",
+               "type": "date",
+               "value": {
+                  "value": "2021-06-17T00:00"
+               }
+            },
+            {
+               "name": "trainingEndDate",
+               "type": "date",
+               "value": {
+                  "value": "2021-07-23T00:00"
+               }
+            }
+         ]
+      },
+      {
+         "attributes": [
+            {
+               "name": "attachId",
+               "type": "integer",
+               "value": {
+                  "value": "54780142"
+               }
+            },
+            {
+               "name": "attachType",
+               "type": "dictionary",
+               "value": {
+                  "id": 128619874,
+                  "code": "9",
+                  "value": "школьное"
+               }
+            },
+            {
+               "name": "attachForm",
+               "type": "dictionary",
+               "value": {
+                  "id": 128620020,
+                  "code": "60",
+                  "value": "Прикрепление к классу"
+               }
+            },
+            {
+               "name": "organizationId",
+               "type": "integer",
+               "value": {
+                  "value": "200001011762"
+               }
+            },
+            {
+               "name": "areaId",
+               "type": "integer",
+               "value": {
+                  "value": "32305799"
+               }
+            },
+            {
+               "name": "attachStartDate",
+               "type": "date",
+               "value": {
+                  "value": "2018-04-07"
+               }
+            },
+            {
+               "name": "attachEndDate",
+               "type": "date",
+               "value": {
+                  "value": "2019-12-04"
+               }
+            },
+            {
+               "name": "isActual",
+               "type": "long",
+               "value": {
+                  "value": "false"
+               }
+            },
+            {
+               "name": "attachEndCause",
+               "type": "dictionary",
+               "value": {
+                  "id": 128619975,
+                  "code": "40",
+                  "value": "Другие причины"
+               }
+            }
+         ]
+      }
+   ]
+}
