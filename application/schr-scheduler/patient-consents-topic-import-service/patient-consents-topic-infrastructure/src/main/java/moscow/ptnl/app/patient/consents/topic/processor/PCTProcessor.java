@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -58,13 +59,12 @@ public class PCTProcessor extends EsuConsumerProcessor {
             errorFields.add(content.getConsentDetails().getDocumentedConsent().getLocationName() == null ? "locationName" : null);
             errorFields.add(content.getConsentDetails().getDocumentedConsent().getAllMedicalIntervention() == null ? "allMedicalIntervention" : null);
 
-            if (content.getConsentDetails().getDocumentedConsent().getInterventionDetails().getMedInterventionId() == null ||
-                    content.getConsentDetails().getDocumentedConsent().getInterventionDetails().getMedInterventionId().stream().anyMatch(Objects::isNull)) {
+            if (checkArrayIsNullOrHasNulls(content.getConsentDetails().getDocumentedConsent().getInterventionDetails().getMedInterventionId())) {
                 errorFields.add("medInterventionId");
             }
 
             if (content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics() == null ||
-                    content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic() == null ||
+                    checkArrayIsNullOrHasNulls(content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic()) ||
                     content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(Immunodiagnostic::getImmunoTestKind).anyMatch(Objects::isNull) ||
                     content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(Immunodiagnostic::getImmunoTestKind).map(ImmunoTestKind::getImmunoKindCode).anyMatch(Objects::isNull)
             ) {
@@ -72,7 +72,7 @@ public class PCTProcessor extends EsuConsumerProcessor {
             }
 
             if (content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics() == null ||
-                    content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic() == null ||
+                    checkArrayIsNullOrHasNulls(content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic()) ||
                     content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(Immunodiagnostic::getImmunoTestKind).anyMatch(Objects::isNull) ||
                     content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(Immunodiagnostic::getImmunoTestKind).map(ImmunoTestKind::getInfectionCode).anyMatch(Objects::isNull)
             ) {
@@ -80,7 +80,7 @@ public class PCTProcessor extends EsuConsumerProcessor {
             }
 
             if (content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics() == null ||
-                    content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic() == null ||
+                    checkArrayIsNullOrHasNulls(content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic()) ||
                     content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(Immunodiagnostic::getImmunoDrugsTns).anyMatch(Objects::isNull) ||
                     content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(i -> i.getImmunoDrugsTns().getImmunoDrugsTnCode()).anyMatch(Objects::isNull)
             ) {
@@ -88,7 +88,6 @@ public class PCTProcessor extends EsuConsumerProcessor {
             }
 
             errorFields.add(content.getConsentDetails().getDocumentedConsent().getRepresentativeDocumentId() == null ? "representativeDocumentId" : null);
-            errorFields.add(content.getConsentDetails().getDocumentedConsent().getTemplateId() == null ? "templateId" : null);
             errorFields.add(content.getConsentDetails().getDocumentedConsent().getSignedByPatient() == null ? "signedByPatient" : null);
             errorFields.add(content.getConsentDetails().getDocumentedConsent().getCancelReasonId() == null ? "cancelReasonId" : null);
             errorFields.add(content.getConsentDetails().getDocumentedConsent().getCancelReasonOther() == null ? "cancelReasonOther" : null);
@@ -107,5 +106,17 @@ public class PCTProcessor extends EsuConsumerProcessor {
             }
         }
         return errorMsg;
+    }
+
+    private boolean checkArrayIsNullOrHasNulls(List<?> array) {
+        if (array == null) {
+            return true;
+        }
+        for (Object value : array) {
+            if (value == null) {
+                return true;
+            }
+        }
+        return false;
     }
 }
