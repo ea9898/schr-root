@@ -1,8 +1,7 @@
-package moscow.ptnl.app.la.handler.task;
+package moscow.ptnl.app.last.anthropometry.task;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import moscow.ptnl.app.domain.model.es.AnthropometryInfo;
 import moscow.ptnl.app.domain.model.es.StudentPatientData;
 import moscow.ptnl.app.error.CustomErrorReason;
@@ -10,7 +9,6 @@ import moscow.ptnl.app.infrastructure.repository.es.StudentPatientDataRepository
 import moscow.ptnl.app.model.PlannersEnum;
 import moscow.ptnl.app.model.TopicType;
 import moscow.ptnl.app.task.BaseEsuProcessorTask;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;

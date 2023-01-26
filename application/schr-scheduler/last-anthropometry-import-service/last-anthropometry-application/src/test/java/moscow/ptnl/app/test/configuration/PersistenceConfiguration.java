@@ -1,5 +1,6 @@
-package moscow.ptnl.app.esu.la.handler.configuration;
+package moscow.ptnl.app.test.configuration;
 
+import jakarta.persistence.EntityManagerFactory;
 import moscow.ptnl.app.config.PersistenceConstraint;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -17,7 +18,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.support.TransactionOperations;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import jakarta.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 import java.util.ResourceBundle;

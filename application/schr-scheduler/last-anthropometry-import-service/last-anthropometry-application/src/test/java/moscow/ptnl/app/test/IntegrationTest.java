@@ -1,35 +1,34 @@
-package moscow.ptnl.app.esu.la.handler;
+package moscow.ptnl.app.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import liquibase.Liquibase;
 import liquibase.database.Database;
 import liquibase.database.DatabaseFactory;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.exception.LiquibaseException;
-
 import liquibase.resource.FileSystemResourceAccessor;
 import moscow.ptnl.app.config.ESConfiguration;
-import moscow.ptnl.app.domain.model.es.StudentPatientData;
-import moscow.ptnl.app.la.handler.config.AsyncConfiguration;
-import moscow.ptnl.app.la.handler.config.RestConfiguration;
-import moscow.ptnl.app.la.handler.task.LastAnthropometryProcessTask;
+import moscow.ptnl.app.config.PersistenceConfiguration;
 import moscow.ptnl.app.config.PersistenceConstraint;
-import moscow.ptnl.app.esu.la.handler.configuration.MockConfiguration;
-import moscow.ptnl.app.esu.la.handler.configuration.PersistenceConfiguration;
+import moscow.ptnl.app.domain.model.es.StudentPatientData;
 import moscow.ptnl.app.infrastructure.repository.es.StudentPatientDataRepository;
+import moscow.ptnl.app.last.anthropometry.config.AsyncConfiguration;
+import moscow.ptnl.app.last.anthropometry.config.RestConfiguration;
+import moscow.ptnl.app.last.anthropometry.task.LastAnthropometryProcessTask;
 import moscow.ptnl.app.model.PlannersEnum;
 import moscow.ptnl.app.model.TopicType;
 import moscow.ptnl.app.model.es.IndexEsuInput;
 import moscow.ptnl.app.repository.EsuInputCRUDRepository;
 import moscow.ptnl.app.repository.es.IndexEsuInputRepository;
+import moscow.ptnl.app.test.configuration.MockConfiguration;
 import moscow.ptnl.domain.entity.esu.EsuInput;
 import moscow.ptnl.domain.entity.esu.EsuStatusType;
 import moscow.ptnl.domain.service.SettingService;
-
 import moscow.ptnl.schr.repository.SettingsCRUDRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -41,8 +40,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import javax.sql.DataSource;
 import java.io.BufferedReader;
 import java.io.IOException;

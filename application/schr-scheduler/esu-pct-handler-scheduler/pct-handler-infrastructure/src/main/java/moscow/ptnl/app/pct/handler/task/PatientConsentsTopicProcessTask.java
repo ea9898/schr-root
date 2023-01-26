@@ -107,7 +107,6 @@ public class PatientConsentsTopicProcessTask extends BaseEsuProcessorTask {
     }
 
     private void applyData(model.DocumentedConsent newData, DocumentedConsent documentedConsent) {
-        documentedConsent.setDocumentId(newData.getDocumentId());
         documentedConsent.setCreateDate(newData.getCreateDate());
         documentedConsent.setLocationId(newData.getLocationId());
         documentedConsent.setLocationName(newData.getLocationName());

@@ -1,4 +1,4 @@
-package moscow.ptnl.app.la.handler.config;
+package moscow.ptnl.app.last.anthropometry.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

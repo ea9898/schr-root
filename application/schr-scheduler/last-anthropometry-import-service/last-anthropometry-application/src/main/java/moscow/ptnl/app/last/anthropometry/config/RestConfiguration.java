@@ -1,4 +1,4 @@
-package moscow.ptnl.app.la.handler.config;
+package moscow.ptnl.app.last.anthropometry.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonParser;
