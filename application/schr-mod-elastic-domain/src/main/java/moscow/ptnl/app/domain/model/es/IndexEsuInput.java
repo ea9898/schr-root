@@ -4,6 +4,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 
 import java.time.LocalDateTime;
+import org.springframework.data.annotation.Id;
 
 /**
  *
@@ -13,6 +14,9 @@ import java.time.LocalDateTime;
 public class IndexEsuInput {
     
     public static final String INDEX_NAME = "index_esu_input";
+    
+    @Id
+    private String id;
     
     private Long offset;
 

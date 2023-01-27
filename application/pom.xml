@@ -15,11 +15,13 @@
         <module>schr-mod-utility</module>
         <module>schr-mod-jpa</module>
         <module>schr-mod-elastic</module>
+	<module>schr-mod-elastic-domain</module>
         <module>schr-mod-health</module>
         <module>schr-mod-metrics</module>
         <module>schr-mod-domain</module>
         <module>schr-mod-esu</module>
         <module>schr-mod-schedule</module>
+	<module>schr-mod-security</module>
         <module>schr-service</module>
         <module>schr-scheduler</module>
     </modules>

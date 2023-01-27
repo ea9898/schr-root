@@ -98,11 +98,11 @@
         <AsyncLogger name="org.springframework.data.elasticsearch.client.WIRE" level="trace">
             <AppenderRef ref="elastic" level="trace" />
         </AsyncLogger>
-        <AsyncLogger name="org.elasticsearch.client" level="warn">
-            <AppenderRef ref="elastic" level="warn" />
+        <AsyncLogger name="org.elasticsearch.client" level="debug">
+            <AppenderRef ref="elastic" level="debug" />
         </AsyncLogger>
-        <AsyncLogger name="org.apache.http" level="warn">
-            <AppenderRef ref="elastic" level="warn" />
+        <AsyncLogger name="org.apache.http" level="debug">
+            <AppenderRef ref="elastic" level="debug" />
         </AsyncLogger>
 
     </Loggers>

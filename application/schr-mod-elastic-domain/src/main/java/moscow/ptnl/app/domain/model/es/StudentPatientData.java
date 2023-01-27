@@ -4,13 +4,17 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 
 import java.util.List;
+import org.springframework.data.annotation.Id;
 
 import static org.springframework.data.elasticsearch.annotations.FieldType.Nested;
 
 @Document(indexName = StudentPatientData.INDEX_NAME, createIndex = false)
 public class StudentPatientData {
 
-    public static final String INDEX_NAME = "student_patient_registry";
+    public static final String INDEX_NAME = "student_patient_registry_alias";
+    
+    @Id
+    private String id;
 
     @Field(type = Nested, name = "patientInfo", includeInParent = true)
     private PatientInfo patientInfo;

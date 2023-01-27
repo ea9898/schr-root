@@ -1,2 +1,2 @@
 CODE#VAL#DESCRIPTION#DATE_UPDATED
-services.security.settings#{"SCHREGISTER":{"enabled":true,"authMethods":{"searchByDsl":{"enabled":true,"permissions":[444001]}}}}#Настройка безопасности методов сервиса#NOW
+services.security.settings#{"StudentPatientDataSearchService":{"enabled":true,"authMethods":{"searchByDsl":{"enabled":true,"permissions":[444001]}}}}#Настройка безопасности методов сервиса#NOW

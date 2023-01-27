@@ -21,6 +21,17 @@
         </dependency>
         <dependency>
             <groupId>moscow.ptnl.schregister</groupId>
+            <artifactId>schr-mod-elastic</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>moscow.ptnl.schregister</groupId>
+            <artifactId>schr-mod-elastic-domain</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>moscow.ptnl.schregister</groupId>
             <artifactId>schr-mod-jpa</artifactId>
             <version>${project.version}</version>
         </dependency>
