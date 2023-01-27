@@ -19,7 +19,6 @@
         <module>esu-sae-listener-scheduler</module>
         <module>last-anthropometry-import-service</module>
         <module>patient-consents-topic-import-service</module>
-        <module>esu-pct-handler-scheduler</module>
     </modules>
 
 </project>

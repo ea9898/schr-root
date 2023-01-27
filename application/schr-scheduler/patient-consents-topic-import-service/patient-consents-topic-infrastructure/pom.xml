@@ -13,12 +13,17 @@
     <dependencies>
         <dependency>
             <groupId>moscow.ptnl.schregister</groupId>
+            <artifactId>patient-consents-topic-domain</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>moscow.ptnl.schregister</groupId>
             <artifactId>schr-mod-esu</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>moscow.ptnl.schregister</groupId>
-            <artifactId>patient-consents-topic-domain</artifactId>
+            <artifactId>schr-mod-elastic</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
