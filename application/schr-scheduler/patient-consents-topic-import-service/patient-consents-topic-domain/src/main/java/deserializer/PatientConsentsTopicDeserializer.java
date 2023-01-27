@@ -6,6 +6,7 @@ import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.Option;
 
+import com.jayway.jsonpath.spi.mapper.JacksonMappingProvider;
 import model.ConsentDetails;
 import model.DocumentedConsent;
 import model.Immunodiagnostics;
@@ -34,6 +35,7 @@ public class PatientConsentsTopicDeserializer implements Function<String, Patien
     @PostConstruct
     public void setup() {
         configuration = Configuration.defaultConfiguration()
+                .mappingProvider(new JacksonMappingProvider(mapper))
                 .addOptions(Option.SUPPRESS_EXCEPTIONS);
     }
 
@@ -41,34 +43,34 @@ public class PatientConsentsTopicDeserializer implements Function<String, Patien
     public PatientConsents apply(String json) {
         DocumentContext value = JsonPath.using(configuration).parse(json);
 
-        Immunodiagnostics immunodiagnostics = extractSingle(value, "$.consentDetails.documentedConsent.Immunodiagnostics", Immunodiagnostics.class);
+        Immunodiagnostics immunodiagnostics = value.read("$.message.consentDetails.documentedConsent.Immunodiagnostics", Immunodiagnostics.class);
 
         ConsentDetails consentDetails = new ConsentDetails(
-                extractSingle(value, "$.consentDetails.consentId", Long.class),
+                value.read("$.message.consentDetails.consentId", Long.class),
                 new DocumentedConsent(
-                        value.read("$.consentDetails.documentedConsent.documentId"),
-                        extractSingle(value, "$.consentDetails.documentedConsent.createDate", LocalDate.class),
-                        extractSingle(value, "$.consentDetails.documentedConsent.locationId", Long.class),
-                        value.read("$.consentDetails.documentedConsent.locationName"),
-                        value.read("$.consentDetails.documentedConsent.allMedicalIntervention"),
+                        value.read("$.message.consentDetails.documentedConsent.documentId"),
+                        value.read("$.message.consentDetails.documentedConsent.createDate", LocalDate.class),
+                        value.read("$.message.consentDetails.documentedConsent.locationId", Long.class),
+                        value.read("$.message.consentDetails.documentedConsent.locationName"),
+                        value.read("$.message.consentDetails.documentedConsent.allMedicalIntervention"),
                         new InterventionDetails(
-                                extractList(value, "$.consentDetails.documentedConsent.interventionDetails.medInterventionId[*]", Long.class)
+                                extractList(value, "$.message.consentDetails.documentedConsent.interventionDetails.medInterventionId[*]", Long.class)
                         ),
                         immunodiagnostics,
-                        value.read("$.consentDetails.documentedConsent.representativeDocumentId"),
-                        value.read("$.consentDetails.documentedConsent.signedByPatient"),
-                        extractSingle(value, "$.consentDetails.documentedConsent.cancelReasonId", Long.class),
-                        value.read("$.consentDetails.documentedConsent.cancelReasonOther"),
-                        extractSingle(value, "$.consentDetails.documentedConsent.moId", Long.class),
-                        value.read("$.consentDetails.documentedConsent.moName")
+                        value.read("$.message.consentDetails.documentedConsent.representativeDocumentId"),
+                        value.read("$.message.consentDetails.documentedConsent.signedByPatient"),
+                        value.read("$.message.consentDetails.documentedConsent.cancelReasonId", Long.class),
+                        value.read("$.message.consentDetails.documentedConsent.cancelReasonOther"),
+                        value.read("$.message.consentDetails.documentedConsent.moId", Long.class),
+                        value.read("$.message.consentDetails.documentedConsent.moName")
                 ),
-                extractSingle(value, "$.consentDetails.issueDateTime", LocalDateTime.class),
-                extractSingle(value, "$.consentDetails.consentFormId", Long.class),
-                extractSingle(value, "$.consentDetails.consentTypeId", Long.class),
-                extractSingle(value, "$.consentDetails.representativePhysicalId", Long.class),
-                extractSingle(value, "$.consentDetails.representativeLegalId", Long.class)
+                value.read("$.message.consentDetails.issueDateTime", LocalDateTime.class),
+                value.read("$.message.consentDetails.consentFormId", Long.class),
+                value.read("$.message.consentDetails.consentTypeId", Long.class),
+                value.read("$.message.consentDetails.representativePhysicalId", Long.class),
+                value.read("$.message.consentDetails.representativeLegalId", Long.class)
         );
-        return new PatientConsents(extractSingle(value, "$.patientId", Long.class), consentDetails);
+        return new PatientConsents(value.read("$.message.patientId", Long.class), consentDetails);
     }
 
     private <T> List<T> extractList(DocumentContext value, String path, Class<T> clazz) {
@@ -78,14 +80,5 @@ public class PatientConsentsTopicDeserializer implements Function<String, Patien
             return null;
         }
         return array;
-    }
-
-    private <T> T extractSingle(DocumentContext value, String path, Class<T> clazz) {
-        T array = value.read(path);
-
-        if (array == null) {
-            return null;
-        }
-        return mapper.convertValue(array, clazz);
     }
 }

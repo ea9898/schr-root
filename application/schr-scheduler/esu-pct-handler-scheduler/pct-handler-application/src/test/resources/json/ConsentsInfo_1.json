@@ -1,48 +1,50 @@
 {
-  "patientId": 3987621809,
-  "consentDetails": {
-    "consentId": 50699767,
-    "documentedConsent": {
-      "documentId": "4296e25e-00ac-4fbf-ba05-f74160384e5c",
-      "createDate": "2022-12-20T12:47:25.394201",
-      "locationId": 238335538,
-      "locationName": "медблок2ПО",
-      "allMedicalIntervention": false,
-      "interventionDetails": {
-        "medInterventionId": [
-          158370312
-        ]
-      },
-      "Immunodiagnostics": {
-        "immunodiagnostic": [
-          {
-            "immunoTestKind": {
-              "immunoKindCode": 158370689,
-              "infectionCode": 158370685
-            },
-            "immunoDrugsTns": {
-              "immunoDrugsTnCode": [
-                158370694
-              ]
+  "message": {
+    "patientId": 3987621809,
+    "consentDetails": {
+      "consentId": 50699767,
+      "documentedConsent": {
+        "documentId": "4296e25e-00ac-4fbf-ba05-f74160384e5c",
+        "createDate": "2022-12-20T12:47:25.394201",
+        "locationId": 238335538,
+        "locationName": "медблок2ПО",
+        "allMedicalIntervention": false,
+        "interventionDetails": {
+          "medInterventionId": [
+            158370312
+          ]
+        },
+        "Immunodiagnostics": {
+          "immunodiagnostic": [
+            {
+              "immunoTestKind": {
+                "immunoKindCode": 158370689,
+                "infectionCode": 158370685
+              },
+              "immunoDrugsTns": {
+                "immunoDrugsTnCode": [
+                  158370694
+                ]
+              }
             }
-          }
-        ]
+          ]
+        },
+        "representativeDocumentId": "513e882f-9a9b-4d4f-af45-1d1d6e4909df",
+        "signedByPatient": false,
+        "moId": 10000290,
+        "moName": "ГБУЗ ДГП № 110 ДЗМ",
+        "template": "openEHR-EHR-COMPOSITION.t_informed_consent_reference_forms_1177_19_308.v2"
       },
-      "representativeDocumentId": "513e882f-9a9b-4d4f-af45-1d1d6e4909df",
-      "signedByPatient": false,
-      "moId": 10000290,
-      "moName": "ГБУЗ ДГП № 110 ДЗМ",
-      "template": "openEHR-EHR-COMPOSITION.t_informed_consent_reference_forms_1177_19_308.v2"
-    },
-    "issueDateTime": "2022-12-20T00:00:00",
-    "consentFormId": 147838226,
-    "consentTypeId": 147864273,
-    "representativePhysicalId": 12345,
-    "authorDetails": {
-      "medEmployeeLogin": "NataAleksandrova",
-      "medEmployeeName": "Александрова Наталья Викторовна",
-      "medEmployeeSpeciality": "Врач-педиатр участковый",
-      "muName": "ГБУЗ г. Москвы \"Детская городская поликлиника № 110 ДЗМ\""
+      "issueDateTime": "2022-12-20T00:00:00",
+      "consentFormId": 147838226,
+      "consentTypeId": 147864273,
+      "representativePhysicalId": 12345,
+      "authorDetails": {
+        "medEmployeeLogin": "NataAleksandrova",
+        "medEmployeeName": "Александрова Наталья Викторовна",
+        "medEmployeeSpeciality": "Врач-педиатр участковый",
+        "muName": "ГБУЗ г. Москвы \"Детская городская поликлиника № 110 ДЗМ\""
+      }
     }
   }
 }

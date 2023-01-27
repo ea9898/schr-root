@@ -11,7 +11,6 @@ public class DocumentedConsent {
     private InterventionDetails interventionDetails;
     private Immunodiagnostics immunodiagnostics;
     private String representativeDocumentId;
-    private Long templateId;
     private Boolean signedByPatient;
     private Long cancelReasonId;
     private String cancelReasonOther;
@@ -103,14 +102,6 @@ public class DocumentedConsent {
 
     public void setRepresentativeDocumentId(String representativeDocumentId) {
         this.representativeDocumentId = representativeDocumentId;
-    }
-
-    public Long getTemplateId() {
-        return templateId;
-    }
-
-    public void setTemplateId(Long templateId) {
-        this.templateId = templateId;
     }
 
     public Boolean getSignedByPatient() {
