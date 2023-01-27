@@ -35,7 +35,23 @@ public class PatientSchoolAttachmentDeserializer implements Function<String, Pat
     @Override
     public PatientSchoolAttachment apply(String json) {
         Object value = configuration.jsonProvider().parse(json);
-        return getPatientSchoolAttachment(value);
+
+        return PatientSchoolAttachment.build(JsonPath.read(value, "$.emiasId"),
+                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"attachId\")].value.value", Long.class),
+                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"organizationId\")].value.value", Long.class),
+                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"areaId\")].value.value", Long.class),
+                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"attachStartDate\")].value.value", LocalDate.class),
+                JsonPath.read(value, "$.studentId"),
+                JsonPath.read(value, "$.studentPersonId"),
+                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"classUid\")].value.value", String.class),
+                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"educationForm\")].value.id", Long.class),
+                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"educationForm\")].value.value", String.class),
+                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"trainingBeginDate\")].value.value", LocalDate.class),
+                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"trainingEndDate\")].value.value", LocalDate.class),
+                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"academicYear\")].value.id", Long.class),
+                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"academicYear\")].value.value", String.class),
+                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"isActual\")].value.value", Boolean.class),
+                mapper.convertValue(JsonPath.read(value, "$.operationDate"), LocalDateTime.class));
     }
 
     public List<PatientSchoolAttachment> getPatientSchoolAttachments(String json) {
@@ -44,29 +60,26 @@ public class PatientSchoolAttachmentDeserializer implements Function<String, Pat
         List<Object> entityDataList = mapper.convertValue(JsonPath.read(value, "$.entityData"), List.class);
         List<PatientSchoolAttachment> attachmentDataList = new ArrayList<>();
         for (Object entityData : entityDataList) {
-            PatientSchoolAttachment attachment = getPatientSchoolAttachment(entityData);
+            PatientSchoolAttachment attachment = PatientSchoolAttachment.build(
+                    JsonPath.read(value, "$.emiasId"),
+                    extractSingleArray(entityData, "$.attributes[?(@.name==\"attachId\")].value.value", Long.class),
+                    extractSingleArray(entityData, "$.attributes[?(@.name==\"organizationId\")].value.value", Long.class),
+                    extractSingleArray(entityData, "$.attributes[?(@.name==\"areaId\")].value.value", Long.class),
+                    extractSingleArray(entityData, "$.attributes[?(@.name==\"attachStartDate\")].value.value", LocalDate.class),
+                    JsonPath.read(value, "$.studentId"),
+                    JsonPath.read(value, "$.studentPersonId"),
+                    extractSingleArray(entityData, "$.attributes[?(@.name==\"classUid\")].value.value", String.class),
+                    extractSingleArray(entityData, "$.attributes[?(@.name==\"educationForm\")].value.id", Long.class),
+                    extractSingleArray(entityData, "$.attributes[?(@.name==\"educationForm\")].value.value", String.class),
+                    extractSingleArray(entityData, "$.attributes[?(@.name==\"trainingBeginDate\")].value.value", LocalDate.class),
+                    extractSingleArray(entityData, "$.attributes[?(@.name==\"trainingEndDate\")].value.value", LocalDate.class),
+                    extractSingleArray(entityData, "$.attributes[?(@.name==\"academicYear\")].value.id", Long.class),
+                    extractSingleArray(entityData, "$.attributes[?(@.name==\"academicYear\")].value.value", String.class),
+                    extractSingleArray(entityData, "$.attributes[?(@.name==\"isActual\")].value.value", Boolean.class),
+                    mapper.convertValue(JsonPath.read(value, "$.operationDate"), LocalDateTime.class));
             attachmentDataList.add(attachment);
         }
         return attachmentDataList;
-    }
-
-    private PatientSchoolAttachment getPatientSchoolAttachment(Object value) {
-        return PatientSchoolAttachment.build(JsonPath.read(value, "$.emiasId"),
-                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"attachId\")].value.value", Long.class),
-                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"organizationId\")].value.value", Long.class),
-                extractSingleArray(value, "$.attributes[?(@.name==\"areaId\")].value.value", Long.class),
-                extractSingleArray(value, "$.attributes[?(@.name==\"attachStartDate\")].value.value", LocalDate.class),
-                JsonPath.read(value, "$.studentId"),
-                JsonPath.read(value, "$.studentPersonId"),
-                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"classUid\")].value.value", String.class),
-                extractSingleArray(value, "$.attributes[?(@.name==\"educationForm\")].value.id", Long.class),
-                extractSingleArray(value, "$.attributes[?(@.name==\"educationForm\")].value.value", String.class),
-                extractSingleArray(value, "$.attributes[?(@.name==\"trainingBeginDate\")].value.value", LocalDate.class),
-                extractSingleArray(value, "$.attributes[?(@.name==\"trainingEndDate\")].value.value", LocalDate.class),
-                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"academicYear\")].value.id", Long.class),
-                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"academicYear\")].value.value", String.class),
-                extractSingleArray(value, "$.entityData[*].attributes[?(@.name==\"isActual\")].value.value", Boolean.class),
-                mapper.convertValue(JsonPath.read(value, "$.operationDate"), LocalDateTime.class));
     }
 
     private <T> T extractSingleArray(Object value, String path, Class<T> clazz) {

@@ -33,7 +33,6 @@ public class SchoolAttachmentEventProcessTask extends BaseEsuProcessorTask {
     @Autowired
     private StudentPatientDataRepository studentPatientDataRepository;
 
-
     @Override
     protected Optional<String> processMessage(String inputMsg) {
         // 4.2 Система выполняет парсинг сообщения
@@ -50,7 +49,6 @@ public class SchoolAttachmentEventProcessTask extends BaseEsuProcessorTask {
             Optional<StudentPatientData> studentPatientDataOptional = studentPatientDataRepository.findById(patientId.toString());
 
             StudentPatientData studentPatientData;
-
             if (studentPatientDataOptional.isEmpty()) {
                 studentPatientData = new StudentPatientData();
                 try {
@@ -59,11 +57,9 @@ public class SchoolAttachmentEventProcessTask extends BaseEsuProcessorTask {
                     // TODO Вставить "КОД"
                     return Optional.of(CustomErrorReason.CREATE_NEW_PATIENT_EXCEPTION.format("КОД", e.getMessage()));
                 }
-
                 // TODO алгоритм A_SCHR_1 - пункты 3, 4
                 // TODO алгоритм A_SCHR_1 - пункты 5, 6
                 // TODO алгоритм A_SCHR_1 - пункт 7
-
             } else {
                 studentPatientData = studentPatientDataOptional.get();
             }
@@ -78,12 +74,13 @@ public class SchoolAttachmentEventProcessTask extends BaseEsuProcessorTask {
                 if (!studInfoList.isEmpty()) {
                     if (studInfoList.get(0).getStudChangeDate().isBefore(attachment.getUpdateDate())) {
                         if (attachment.getActual()) {
-                            // Система удаляет найденный блок (блоки) и переходит на следующий шаг (4.4.2 Система записывает блок в элемент индекса studInfo)
+                            // Система удаляет найденный блок (блоки) и переходит на следующий шаг
                             studentPatientData.getStudInfo().removeAll(studInfoList);
-                            applyData(attachment, studentPatientData);
+                            applyData(attachment, studentPatientData); //4.4.2 Система записывает блок в элемент индекса studInfo
                         } else {
                             //Система удаляет найденный блок/блоки
                             studentPatientData.getStudInfo().removeAll(studInfoList);
+                            studentPatientDataRepository.save(studentPatientData);
                             //ЕСЛИ после удаления блока/блоков в элементе индекса studInfo не останется блоков в массиве
                             if (studentPatientData.getStudInfo().isEmpty()) {
                                 // Система проверяет возраст пациента
@@ -108,8 +105,8 @@ public class SchoolAttachmentEventProcessTask extends BaseEsuProcessorTask {
                     }
                 } else {
                     if (attachment.getActual()) {
-                        // Система переходит на следующий шаг (4.4.2 Система записывает блок в элемент индекса studInfo)
-                        applyData(attachment, studentPatientData);
+                        // Система переходит на следующий шаг
+                        applyData(attachment, studentPatientData); //4.4.2 Система записывает блок в элемент индекса studInfo
                     } else {
                         // Система проверяет возраст пациента
                         if ((LocalDate.now().getYear() - studentPatientData.getPatientInfo().getBirthDate().getYear()) >= ageMax) {
