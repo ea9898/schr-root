@@ -61,8 +61,8 @@ public class ErpChangePatientPoliciesDeserializer implements Function<String, Er
     @Override
     public ErpChangePatientPolicies apply(String json) {
         Object value = configuration.jsonProvider().parse(json);
-
         TypeRef<List<EntityData>> typeRef = new TypeRef<List<EntityData>>() {};
+
         return new ErpChangePatientPolicies(
                 extractSingle(value, "$.id", Integer.class),
                 extractSingle(value, "$.operationDate", LocalDateTime.class),
@@ -73,6 +73,7 @@ public class ErpChangePatientPoliciesDeserializer implements Function<String, Er
                 JsonPath.read(value, "$.entityName"),
                 JsonPath.parse(json).read("$.entityData", typeRef)
         );
+
     }
 
     private <T> T extractSingleArray(Object value, String path, Class<T> clazz) {

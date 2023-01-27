@@ -83,6 +83,16 @@ public class ECPPProcessor extends EsuConsumerProcessor {
                 }
             }
 
+            // $.entityData[0].attributes[?(@.name=="policyOMSType")].value.code
+            if (!(content.getEntityData() == null || content.getEntityData().isEmpty() || content.getEntityData().get(0).getAttributes() == null)) {
+                Optional<Attribute> optionalAttribute = content.getEntityData().get(0).getAttributes()
+                        .stream().filter(i -> i.getName().equals("policyOMSType")).findFirst();
+                if (optionalAttribute.isEmpty() || optionalAttribute.get().getValue() == null
+                        || optionalAttribute.get().getValue().getCode() == null || optionalAttribute.get().getValue().getCode().strip().length() == 0) {
+                    errorFields.add("erpChangePatient.policyOMSType");
+                }
+            }
+
             errorFields.remove(null);
 
             if (!errorFields.isEmpty()) {

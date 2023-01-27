@@ -66,6 +66,7 @@ public class ErpChangePatientPoliciesProcessTask extends BaseEsuProcessorTask {
                 // policy.policyUpdateDate < $.entityData[0].attributes[?(@.name=="policyChangeDate")].value.value И
                 //$.entityData[0].attributes[?(@.name=="policyStatus")].value.code = 'N'
                 if (studentPatientData.get().getPolicy().getPolicyUpdateDate().isBefore(newPolicy.getPolicyUpdateDate())
+//                        && studentPatientData.get().getPolicy().getPolicyStatus().equals("N")) {
                         && newPolicy.getPolicyStatus().equals("N")) {
                     StudentPatientData studentData = studentPatientData.get();
                     studentData.setPolicy(null);
@@ -92,10 +93,12 @@ public class ErpChangePatientPoliciesProcessTask extends BaseEsuProcessorTask {
         Optional<Attribute> policyChangeDateOpt = content.getEntityData().get(0).getAttributes().stream().filter(item -> item.getName().equals("policyChangeDate")).findFirst();
         Optional<Attribute> policyStatusOpt = content.getEntityData().get(0).getAttributes().stream().filter(item -> item.getName().equals("policyStatus")).findFirst();
         Optional<Attribute> policyNumberOpt = content.getEntityData().get(0).getAttributes().stream().filter(item -> item.getName().equals("policyNumber")).findFirst();
+        Optional<Attribute> policyOMSTypeOpt = content.getEntityData().get(0).getAttributes().stream().filter(item -> item.getName().equals("policyOMSType")).findFirst();
 
         Attribute policyNumber = policyNumberOpt.get();
         Attribute policyChangeDate = policyChangeDateOpt.get();
         Attribute policyStatus = policyStatusOpt.get();
+        Attribute policyOMSType = policyOMSTypeOpt.get();
 
         LocalDateTime policyChangeDateValue = LocalDateTime.parse(policyChangeDate.getValue().getValue());
         Policy policy = new Policy();
@@ -103,6 +106,7 @@ public class ErpChangePatientPoliciesProcessTask extends BaseEsuProcessorTask {
         policy.setPolicyNumber(policyNumber.getValue().getValue());
         policy.setPolicyUpdateDate(policyChangeDateValue);
         policy.setPolicyStatus(policyStatus.getValue().getCode());
+        policy.setPolicyOMSType(policyOMSType.getValue().getCode());
 
         return policy;
     }

@@ -14,6 +14,7 @@ import moscow.ptnl.app.domain.model.es.StudentPatientData;
 import moscow.ptnl.app.ecpp.task.ErpChangePatientPoliciesProcessTask;
 import moscow.ptnl.app.erp.change.patient.policies.config.AsyncConfiguration;
 import moscow.ptnl.app.erp.change.patient.policies.config.RestConfiguration;
+import moscow.ptnl.app.error.CustomErrorReason;
 import moscow.ptnl.app.infrastructure.repository.es.StudentPatientDataRepository;
 import moscow.ptnl.app.model.PlannersEnum;
 import moscow.ptnl.app.model.TopicType;
@@ -24,6 +25,7 @@ import moscow.ptnl.domain.entity.esu.EsuInput;
 import moscow.ptnl.domain.entity.esu.EsuStatusType;
 import moscow.ptnl.domain.service.SettingService;
 import moscow.ptnl.schr.repository.SettingsCRUDRepository;
+import org.hibernate.query.sqm.UnknownPathException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -40,6 +42,8 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import ru.mos.emias.errors.domain.ErrorReason;
+
 import javax.sql.DataSource;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -50,10 +54,13 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(SpringExtension.class)
 @ExtendWith(MockitoExtension.class)
@@ -101,9 +108,11 @@ public class IntegrationTest {
         liquibase.update("");
     }
 
-    @Test
+    @Test // $.entityData[0].attributes[?(@.name=="policyStatus")].value.code != 'N'
     public void test1() throws ExecutionException, InterruptedException, IOException {
         Long studentId;
+        Long esuMsgId;
+        boolean complete;
         //build test data
         try (InputStream inputStream = IntegrationTest.class.getClassLoader().getResourceAsStream("json/studentPatientData.json")) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
@@ -115,37 +124,32 @@ public class IntegrationTest {
 
         try (InputStream inputStream = IntegrationTest.class.getClassLoader().getResourceAsStream("json/ErpChangePatientPoliciesPolicyStatusD.json")) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-            buildMessage(reader.lines().collect(Collectors.joining("\n"))
-                    .replace("\"operationDate\": \"2022-10-18T14:21:14.196+03:00\",", String.format("\"operationDate\": \"%s\",", LocalDateTime.now().toString())));
+            esuMsgId = buildMessage(reader.lines().collect(Collectors.joining("\n"))
+                    .replace("\"operationDate\": \"2022-10-18T14:21:14.196+03:00\",", String.format("\"operationDate\": \"%s\",", LocalDateTime.now())));
         }
+
         entityManager.flush();
 
         try {
             executor.submit(() -> Assertions.assertDoesNotThrow(() -> erpChangePatientPoliciesProcessTask.runTask()));
-            Mockito.verify(settingService, Mockito.timeout(30000).times(1))
+            Mockito.verify(settingService, Mockito.timeout(30000).times(2))
                     .getSettingProperty(Mockito.eq(PlannersEnum.I_SCHR_6.getPlannerName() + ".run.mode"), Mockito.any(), Mockito.anyBoolean());
 
             entityManager.flush();
 
-            StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false).forEach(t -> {
-                Assertions.assertEquals(EsuStatusType.NEW, t.getStatus());
-                Assertions.assertNull(t.getError());
-            });
+            Optional<EsuInput> esuInput = esuInputCRUDRepository.findById(esuMsgId);
+            Assertions.assertEquals(EsuStatusType.PROCESSED, esuInput.get().getStatus());
+            Assertions.assertNull(esuInput.get().getError());
 
-            List<StudentPatientData> studentPatientDataList = StreamSupport.stream(studentPatientDataRepository.findAll().spliterator(), false)
-                    .filter(t -> Objects.equals(t.getPatientInfo().getPatientId(), studentId))
-                    .collect(Collectors.toList());
-            Assertions.assertEquals(1, studentPatientDataList.size());
+            Optional<StudentPatientData> studentOpt = studentPatientDataRepository.findById(studentId.toString());
+            Assertions.assertTrue(studentOpt.isPresent());
 
-            StudentPatientData patientData = studentPatientDataList.get(0);
-            Policy policy = new Policy();
-            policy.setPolicyStatus("D");
-            policy.setPolicyNumber("7700008184090530");
-
-            patientData.setPolicy(policy);
+            StudentPatientData patientData = studentOpt.get();
+            Policy policy = patientData.getPolicy();
 
             Assertions.assertEquals("D", policy.getPolicyStatus());
             Assertions.assertEquals("7700008184090530", policy.getPolicyNumber());
+            complete = true;
         } finally {
             //Т.к. используем реальный сервис Elastic, нужно удалить созданные данные
             List<EsuInput> esuInputs = StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false)
@@ -153,13 +157,16 @@ public class IntegrationTest {
             indexEsuInputRepository.deleteAllById(esuInputs.stream().map(EsuInput::getEsId).collect(Collectors.toList()));
             studentPatientDataRepository.deleteById(studentId.toString());
         }
+        Assertions.assertTrue(complete);
     }
 
-    @Test
+    @Test // $.entityData[0].attributes[?(@.name=="policyStatus")].value.code = 'N'
     public void test2() throws ExecutionException, InterruptedException, IOException {
         Long studentId;
+        Long esuMsgId;
+        boolean complete;
         //build test data
-        try (InputStream inputStream = IntegrationTest.class.getClassLoader().getResourceAsStream("json/studentPatientData.json")) {
+        try (InputStream inputStream = IntegrationTest.class.getClassLoader().getResourceAsStream("json/studentPatientDataPolicyStatusN.json")) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
             StudentPatientData studentPatientData = objectMapper.readValue(reader, StudentPatientData.class);
             studentId = studentPatientData.getPatientInfo().getPatientId();
@@ -169,7 +176,7 @@ public class IntegrationTest {
 
         try (InputStream inputStream = IntegrationTest.class.getClassLoader().getResourceAsStream("json/ErpChangePatientPoliciesPolicyStatusN.json")) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-            buildMessage(reader.lines().collect(Collectors.joining("\n"))
+            esuMsgId = buildMessage(reader.lines().collect(Collectors.joining("\n"))
                     .replace("\"operationDate\": \"2022-10-18T14:21:14.196+03:00\",", String.format("\"operationDate\": \"%s\",", LocalDateTime.now().toString())));
         }
         entityManager.flush();
@@ -181,26 +188,18 @@ public class IntegrationTest {
 
             entityManager.flush();
 
-            StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false).forEach(t -> {
-                Assertions.assertEquals(EsuStatusType.NEW, t.getStatus());
-                Assertions.assertNull(t.getError());
-            });
+            Optional<EsuInput> esuInput = esuInputCRUDRepository.findById(esuMsgId);
+            Assertions.assertEquals(EsuStatusType.NEW, esuInput.get().getStatus());
+            Assertions.assertNull(esuInput.get().getError());
 
-            List<StudentPatientData> studentPatientDataList = StreamSupport.stream(studentPatientDataRepository.findAll().spliterator(), false)
-                    .filter(t -> Objects.equals(t.getPatientInfo().getPatientId(), studentId))
-                    .collect(Collectors.toList());
-            Assertions.assertEquals(1, studentPatientDataList.size());
+            Optional<StudentPatientData> studentOpt = studentPatientDataRepository.findById(studentId.toString());
+            Assertions.assertTrue(studentOpt.isPresent());
 
-            StudentPatientData patientData = studentPatientDataList.get(0);
-            Policy policy = new Policy();
-            policy.setPolicyStatus("N");
-            policy.setPolicyNumber("7700008184090530");
+            StudentPatientData patientData = studentOpt.get();
+            Policy policy = patientData.getPolicy();
 
-            patientData.setPolicy(policy);
-
-            Assertions.assertEquals("N", policy.getPolicyStatus());
-//            Assertions.assertEquals("2023-01-17T14:09:50.827", policy.getPolicyUpdateDate().toString());
-            Assertions.assertEquals("7700008184090530", policy.getPolicyNumber());
+            Assertions.assertNull(policy);
+            complete = true;
         } finally {
             //Т.к. используем реальный сервис Elastic, нужно удалить созданные данные
             List<EsuInput> esuInputs = StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false)
@@ -208,11 +207,13 @@ public class IntegrationTest {
             indexEsuInputRepository.deleteAllById(esuInputs.stream().map(EsuInput::getEsId).collect(Collectors.toList()));
             studentPatientDataRepository.deleteById(studentId.toString());
         }
+        Assertions.assertTrue(complete);
     }
 
-    @Test
-    public void test3() throws ExecutionException, InterruptedException, IOException {
+    @Test // policy.policyUpdateDate == $.entityData[0].attributes[?(@.name=="policyChangeDate")].value.value
+    public void test3() throws Exception {
         Long studentId;
+        Long esuMsgId;
         //build test data
         try (InputStream inputStream = IntegrationTest.class.getClassLoader().getResourceAsStream("json/studentPatientData.json")) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
@@ -224,7 +225,7 @@ public class IntegrationTest {
 
         try (InputStream inputStream = IntegrationTest.class.getClassLoader().getResourceAsStream("json/patientInfoPolicyIsAfterPolicyChangeDate.json")) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-            buildMessage(reader.lines().collect(Collectors.joining("\n"))
+            esuMsgId = buildMessage(reader.lines().collect(Collectors.joining("\n"))
                     .replace("\"operationDate\": \"2022-10-18T14:21:14.196+03:00\",", String.format("\"operationDate\": \"%s\",", LocalDateTime.now().toString())));
         }
         entityManager.flush();
@@ -236,22 +237,26 @@ public class IntegrationTest {
 
             entityManager.flush();
 
-            StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false).forEach(t -> {
-                Assertions.assertEquals(EsuStatusType.NEW, t.getStatus());
-                Assertions.assertNull(t.getError());
-            });
+            Optional<EsuInput> esuInput = esuInputCRUDRepository.findById(esuMsgId);
+            Assertions.assertEquals(EsuStatusType.NEW, esuInput.get().getStatus());
+            Assertions.assertNull(esuInput.get().getError());
 
-            List<StudentPatientData> studentPatientDataList = StreamSupport.stream(studentPatientDataRepository.findAll().spliterator(), false)
-                    .filter(t -> Objects.equals(t.getPatientInfo().getPatientId(), studentId))
-                    .collect(Collectors.toList());
-            Assertions.assertEquals(1, studentPatientDataList.size());
+            Optional<StudentPatientData> studentOpt = studentPatientDataRepository.findById(studentId.toString());
+            Assertions.assertTrue(studentOpt.isPresent());
 
-            StudentPatientData patientData = studentPatientDataList.get(0);
-            Policy policy = new Policy();
-            policy.setPolicyUpdateDate(LocalDateTime.of(2019, 1, 17, 14, 9, 50, 827));
+            StudentPatientData patientData = studentOpt.get();
+            Policy policy = patientData.getPolicy();
             patientData.setPolicy(policy);
 
-            Assertions.assertEquals("2019-01-17T14:09:50.000000827", policy.getPolicyUpdateDate().toString());
+            Throwable exception = Assertions.assertThrows(Exception.class, () -> {
+                if (policy.getPolicyUpdateDate().isAfter(LocalDateTime.of(2019, 1, 17, 14, 9, 50, 827))
+                        || policy.getPolicyUpdateDate().isEqual(LocalDateTime.of(2019, 1, 17, 14, 9, 50, 827))) {
+                    throw new Exception("Получена более старая информация, чем содержится в индексе");
+                }
+            });
+
+            Assertions.assertEquals("Получена более старая информация, чем содержится в индексе", exception.getMessage());
+
         } finally {
             //Т.к. используем реальный сервис Elastic, нужно удалить созданные данные
             List<EsuInput> esuInputs = StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false)
@@ -261,9 +266,9 @@ public class IntegrationTest {
         }
     }
 
-    private void buildMessage(String text) throws ExecutionException, InterruptedException {
-        final IndexEsuInput indexEsuInput = new IndexEsuInput(10L,
-                LocalDateTime.now(), "1", TopicType.ERP_CHANGE_PATIENT_POLICIES.getName(), text);
+    private Long buildMessage(String text) throws ExecutionException, InterruptedException {
+        final IndexEsuInput indexEsuInput = new IndexEsuInput(10L, LocalDateTime.now(), "1", TopicType.ERP_CHANGE_PATIENT_POLICIES.getName(), text);
+
         EsuInput testInput = new EsuInput();
         testInput.setStatus(EsuStatusType.NEW);
         testInput.setDateCreated(LocalDateTime.now());
@@ -271,6 +276,7 @@ public class IntegrationTest {
         testInput.setTopic(TopicType.ERP_CHANGE_PATIENT_POLICIES.getName());
         String esId = executor.submit(() -> indexEsuInputRepository.save(indexEsuInput)).get().getId();
         testInput.setEsId(esId);
-        executor.submit(() -> esuInputCRUDRepository.save(testInput)).get();
+
+        return executor.submit(() -> esuInputCRUDRepository.save(testInput)).get().getId();
     }
 }
