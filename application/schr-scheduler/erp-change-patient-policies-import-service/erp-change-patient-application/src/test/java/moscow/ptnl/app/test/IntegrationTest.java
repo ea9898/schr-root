@@ -176,20 +176,18 @@ public class IntegrationTest {
 
         try (InputStream inputStream = IntegrationTest.class.getClassLoader().getResourceAsStream("json/ErpChangePatientPoliciesPolicyStatusN.json")) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-            esuMsgId = buildMessage(reader.lines().collect(Collectors.joining("\n"))
-                    .replace("\"operationDate\": \"2022-10-18T14:21:14.196+03:00\",", String.format("\"operationDate\": \"%s\",", LocalDateTime.now().toString())));
+            esuMsgId = buildMessage(reader.lines().collect(Collectors.joining("\n")));
         }
         entityManager.flush();
 
         try {
             executor.submit(() -> Assertions.assertDoesNotThrow(() -> erpChangePatientPoliciesProcessTask.runTask()));
-            Mockito.verify(settingService, Mockito.timeout(30000).times(1))
-                    .getSettingProperty(Mockito.eq(PlannersEnum.I_SCHR_6.getPlannerName() + ".run.mode"), Mockito.any(), Mockito.anyBoolean());
 
             entityManager.flush();
+            Thread.sleep(5000);
 
             Optional<EsuInput> esuInput = esuInputCRUDRepository.findById(esuMsgId);
-            Assertions.assertEquals(EsuStatusType.NEW, esuInput.get().getStatus());
+            Assertions.assertEquals(EsuStatusType.PROCESSED, esuInput.get().getStatus());
             Assertions.assertNull(esuInput.get().getError());
 
             Optional<StudentPatientData> studentOpt = studentPatientDataRepository.findById(studentId.toString());
@@ -198,6 +196,7 @@ public class IntegrationTest {
             StudentPatientData patientData = studentOpt.get();
             Policy policy = patientData.getPolicy();
 
+            Assertions.assertNull(studentOpt.get().getPolicy());
             Assertions.assertNull(policy);
             complete = true;
         } finally {

@@ -63,22 +63,22 @@ public class ErpChangePatientPoliciesProcessTask extends BaseEsuProcessorTask {
                     studentPatientData.get().getPolicy().getPolicyUpdateDate().isEqual(newPolicy.getPolicyUpdateDate())) {
                 return Optional.of(CustomErrorReason.INFORMATION_IS_OUTDATED.format());
             } else {
-                // policy.policyUpdateDate < $.entityData[0].attributes[?(@.name=="policyChangeDate")].value.value И
-                //$.entityData[0].attributes[?(@.name=="policyStatus")].value.code = 'N'
-                if (studentPatientData.get().getPolicy().getPolicyUpdateDate().isBefore(newPolicy.getPolicyUpdateDate())
-//                        && studentPatientData.get().getPolicy().getPolicyStatus().equals("N")) {
-                        && newPolicy.getPolicyStatus().equals("N")) {
-                    StudentPatientData studentData = studentPatientData.get();
-                    studentData.setPolicy(null);
-                    studentPatientDataRepository.save(studentData);
-                }
+
                 // policy.policyUpdateDate < $.entityData[0].attributes[?(@.name=="policyChangeDate")].value.value И
                 //$.entityData[0].attributes[?(@.name=="policyStatus")].value.code != 'N'
-                if (studentPatientData.get().getPolicy().getPolicyUpdateDate().isBefore(newPolicy.getPolicyUpdateDate())
-                        && !newPolicy.getPolicyStatus().equals("N")) {
+                if (!newPolicy.getPolicyStatus().equals("N")) {
                     //4.5 Система добавляет в документ элемент индекса policy
                     StudentPatientData studentData = studentPatientData.get();
                     studentData.setPolicy(newPolicy);
+                    studentPatientDataRepository.save(studentData);
+                }
+
+                // policy.policyUpdateDate < $.entityData[0].attributes[?(@.name=="policyChangeDate")].value.value И
+                //$.entityData[0].attributes[?(@.name=="policyStatus")].value.code = 'N'
+                if (newPolicy.getPolicyStatus().equals("N")) {
+                    StudentPatientData studentData = studentPatientData.get();
+                    studentData.setPolicy(null);
+
                     studentPatientDataRepository.save(studentData);
                 }
 

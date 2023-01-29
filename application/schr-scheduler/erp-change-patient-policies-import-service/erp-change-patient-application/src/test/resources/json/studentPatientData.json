@@ -80,7 +80,8 @@
   "policy": {
     "policyNumber": 8611648205101698,
     "policyUpdateDate": "2020-07-01T00:00:00.000+00",
-    "policyStatus": "Y"
+    "policyStatus": "Y",
+    "policyOMSType": "D"
   },
   "studInfo": [
     {
