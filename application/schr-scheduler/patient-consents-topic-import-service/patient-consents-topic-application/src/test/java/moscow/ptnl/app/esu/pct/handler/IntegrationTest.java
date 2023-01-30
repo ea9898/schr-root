@@ -17,7 +17,7 @@ import moscow.ptnl.app.esu.pct.handler.configuration.PersistenceConfiguration;
 import moscow.ptnl.app.infrastructure.repository.es.StudentPatientDataRepository;
 import moscow.ptnl.app.model.PlannersEnum;
 import moscow.ptnl.app.model.TopicType;
-import moscow.ptnl.app.model.es.IndexEsuInput;
+import moscow.ptnl.app.domain.model.es.IndexEsuInput;
 import moscow.ptnl.app.patient.consents.topic.config.RestConfiguration;
 import moscow.ptnl.app.patient.consents.topic.task.PatientConsentsTopicProcessTask;
 import moscow.ptnl.app.repository.EsuInputCRUDRepository;

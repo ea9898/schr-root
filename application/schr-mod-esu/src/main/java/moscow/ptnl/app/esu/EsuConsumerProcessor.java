@@ -2,7 +2,7 @@ package moscow.ptnl.app.esu;
 
 import moscow.ptnl.app.config.PersistenceConstraint;
 import moscow.ptnl.app.model.TopicType;
-import moscow.ptnl.app.model.es.IndexEsuInput;
+import moscow.ptnl.app.domain.model.es.IndexEsuInput;
 import moscow.ptnl.app.repository.es.IndexEsuInputRepository;
 import moscow.ptnl.domain.entity.esu.EsuInput;
 import moscow.ptnl.domain.entity.esu.EsuStatusType;

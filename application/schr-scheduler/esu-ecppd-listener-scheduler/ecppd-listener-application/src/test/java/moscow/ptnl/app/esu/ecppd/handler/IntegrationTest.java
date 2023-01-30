@@ -19,7 +19,7 @@ import moscow.ptnl.app.esu.ecppd.listener.task.ErpChangePatientPersonalDataProce
 import moscow.ptnl.app.infrastructure.repository.es.StudentPatientDataRepository;
 import moscow.ptnl.app.model.PlannersEnum;
 import moscow.ptnl.app.model.TopicType;
-import moscow.ptnl.app.model.es.IndexEsuInput;
+import moscow.ptnl.app.domain.model.es.IndexEsuInput;
 import moscow.ptnl.app.repository.EsuInputCRUDRepository;
 import moscow.ptnl.app.repository.es.IndexEsuInputRepository;
 import moscow.ptnl.domain.entity.esu.EsuInput;

@@ -1,4 +1,4 @@
-package moscow.ptnl.app.model.es;
+package moscow.ptnl.app.domain.model.es;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
