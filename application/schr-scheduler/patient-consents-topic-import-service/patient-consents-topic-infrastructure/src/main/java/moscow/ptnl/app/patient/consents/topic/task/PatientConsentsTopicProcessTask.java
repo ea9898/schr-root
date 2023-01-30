@@ -61,7 +61,7 @@ public class PatientConsentsTopicProcessTask extends BaseEsuProcessorTask {
                 return Optional.of(CustomErrorReason.PATIENT_NOT_FOUND.format(content.getPatientId()));
             }
             //4.4 Для документа найденного на шаге 4.3, выполняется поиск блоков в элементе индекса consentsInfo
-            Iterator<ConsentInfo> consentsInfoIterator = studentPatientData.get().getConsentsInfo().listIterator();
+            Iterator<ConsentInfo> consentsInfoIterator = studentPatientData.get().getConsentInfos().listIterator();
 
             while (consentsInfoIterator.hasNext()) {
                 ConsentInfo consentInfo = consentsInfoIterator.next();
@@ -76,8 +76,8 @@ public class PatientConsentsTopicProcessTask extends BaseEsuProcessorTask {
             //4.5 Система записывает блок в элемент индекса consentsInfo документа найденного на шаге
             applyData(content, studentPatientData.get());
 
-            if (studentPatientData.get().getConsentsInfo().isEmpty()) {
-                studentPatientData.get().setConsentsInfo(null);
+            if (studentPatientData.get().getConsentInfos().isEmpty()) {
+                studentPatientData.get().setConsentInfos(null);
             }
             studentPatientDataRepository.save(studentPatientData.get());
 
@@ -98,10 +98,10 @@ public class PatientConsentsTopicProcessTask extends BaseEsuProcessorTask {
             consentInfo.setDocumentedConsent(new DocumentedConsent());
             applyData(newData.getConsentDetails().getDocumentedConsent(), consentInfo.getDocumentedConsent());
         }
-        if (entity.getConsentsInfo() == null) {
-            entity.setConsentsInfo(new ArrayList<>());
+        if (entity.getConsentInfos() == null) {
+            entity.setConsentInfos(new ArrayList<>());
         }
-        entity.getConsentsInfo().add(consentInfo);
+        entity.getConsentInfos().add(consentInfo);
     }
 
     private void applyData(moscow.ptnl.app.patient.consents.topic.model.DocumentedConsent newData, DocumentedConsent documentedConsent) {

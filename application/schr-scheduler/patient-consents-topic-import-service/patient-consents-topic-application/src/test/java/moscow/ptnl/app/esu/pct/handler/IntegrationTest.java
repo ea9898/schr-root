@@ -156,14 +156,14 @@ public class IntegrationTest {
             Assertions.assertEquals(1, studentPatientDataList.size(), "Too many patients with Id=3987621809");
             StudentPatientData patientData = studentPatientDataList.get(0);
             Assertions.assertEquals(LocalDate.of(2018, 5,7), patientData.getPatientInfo().getBirthDate());
-            Assertions.assertEquals(1, patientData.getConsentsInfo().size());
-            Assertions.assertEquals(50699767L, patientData.getConsentsInfo().get(0).getConsentId());
-            Assertions.assertEquals(LocalDateTime.of(2022, 12, 20, 0, 0), patientData.getConsentsInfo().get(0).getIssueDateTime());
-            Assertions.assertArrayEquals(List.of(158370312L).toArray() , patientData.getConsentsInfo().get(0).getDocumentedConsent().getInterventionDetails().getMedInterventionId().toArray());
-            Assertions.assertEquals(1, patientData.getConsentsInfo().get(0).getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().size());
-            Assertions.assertArrayEquals(List.of(158370694L).toArray() , patientData.getConsentsInfo().get(0).getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().get(0).getImmunoDrugsTns().getImmunoDrugsTnCode().toArray());
-            Assertions.assertEquals(158370689L , patientData.getConsentsInfo().get(0).getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().get(0).getImmunoTestKind().getImmunoKindCode());
-            Assertions.assertEquals(158370685L , patientData.getConsentsInfo().get(0).getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().get(0).getImmunoTestKind().getInfectionCode());
+            Assertions.assertEquals(1, patientData.getConsentInfos().size());
+            Assertions.assertEquals(50699767L, patientData.getConsentInfos().get(0).getConsentId());
+            Assertions.assertEquals(LocalDateTime.of(2022, 12, 20, 0, 0), patientData.getConsentInfos().get(0).getIssueDateTime());
+            Assertions.assertArrayEquals(List.of(158370312L).toArray() , patientData.getConsentInfos().get(0).getDocumentedConsent().getInterventionDetails().getMedInterventionId().toArray());
+            Assertions.assertEquals(1, patientData.getConsentInfos().get(0).getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().size());
+            Assertions.assertArrayEquals(List.of(158370694L).toArray() , patientData.getConsentInfos().get(0).getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().get(0).getImmunoDrugsTns().getImmunoDrugsTnCode().toArray());
+            Assertions.assertEquals(158370689L , patientData.getConsentInfos().get(0).getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().get(0).getImmunoTestKind().getImmunoKindCode());
+            Assertions.assertEquals(158370685L , patientData.getConsentInfos().get(0).getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().get(0).getImmunoTestKind().getInfectionCode());
         } finally {
             //Т.к. используем реальный сервис Elastic, нужно удалить созданные данные
             List<EsuInput> esuInputs = StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false)

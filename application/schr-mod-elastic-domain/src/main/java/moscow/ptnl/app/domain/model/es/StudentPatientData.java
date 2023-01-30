@@ -32,7 +32,47 @@ public class StudentPatientData {
     private List<StudentAttachInfo> studInfo;
 
     @Field(type = Nested, name = "сonsentsInfo", includeInParent = true)
-    private List<ConsentsInfo> сonsentsInfo;
+    private List<ConsentInfo> consentInfos;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public PatientInfo getPatientInfo() {
+        return patientInfo;
+    }
+
+    public void setPatientInfo(PatientInfo patientInfo) {
+        this.patientInfo = patientInfo;
+    }
+
+    public List<AnthropometryInfo> getAnthropometryInfo() {
+        return anthropometryInfo;
+    }
+
+    public void setAnthropometryInfo(List<AnthropometryInfo> anthropometryInfo) {
+        this.anthropometryInfo = anthropometryInfo;
+    }
+
+    public List<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<Attachment> attachments) {
+        this.attachments = attachments;
+    }
+
+    public Policy getPolicy() {
+        return policy;
+    }
+
+    public void setPolicy(Policy policy) {
+        this.policy = policy;
+    }
 
     public List<StudentAttachInfo> getStudInfo() {
         return studInfo;
@@ -42,11 +82,11 @@ public class StudentPatientData {
         this.studInfo = studInfo;
     }
 
-    public List<ConsentInfo> getConsentsInfo() {
-        return consentsInfo;
+    public List<ConsentInfo> getConsentInfos() {
+        return consentInfos;
     }
 
-    public void setConsentsInfo(List<ConsentInfo> consentsInfo) {
-        this.consentsInfo = consentsInfo;
+    public void setConsentInfos(List<ConsentInfo> consentInfos) {
+        this.consentInfos = consentInfos;
     }
 }
