@@ -11,22 +11,13 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>schr-mod-elastic</artifactId>
+    <artifactId>schr-mod-elastic-domain</artifactId>
     <packaging>jar</packaging>
     
     <dependencies>
         <dependency>
-            <groupId>moscow.ptnl.schregister</groupId>
-            <artifactId>schr-mod-elastic-domain</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-elasticsearch</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.elasticsearch.client</groupId>
-            <artifactId>elasticsearch-rest-client</artifactId>
         </dependency>
     </dependencies>
     
