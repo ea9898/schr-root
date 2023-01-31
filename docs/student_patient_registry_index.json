@@ -1,0 +1,276 @@
+PUT /student_patient_registry_index
+
+{
+  "aliases": {
+    "student_patient_registry_alias": {}
+  },
+  "mappings": {
+    "properties": {
+      "patientInfo": {
+        "properties": {
+          "patientId": {
+            "type": "long"
+          },
+          "ukl": {
+            "type": "keyword"
+          },
+          "lastName": {
+            "type": "keyword"
+          },
+          "firstName": {
+            "type": "keyword"
+          },
+          "patronymic": {
+            "type": "keyword"
+          },
+          "fullName": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 256
+              }
+            }
+          },
+          "birthDate": {
+            "type": "date",
+            "format": "strict_date"
+          },
+          "genderCode": {
+            "type": "keyword"
+          },
+          "deathDate": {
+            "type": "date",
+            "format": "strict_date"
+          },
+          "updateDate": {
+            "type": "date",
+            "format": "date_hour_minute_second_millis"
+          }
+        }
+      },
+      "anthropometryInfo": {
+        "properties": {
+          "measurementDate": {
+            "type": "date",
+            "format": "strict_date"
+          },
+          "documentId": {
+            "type": "keyword"
+          },
+          "measurementType": {
+            "type": "integer"
+          },
+          "measurementValue": {
+            "type": "float"
+          },
+          "centility": {
+            "type": "keyword"
+          },
+          "resultAssessmentId": {
+            "type": "long"
+          }
+        }
+      },
+      "attachments": {
+        "properties": {
+          "id": {
+            "type": "long"
+          },
+          "areaId": {
+            "type": "long"
+          },
+          "areaTypeCode": {
+            "type": "long"
+          },
+          "attachBeginDate": {
+            "type": "date",
+            "format": "strict_date"
+          },
+          "moId": {
+            "type": "long"
+          },
+          "muId": {
+            "type": "long"
+          },
+          "attachTypeCode": {
+            "type": "keyword"
+          },
+          "attachTypeName": {
+            "type": "keyword"
+          },
+          "processOfAttachmentCode": {
+            "type": "keyword"
+          },
+          "processOfAttachmentName": {
+            "type": "keyword"
+          },
+          "updateDate": {
+            "type": "date",
+            "format": "date_hour_minute_second_millis"
+          }
+        }
+      },
+      "policy": {
+        "properties": {
+          "policyNumber": {
+            "type": "keyword"
+          },
+          "policyUpdateDate": {
+            "type": "date",
+            "format": "date_hour_minute_second_millis"
+          },
+          "policyStatus": {
+            "type": "keyword"
+          },
+          "policyOMSType": {
+            "type": "keyword"
+          }
+        }
+      },
+      "studInfo": {
+        "properties": {
+          "attachId": {
+            "type": "long"
+          },
+          "organizationId": {
+            "type": "long"
+          },
+          "areaId": {
+            "type": "long"
+          },
+          "attachStartDate": {
+            "type": "date",
+            "format": "strict_date"
+          },
+          "studentId": {
+            "type": "keyword"
+          },
+          "studentPersonIdMesh": {
+            "type": "keyword"
+          },
+          "classIdMesh": {
+            "type": "keyword"
+          },
+          "educationFormId": {
+            "type": "long"
+          },
+          "educationFormName": {
+            "type": "keyword"
+          },
+          "trainingBeginDate": {
+            "type": "date",
+            "format": "strict_date"
+          },
+          "trainingEndDate": {
+            "type": "date",
+            "format": "strict_date"
+          },
+          "academicYearId": {
+            "type": "long"
+          },
+          "academicYearName": {
+            "type": "keyword"
+          },
+          "studChangeDate": {
+            "type": "date",
+            "format": "date_hour_minute_second_millis"
+          }
+        }
+      },
+      "consentsInfo": {
+        "properties": {
+          "consentId": {
+            "type": "long"
+          },
+          "documentedConsent": {
+            "properties": {
+              "documentId": {
+                "type": "keyword"
+              },
+              "createDate": {
+                "type": "date",
+                "format": "strict_date"
+              },
+              "locationId": {
+                "type": "long"
+              },
+              "locationName": {
+                "type": "keyword"
+              },
+              "allMedicalIntervention": {
+                "type": "boolean"
+              },
+              "intervention_details": {
+                "properties": {
+                  "medInterventionId": {
+                    "type": "long"
+                  }
+                }
+              },
+              "Immunodiagnostics": {
+                "properties": {
+                  "immunodiagnostic": {
+                    "properties": {
+                      "immunoTestKind": {
+                        "properties": {
+                          "immunoKindCode": {
+                            "type": "long"
+                          },
+                          "infectionCode": {
+                            "type": "long"
+                          }
+                        }
+                      },
+                      "immunoDrugsTns": {
+                        "properties": {
+                          "immunoDrugsTnCode": {
+                            "type": "long"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "representativeDocumentId": {
+                "type": "keyword"
+              },
+               "signedByPatient": {
+                "type": "boolean"
+              },
+              "cancelReasonId": {
+                "type": "long"
+              },
+              "cancelReasonOther": {
+                "type": "keyword"
+              },
+              "moId": {
+                "type": "long"
+              },
+              "moName": {
+                "type": "keyword"
+              }
+            }
+          },
+          "issueDate": {
+            "type": "date",
+            "format": "date_hour_minute_second_millis"
+          },
+          "consentFormId": {
+            "type": "long"
+          },
+          "consentTypeId": {
+            "type": "long"
+          },
+          "representativePhysicalId": {
+            "type": "long"
+          },
+          "representativeLegalId": {
+            "type": "long"
+          }
+        }
+      }
+    }
+  }
+}

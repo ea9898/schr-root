@@ -18,7 +18,7 @@ public class StudentAttachInfo {
     @Field(type = FieldType.Long, name = "areaId")
     private Long areaId;
 
-    @Field(type = FieldType.Date, name = "attachStartDate")
+    @Field(type = FieldType.Date, format = DateFormat.date, name = "attachStartDate")
     private LocalDate attachStartDate;
 
     @Field(type = FieldType.Keyword, name = "studentId")
@@ -36,10 +36,10 @@ public class StudentAttachInfo {
     @Field(type = FieldType.Keyword, name = "educationFormName")
     private String educationFormName;
 
-    @Field(type = FieldType.Date, name = "trainingBeginDate")
+    @Field(type = FieldType.Date, format = DateFormat.date, name = "trainingBeginDate")
     private LocalDate trainingBeginDate;
 
-    @Field(type = FieldType.Date, name = "trainingEndDate")
+    @Field(type = FieldType.Date, format = DateFormat.date, name = "trainingEndDate")
     private LocalDate trainingEndDate;
 
     @Field(type = FieldType.Long, name = "academicYearId")

@@ -8,17 +8,20 @@ import java.time.LocalDate;
 
 public class DocumentedConsent {
 
-    @Field(type = FieldType.Boolean, name = "allMedicalIntervention")
-    private Boolean allMedicalIntervention;
+    @Field(type = FieldType.Keyword, name = "documentId")
+    private String documentId;
+
+    @Field(type = FieldType.Date, format = DateFormat.date, name = "createDate")
+    private LocalDate createDate;
+
+    @Field(type = FieldType.Long, name = "locationId")
+    private Long locationId;
 
     @Field(type = FieldType.Keyword, name = "locationName")
     private String locationName;
 
-    @Field(type = FieldType.Long, name = "cancelReasonId")
-    private Long cancelReasonId;
-
-    @Field(type = FieldType.Long, name = "locationId")
-    private Long locationId;
+    @Field(type = FieldType.Boolean, name = "allMedicalIntervention")
+    private Boolean allMedicalIntervention;
 
     @Field(type = FieldType.Nested, name = "interventionDetails", includeInParent = true)
     private InterventionDetails interventionDetails;
@@ -29,20 +32,24 @@ public class DocumentedConsent {
     @Field(type = FieldType.Keyword, name = "representativeDocumentId")
     private String representativeDocumentId;
 
-    @Field(type = FieldType.Keyword, name = "cancelReasonOther")
-    private String cancelReasonOther;
-
-    @Field(type = FieldType.Keyword, name = "moName")
-    private String moName;
-
     @Field(type = FieldType.Boolean, name = "signedByPatient")
     private Boolean signedByPatient;
+
+    @Field(type = FieldType.Long, name = "cancelReasonId")
+    private Long cancelReasonId;
+
+    @Field(type = FieldType.Keyword, name = "cancelReasonOther")
+    private String cancelReasonOther;
 
     @Field(type = FieldType.Long, name = "moId")
     private Long moId;
 
-    @Field(type = FieldType.Date, format = DateFormat.date, name = "createDate")
-    private LocalDate createDate;
+    @Field(type = FieldType.Keyword, name = "moName")
+    private String moName;
+
+    public String getDocumentId() { return documentId; }
+
+    public void setDocumentId(String documentId) { this.documentId = documentId; }
 
     public Boolean getAllMedicalIntervention() {
         return allMedicalIntervention;

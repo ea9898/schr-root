@@ -20,15 +20,19 @@ public class IndexEsuInput {
     @Id
     private String id;
 
+    @Field(type = FieldType.Long, name = "offset")
     private Long offset;
 
     @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second_millis, name = "timestamp")
     private LocalDateTime timeStamp;
 
+    @Field(type = FieldType.Keyword, name = "key")
     private String key;
 
+    @Field(type = FieldType.Keyword, name = "topic")
     private String topic;
 
+    @Field(type = FieldType.Text, name = "message")
     private String message;
 
     @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second_millis, name = "date_created")

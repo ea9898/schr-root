@@ -1,5 +1,6 @@
 package moscow.ptnl.app.domain.model.es;
 
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
@@ -7,7 +8,7 @@ import java.time.LocalDate;
 
 public class AnthropometryInfo {
 
-    @Field(type = FieldType.Date, name = "measurementDate")
+    @Field(type = FieldType.Date, name = "measurementDate", format = DateFormat.date)
     private LocalDate measurementDate;
 
     @Field(type = FieldType.Keyword, name = "documentId")

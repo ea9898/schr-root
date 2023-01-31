@@ -27,13 +27,13 @@ public class PatientInfo {
     @Field(type = FieldType.Text, name = "fullName")
     private String fullName;
 
-    @Field(type = FieldType.Date, name = "birthDate")
+    @Field(type = FieldType.Date, format = DateFormat.date, name = "birthDate")
     private LocalDate birthDate;
 
     @Field(type = FieldType.Keyword, name = "genderCode")
     private Long genderCode;
 
-    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second_millis, name = "deathDate")
+    @Field(type = FieldType.Date, format = DateFormat.date, name = "deathDate")
     private LocalDate deathDate;
 
     @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second_millis, name = "updateDate")
