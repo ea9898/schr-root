@@ -58,7 +58,7 @@ public class MetricsConfiguration {
     public ServletRegistrationBean<Servlet> metricsServletRegistrationBean(PrometheusMeterRegistry service) {
         MetricsServlet metricsServlet = new MetricsServlet(service);
         ServletRegistrationBean<Servlet> regBeen = new ServletRegistrationBean<>(metricsServlet,
-                "/metrics");
+                "/schr/metrics");
         regBeen.setLoadOnStartup(4);
 
         return regBeen;

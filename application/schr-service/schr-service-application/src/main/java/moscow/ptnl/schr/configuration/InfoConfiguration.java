@@ -18,7 +18,7 @@ public class InfoConfiguration {
     @Bean
     public ServletRegistrationBean<Servlet> infoServletRegistrationBean(WebApplicationContext webApplicationContext) {
         ServletRegistrationBean<Servlet> regBeen = new ServletRegistrationBean<>(new DispatcherServlet(webApplicationContext),
-                "/info.json");
+                "/schr/info.json");
         regBeen.setLoadOnStartup(2);
 
         return regBeen;

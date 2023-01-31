@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class InfoServlet {
 
-    @GetMapping("info.json")
+    @GetMapping("/schr/info.json")
     public String info() {
         InputStream resource = getClass().getClassLoader().getResourceAsStream("info.json");
         return new BufferedReader(new InputStreamReader(resource, StandardCharsets.UTF_8))

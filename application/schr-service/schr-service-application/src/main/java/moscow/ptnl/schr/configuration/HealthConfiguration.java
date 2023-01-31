@@ -35,7 +35,7 @@ public class HealthConfiguration {
         
         List<String> tablesList = Arrays.asList(tables.split(","));
         ServletRegistrationBean<Servlet> regBeen = new ServletRegistrationBean<>(new HealthCheckServlet(service, tablesList),
-                "/health");
+                "/schr/health");
         regBeen.setLoadOnStartup(3);
 
         return regBeen;
