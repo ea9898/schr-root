@@ -76,6 +76,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.13.4</version>
         </dependency>
         <dependency>
             <groupId>jakarta.json</groupId>
@@ -87,6 +88,17 @@
             <artifactId>jakarta.servlet-api</artifactId>
         </dependency>
         <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>4.0.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -95,11 +107,6 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>2.13.4</version>
         </dependency>
     </dependencies>
 
@@ -167,6 +174,51 @@
                 <configuration>
                     <useSystemClassLoader>false</useSystemClassLoader>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-codegen-plugin</artifactId>
+                <version>${cxf.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <defaultOptions>
+                                <bindingFiles>
+                                    <bindingFile>${basedir}/../../../schr-common/jaxb-binding.xml</bindingFile>
+                                </bindingFiles>
+                                <noAddressBinding>true</noAddressBinding>
+                            </defaultOptions>
+                            <wsdlOptions>
+                                <wsdlOption>
+                                    <wsdl>${basedir}/src/main/resources/META-INF/wsdl/erpPatient/erp.patientService.v2.wsdl</wsdl>
+                                    <serviceName>ErpPatientV2</serviceName>
+                                    <extraargs>
+                                        <extraarg>-verbose</extraarg>
+                                    </extraargs>
+                                </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>${basedir}/src/main/resources/META-INF/wsdl/consentInfoService/consentInfo.consentInfoService.v2.wsdl</wsdl>
+                                    <serviceName>consentInfoService</serviceName>
+                                    <extraargs>
+                                        <extraarg>-verbose</extraarg>
+                                    </extraargs>
+                                </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>${basedir}/src/main/resources/META-INF/wsdl/anthropometryService/anthropometryService.v1.wsdl</wsdl>
+                                    <serviceName>anthropometryService</serviceName>
+                                    <extraargs>
+                                        <extraarg>-verbose</extraarg>
+                                    </extraargs>
+                                </wsdlOption>
+                            </wsdlOptions>
+                        </configuration>
+                        <goals>
+                            <goal>wsdl2java</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>

@@ -15,13 +15,13 @@
         <module>schr-mod-utility</module>
         <module>schr-mod-jpa</module>
         <module>schr-mod-elastic</module>
-	<module>schr-mod-elastic-domain</module>
+        <module>schr-mod-elastic-domain</module>
         <module>schr-mod-health</module>
         <module>schr-mod-metrics</module>
         <module>schr-mod-domain</module>
         <module>schr-mod-esu</module>
         <module>schr-mod-schedule</module>
-	<module>schr-mod-security</module>
+        <module>schr-mod-security</module>
         <module>schr-service</module>
         <module>schr-scheduler</module>
     </modules>
@@ -35,6 +35,7 @@
         <jakarta.json.version>2.1.1</jakarta.json.version>
         <hibernate.version>6.1.6.Final</hibernate.version>
         <cxf.version>4.0.0</cxf.version>
+        <cxf.plugin.version>4.0.0</cxf.plugin.version>
         <mapstruct.version>1.5.2.Final</mapstruct.version>
         <esu.client.lib.version>4.5.1</esu.client.lib.version>
         <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>

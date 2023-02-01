@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="anthropometryService" targetNamespace="http://emias.mos.ru/anthropometry/anthropometryService/v1/" xmlns:nsf="http://emias.mos.ru/system/v1/faults/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tcx="http://emias.mos.ru/system/v1/userContext/" xmlns:tnc="http://emias.mos.ru/anthropometry/anthropometryService/v1/types/" xmlns:tns="http://emias.mos.ru/anthropometry/anthropometryService/v1/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:documentation>version="1.0"</wsdl:documentation>
+  <wsdl:types>
+    <xs:schema targetNamespace="http://emias.mos.ru/anthropometry/anthropometryService/v1/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://emias.mos.ru/system/v1/faults/" schemaLocation="../emias/emias.system.v1.faults.xsd"/>
+      <xs:import namespace="http://emias.mos.ru/system/v1/userContext/" schemaLocation="../emias/emias.system.v1.userContext.xsd"/>
+      <xs:import namespace="http://emias.mos.ru/anthropometry/anthropometryService/v1/types/" schemaLocation="anthropometryService.v1.types.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="fault">
+    <wsdl:documentation>Ошибка</wsdl:documentation>
+    <wsdl:part element="nsf:fault" name="body"/>
+  </wsdl:message>
+  <wsdl:message name="userContext">
+    <wsdl:part element="tcx:userContext" name="userContext"/>
+  </wsdl:message>
+  <wsdl:message name="getAnthropometryDataByPatientRequest">
+    <wsdl:part element="tnc:getAnthropometryDataByPatientRequest" name="body"/>
+  </wsdl:message>
+  <wsdl:message name="getAnthropometryDataByPatientResponse">
+    <wsdl:part element="tnc:getAnthropometryDataByPatientResponse" name="body"/>
+  </wsdl:message>
+  <wsdl:portType name="AnthropometryServicePortType">
+    <wsdl:operation name="getAnthropometryDataByPatient">
+      <wsdl:input message="tns:getAnthropometryDataByPatientRequest"/>
+      <wsdl:output message="tns:getAnthropometryDataByPatientResponse"/>
+      <wsdl:fault message="tns:fault" name="anthropometryServiceError"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

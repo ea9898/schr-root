@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="2.1" xmlns="http://java.sun.com/xml/ns/jaxb">
+  <bindings scd="x-schema::tns" xmlns:tns="http://emias.mos.ru/system/v1/faults/">
+    <schemaBindings map="true">
+      <package name="ru.mos.emias.system.v1.faults"/>
+    </schemaBindings>
+    <bindings scd="~tns:UnauthorizedRequestSecurityException">
+      <class ref="ru.mos.emias.system.v1.faults.UnauthorizedRequestSecurityException"/>
+    </bindings>
+    <bindings scd="~tns:UnexpectedFault">
+      <class ref="ru.mos.emias.system.v1.faults.UnexpectedFault"/>
+    </bindings>
+    <bindings scd="~tns:ErrorMessage">
+      <class ref="ru.mos.emias.system.v1.faults.ErrorMessage"/>
+    </bindings>
+    <bindings scd="~tns:BaseFault">
+      <class ref="ru.mos.emias.system.v1.faults.BaseFault"/>
+    </bindings>
+    <bindings scd="~tns:ErrorMessageCollection">
+      <class ref="ru.mos.emias.system.v1.faults.ErrorMessageCollection"/>
+    </bindings>
+    <bindings scd="~tns:KeyValuePair">
+      <class ref="ru.mos.emias.system.v1.faults.KeyValuePair"/>
+    </bindings>
+    <bindings scd="~tns:Message">
+      <class ref="ru.mos.emias.system.v1.faults.Message"/>
+    </bindings>
+    <bindings scd="~tns:SecurityFault">
+      <class ref="ru.mos.emias.system.v1.faults.SecurityFault"/>
+    </bindings>
+    <bindings scd="~tns:BusinessFault">
+      <class ref="ru.mos.emias.system.v1.faults.BusinessFault"/>
+    </bindings>
+    <bindings scd="~tns:OtherSecurityException">
+      <class ref="ru.mos.emias.system.v1.faults.OtherSecurityException"/>
+    </bindings>
+    <bindings scd="~tns:ErrorMessageTypes">
+      <typesafeEnumClass ref="ru.mos.emias.system.v1.faults.ErrorMessageTypes"/>
+    </bindings>
+    <bindings scd="~tns:SecurityExceptionTypes">
+      <typesafeEnumClass ref="ru.mos.emias.system.v1.faults.SecurityExceptionTypes"/>
+    </bindings>
+    <bindings scd="~tns:FaultTypes">
+      <typesafeEnumClass ref="ru.mos.emias.system.v1.faults.FaultTypes"/>
+    </bindings>
+  </bindings>
+</bindings>
+
