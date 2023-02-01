@@ -70,10 +70,19 @@
   },
   "studInfo": [               {
     "organizationId": 141,
-    "studChangeDate": "2022-10-23T00:00:00.000+00",
+    "studChangeDate": "2022-05-23T18:47:30.868+03:00",
     "classIdMesh": "842ae5a5-2ed7-4eb5-8560-2dccdff0ad52",
     "academicYearId": 19,
     "attachId": 69762569,
+    "studentId": "4170d974-7198-4e12-9a8c-3f0ca581b92d",
+    "academicYearName": "2018/2019",
+    "studentPersonIdMesh": "0af44578-4425-4f74-b54d-4bb3ef934762"
+  },                {
+    "organizationId": 141,
+    "studChangeDate": "2022-05-23T18:47:30.868+03:00",
+    "classIdMesh": "842ae5a5-2ed7-4eb5-8560-2dccdff0ad52",
+    "academicYearId": 19,
+    "attachId": 123456789,
     "studentId": "4170d974-7198-4e12-9a8c-3f0ca581b92d",
     "academicYearName": "2018/2019",
     "studentPersonIdMesh": "0af44578-4425-4f74-b54d-4bb3ef934762"

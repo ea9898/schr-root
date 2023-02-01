@@ -7,65 +7,82 @@ public class PatientSchoolAttachment {
 
     private Long patientId;
 
+    private Long attachmentId;
+
+    private Long organizationId;
+
+    private Long areaId;
+
+    private LocalDate attachStartDate;
+
     private String studentId;
 
     private String studentPersonId;
 
-    private LocalDateTime updateDate;
+    private String classUid;
 
-    private Boolean attachmentId;
+    private Long educationFormId;
 
-    private Boolean organizationId;
+    private String educationForm;
 
-    private Boolean areaId;
+    private LocalDate trainingBeginDate;
 
-    private Boolean attachStartDate;
+    private LocalDate trainingEndDate;
 
-    private Boolean classUid;
+    private Integer academicYearId;
 
-    private Boolean educationForm;
-
-    private Boolean educationFormName;
-
-    private Boolean trainingBeginDate;
-
-    private Boolean trainingEndDate;
-
-    private Boolean academicYearId;
-
-    private Boolean academicYear;
+    private String academicYear;
 
     private Boolean actual;
 
-    public static PatientSchoolAttachment build(Long patientId, String studentId, String studentPersonId, LocalDateTime updateDate,
-                                                Boolean attachmentId, Boolean organizationId, Boolean areaId, Boolean attachStartDate,
-                                                Boolean classUid, Boolean educationForm, Boolean educationFormName,
-                                                Boolean trainingBeginDate, Boolean trainingEndDate, Boolean academicYearId,
-                                                Boolean academicYear, Boolean actual) {
-        PatientSchoolAttachment patientSchoolAttachment = new PatientSchoolAttachment();
+    private LocalDateTime updateDate;
 
-        patientSchoolAttachment.patientId = patientId;
-        patientSchoolAttachment.studentId = studentId;
-        patientSchoolAttachment.studentPersonId = studentPersonId;
-        patientSchoolAttachment.updateDate = updateDate;
-        patientSchoolAttachment.attachmentId = attachmentId;
-        patientSchoolAttachment.organizationId = organizationId;
-        patientSchoolAttachment.areaId = areaId;
-        patientSchoolAttachment.attachStartDate = attachStartDate;
-        patientSchoolAttachment.classUid = classUid;
-        patientSchoolAttachment.educationForm = educationForm;
-        patientSchoolAttachment.educationFormName = educationFormName;
-        patientSchoolAttachment.trainingBeginDate = trainingBeginDate;
-        patientSchoolAttachment.trainingEndDate = trainingEndDate;
-        patientSchoolAttachment.academicYearId = academicYearId;
-        patientSchoolAttachment.academicYear = academicYear;
-        patientSchoolAttachment.actual = actual;
+    public static PatientSchoolAttachment build(Long patientId, Long attachmentId, Long organizationId, Long areaId,
+                                                LocalDate attachStartDate, String studentId, String studentPersonId,
+                                                String classUid, Long educationFormId, String educationForm,
+                                                LocalDate trainingBeginDate, LocalDate trainingEndDate,
+                                                Long academicYearId, String academicYear, Boolean actual,
+                                                LocalDateTime updateDate) {
+        PatientSchoolAttachment newAttachment = new PatientSchoolAttachment();
 
-        return patientSchoolAttachment;
+        newAttachment.patientId = patientId;
+        newAttachment.attachmentId = attachmentId;
+        newAttachment.organizationId = organizationId;
+        newAttachment.areaId = areaId;
+        newAttachment.attachStartDate = attachStartDate;
+        newAttachment.studentId = studentId;
+        newAttachment.studentPersonId = studentPersonId;
+        newAttachment.classUid = classUid;
+        newAttachment.educationFormId = educationFormId;
+        newAttachment.educationForm = educationForm;
+        newAttachment.trainingBeginDate = trainingBeginDate;
+        newAttachment.trainingEndDate = trainingEndDate;
+        newAttachment.academicYearId = academicYearId == null ? null : academicYearId.intValue();
+        newAttachment.academicYear = academicYear;
+        newAttachment.actual = actual;
+        newAttachment.updateDate = updateDate;
+
+        return newAttachment;
     }
 
     public Long getPatientId() {
         return patientId;
+    }
+
+    public Long getAttachmentId() {
+        return attachmentId;
+    }
+
+    public Long getOrganizationId() {
+        return organizationId;
+    }
+
+    public Long getAreaId() {
+        return areaId;
+    }
+
+    public LocalDate getAttachStartDate() {
+        return attachStartDate;
     }
 
     public String getStudentId() {
@@ -76,55 +93,39 @@ public class PatientSchoolAttachment {
         return studentPersonId;
     }
 
-    public LocalDateTime getUpdateDate() {
-        return updateDate;
-    }
-
-    public Boolean getAttachmentId() {
-        return attachmentId;
-    }
-
-    public Boolean getOrganizationId() {
-        return organizationId;
-    }
-
-    public Boolean getAreaId() {
-        return areaId;
-    }
-
-    public Boolean getAttachStartDate() {
-        return attachStartDate;
-    }
-
-    public Boolean getClassUid() {
+    public String getClassUid() {
         return classUid;
     }
 
-    public Boolean getEducationForm() {
+    public Long getEducationFormId() {
+        return educationFormId;
+    }
+
+    public String getEducationForm() {
         return educationForm;
     }
 
-    public Boolean getEducationFormName() {
-        return educationFormName;
-    }
-
-    public Boolean getTrainingBeginDate() {
+    public LocalDate getTrainingBeginDate() {
         return trainingBeginDate;
     }
 
-    public Boolean getTrainingEndDate() {
+    public LocalDate getTrainingEndDate() {
         return trainingEndDate;
     }
 
-    public Boolean getAcademicYearId() {
+    public Integer getAcademicYearId() {
         return academicYearId;
     }
 
-    public Boolean getAcademicYear() {
+    public String getAcademicYear() {
         return academicYear;
     }
 
     public Boolean getActual() {
         return actual;
+    }
+
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
     }
 }
