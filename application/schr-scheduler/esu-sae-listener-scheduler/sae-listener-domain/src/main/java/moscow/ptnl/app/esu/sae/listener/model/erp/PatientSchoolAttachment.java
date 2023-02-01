@@ -7,6 +7,12 @@ public class PatientSchoolAttachment {
 
     private Long patientId;
 
+    private String studentId;
+
+    private String studentPersonId;
+
+    private LocalDateTime updateDate;
+
     private Long attachmentId;
 
     private Long organizationId;
@@ -14,10 +20,6 @@ public class PatientSchoolAttachment {
     private Long areaId;
 
     private LocalDate attachStartDate;
-
-    private String studentId;
-
-    private String studentPersonId;
 
     private String classUid;
 
@@ -35,13 +37,72 @@ public class PatientSchoolAttachment {
 
     private Boolean actual;
 
-    private LocalDateTime updateDate;
+    private Boolean attachmentIdChecked;
 
-    public static PatientSchoolAttachment build(Long patientId, Long attachmentId, Long organizationId, Long areaId,
-                                                LocalDate attachStartDate, String studentId, String studentPersonId,
-                                                String classUid, Long educationFormId, String educationForm,
-                                                LocalDate trainingBeginDate, LocalDate trainingEndDate,
-                                                Long academicYearId, String academicYear, Boolean actual,
+    private Boolean organizationIdChecked;
+
+    private Boolean areaIdChecked;
+
+    private Boolean attachStartDateChecked;
+
+    private Boolean classUidChecked;
+
+    private Boolean educationFormChecked;
+
+    private Boolean educationFormNameChecked;
+
+    private Boolean trainingBeginDateChecked;
+
+    private Boolean trainingEndDateChecked;
+
+    private Boolean academicYearIdChecked;
+
+    private Boolean academicYearChecked;
+
+
+    public static PatientSchoolAttachment buildChecker(Long patientId, String studentId, String studentPersonId, LocalDateTime updateDate,
+                                                Boolean attachmentId, Boolean organizationId, Boolean areaId, Boolean attachStartDate,
+                                                Boolean classUid, Boolean educationForm, Boolean educationFormName,
+                                                Boolean trainingBeginDate, Boolean trainingEndDate, Boolean academicYearId,
+                                                Boolean academicYear, Boolean actual) {
+        PatientSchoolAttachment patientSchoolAttachment = new PatientSchoolAttachment();
+
+        patientSchoolAttachment.patientId = patientId;
+        patientSchoolAttachment.studentId = studentId;
+        patientSchoolAttachment.studentPersonId = studentPersonId;
+        patientSchoolAttachment.updateDate = updateDate;
+        patientSchoolAttachment.attachmentIdChecked = attachmentId;
+        patientSchoolAttachment.organizationIdChecked = organizationId;
+        patientSchoolAttachment.areaIdChecked = areaId;
+        patientSchoolAttachment.attachStartDateChecked = attachStartDate;
+        patientSchoolAttachment.classUidChecked = classUid;
+        patientSchoolAttachment.educationFormChecked = educationForm;
+        patientSchoolAttachment.educationFormNameChecked = educationFormName;
+        patientSchoolAttachment.trainingBeginDateChecked = trainingBeginDate;
+        patientSchoolAttachment.trainingEndDateChecked = trainingEndDate;
+        patientSchoolAttachment.academicYearIdChecked = academicYearId;
+        patientSchoolAttachment.academicYearChecked = academicYear;
+        patientSchoolAttachment.actual = actual;
+
+        return patientSchoolAttachment;
+    }
+
+
+    public static PatientSchoolAttachment build(Long patientId,
+                                                Long attachmentId,
+                                                Long organizationId,
+                                                Long areaId,
+                                                LocalDate attachStartDate,
+                                                String studentId,
+                                                String studentPersonId,
+                                                String classUid,
+                                                Long educationFormId,
+                                                String educationForm,
+                                                LocalDate trainingBeginDate,
+                                                LocalDate trainingEndDate,
+                                                Long academicYearId,
+                                                String academicYear,
+                                                Boolean actual,
                                                 LocalDateTime updateDate) {
         PatientSchoolAttachment newAttachment = new PatientSchoolAttachment();
 
@@ -128,4 +189,26 @@ public class PatientSchoolAttachment {
     public LocalDateTime getUpdateDate() {
         return updateDate;
     }
+
+    public Boolean getAttachmentIdChecked() { return attachmentIdChecked; }
+
+    public Boolean getOrganizationIdChecked() { return organizationIdChecked; }
+
+    public Boolean getAreaIdChecked() { return areaIdChecked; }
+
+    public Boolean getAttachStartDateChecked() { return attachStartDateChecked; }
+
+    public Boolean getClassUidChecked() { return classUidChecked; }
+
+    public Boolean getEducationFormChecked() { return educationFormChecked; }
+
+    public Boolean getEducationFormNameChecked() { return educationFormNameChecked; }
+
+    public Boolean getTrainingBeginDateChecked() { return trainingBeginDateChecked; }
+
+    public Boolean getTrainingEndDateChecked() { return trainingEndDateChecked; }
+
+    public Boolean getAcademicYearIdChecked() { return academicYearIdChecked; }
+
+    public Boolean getAcademicYearChecked() { return academicYearChecked; }
 }

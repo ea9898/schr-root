@@ -8,11 +8,8 @@ import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.spi.json.JacksonJsonProvider;
 import moscow.ptnl.app.esu.sae.listener.model.erp.PatientSchoolAttachment;
 
-import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
 
 import java.time.LocalDate;
 import jakarta.annotation.PostConstruct;
@@ -45,29 +42,31 @@ public class PatientSchoolAttachmentDeserializer implements Function<String, Pat
         LinkedList jsonArray = value.read("$.entityData[*]");
         int attachNum = jsonArray.size();
 
-        return PatientSchoolAttachment.build(
-                value.read(value, "$.emiasId"),
-                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"attachId\")].value.value", Long.class),
-                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"organizationId\")].value.value", Long.class),
-                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"areaId\")].value.value", Long.class),
-                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"attachStartDate\")].value.value", LocalDate.class),
-                value.read(value, "$.studentId"),
-                value.read(value, "$.studentPersonId"),
-                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"classUid\")].value.value", String.class),
-                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"educationForm\")].value.id", Long.class),
-                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"educationForm\")].value.value", String.class),
-                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"trainingBeginDate\")].value.value", LocalDate.class),
-                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"trainingEndDate\")].value.value", LocalDate.class),
-                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"academicYear\")].value.id", Long.class),
-                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"academicYear\")].value.value", String.class),
-                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"isActual\")].value.value", Boolean.class),
-                mapper.convertValue(JsonPath.read(value, "$.operationDate"), LocalDateTime.class));
+        return PatientSchoolAttachment.buildChecker(
+                value.read("$.emiasId"),
+                value.read("$.studentId"),
+                value.read("$.studentPersonId"),
+                mapper.convertValue(value.read("$.operationDate"), LocalDateTime.class),
+                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"attachId\")].value.value", Long.class, attachNum),
+                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"organizationId\")].value.value", Long.class, attachNum),
+                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"areaId\")].value.value", Long.class, attachNum),
+                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"attachStartDate\")].value.value", LocalDate.class, attachNum),
+                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"classUid\")].value.value", String.class, attachNum),
+                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"educationForm\")].value.id", Long.class, attachNum),
+                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"educationForm\")].value.value", String.class, attachNum),
+                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"trainingBeginDate\")].value.value", LocalDateTime.class, attachNum),
+                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"trainingEndDate\")].value.value", LocalDateTime.class, attachNum),
+                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"academicYear\")].value.id", Long.class, attachNum),
+                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"academicYear\")].value.value", String.class, attachNum),
+                checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"isActual\")].value.value", Boolean.class, attachNum)
+        );
     }
 
-    public List<PatientSchoolAttachment> getPatientSchoolAttachments(String json) {
-        Object value = configuration.jsonProvider().parse(json);
 
-        List<Object> entityDataList = mapper.convertValue(JsonPath.read(value, "$.entityData"), List.class);
+    public List<PatientSchoolAttachment> getPatientSchoolAttachments(String json) {
+        DocumentContext value = JsonPath.using(configuration).parse(json);
+
+        List<Object> entityDataList = mapper.convertValue(value.read("$.entityData"), List.class);
         List<PatientSchoolAttachment> attachmentDataList = new ArrayList<>();
         for (Object entityData : entityDataList) {
             PatientSchoolAttachment attachment = PatientSchoolAttachment.build(

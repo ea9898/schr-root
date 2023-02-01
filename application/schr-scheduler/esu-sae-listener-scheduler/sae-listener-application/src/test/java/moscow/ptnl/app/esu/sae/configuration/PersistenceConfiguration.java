@@ -1,6 +1,6 @@
-package moscow.ptnl.app.esu.sae.handler.configuration;
+package moscow.ptnl.app.esu.sae.configuration;
 
-import javax.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import moscow.ptnl.app.config.PersistenceConstraint;
 

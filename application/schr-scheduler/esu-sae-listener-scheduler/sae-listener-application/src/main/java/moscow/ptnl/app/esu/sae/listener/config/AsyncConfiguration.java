@@ -1,4 +1,4 @@
-package moscow.ptnl.app.sae.handler.config;
+package moscow.ptnl.app.esu.sae.listener.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

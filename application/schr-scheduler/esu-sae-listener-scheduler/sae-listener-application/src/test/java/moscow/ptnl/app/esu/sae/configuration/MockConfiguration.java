@@ -1,8 +1,8 @@
-package moscow.ptnl.app.esu.sae.handler.configuration;
+package moscow.ptnl.app.esu.sae.configuration;
 
-import javax.inject.Inject;
-import moscow.ptnl.app.sae.handler.task.SchoolAttachmentEventProcessTask;
+import jakarta.inject.Inject;
 import moscow.ptnl.app.esu.sae.listener.deserializer.PatientSchoolAttachmentDeserializer;
+import moscow.ptnl.app.esu.sae.listener.task.SchoolAttachmentEventProcessTask;
 import moscow.ptnl.app.service.PlannersService;
 import moscow.ptnl.app.service.PlannersServiceImpl;
 import moscow.ptnl.domain.repository.SettingsRepository;

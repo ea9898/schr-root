@@ -1,4 +1,4 @@
-package moscow.ptnl.app.sae.handler.task;
+package moscow.ptnl.app.esu.sae.listener.task;
 
 import moscow.ptnl.app.domain.model.es.StudentAttachInfo;
 import moscow.ptnl.app.domain.model.es.StudentPatientData;
@@ -112,10 +112,10 @@ public class SchoolAttachmentEventProcessTask extends BaseEsuProcessorTask {
                         if ((LocalDate.now().getYear() - studentPatientData.getPatientInfo().getBirthDate().getYear()) >= ageMax) {
                             // Система удаляет документ с пациентом _id = $.emiasId и переходит на шаг 4.5 с ошибкой SCHR_106
                             studentPatientDataRepository.delete(studentPatientData);
-                            return Optional.of(CustomErrorReason.RECORD_NOT_FOUND.format());
+                            return Optional.of(CustomErrorReason.REMOVING_RECORD_NOT_FOUND.format());
                         } else {
                             // Система переходит на шаг 4.5 с ошибкой SCHR_106
-                            return Optional.of(CustomErrorReason.RECORD_NOT_FOUND.format());
+                            return Optional.of(CustomErrorReason.REMOVING_RECORD_NOT_FOUND.format());
                         }
                     }
                 }

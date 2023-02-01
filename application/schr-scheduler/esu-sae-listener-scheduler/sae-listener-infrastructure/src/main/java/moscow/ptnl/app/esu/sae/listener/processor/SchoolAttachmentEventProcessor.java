@@ -60,15 +60,15 @@ public class SchoolAttachmentEventProcessor extends EsuConsumerProcessor {
             errorFields.add(content.getStudentPersonId() == null ? "studentPersonId" : null);
             errorFields.add(content.getUpdateDate() == null ? "operationDate" : null);
 
-            errorFields.add(!content.getAttachmentId() ? "attachId" : null);
-            errorFields.add(!content.getOrganizationId() ? "organizationId" : null);
-            errorFields.add(!content.getAreaId() ? "areaId" : null);
-            errorFields.add(!content.getAttachStartDate() ? "attachStartDate" : null);
-            errorFields.add(!content.getClassUid() ? "classUid" : null);
-            errorFields.add(!content.getEducationForm() ? "educationForm.id" : null);
-            errorFields.add(!content.getEducationFormName() ? "educationForm" : null);
-            errorFields.add(!content.getAcademicYearId() ? "academicYear.id" : null);
-            errorFields.add(!content.getAcademicYear() ? "academicYear" : null);
+            errorFields.add(!content.getAttachmentIdChecked() ? "attachId" : null);
+            errorFields.add(!content.getOrganizationIdChecked() ? "organizationId" : null);
+            errorFields.add(!content.getAreaIdChecked() ? "areaId" : null);
+            errorFields.add(!content.getAttachStartDateChecked() ? "attachStartDate" : null);
+            errorFields.add(!content.getClassUidChecked() ? "classUid" : null);
+            errorFields.add(!content.getEducationFormChecked() ? "educationForm.id" : null);
+            errorFields.add(!content.getEducationFormNameChecked() ? "educationForm" : null);
+            errorFields.add(!content.getAcademicYearIdChecked() ? "academicYear.id" : null);
+            errorFields.add(!content.getAcademicYearChecked() ? "academicYear" : null);
             errorFields.add(!content.getActual() ? "isActual" : null);
 
             errorFields.remove(null);

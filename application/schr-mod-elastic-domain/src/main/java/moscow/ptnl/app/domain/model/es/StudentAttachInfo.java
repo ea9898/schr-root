@@ -22,10 +22,10 @@ public class StudentAttachInfo {
     private LocalDate attachStartDate;
 
     @Field(type = FieldType.Keyword, name = "studentId")
-    private String studentIdKis;
+    private String studentId;
 
     @Field(type = FieldType.Keyword, name = "studentPersonIdMesh")
-    private String studentIdMesh;
+    private String studentPersonIdMesh;
 
     @Field(type = FieldType.Keyword, name = "classIdMesh")
     private String classIdMesh;
@@ -67,21 +67,13 @@ public class StudentAttachInfo {
         this.organizationId = organizationId;
     }
 
-    public String getStudentIdKis() {
-        return studentIdKis;
-    }
+    public String getStudentId() { return studentId; }
 
-    public void setStudentIdKis(String studentIdKis) {
-        this.studentIdKis = studentIdKis;
-    }
+    public void setStudentId(String studentId) { this.studentId = studentId; }
 
-    public String getStudentIdMesh() {
-        return studentIdMesh;
-    }
+    public String getStudentPersonIdMesh() { return studentPersonIdMesh; }
 
-    public void setStudentIdMesh(String studentIdMesh) {
-        this.studentIdMesh = studentIdMesh;
-    }
+    public void setStudentPersonIdMesh(String studentPersonIdMesh) { this.studentPersonIdMesh = studentPersonIdMesh; }
 
     public String getClassIdMesh() {
         return classIdMesh;
