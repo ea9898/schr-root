@@ -21,8 +21,8 @@ public interface DatabaseCheckRepository {
     
     default long selectCountFromTable(String tableName, Integer timeout) {
         Query query = getEntityManager().createNativeQuery("SELECT COUNT(*) FROM " + tableName);
-        query.setHint("javax.persistence.query.timeout", timeout);
-        query.setHint("javax.persistence.lock.timeout", timeout);
+        query.setHint("jakarta.persistence.query.timeout", timeout);
+        query.setHint("jakarta.persistence.lock.timeout", timeout);
 
         return (Long) query.getSingleResult();
     }
