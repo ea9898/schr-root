@@ -64,9 +64,9 @@ public class PatientSchoolAttachmentDeserializer implements Function<String, Pat
 
 
     public List<PatientSchoolAttachment> getPatientSchoolAttachments(String json) {
-        DocumentContext value = JsonPath.using(configuration).parse(json);
+        Object value = configuration.jsonProvider().parse(json);
 
-        List<Object> entityDataList = mapper.convertValue(value.read("$.entityData"), List.class);
+        List<Object> entityDataList = mapper.convertValue(JsonPath.read(value, "$.entityData"), List.class);
         List<PatientSchoolAttachment> attachmentDataList = new ArrayList<>();
         for (Object entityData : entityDataList) {
             PatientSchoolAttachment attachment = PatientSchoolAttachment.build(

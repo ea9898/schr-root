@@ -2,6 +2,12 @@ package moscow.ptnl.app.esu.sae.configuration;
 
 import jakarta.inject.Inject;
 import moscow.ptnl.app.esu.sae.listener.deserializer.PatientSchoolAttachmentDeserializer;
+import moscow.ptnl.app.esu.sae.listener.service.AnthropometryServiceImpl;
+import moscow.ptnl.app.esu.sae.listener.service.ConsentInfoServiceImpl;
+import moscow.ptnl.app.esu.sae.listener.service.PatientServiceImpl;
+import moscow.ptnl.app.esu.sae.listener.service.anthropometry.AnthropometryService;
+import moscow.ptnl.app.esu.sae.listener.service.consent.ConsentInfoService;
+import moscow.ptnl.app.esu.sae.listener.service.patient.PatientService;
 import moscow.ptnl.app.esu.sae.listener.task.SchoolAttachmentEventProcessTask;
 import moscow.ptnl.app.service.PlannersService;
 import moscow.ptnl.app.service.PlannersServiceImpl;
@@ -14,13 +20,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.PropertySource;
 
-/**
- *
- * @author sorlov
- */
 @Configuration
 @EnableAspectJAutoProxy
+@PropertySource("classpath:application.properties")
 public class MockConfiguration {
 
     @Inject
@@ -51,6 +55,18 @@ public class MockConfiguration {
         return new SchoolAttachmentEventProcessTask();
     }
 
-//    @Bean
-//    public Repositories repositories() { return new Repositories(applicationContext); }
+    @Bean
+    public PatientService patientService() {
+        return new PatientServiceImpl();
+    }
+
+    @Bean
+    public AnthropometryService anthropometryService() {
+        return new AnthropometryServiceImpl();
+    }
+
+    @Bean
+    public ConsentInfoService consentInfoService() {
+        return new ConsentInfoServiceImpl();
+    }
 }
