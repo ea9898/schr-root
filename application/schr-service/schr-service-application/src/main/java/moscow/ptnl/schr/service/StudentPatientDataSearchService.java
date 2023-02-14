@@ -21,7 +21,7 @@ public interface StudentPatientDataSearchService {
     @POST
     @Path("/searchByDsl")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON+ "; charset=UTF-8")
     SearchByDslResponse searchByDsl(SearchByDslRequest request) throws ServiceException;
     
 }

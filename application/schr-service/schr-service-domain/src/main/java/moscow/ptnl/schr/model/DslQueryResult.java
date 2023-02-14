@@ -12,7 +12,7 @@ import moscow.ptnl.schr.error.ErrorReason;
 public class DslQueryResult implements Serializable {
     
     private Long totalCount;
-    private List<String> items;
+    private List<Object> items;
     private String errorMessage;
     private ErrorReason reason;
 
@@ -24,14 +24,14 @@ public class DslQueryResult implements Serializable {
         this.totalCount = totalCount;
     }
 
-    public List<String> getItems() {
+    public List<Object> getItems() {
         if (items == null) {
             items = new ArrayList<>();
         }
         return items;
     }
 
-    public void setItems(List<String> items) {
+    public void setItems(List<Object> items) {
         this.items = items;
     }
 

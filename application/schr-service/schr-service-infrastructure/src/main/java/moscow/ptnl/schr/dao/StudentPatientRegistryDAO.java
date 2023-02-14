@@ -2,6 +2,7 @@ package moscow.ptnl.schr.dao;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Map;
 import moscow.ptnl.app.domain.model.es.StudentPatientData;
 import moscow.ptnl.app.helper.ESHelper;
 import moscow.ptnl.schr.error.ErrorReason;
@@ -30,12 +31,13 @@ public class StudentPatientRegistryDAO {
     private final ObjectMapper objectMapper = new ObjectMapper();
       
     
-    public DslQueryResult executeDslQuery(final String dslQuery) {
+    public DslQueryResult executeDslQuery(final Object dslQuery) {
         DslQueryResult result = new DslQueryResult();
         String content;
         //2. Система выполняет GET запрос к хранилищу Elasticsearch
+        String query = objectMapper.convertValue(dslQuery, JsonNode.class).toString();
         try {
-            ESHelper.ESResponse response = esHelper.getContent("POST", "/" + StudentPatientData.INDEX_NAME + "/_search", dslQuery);
+            ESHelper.ESResponse response = esHelper.getContent("POST", "/" + StudentPatientData.INDEX_NAME + "/_search", query);
             if (!response.isSuccess()) {
                 if (response.getContent().isPresent()) {
                     result.setError(ErrorReason.BAD_REQUEST, response.getContent().get());
@@ -63,7 +65,7 @@ public class StudentPatientRegistryDAO {
             JsonNode hitsNode = node.at("/hits/hits");
             if (!hitsNode.isMissingNode() && hitsNode.isArray()) {
                 for (final JsonNode itemNode : hitsNode) {
-                    result.getItems().add(itemNode.toString());
+                    result.getItems().add(itemNode);
                 }
             }
         } catch (Exception e) {

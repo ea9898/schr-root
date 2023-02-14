@@ -15,13 +15,13 @@ import java.io.Serializable;
 public class SearchByDslRequest extends UserContextRequest implements Serializable {
     
     //Текст DSL-запроса
-    private String dslQuery;
+    private Object dslQuery;
 
-    public String getDslQuery() {
+    public Object getDslQuery() {
         return dslQuery;
     }
 
-    public void setDslQuery(String dslQuery) {
+    public void setDslQuery(Object dslQuery) {
         this.dslQuery = dslQuery;
     }
     

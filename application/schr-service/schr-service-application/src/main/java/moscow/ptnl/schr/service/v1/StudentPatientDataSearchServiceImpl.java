@@ -39,7 +39,7 @@ public class StudentPatientDataSearchServiceImpl implements StudentPatientDataSe
         //1. Система выполняет проверку полномочий пользователя используя данные из системного параметра services.security.settings
         //сделано через аннотацию EMIASSecured               
         
-        if (request.getDslQuery() == null || request.getDslQuery().isEmpty()) {
+        if (request.getDslQuery() == null) {
             throw new ServiceException(ErrorReason.BAD_REQUEST);
         }
         

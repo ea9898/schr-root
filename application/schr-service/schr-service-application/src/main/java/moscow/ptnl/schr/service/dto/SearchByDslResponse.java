@@ -16,18 +16,18 @@ import java.util.List;
 public class SearchByDslResponse implements Serializable {
     
     //Массив найденных документов в индексе
-    private List<String> items;
+    private List<Object> items;
     //Общее количество найденных документов
     private Integer totalCount;
 
-    public List<String> getItems() {
+    public List<Object> getItems() {
         if (items == null) {
             items = new ArrayList<>();
         }
         return items;
     }
 
-    public void setItems(List<String> items) {
+    public void setItems(List<Object> items) {
         this.items = items;
     }
 
