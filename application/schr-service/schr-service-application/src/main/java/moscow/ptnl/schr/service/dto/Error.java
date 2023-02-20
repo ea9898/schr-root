@@ -9,11 +9,11 @@ import java.io.Serializable;
 public class Error implements Serializable {
     
     private String code;
-    private String message;
+    private Object message;
     
     public Error(){}
     
-    public Error(String code, String message){
+    public Error(String code, Object message){
         this.code = code;
         this.message = message;
     }
@@ -26,11 +26,11 @@ public class Error implements Serializable {
         this.code = code;
     }
 
-    public String getMessage() {
+    public Object getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(Object message) {
         this.message = message;
     }
     

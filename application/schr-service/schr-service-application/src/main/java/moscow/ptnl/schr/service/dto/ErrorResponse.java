@@ -20,7 +20,7 @@ public class ErrorResponse implements Serializable {
     
     public ErrorResponse(){}
     
-    public ErrorResponse(String code, String message, String journalId){
+    public ErrorResponse(String code, Object message, String journalId){
         this.error = new Error(code, message);
         this.journalId = journalId;
     }
