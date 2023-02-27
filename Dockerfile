@@ -6,7 +6,7 @@ COPY application/ /opt/src
 COPY libs/ /opt/src/libs
 COPY .git /opt/src
 RUN apt-get update && apt-get install -y git
-RUN mvn install:install-file -Dfile=/opt/src/libs/client-lib-4.5.1.jar -DgroupId=ru.mos.emias.esu -DartifactId=client-lib -Dversion=4.5.1 -Dpackaging=jar
+RUN mvn install:install-file -Dfile=/opt/src/libs/client-lib-4.5.2.jar -DgroupId=ru.mos.emias.esu -DartifactId=client-lib -Dversion=4.5.2 -Dpackaging=jar
 RUN mvn install:install-file -Dfile=/opt/src/libs/emias-user-context-1.0.0.jar -DgroupId=ru.mos.emias.uc -DartifactId=emias-user-context -Dversion=1.0.0 -Dpackaging=jar
 RUN mvn install:install-file -Dfile=/opt/src/libs/emias-common-domain-2.0.4.jar -DgroupId=ru.mos.emias.common -DartifactId=emias-common-domain -Dversion=2.0.4 -Dpackaging=jar
 RUN mvn install:install-file -Dfile=/opt/src/libs/emias-errors-1.1.0.jar -DgroupId=ru.mos.emias.errors -DartifactId=emias-errors -Dversion=1.1.0 -Dpackaging=jar
