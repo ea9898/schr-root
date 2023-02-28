@@ -42,8 +42,8 @@ public class PatientServiceImpl implements PatientService {
         Options options = new Options();
         List<KeyValuePair> entry = options.getEntry();
         KeyValuePair keyValuePair = new KeyValuePair();
-        keyValuePair.setValue("getAreaType");
-        keyValuePair.setKey("true");
+        keyValuePair.setKey("getAreaType");
+        keyValuePair.setValue("true");
         entry.add(keyValuePair);
         request.setOptions(options);
 
