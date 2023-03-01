@@ -70,7 +70,6 @@
                     <targetPackage>ru.mos.emias.esu.model</targetPackage>
                     <useLongIntegers>true</useLongIntegers>
                     <dateType>java.time.LocalDate</dateType>
-                    <dateTimeType>java.time.LocalDateTime</dateTimeType>
                 </configuration>
                 <executions>
                     <execution>

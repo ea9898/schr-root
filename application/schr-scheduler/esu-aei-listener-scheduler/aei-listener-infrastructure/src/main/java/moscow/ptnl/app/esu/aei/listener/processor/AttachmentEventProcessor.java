@@ -62,8 +62,8 @@ public class AttachmentEventProcessor extends EsuConsumerProcessor {
             errorFields.add(content.getAttachmentNewValue().getMuId() == null ? "attachmentNewValue.muId" : null);
             errorFields.add(content.getAttachmentNewValue().getAttachType().getCode() == null ? "attachmentNewValue.attachType.code" : null);
             errorFields.add(content.getAttachmentNewValue().getAttachType().getTitle() == null ? "attachmentNewValue.attachType.title" : null);
-            errorFields.add(content.getAttachmentNewValue().getProcessOfAttachment().getCode() == null ? "attachmentNewValue.processOfAttachment.code" : null);
-            errorFields.add(content.getAttachmentNewValue().getProcessOfAttachment().getTitle() == null ? "attachmentNewValue.processOfAttachment.title" : null);
+            errorFields.add(content.getAttachmentNewValue().getProcessOfAttachment() == null || content.getAttachmentNewValue().getProcessOfAttachment().getCode() == null ? "attachmentNewValue.processOfAttachment.code" : null);
+            errorFields.add(content.getAttachmentNewValue().getProcessOfAttachment() == null || content.getAttachmentNewValue().getProcessOfAttachment().getTitle() == null ? "attachmentNewValue.processOfAttachment.title" : null);
             errorFields.add(content.getEvent().getDateTime() == null ? "event.dateTime" : null);
             List<Event.EventType> eventTypes = Arrays.asList(Event.EventType.CREATE, Event.EventType.CLOSE, Event.EventType.CHANGE);
             errorFields.add(!eventTypes.contains(content.getEvent().getEventType()) ? "event.eventType" : null);

@@ -31,7 +31,10 @@ public class AttachmentEventValidator {
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(SCHEMA_PATH)) {
             Objects.requireNonNull(inputStream);
             JSONObject rawSchema = new JSONObject(new JSONTokener(inputStream));
-            this.schema = SchemaLoader.load(rawSchema);
+            this.schema = SchemaLoader.builder()
+                    .schemaJson(rawSchema)
+                    .addFormatValidator(new DateTimeFormatValidator())
+                    .build().load().build();
         } catch (Exception e) {
             LOG.error("Ошибка парсинга схемы", e);
             throw new IllegalStateException(e);

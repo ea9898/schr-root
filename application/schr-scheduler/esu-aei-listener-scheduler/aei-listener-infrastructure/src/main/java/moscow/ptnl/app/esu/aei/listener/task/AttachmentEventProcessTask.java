@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import moscow.ptnl.app.domain.model.es.Attachment;
 import moscow.ptnl.app.domain.model.es.StudentPatientData;
 import moscow.ptnl.app.error.CustomErrorReason;
+import moscow.ptnl.app.helper.DateHelper;
 import moscow.ptnl.app.infrastructure.repository.es.StudentPatientDataRepository;
 import moscow.ptnl.app.model.PlannersEnum;
 import moscow.ptnl.app.model.TopicType;
@@ -72,10 +73,11 @@ public class AttachmentEventProcessTask extends BaseEsuProcessorTask {
 
                 if (Objects.equals(attachment.getAreaId(), content.getAttachmentNewValue().getAreaId())) {
                     attachmentsFound = true;
-
-                    if (!content.getEvent().getDateTime().isAfter(attachment.getUpdateDate())) {
+                    if (!DateHelper.convertToLocalDateTimeViaMilisecond(content.getEvent().getDateTime())
+                            .isAfter(attachment.getUpdateDate())) {
                         return Optional.of(CustomErrorReason.INFORMATION_IS_OUTDATED.format());
                     }
+
                     attachments.remove();
                 }
             }
@@ -112,7 +114,7 @@ public class AttachmentEventProcessTask extends BaseEsuProcessorTask {
             attachment.setProcessOfAttachmentCode(newData.getAttachmentNewValue().getProcessOfAttachment().getCode());
             attachment.setProcessOfAttachmentName(newData.getAttachmentNewValue().getProcessOfAttachment().getTitle());
         }
-        attachment.setUpdateDate(newData.getEvent().getDateTime());
+        attachment.setUpdateDate(DateHelper.convertToLocalDateTimeViaMilisecond(newData.getEvent().getDateTime()));
 
         if (entity.getAttachments() == null) {
             entity.setAttachments(new ArrayList<>());

@@ -14,6 +14,7 @@ import org.springframework.scheduling.config.IntervalTask;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 
 import java.lang.invoke.MethodHandles;
+import java.time.Duration;
 
 /**
  * @author sorlov
@@ -45,6 +46,6 @@ public class SchedulerConfiguration implements SchedulingConfigurer {
     }
 
     private void addPatientConsentsTopicProcessTask(ScheduledTaskRegistrar taskRegistrar) {
-        taskRegistrar.addFixedDelayTask(new IntervalTask(patientConsentsTopicProcessTask::runTask, 60000, 10000));
+        taskRegistrar.addFixedDelayTask(new IntervalTask(patientConsentsTopicProcessTask::runTask, Duration.ofMillis(60000), Duration.ofMillis(10000)));
     }
 }

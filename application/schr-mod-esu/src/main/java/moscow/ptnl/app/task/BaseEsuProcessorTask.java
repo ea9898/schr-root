@@ -88,21 +88,24 @@ public abstract class BaseEsuProcessorTask extends BaseTask {
                             try {
                                 //4.1 Система по значению ESU_INPUT.ES_ID из обрабатываемой записи получает документ
                                 // из индекса index_esu_input и забирает сообщение из поля _source.message
-                                IndexEsuInput indexEsuInput = indexEsuInputRepository.findById(input.getEsId())
-                                        .orElseThrow(() -> new IllegalStateException("Не найдено сообщение в индексе с id=" + input.getEsId()));
+                                Optional<IndexEsuInput> indexEsuInput = indexEsuInputRepository.findById(input.getEsId());
+                                if (indexEsuInput.isPresent()) {
+                                    Optional<String> processingError = processMessage(indexEsuInput.get().getMessage());
 
-                                Optional<String> processingError = processMessage(indexEsuInput.getMessage());
-
-                                if (processingError.isPresent()) {
-                                    //АС.2
-                                    input.setError(processingError.get());
+                                    if (processingError.isPresent()) {
+                                        //АС.2
+                                        input.setError(processingError.get());
+                                        input.setStatus(EsuStatusType.PROCESSED);
+                                    }
+                                    else if (input.getStatus() == EsuStatusType.IN_PROGRESS) {
+                                        input.setError(null);
+                                        input.setStatus(EsuStatusType.PROCESSED);
+                                    }
+                                    input.setDateUpdated(LocalDateTime.now());
+                                } else {
+                                    input.setError("Не найдено сообщение в индексе с id=" + input.getEsId());
                                     input.setStatus(EsuStatusType.PROCESSED);
                                 }
-                                else if (input.getStatus() == EsuStatusType.IN_PROGRESS) {
-                                    input.setError(null);
-                                    input.setStatus(EsuStatusType.PROCESSED);
-                                }
-                                input.setDateUpdated(LocalDateTime.now());
                             } finally {
                                 transactions.executeWithoutResult(status -> esuInputCRUDRepository.save(input));
                             }
@@ -112,6 +115,8 @@ public abstract class BaseEsuProcessorTask extends BaseTask {
                     //Просто завершаем выполнение
                     error = "Interrupted";
                     return false;
+                } catch (IllegalStateException ex) {
+                    error = ex.getMessage();
                 } catch (Exception ex) {
                     Throwable th = ex.getCause() != null ? ex.getCause() : ex;
                     error = th.getMessage();
