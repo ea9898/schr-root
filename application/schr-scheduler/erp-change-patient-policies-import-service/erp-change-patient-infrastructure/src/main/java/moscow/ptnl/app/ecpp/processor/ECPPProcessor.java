@@ -56,10 +56,10 @@ public class ECPPProcessor extends EsuConsumerProcessor {
             // policyUpdateDate, $.entityData[0].attributes[?(@.name=="policyChangeDate")].value.value
             if (!(content.getEntityData() == null || content.getEntityData().isEmpty() || content.getEntityData().get(0).getAttributes() == null)) {
                 Optional<Attribute> optionalAttribute = content.getEntityData().get(0).getAttributes()
-                        .stream().filter(i -> i.getName().equals("policyUpdateDate")).findFirst();
+                        .stream().filter(i -> i.getName().equals("policyChangeDate")).findFirst();
                 if (optionalAttribute.isEmpty() || optionalAttribute.get().getValue() == null ||
                         optionalAttribute.get().getValue().getValue() == null || optionalAttribute.get().getValue().getValue().strip().length() == 0) {
-                    errorFields.add("erpChangePatient.policyUpdateDate");
+                    errorFields.add("erpChangePatient.policyChangeDate");
                 }
             }
 
