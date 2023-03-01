@@ -20,7 +20,7 @@ import java.time.Duration;
  */
 @Configuration
 @EnableScheduling
-public class SchedulerConfiguration implements SchedulingConfigurer  {
+public class SchedulerConfiguration implements SchedulingConfigurer {
 
     protected static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass().getName());
 
