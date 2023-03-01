@@ -79,7 +79,7 @@ public class LastAnthropometryProcessor extends EsuConsumerProcessor {
             }
 
             if (!notEmptyContent) {
-                errorFields.add("lastAnthropometry.measurements или lastAnthropometry.additionalProperties");
+                errorFields.add("lastAnthropometry.measurements или lastAnthropometry.annuledMeasurementsTypeId");
             }
 
             if (!errorFields.isEmpty()) {

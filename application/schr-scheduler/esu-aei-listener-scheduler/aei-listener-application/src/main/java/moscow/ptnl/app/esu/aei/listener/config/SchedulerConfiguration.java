@@ -42,10 +42,10 @@ public class SchedulerConfiguration implements SchedulingConfigurer {
     @Override
     public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
         taskRegistrar.setTaskScheduler(buildTaskExecutor());
-        addPatientConsentsTopicProcessTask(taskRegistrar);
+        addAttachmentEventProcessTask(taskRegistrar);
     }
 
-    private void addPatientConsentsTopicProcessTask(ScheduledTaskRegistrar taskRegistrar) {
+    private void addAttachmentEventProcessTask(ScheduledTaskRegistrar taskRegistrar) {
         taskRegistrar.addFixedDelayTask(new IntervalTask(attachmentEventProcessTask::runTask, Duration.ofMillis(60000), Duration.ofMillis(10000)));
     }
 }
