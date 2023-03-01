@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://emias.mos.ru/patientService/address/core/v1/"
+           xmlns:tns="http://emias.mos.ru/patientService/address/core/v1/"
+           elementFormDefault="qualified" >
+
+    <xs:include schemaLocation="../emias/emias.core.address.v1.xsd"/>
+
+    <xs:complexType name="RegionOut">
+        <xs:annotation>
+            <xs:documentation>Сведения о регионе (субъекте РФ) для предоставления</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="tns:AddressLevelBaseType">
+                <xs:attribute name="fiasGuid" type="xs:string">
+                    <xs:annotation>
+                        <xs:documentation>Идентификатор ФИАС</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="RegionOMKTEOut">
+        <xs:annotation>
+            <xs:documentation>Сведения об округе (по ОМК ТЕ) для предоставления</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="tns:AddressLevelBaseType">
+                <xs:sequence minOccurs="0">
+                    <xs:element name="shortName" type="xs:string" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>Краткое наименование округа (по ОМК ТЕ)</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="AddressBaseTypeOut" abstract="true">
+        <xs:annotation>
+            <xs:documentation>Базовый абстрактный тип со сведениями об Адресе для предоставления</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="addressString" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Полное наименование адреса (адрес строкой)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="region" type="tns:RegionOut">
+                <xs:annotation>
+                    <xs:documentation>Сведения о регионе (субъекте РФ)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="regionOMKTE" type="tns:RegionOMKTEOut" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Сведения об округе (по ОМК ТЕ)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="area" type="tns:Area" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Сведения о районе в регионе (субъекте РФ)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="areaOMKTE" type="tns:AreaOMKTE" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Сведения об округе (по ОМК ТЕ)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="city" type="tns:City" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Сведения о городе</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="place" type="tns:Place" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Сведения о населенном пункте</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="plan" type="tns:Plan" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Сведения о планировочной структуре</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="street" type="tns:Street" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Сведения об улице</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="building" type="tns:Building" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Сведения о здании/сооружении</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="globalIdNsi" type="tns:ID">
+            <xs:annotation>
+                <xs:documentation>Уникальный идентификатор адреса в ЕМИАС.НСИ</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="aoLevel" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>Уровень адресного объекта (по уровням Адресного реестра НСИ)</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="fiasGuid" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>Идентификатор ФИАС</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="codePostal" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>Почтовый индекс</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="codeKLADR" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>Код КЛАДР</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="nonActualAddress" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>Неактуальный адрес (сведения из ЕМИАС.НСИ)</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="AddressCustomTypeOut">
+        <xs:annotation>
+            <xs:documentation>Сведения об Адресе, отсутствующем в Адресном реестре ЕМИАС, для предоставления</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="tns:AddressBaseTypeOut">
+                <xs:sequence minOccurs="0">
+                    <xs:element name="flat" type="tns:Flat" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>Сведения о квартире/ офисе/проч.</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="roomNumber" type="tns:Room" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>Сведения о комнате/ помещении</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+                <xs:attribute name="id" type="tns:ID">
+                    <xs:annotation>
+                        <xs:documentation>Идентификатор адреса в продукте ЕМИАС (не в НСИ)</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+</xs:schema>

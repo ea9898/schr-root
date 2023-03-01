@@ -1,0 +1,2802 @@
+<?xml version="1.0"?>
+<xs:schema version="1.0"
+           elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="1.0"
+           xmlns:tns="http://erp.ptnl.net/school/v1/school-service/model"
+           targetNamespace="http://erp.ptnl.net/school/v1/school-service/model">
+
+    <xs:include schemaLocation="common-types.xsd" />
+    <xs:include schemaLocation="school-simple-types.xsd" />
+    
+    <xs:complexType name="EmiasIds">
+	    <xs:sequence>
+	        <xs:element name="emiasId" type="tns:EmiasId" maxOccurs="unbounded">
+	            <xs:annotation>
+	                <xs:documentation>
+	                    Идентификатор пациента в ЕМИАС
+	                </xs:documentation>
+	            </xs:annotation>
+	        </xs:element>
+	    </xs:sequence>
+	</xs:complexType>
+    
+    <!-- Requests - Responses -->
+    <xs:complexType name="GetRepresentativesRequest">
+        <xs:annotation>
+            <xs:documentation>
+                Запрос на получение данных представителей идентифицированных учащихся
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="patients">
+                <xs:annotation>
+                    <xs:documentation>
+                        Группирующая сущность - "Пациенты"
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="emiasId" type="tns:EmiasId" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Идентификатор участка (школьного класса)
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GetRepresentativesResponse">
+        <xs:annotation>
+            <xs:documentation>
+                Ответ на запрос на получение данных представителей идентифицированных учащихся
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="resultRequests">
+                <xs:annotation>
+                    <xs:documentation>
+                        Группирующая сущность результатов выполнения запроса
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="resultRequest" minOccurs="1" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Результат выполнения запроса
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="emiasId" type="tns:EmiasId">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Идентификатор пациента в ЕМИАС
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="result" type="tns:Result">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Результат выполнения запроса. Возможные значения: success – успешно; failure – не успешно
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="studentRepresentatives" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность, которая содержит данные о представителях учащегося - пациента
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="comment" type="tns:Comment" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Комментарий в формате текста
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="representatives" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Группирующая сущность - "Представители"
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                        <xs:sequence>
+                                                            <xs:element name="representative" maxOccurs="unbounded">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Группирующая сущность - "Представитель"
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                                <xs:complexType>
+                                                                    <xs:sequence>
+                                                                        <xs:element name="representativeId" type="tns:RepresentativeId">
+                                                                            <xs:annotation>
+                                                                                <xs:documentation>
+                                                                                    Идентификатор представителя (соответствует значению person_uuid в КИС ГУСОЭВ)
+                                                                                </xs:documentation>
+                                                                            </xs:annotation>
+                                                                        </xs:element>
+                                                                        <xs:element name="family" type="tns:RepFamily">
+                                                                            <xs:annotation>
+                                                                                <xs:documentation>
+                                                                                    Фамилия представителя
+                                                                                </xs:documentation>
+                                                                            </xs:annotation>
+                                                                        </xs:element>
+                                                                        <xs:element name="name" type="tns:RepName">
+                                                                            <xs:annotation>
+                                                                                <xs:documentation>
+                                                                                    Имя представителя
+                                                                                </xs:documentation>
+                                                                            </xs:annotation>
+                                                                        </xs:element>
+                                                                        <xs:element name="patronymic" type="tns:RepPatronymic" minOccurs="0">
+                                                                            <xs:annotation>
+                                                                                <xs:documentation>
+                                                                                    Отчество представителя
+                                                                                </xs:documentation>
+                                                                            </xs:annotation>
+                                                                        </xs:element>
+                                                                        <xs:element name="contactRepresentative" type="tns:RepContact"
+                                                                                    minOccurs="0" maxOccurs="unbounded">
+                                                                            <xs:annotation>
+                                                                                <xs:documentation>
+                                                                                    Группирующая сущность – "Контакты представителя"
+                                                                                </xs:documentation>
+                                                                            </xs:annotation>
+                                                                        </xs:element>
+                                                                    </xs:sequence>
+                                                                </xs:complexType>
+                                                            </xs:element>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="errors" type="tns:Errors" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Сообщения об ошибке
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetPatientBannerRequest">
+        <xs:annotation>
+            <xs:documentation>
+                Запрос на получение баннера учащегося
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="emiasId" type="tns:EmiasId">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор пациента в ЕМИАС
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GetPatientBannerResponse">
+        <xs:annotation>
+            <xs:documentation>
+                Ответ на запрос на получение баннера учащегося
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="student">
+                <xs:annotation>
+                    <xs:documentation>
+                        Группирующая сущность - "Сведения об учащемся"
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="studentId" type="tns:StudentId">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Идентификатор учащегося (соответствует значению person_uuid в КИС ГУСОЭВ)
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="ukl" type="tns:Ukl">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    УКЛ пациента
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="emiasId" type="tns:EmiasId">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Идентификатор пациента в ЕМИАС
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="family" type="tns:PatFamily">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Фамилия
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="name" type="tns:PatName">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Имя
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="patronymic" type="tns:PatPatronymic" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Отчество
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="gender" type="tns:Gender">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Пол учащегося. Возможные значения: 1 – мужской; 2 – женский; 0 – любой
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="birthDate" type="xs:date">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Дата рождения
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="policies" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Группирующая сущность - "Сведения об полисах пациента"
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="policy" minOccurs="1" maxOccurs="unbounded" type="tns:OutputPolicy">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Сведения об актуальном полисе пациента.
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="documents" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Группирующая сущность - "Сведения об актуальных документах пациента"
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="document" minOccurs="1" maxOccurs="unbounded">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность. Только актуальные документы
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="documentTypeId" type="tns:DocumentTypeId">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Код типа документа
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="documentTypeName" type="tns:DocumentTypeName">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Наименование типа документа. Заполняется на основании справочника ЕМИАС "Тип ДУЛ". Справочник синхронизируется с ПО Норма (DOC_TYPE)
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="documentSeries" type="tns:DocumentSeries" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Серия документа
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="documentNumber" type="tns:DocumentNumber">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Номер документа
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="snils" type="tns:Snils" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    СНИЛС
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="age" type="tns:Age" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Количество полных лет
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="contactsPatient" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Группирующая сущность - "Контакты пациента" (только актуальные)
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="contactPatient" type="tns:PatContact" minOccurs="1" maxOccurs="unbounded">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность - "Контакт пациента"
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="addresses" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Группирующая сущность - "Адреса пациента" (только актуальные)
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="address" type="tns:OutputAddress" minOccurs="1" maxOccurs="unbounded">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность - "Адрес пациента"
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="attachments" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Группирующая сущность. Возвращаются актуальные прикрепления пациента к МО (прикрепление к ОО исключается)
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="attachment" minOccurs="1" maxOccurs="unbounded">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность - "Прикрепление"
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="attachId" type="tns:AttachId">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Идентификатор прикрепления, созданного в ЕМИАС.ЕРП
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="attachNumber" type="tns:AttachNumber" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Номер прикрепления ЕМИАС
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="attachType" type="tns:StudAttachType">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Категория прикрепления. Допустимые значения: 0 – небазовое; 1 – базовое терапевтическое; 2 – базовое стоматологическое; 9 – прикрепление к ОО
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="attachFormID" type="tns:AttachFormID">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Код вида прикрепления. Заполняется в соответствии со справочником ЕМИАС "Вид прикрепления". Возможные значения: 10 – по участковому принципу (основное); 20 – по участковому принципу; 40 – по медицинским показаниям
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="attachFormName" type="tns:AttachFormName">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Наименование вида прикрепления. Заполняется на основании справочника ЕМИАС "Вид прикрепления". Справочник синхронизируется с ПО Норма (ATTACHMENT_TYPE)
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="mainMoId" type="tns:MainMoId" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Идентификатор головной МО прикрепления в ЕМИАС
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="moId" type="tns:MoId">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Идентификатор МО (филиала) прикрепления в ЕМИАС
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="areaId" type="tns:AreaId" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Идентификатор участка прикрепления
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="areaTypeId" type="tns:AreaTypeId" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Тип участка прикрепления. Заполняется в соответствии со справочником типов участков в ЕМИАС. Только цифры
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="areaTypeName" type="tns:AreaTypeName" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Наименование типа участка прикрепления. Заполняется на основании справочника типов участков в ЕМИАС. Справочник синхронизируется с ПО Норма (AREA_TYPE)
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="dateFromAttach" type="xs:date">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Дата начала прикрепления. Формат: "YYYY-MM-DD"
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="representatives" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Группирующая сущность - "Представители Учащегося - пациента"
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="representative" minOccurs="1" maxOccurs="unbounded">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность - "Представитель Учащегося - пациента"
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="representativeId" type="tns:RepresentativeId">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Идентификатор представителя (соответствует значению person_uuid в КИС ГУСОЭВ)
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="family" type="tns:RepFamily">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Фамилия
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="name" type="tns:RepName">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Имя
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="patronymic" type="tns:RepPatronymic" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Отчество
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="contactsRepresentative" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Группирующая сущность – "Контакты представителя"
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                        <xs:sequence>
+                                                            <xs:element name="contactRepresentative" type="tns:RepContact" minOccurs="1" maxOccurs="unbounded">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Группирующая сущность – "Контакт представителя"
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="comment" type="tns:Comment" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Комментарий
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetStudentsListRequest">
+        <xs:annotation>
+            <xs:documentation>
+                Запрос на поиск пациента по параметрам
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="policyNumber" type="tns:PolicyNumber" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Номер полиса ОМС
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="document" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Группирующая сущность - "Документ, удостоверяющий личность"
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="documentTypeId" type="tns:DocumentTypeId">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Код типа документа. Заполняется на основании справочника ЕМИАС "Тип ДУЛ". Справочник синхронизируется с ПО Норма (DOC_TYPE)
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="documentSeries" type="tns:DocumentSeries" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Серия ДУЛ
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="documentNumber" type="tns:DocumentNumber">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Номер ДУЛ
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="numSnils" type="tns:Snils" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Номер СНИЛС
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>            
+            <xs:element name="family" type="tns:PatFamily" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Фамилия, возможен поиск по частичному совпадению (с использованием символа %)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="name" type="tns:PatName" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Имя, возможен поиск по частичному совпадению (с использованием символа %)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="patronymic" type="tns:PatPatronymic" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Отчество
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="birthDate" type="tns:DatePeriod" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Группирующая сущность - "Период даты рождения"
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="age" type="tns:Age" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Количество полных лет
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="gender" type="tns:Gender" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Пол учащегося. Возможные значения: 1 – мужской; 2 – женский; 0 – любой
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="moId" type="tns:MoId" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор МО (филиала) прикрепления в ЕМИАС
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="pagingRequest" type="tns:PagingRequest">
+                <xs:annotation>
+                    <xs:documentation>
+                        Информация для постраничного вывода – входные параметры
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GetStudentsListResponse">
+        <xs:annotation>
+            <xs:documentation>
+                Ответ на запрос на поиск пациента по параметрам
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="patients" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Группирующая сущность - "Пациенты"
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="patient" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Группирующая сущность - "Пациент"
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="ukl" type="tns:Ukl">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Уникальный идентификатор пациента в ЕМИАС.ЕРП
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="emiasId" type="tns:EmiasId">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Идентификатор пациента в ЕМИАС
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="family" type="tns:PatFamily">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Фамилия
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="name" type="tns:PatName">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Имя
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="patronymic" type="tns:PatPatronymic" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Отчество
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="policies" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность - "Сведения о полисах пациента"
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="policy" maxOccurs="unbounded" type="tns:OutputPolicy">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Сведения о действующем полисе пациента
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="documents" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность - "Сведения о документах пациента"
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="document" maxOccurs="unbounded">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Документ пациента
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                        <xs:sequence>
+                                                            <xs:element name="documentTypeId" type="tns:DocumentTypeId">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Код типа документа
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="documentTypeName" type="tns:DocumentTypeName">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Наименование типа документа. Заполняется на основании справочника ЕМИАС "Тип ДУЛ". Справочник синхронизируется с ПО Норма (DOC_TYPE)
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="documentSeries" type="tns:DocumentSeries" minOccurs="0">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Серия документа
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="documentNumber" type="tns:DocumentNumber">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Номер документа
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="attachments" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность - "Актуальные прикрепления пациента"
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="attachment" maxOccurs="unbounded" type="tns:OutputAttachment">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Группирующая сущность - "Актуальное прикрепление пациента"
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="addresses" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность - "Адреса пациента" (только актуальные)
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="address" type="tns:OutputAddress" minOccurs="1" maxOccurs="unbounded">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Группирующая сущность - "Адрес пациента"
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="pagingResponse" type="tns:PagingResponse">
+                <xs:annotation>
+                    <xs:documentation>
+                        Информация для постраничного вывода
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RemoveLinkStudentInfoRequest">
+        <xs:annotation>
+            <xs:documentation>
+                Запрос на удаление связи Учащийся - Пациент
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="studentId" type="tns:StudentId">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор учащегося (соответствует значению person_uuid в КИС ГУСОЭВ)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="emiasId" type="tns:EmiasId">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор пациента в ЕМИАС
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="RemoveLinkStudentInfoResponse">
+        <xs:annotation>
+            <xs:documentation>
+                Ответ на запрос на удаление связи Учащийся - Пациент
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="result" type="tns:Result">
+                <xs:annotation>
+                    <xs:documentation>
+                        Результат сведения данных о пациенте и учащемся. Возможные значения: success – успешно; failure – не успешно
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetClassStudentsCountRequest">
+        <xs:annotation>
+            <xs:documentation>
+                Запрос на поиск количества пациентов на участке по параметрам
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="areaIds">
+                <xs:annotation>
+                    <xs:documentation>
+                        Список идентификаторов участков. Количество идентификаторов, подаваемых на вход, ограничено внутренним системным параметром
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="areaId" minOccurs="1" maxOccurs="unbounded" type="tns:AreaId">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Идентификатор участка (школьного класса)
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="gender" type="tns:Gender" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Пол учащегося. Возможные значения: 1 – мужской; 2 – женский; 0 – любой
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="birthDate" type="tns:DatePeriod" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Группирующая сущность - "Период даты рождения"
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="attachment" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Группирующая сущность - "Прикрепление"
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="mainMoId" type="tns:MainMoId" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Идентификатор головной МО прикрепления в ЕМИАС. Обязательно к заполнению, если один из параметров attachToCurrentMO, attachToOtherMO соответствует "true"
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="attachToCurrentMO" type="xs:boolean" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Базовое терапевтическое прикрепление (typeAttach = 1) к текущему (заданному) МО. Возможные значения: true; false. По умолчанию принимает значение "false"
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="attachToOtherMO" type="xs:boolean" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Бзовое терапевтическое прикрепление (typeAttach = 1) не к текущему (заданному) МО. Возможные значения: true; false. По умолчанию принимает значение "false"
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="noAttach" type="xs:boolean" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Не имеет базового терапевтического прикрепления. Возможные значения: true; false. По умолчанию принимает значение "false"
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="noPolicy" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Нет полиса. Возможные значения: true; false
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GetClassStudentsCountResponse">
+        <xs:annotation>
+            <xs:documentation>
+                Ответ на запрос на поиск количества пациентов на участке по параметрам
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="areas" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Группирующая сущность - "Данные по участкам"
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="area" minOccurs="0" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Группирующая сущность - "Участок"
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="areaId" type="tns:AreaId">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Идентификатор участка (школьного класса)
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="patientsCount" type="tns:PatientsCount">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Количество пациентов
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="GetClassStudentsByGenderRequest">
+        <xs:annotation>
+            <xs:documentation>
+                Запрос на список идентифицированных учащихся с учетом гендерного признака на участке и их количества по заданным входным параметрам
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="areaIds">
+                <xs:annotation>
+                    <xs:documentation>
+                        Список идентификаторов участков. Количество идентификаторов, подаваемых на вход, ограничено внутренним системным параметром
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="areaId" minOccurs="1" maxOccurs="unbounded" type="tns:AreaId">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Идентификатор участка (школьного класса)
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="gender" type="tns:Gender" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Пол учащегося. Возможные значения: 1 – мужской; 2 – женский; 0 – любой
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="birthDate" type="tns:DatePeriod" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Группирующая сущность - "Период даты рождения"
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="attachment" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Группирующая сущность - "Прикрепление"
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="mainMoId" type="tns:MainMoId" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Идентификатор головной МО прикрепления в ЕМИАС. Обязательно к заполнению, если один из параметров attachToCurrentMO, attachToOtherMO соответствует "true"
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="attachToCurrentMO" type="xs:boolean" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Базовое терапевтическое прикрепление (typeAttach = 1) к текущему (заданному) МО. Возможные значения: true; false. По умолчанию принимает значение "false"
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="attachToOtherMO" type="xs:boolean" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Бзовое терапевтическое прикрепление (typeAttach = 1) не к текущему (заданному) МО. Возможные значения: true; false. По умолчанию принимает значение "false"
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="noAttach" type="xs:boolean" minOccurs="0" maxOccurs="1">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Не имеет базового терапевтического прикрепления. Возможные значения: true; false. По умолчанию принимает значение "false"
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="noPolicy" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Нет полиса. Возможные значения: true; false
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GetClassStudentsByGenderResponse">
+        <xs:annotation>
+            <xs:documentation>
+                Ответ запрос на список идентифицированных учащихся с учетом гендерного признака на участке и их количества по заданным входным параметрам
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="areas" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Группирующая сущность - "Данные по участкам"
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="area" minOccurs="0" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Группирующая сущность - "Участок"
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="areaId" type="tns:AreaId">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Идентификатор участка (школьного класса)
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="totalCount" type="xs:long">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Количество пациентов
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="boysCount" type="xs:long">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Количество пациентов мужского пола
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="girlsCount" type="xs:long">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Количество пациентов женского пола
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="undefinedCount" type="xs:long">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Количество пациентов с неопределенным полом
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="boysId" type="tns:EmiasIds" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность - ИД пациентов мужского пола
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="girlsId" type="tns:EmiasIds" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность - ИД пациентов женского пола
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="undefinedId" type="tns:EmiasIds" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность - ИД пациентов с неопределенным полом
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>                                                                        
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>    
+
+    <xs:complexType name="GetClassStudentsListRequest">
+        <xs:annotation>
+            <xs:documentation>
+                Запрос на получение списка пациентов класса
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="areaIds">
+                <xs:annotation>
+                    <xs:documentation>
+                        Список идентификаторов участков. Количество идентификаторов, подаваемых на вход, ограничено внутренним системным параметром
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="areaId" type="tns:AreaId" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Идентификатор участка (школьного класса)
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GetClassStudentsListResponse">
+        <xs:annotation>
+            <xs:documentation>
+                Ответ на запрос на получение списка пациентов класса
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="areas">
+                <xs:annotation>
+                    <xs:documentation>
+                        Группирующая сущность - "Данные по участкам"
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="area" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Группирующая сущность - "Данные по участку"
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="areaId" type="tns:AreaId">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Идентификатор участка (школьного класса)
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="patients" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность - "Пациенты"
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="patient" maxOccurs="unbounded">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Группирующая сущность - "Пациент"
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                        <xs:sequence>
+                                                            <xs:element name="ukl" type="tns:Ukl">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Уникальный идентификатор пациента в ЕМИАС.ЕРП
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="emiasId" type="tns:EmiasId" minOccurs="0">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Идентификатор пациента в ЕМИАС
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="family" type="tns:PatFamily">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Фамилия
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="name" type="tns:PatName">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Имя
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="patronymic" type="tns:PatPatronymic" minOccurs="0">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Фамилия
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="policies" minOccurs="0">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Группирующая сущность - "Сведения о полисах пациента"
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                                <xs:complexType>
+                                                                    <xs:sequence>
+                                                                        <xs:element name="policy" maxOccurs="unbounded" type="tns:OutputPolicy">
+                                                                            <xs:annotation>
+                                                                                <xs:documentation>
+                                                                                    Группирующая сущность - "Сведения об актуальном полисе пациента"
+                                                                                </xs:documentation>
+                                                                            </xs:annotation>
+                                                                        </xs:element>
+                                                                    </xs:sequence>
+                                                                </xs:complexType>
+                                                            </xs:element>
+                                                            <xs:element name="birthDate" type="xs:date">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Дата рождения пациента
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="age" type="tns:Age">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Количество полных лет
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="gender" type="tns:Gender">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Пол учащегося. Возможные значения: 1 – мужской; 2 – женский; 0 – любой
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="attachments" minOccurs="0">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Группирующая сущность - "Актуальные базовые терапевтические прикрепления и прикрепления к ОО"
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                                <xs:complexType>
+                                                                    <xs:sequence>
+                                                                        <xs:element name="attachment" maxOccurs="unbounded">
+                                                                            <xs:annotation>
+                                                                                <xs:documentation>
+                                                                                    Группирующая сущность - "Прикрепление"
+                                                                                </xs:documentation>
+                                                                            </xs:annotation>
+                                                                            <xs:complexType>
+                                                                                <xs:sequence>
+                                                                                    <xs:element name="attachId" type="tns:AttachId">
+                                                                                        <xs:annotation>
+                                                                                            <xs:documentation>
+                                                                                                Идентификатор прикрепления, созданного в ЕМИАС.ЕРП
+                                                                                            </xs:documentation>
+                                                                                        </xs:annotation>
+                                                                                    </xs:element>
+                                                                                    <xs:element name="attachType" type="tns:StudAttachType">
+                                                                                        <xs:annotation>
+                                                                                            <xs:documentation>
+                                                                                                Категория прикрепления. Допустимые значения: 1 – базовое терапевтическое; 9 – прикрепление к ОО
+                                                                                            </xs:documentation>
+                                                                                        </xs:annotation>
+                                                                                    </xs:element>
+                                                                                    <xs:element name="mainMoId" type="tns:MainMoId" minOccurs="0">
+                                                                                        <xs:annotation>
+                                                                                            <xs:documentation>
+                                                                                                Идентификатор головной МО прикрепления в ЕМИАС
+                                                                                            </xs:documentation>
+                                                                                        </xs:annotation>
+                                                                                    </xs:element>
+                                                                                    <xs:element name="moId" type="tns:MoId">
+                                                                                        <xs:annotation>
+                                                                                            <xs:documentation>
+                                                                                                Идентификатор МО (филиала)
+                                                                                            </xs:documentation>
+                                                                                        </xs:annotation>
+                                                                                    </xs:element>
+                                                                                    <xs:element name="areaId" type="tns:AreaId" minOccurs="0">
+                                                                                        <xs:annotation>
+                                                                                            <xs:documentation>
+                                                                                                Идентификатор участка
+                                                                                            </xs:documentation>
+                                                                                        </xs:annotation>
+                                                                                    </xs:element>
+                                                                                    <xs:element name="areaTypeId" type="tns:AreaTypeId" minOccurs="0">
+                                                                                        <xs:annotation>
+                                                                                            <xs:documentation>
+                                                                                                Тип участка прикрепления. Заполняется в соответствии со справочником типов участков в ЕМИАС. Только цифры
+                                                                                            </xs:documentation>
+                                                                                        </xs:annotation>
+                                                                                    </xs:element>
+                                                                                    <xs:element name="areaTypeName" type="tns:AreaTypeName" minOccurs="0">
+                                                                                        <xs:annotation>
+                                                                                            <xs:documentation>
+                                                                                                Наименование типа участка прикрепления. Заполняется на основании справочника типов участков в ЕМИАС. Справочник синхронизируется с ПО Норма (AREA_TYPE)
+                                                                                            </xs:documentation>
+                                                                                        </xs:annotation>
+                                                                                    </xs:element>
+                                                                                    <xs:element name="isActual" type="xs:boolean">
+                                                                                        <xs:annotation>
+                                                                                            <xs:documentation>
+                                                                                                Актуальность прикрепления. Возможные значения: true; false
+                                                                                            </xs:documentation>
+                                                                                        </xs:annotation>
+                                                                                    </xs:element>
+                                                                                </xs:sequence>
+                                                                            </xs:complexType>
+                                                                        </xs:element>
+                                                                    </xs:sequence>
+                                                                </xs:complexType>
+                                                            </xs:element>
+                                                            <xs:element name="addresses" minOccurs="0">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Группирующая сущность - "Адреса пациента" (только актуальные)
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                                <xs:complexType>
+                                                                    <xs:sequence>
+                                                                        <xs:element name="address" type="tns:OutputAddress" minOccurs="1" maxOccurs="unbounded">
+                                                                            <xs:annotation>
+                                                                                <xs:documentation>
+                                                                                    Группирующая сущность - "Адрес пациента"
+                                                                                </xs:documentation>
+                                                                            </xs:annotation>
+                                                                        </xs:element>
+                                                                    </xs:sequence>
+                                                                </xs:complexType>
+                                                            </xs:element>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetStudentAttachmentsListRequest">
+        <xs:annotation>
+            <xs:documentation>
+                Запрос на получение данных пациента по прикреплениям пациента
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="patients">
+                <xs:annotation>
+                    <xs:documentation>
+                        Пакет запросов сведений о пациентах с прикреплениями. Максимальное количество запросов в пакете ограничено внутренним системным параметром
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="patient" minOccurs="1" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Группирующая сущность - "Пациент"
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="emiasId" type="tns:EmiasId">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Идентификатор пациента в ЕМИАС
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="attachIds" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Список идентификаторов прикреплений
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="attachId" type="tns:AttachId" minOccurs="1" maxOccurs="unbounded">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Идентификатор прикрепления в ЕМИАС.ЕРП
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GetStudentAttachmentsListResponse">
+        <xs:annotation>
+            <xs:documentation>
+                Ответ на запрос на получение данных пациента по прикреплениям пациента
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="resultRequests">
+                <xs:annotation>
+                    <xs:documentation>
+                        Группирующая сущность результатов выполнения запроса
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="resultRequest" minOccurs="1" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Результат выполнения запроса
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="emiasId" type="tns:EmiasId">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Идентификатор пациента в ЕМИАС
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="result" type="tns:Result">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Результат выполнения запроса. Возможные значения: success – успешно; failure – не успешно
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="patient" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность, которая содержит краткое описание пациента
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="ukl" type="tns:Ukl">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Уникальный идентификатор пациента в ЕМИАС.ЕРП
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="emiasId" type="tns:EmiasId">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Идентификатор пациента в ЕМИАС
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="family" type="tns:PatFamily">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Фамилия пациента
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="name" type="tns:PatName">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Имя пациента
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="patronymic" type="tns:PatPatronymic" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Отчество пациента
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="policies" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Группирующая сущность. Сведения о полисах пациента. Вариант предоставления полисов определяется на основании внутреннего системного параметра: 0 – предоставлять все актуальные полисы; 1 – предоставлять единственный актуальный полис (выбор по алгоритму). По умолчанию устанавливается значение "1"
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                        <xs:sequence>
+                                                            <xs:element name="policy" minOccurs="1" maxOccurs="unbounded" type="tns:OutputPolicy">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Сведения об актуальном полисе пациента.
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                                <xs:element name="birthDate" type="xs:date" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Дата рождения пациента
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="age" type="tns:Age" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Количество полных лет
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="gender" type="tns:Gender">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Пол учащегося. Возможные значения: 1 – мужской; 2 – женский; 0 – любой
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="addresses" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Группирующая сущность - "Адреса пациента" (только актуальные)
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                        <xs:sequence>
+                                                            <xs:element name="address" type="tns:OutputAddress" minOccurs="1" maxOccurs="unbounded">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Группирующая сущность - "Адрес пациента"
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                                <xs:element name="requestedAttachments" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Запрошенные прикрепления. Возвращаются все прикрепления, соответствующие входному запросу
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                        <xs:sequence>
+                                                            <xs:element name="requestedAttachment" minOccurs="1" maxOccurs="unbounded" type="tns:OutputAttachment">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Сведения о прикреплении учащегося
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                                <xs:element name="actualAttachments" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Актуальные прикрепления. Возвращаются все актуальные прикрепления пациента
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                        <xs:sequence>
+                                                            <xs:element name="actualAttachment" type="tns:OutputAttachment" minOccurs="1" maxOccurs="unbounded">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Сведения о прикреплении учащегося
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="errors" type="tns:Errors" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Сообщения об ошибке
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SetLinkStudentInfoRequest">
+        <xs:annotation>
+            <xs:documentation>
+                Запрос на сведение пациента и учащегося в ЕМИАС
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="emiasId" type="tns:EmiasId">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор пациента в ЕМИАС
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="studentId" type="tns:StudentId">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор учащегося (соответствует значению person_uuid в КИС ГУСОЭВ). Обязателен к заполнению при необходимости установки связи Учащийся – Пациент
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="studentPersonId" type="tns:StudentPersonId" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор персоны-учащегося в МЭШ
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="attachments" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Прикрепления учащегося
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="attachment" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Группирующая сущность - "Прикрепление учащегося"
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="studentClassId" type="tns:StudentClassId">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Идентификатор прикрепления учащегося к классу в КИС ГУСОЭВ. При передаче прикрепления выполняется проверка на наличие у пациента прикрепления с переданным значением. Если найдено, то выполняется обновление данных, иначе добавление данных
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="attachType" type="tns:MinStudAttachType2">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Категория прикрепления. Возможные значения: 9 – школьное прикрепление
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="mainMoId" type="tns:MainMoId">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Идентификатор головной МО прикрепления в ЕМИАС. Заполняется на основании справочника МО в ЕМИАС
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="moId" type="tns:MoId">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Идентификатор МО (филиала) прикрепления в ЕМИАС (образовательного учреждения). Заполняется на основании справочника МО в ЕМИАС
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="areaId" type="tns:AreaId">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Идентификатор участка прикрепления. Заполняется на основании справочника участков в ЕМИАС
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="areaTypeId" type="tns:AreaTypeId">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Идентификатор типа участка прикрепления. Заполняется на основании справочника типов участков в ЕМИАС, Справочник синхронизируется с ПО Норма (AREA_TYPE). Возможные значения: 230 – "Школьный класс". Только цифры
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="causeEndAttachId" type="tns:CauseEndAttachId" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Код причины закрытия прикрепления. Заполняется на основании справочника ЕМИАС "Причина закрытия прикрепления", Справочник синхронизации с ПО Норма (ATTACHMENT_CLOSE_REASON). Обязательно к заполнению при закрытии прикрепления. Возможные значения: 40 – "Другие причины"
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="dateFromAttach" type="xs:date">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Дата начала прикрепления
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="dateToAttach" type="xs:date" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Дата окончания прикрепления
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+
+                                    <xs:element name="additionalData" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Дополнительные сведения о прикреплении учащегося к классу (для передачи данных из ЕИМАС.Учащиеся)
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="classUid" type="tns:ClassUid" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Идентификатор класса в МЭШ
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="academicYearId" type="tns:AcademicYearId" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Идентификатор учебного года в МЭШ
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="academicYearName" type="tns:AcademicYearName" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Наименование учебного года
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="educationFormId" type="tns:EducationFormId" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Идентификатор формы обучения в МЭШ
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="educationFormName" type="tns:EducationFormName" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Наименование формы обучения
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="deductionReasonId" type="tns:DeductionReasonId" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Идентификатор причины отчисления в МЭШ
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="deductionReasonName" type="tns:DeductionReasonName" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Наименование причины отчисления
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="dateBeginTraining" type="xs:date" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Дата начала обучения в МЭШ
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="dateEndTraining" type="xs:date" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Дата окончания обучения в МЭШ
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+
+
+                                    </xs:element>
+
+                                    <xs:element name="isActual" type="xs:boolean">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Признак актуальности прикрепления. Возможные значения: true; false.
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="representatives" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Группирующая сущность - "Сведения о представителях Учащегося - Пациента"
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="representative" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Сведения о представителе и/или связи представителя и Пациента – Учащегося.
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="representativeId" type="tns:RepresentativeId">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Идентификатор представителя (соответствует значению person_uuid в КИС ГУСОЭВ)
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="representativeLink" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность. При передаче сведений из КПИ не заполняется. Передается при необходимости установки или удаления связи Представитель – Учащийся.
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="representativeLinkId" type="tns:RepresentativeLinkId">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Идентификатор связи Представитель – Учащийся в КИС ГУСОЭВ
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="representativeTypeId" type="tns:RepresentativeTypeId" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Идентификатор категории представителя
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="representativeTypeName" type="tns:RepresentativeTypeName" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Наименование категории представителя
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="isActual" type="xs:boolean">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Признак актуальности связи Представитель – Учащийся. Возможные значения: true; false. По умолчанию принимает значение "true"
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="representativeData" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность. Передается при необходимости добавления/обновления данных представителя в ЕМИАС.ЕРП
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="family" type="tns:RepFamily">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Фамилия
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="name" type="tns:RepName">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Имя
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="patronymic" type="tns:RepPatronymic" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Отчество
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="representativePersonId" type="tns:RepresentativePersonId" minOccurs="0">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Идентификатор персоны-представителя в МЭШ
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                                <xs:element name="isActual" type="xs:boolean">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Признак актуальности данных представителя. Возможные значения: true; false. По умолчанию принимает значение "true"
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                    <xs:element name="contacts" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Группирующая сущность - "Сведения о контактах представителя"
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="contact" maxOccurs="unbounded">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Группирующая сущность - "Сведения о контакте представителя"
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                        <xs:sequence>
+                                                            <xs:element name="contactId" type="tns:ContactId">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Идентификатор контакта в КИС ГУСОЭВ
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="contactType" type="tns:RepContactType">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Тип контакта. Возможные значения: Е – электронная почта; T – контактный телефон
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="value" type="tns:RepContactValue">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Значение контакта (номер телефона или адрес электронной почты)
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="updateDateKis" type="xs:dateTime" minOccurs="0">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Дата обновления контакта, полученная из КИС ГУСОЭВ
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="isMainContact" type="xs:boolean" minOccurs="0">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Признак основного контакта. Возможные значения: false - не основной; true - основной
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                            <xs:element name="isActual" type="xs:boolean">
+                                                                <xs:annotation>
+                                                                    <xs:documentation>
+                                                                        Признак актуальности контакта. Возможные значения: true; false. По умолчанию принимает значение "true"
+                                                                    </xs:documentation>
+                                                                </xs:annotation>
+                                                            </xs:element>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SetLinkStudentInfoResponse">
+        <xs:annotation>
+            <xs:documentation>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="result" type="tns:Result">
+                <xs:annotation>
+                    <xs:documentation>
+                        Результат выполнения запроса
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="attachResults" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Результаты добавления/обновления прикреплений в ЕМИАС.ЕРП.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="attachResult" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Результат добавления/обновления прикрепления в ЕМИАС.ЕРП.
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="studentClassId" type="tns:StudentClassId">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Идентификатор прикрепления учащегося к классу в КИС ГУСОЭВ
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="attachId" type="tns:AttachId">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Идентификатор прикрепления, созданного в ЕМИАС.ЕРП
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetClassStudentsListByParamRequest">
+        <xs:annotation>
+            <xs:documentation>
+                Запрос на получение списков пациентов классов по параметрам
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="areaIds">
+                <xs:annotation>
+                    <xs:documentation>
+                        Список идентификаторов участков. Количество идентификаторов, подаваемых на вход, ограничено внутренним системным параметром
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="areaId" minOccurs="1" maxOccurs="unbounded" type="tns:AreaId">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Идентификатор участка (школьного класса)
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ages" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Список возрастов (полных лет) для поиска
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="age" minOccurs="1" maxOccurs="unbounded" type="tns:Age">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Количество полных лет
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="birthDate" type="tns:DatePeriod" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Группирующая сущность - "Период даты рождения"
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="gender" type="tns:Gender" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Пол учащегося. Возможные значения: 1 – мужской; 2 – женский; 0 – любой
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="birthMonths" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Список возрастов (полных лет) для поиска
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="birthMonth" minOccurs="1" maxOccurs="unbounded" type="tns:BirthMonth">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Количество полных лет
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GetClassStudentsListByParamResponse">
+        <xs:annotation>
+            <xs:documentation>
+                Ответ на запрос на получение списков пациентов классов по параметрам
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="areas">
+                <xs:annotation>
+                    <xs:documentation>
+                        Группирующая сущность - "Данные по участкам"
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="area" minOccurs="1" maxOccurs="unbounded">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Группирующая сущность - "Данные по участку"
+                                </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="areaId" type="tns:AreaId">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Идентификатор участка (школьного класса)
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="patients" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>
+                                                Данные о пациентах
+                                            </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="patient" maxOccurs="unbounded" type="tns:OutputPatient">
+                                                    <xs:annotation>
+                                                        <xs:documentation>
+                                                            Группирующая сущность - "Пациент"
+                                                        </xs:documentation>
+                                                    </xs:annotation>
+                                                </xs:element>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="UpdateRepresentativesRequest">
+        <xs:annotation>
+            <xs:documentation>
+                Запрос на изменение данных представителей идентифицированных учащихся
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="emiasId" type="tns:EmiasId">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор пациента в ЕМИАС
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="comment" type="tns:Comment">
+                <xs:annotation>
+                    <xs:documentation>
+                        Текстовый комментарий
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="UpdateRepresentativesResponse">
+        <xs:annotation>
+            <xs:documentation>
+                Ответ на запрос на изменение данных представителей идентифицированных учащихся
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="result" type="tns:Result">
+                <xs:annotation>
+                    <xs:documentation>
+                        Результат выполнения запроса. Возможные значения: success – успешно; failure – не успешно
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetStudentIdRequest">
+        <xs:annotation>
+            <xs:documentation>
+                Запрос на получение идентификатора учащегося в МЭШ
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="emiasId" type="tns:EmiasId">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор пациента в ЕМИАС
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GetStudentIdResponse">
+        <xs:annotation>
+            <xs:documentation>
+                Ответ на запрос на получение идентификатора учащегося в МЭШ
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="emiasId" type="tns:EmiasId">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор пациента в ЕМИАС
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="studentPersonId" type="tns:StudentPersonId">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор учащегося в МЭШ (guid)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Остальное -->
+    <xs:complexType name="Errors">
+        <xs:annotation>
+            <xs:documentation>
+                Сообщение об ошибке
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="error" type="tns:faultInfo" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>
+                        Информация об ошибке
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RepContact">
+        <xs:annotation>
+            <xs:documentation>
+                Контакт
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="contactType" type="tns:RepContactType">
+                <xs:annotation>
+                    <xs:documentation>
+                        Тип контакта. Доступные значения: T – телефон; E – электронная почта
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="contactValue" type="tns:RepContactValue">
+                <xs:annotation>
+                    <xs:documentation>
+                        Значение контакта (номер телефона или адрес электронной почты)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PatContact">
+        <xs:annotation>
+            <xs:documentation>
+                Контакт пациента
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="contactType" type="tns:PatContactType">
+                <xs:annotation>
+                    <xs:documentation>
+                        Тип контакта. Возможные значения: Е – электронная почта; T – контактный телефон; M – мобильный телефон
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="contactValue" type="tns:PatContactValue">
+                <xs:annotation>
+                    <xs:documentation>
+                        Значение контакта
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PagingRequest">
+        <xs:annotation>
+            <xs:documentation>
+                Информация для постраничного вывода – входные параметры
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="page" type="tns:Page">
+                <xs:annotation>
+                    <xs:documentation>
+                        Номер страницы
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="pageSize" type="tns:PageSize">
+                <xs:annotation>
+                    <xs:documentation>
+                        Число записей на странице, не превышающее максимальное значение. Максимальное количество возвращаемых данных на странице определяется внутренним системным параметром
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PagingResponse">
+        <xs:annotation>
+            <xs:documentation>
+                Информация для постраничного вывода – выходные параметры
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="page" type="tns:Page">
+                <xs:annotation>
+                    <xs:documentation>
+                        Номер страницы
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="pageSize" type="tns:PageSize">
+                <xs:annotation>
+                    <xs:documentation>
+                        Число записей на странице
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="total" type="tns:Total">
+                <xs:annotation>
+                    <xs:documentation>
+                        Общее количество записей
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DatePeriod">
+        <xs:annotation>
+            <xs:documentation>Период даты рождения/поступления</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="startDate" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>Дата с</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="endDate" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>Дата по</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OutputPatient">
+        <xs:annotation>
+            <xs:documentation>
+                Группирующая сущность - "Сведения о пациенте"
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="ukl" type="tns:Ukl">
+                <xs:annotation>
+                    <xs:documentation>
+                        Уникальный идентификатор пациента в ЕМИАС.ЕРП
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="emiasId" type="tns:EmiasId" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор пациента в ЕМИАС
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="family" type="tns:PatFamily">
+                <xs:annotation>
+                    <xs:documentation>
+                        Фамилия
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="name" type="tns:PatName">
+                <xs:annotation>
+                    <xs:documentation>
+                        Имя
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="patronymic" type="tns:PatPatronymic" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Отчество
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="birthDate" type="xs:date">
+                <xs:annotation>
+                    <xs:documentation>
+                        Дата рождения пациента
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="age" type="tns:Age">
+                <xs:annotation>
+                    <xs:documentation>
+                        Количество полных лет
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="gender" type="tns:Gender">
+                <xs:annotation>
+                    <xs:documentation>
+                        Пол учащегося. Возможные значения: 1 – мужской; 2 – женский; 0 – любой
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OutputPolicy">
+        <xs:annotation>
+            <xs:documentation>
+                Группирующая сущность - "Сведения о полисе пациента"
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="policyType" type="tns:PolicyType">
+                <xs:annotation>
+                    <xs:documentation>
+                        Тип полиса. Возможные значения: S – полис ОМС старого образца; V – временное свидетельство; N – полис ОМС единого образца
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="policyNumber" type="tns:PolicyNumber">
+                <xs:annotation>
+                    <xs:documentation>
+                        Номер полиса ОМС
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="smo" type="tns:Smo" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор страховой компании, которая обслуживает/ обслуживала полис ОМС (ОГРН)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="terStrah" type="tns:TerStrah" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Код территории страхования (ОКАТО)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="beginDate" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Дата начала действия полиса
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="endDate" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Дата окончания действия полиса
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="policyStatus" type="tns:PolicyStatus">
+                <xs:annotation>
+                    <xs:documentation>
+                        Статус полиса. Возможные значения: Y – действует; N – не действует; D – погашен по смерти (при наличии сведений)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OutputAttachment">
+        <xs:annotation>
+            <xs:documentation>
+                Группирующая сущность - "Сведения о прикреплении"
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="attachId" type="tns:AttachId">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор прикрепления, созданного в ЕМИАС.ЕРП
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="attachType" type="tns:StudAttachType">
+                <xs:annotation>
+                    <xs:documentation>
+                        Категория прикрепления. Возможные значения: 0 – небазовое; 1 – базовое терапевтическое; 2 – базовое стоматологическое; 9 – прикрепление к ОО
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="mainMoId" type="tns:MainMoId" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор головной МО прикрепления в ЕМИАС
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="moId" type="tns:MoId">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор МО (филиала) прикрепления в ЕМИАС
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="areaId" type="tns:AreaId" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Идентификатор участка
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="areaTypeId" type="tns:AreaTypeId" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Тип участка прикрепления. Заполняется в соответствии со справочником типов участков в ЕМИАС. Только цифры
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="areaTypeName" type="tns:AreaTypeName" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Наименование типа участка прикрепления. Заполняется на основании справочника типов участков в ЕМИАС. Справочник синхронизируется с ПО Норма (AREA_TYPE)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="isActual" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation>
+                        Актуальность прикрепления. Возможные значения: true; false
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OutputAddress">
+        <xs:annotation>
+            <xs:documentation>
+                Группирующая сущность - "Адрес пациента"
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="modeAddress" type="tns:ModeAddress">
+                <xs:annotation>
+                    <xs:documentation>
+                        Тип адреса
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="territoryCode" type="tns:TerritoryCode" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Код округа/района по справочнику "ОМК ТЕ"
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="territoryName" type="tns:TerritoryName" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Наименование округа/района. Заполняется на основании справочника "ОМК ТЕ". Справочник синхронизируется с ПО Норма (OMK_TE)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="streetCode" type="tns:StreetCode" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Код улицы по справочнику "ОМК УМ"
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="streetName" type="tns:StreetName" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Наименование улицы. Заполняется на основании справочника "ОМК УМ". Справочник синхронизируется с ПО Норма (OMK_UM)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="nonMoscowAddr" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Присутствует только если заполнен немосковский адрес
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="fullAddr" type="tns:FullAddr" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Адрес в одну строку. Варианты заполнения: 1. Значением, переданным из ЕМИАС и сохраненным в ЕМИАС.ЕРП; 2. Формируется на основании всех данных немосковского адреса (с использованием КЛАДР), если значение не было передано
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="region" type="tns:Region" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Код региона по КЛАДР
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="district" type="tns:District" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Код района по КЛАДР
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="locality" type="tns:Locality" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Код населенного пункта по КЛАДР
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="street" type="tns:Street" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>
+                                    Улица
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="house" type="tns:House" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Номер дома
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="corps" type="tns:Corps" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Номер корпуса дома (при его наличии)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="structure" type="tns:Structure" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Номер строения (при его наличии)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="apartment" type="tns:Apartment" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Номер квартиры
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+

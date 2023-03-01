@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="http://emias.mos.ru/anthropometry/anthropometryService/v1/types/" version="1.0" xmlns="http://emias.mos.ru/anthropometry/anthropometryService/v1/types/" xmlns:ns1="http://emias.mos.ru/system/v1/userContext/" xmlns:ns2="http://emias.mos.ru/system/v1/faults/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:include schemaLocation="../emias/emias.core.v1.xsd"/>
+  <xs:import namespace="http://emias.mos.ru/system/v1/userContext/" schemaLocation="../emias/emias.system.v1.userContext.xsd"/>
+  <xs:import namespace="http://emias.mos.ru/system/v1/faults/" schemaLocation="../emias/emias.system.v1.faults.xsd"/>
+  <xs:element name="getAnthropometryDataByPatientRequest">
+    <xs:annotation>
+      <xs:documentation>Запрос предоставляет актуальные или исторические антропометрические данные по пациенту</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" name="patientId" type="ID">
+          <xs:annotation>
+            <xs:documentation>ИД пациента</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" name="pagingOptions" type="PagingOptions">
+          <xs:annotation>
+            <xs:documentation>Параметры пагинации</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element minOccurs="0" name="options" type="Options">
+          <xs:annotation>
+            <xs:documentation>Дополнительные параметры</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAnthropometryDataByPatientResponse">
+    <xs:annotation>
+      <xs:documentation>Структура ответа по поиску документов МЗ по предоставленным данным</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="result" type="AnthropometryDataResultPage"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="AnthropometryDataResultPage">
+    <xs:complexContent>
+      <xs:extension base="PagingResults">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="measurement" type="AnthropometryItem"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="AnthropometryItem">
+    <xs:annotation>
+      <xs:documentation>Сведения об антропометрии пациента</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" name="measurementDate" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Дата проведения измерений</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="documentID" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Идентификатор документа СИМИ</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="measurementType" type="xs:int">
+        <xs:annotation>
+          <xs:documentation>Тип измерения (1- Рост, 2- Вес, 3- Окружность головы, 4- ИМТ)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" name="measurementValue" type="xs:double">
+        <xs:annotation>
+          <xs:documentation>Измеренное значение (Рост в см, вес в кг, окружность головы в см)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="centility" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Результат сравнения с центильным значением</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="resultAssessmentID" type="xs:long">
+        <xs:annotation>
+          <xs:documentation>Идентификатор результата оценки антропометрического показателя</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

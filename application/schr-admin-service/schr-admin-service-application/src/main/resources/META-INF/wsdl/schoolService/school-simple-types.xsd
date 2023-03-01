@@ -1,0 +1,773 @@
+<?xml version="1.0"?>
+<xs:schema version="1.0"
+           elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="1.0"
+           xmlns:tns="http://erp.ptnl.net/school/v1/school-service/model"
+           targetNamespace="http://erp.ptnl.net/school/v1/school-service/model">
+
+    <xs:simpleType name="EmiasId">
+        <xs:annotation>
+            <xs:documentation>
+                Идентификатор пациента в ЕМИАС
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="Comment">
+        <xs:annotation>
+            <xs:documentation>
+                Комментарий
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="1000"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="RepresentativeId">
+        <xs:annotation>
+            <xs:documentation>
+                Идентификатор представителя (соответствует значению person_uuid в КИС ГУСОЭВ)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="36"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="RepFamily">
+        <xs:annotation>
+            <xs:documentation>
+                Фамилия
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="RepName">
+        <xs:annotation>
+            <xs:documentation>
+                Имя
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="RepPatronymic">
+        <xs:annotation>
+            <xs:documentation>
+                Отчество
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="AttachId">
+        <xs:annotation>
+            <xs:documentation>
+                Идентификатор прикрепления в ЕМИАС.ЕРП
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="Ukl">
+        <xs:annotation>
+            <xs:documentation>
+                Уникальный идентификатор пациента в ЕМИАС.ЕРП
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PatFamily">
+        <xs:annotation>
+            <xs:documentation>
+                Фамилия
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PatName">
+        <xs:annotation>
+            <xs:documentation>
+                Имя
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PatPatronymic">
+        <xs:annotation>
+            <xs:documentation>
+                Отчество
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PolicyNumber">
+        <xs:annotation>
+            <xs:documentation>
+                Номер полиса ОМС
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Smo">
+        <xs:annotation>
+            <xs:documentation>
+                Идентификатор страховой компании, которая обслуживает/ обслуживала полис ОМС (ОГРН)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="13"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TerStrah">
+        <xs:annotation>
+            <xs:documentation>
+                Код территории страхования (ОКАТО)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Age">
+        <xs:annotation>
+            <xs:documentation>
+                Количество полных лет
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:int"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="BirthMonth">
+        <xs:annotation>
+            <xs:documentation>
+                Месяц рождения пациента
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:int"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="MainMoId">
+        <xs:annotation>
+            <xs:documentation>
+                Идентификатор головной МО прикрепления в ЕМИАС
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="MoId">
+        <xs:annotation>
+            <xs:documentation>
+                Идентификатор МО (филиала) прикрепления в ЕМИАС
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="AreaId">
+        <xs:annotation>
+            <xs:documentation>
+                Идентификатор участка прикрепления
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="AreaTypeId">
+        <xs:annotation>
+            <xs:documentation>
+                Тип участка прикрепления. Заполняется в соответствии со справочником типов участков в ЕМИАС. Только цифры
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="3"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ClassUid">
+        <xs:annotation>
+            <xs:documentation>
+                Тип идентификатора класса в МЭШ
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="AreaTypeName">
+        <xs:annotation>
+            <xs:documentation>
+                Наименование типа участка прикрепления. Заполняется на основании справочника типов участков в ЕМИАС. Справочник синхронизируется с ПО Норма (AREA_TYPE)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="200"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="StudentId">
+        <xs:annotation>
+            <xs:documentation>
+                Идентификатор учащегося (соответствует значению person_uuid в КИС ГУСОЭВ)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="36"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="StudentPersonId">
+        <xs:annotation>
+            <xs:documentation>
+                Тип идентификатора персоны-учащегося в МЭШ
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="36"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="AcademicYearId">
+        <xs:annotation>
+            <xs:documentation>
+                Тип идентификатора учебного года в МЭШ
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="AcademicYearName">
+        <xs:annotation>
+            <xs:documentation>
+                Тип наименования учебного года
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EducationFormId">
+        <xs:annotation>
+            <xs:documentation>
+                Тип идентификатора формы обучения в МЭШ
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="EducationFormName">
+        <xs:annotation>
+            <xs:documentation>
+                Тип наименования формы обучения
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DeductionReasonId">
+        <xs:annotation>
+            <xs:documentation>
+                Тип идентификатора причины отчисления в МЭШ
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="DeductionReasonName">
+        <xs:annotation>
+            <xs:documentation>
+                Тип наименования причины отчисления
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="RepresentativeTypeId">
+        <xs:annotation>
+            <xs:documentation>
+                Тип идентификатора категории представителя
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="RepresentativeTypeName">
+        <xs:annotation>
+            <xs:documentation>
+                Тип наименования категории представителя
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="RepresentativePersonId">
+        <xs:annotation>
+            <xs:documentation>
+                Тип идентификатора персоны-представителя в МЭШ
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="36"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="StudentClassId">
+        <xs:annotation>
+            <xs:documentation>
+                Идентификатор прикрепления учащегося к классу в КИС ГУСОЭВ. При передаче прикрепления выполняется проверка на наличие у пациента прикрепления с переданным значением. Если найдено, то выполняется обновление данных, иначе добавление данных
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="36"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CauseEndAttachId">
+        <xs:annotation>
+            <xs:documentation>
+                Код причины закрытия прикрепления. Заполняется на основании справочника ЕМИАС "Причина закрытия прикрепления", Справочник синхронизации с ПО Норма (ATTACHMENT_CLOSE_REASON). Обязательно к заполнению при закрытии прикрепления. Возможные значения: 40 – "Другие причины"
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="3"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="RepresentativeLinkId">
+        <xs:annotation>
+            <xs:documentation>
+                Идентификатор связи Представитель – Учащийся в КИС ГУСОЭВ
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="36"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ContactId">
+        <xs:annotation>
+            <xs:documentation>
+                Идентификатор контакта в КИС ГУСОЭВ
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="36"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="RepContactValue">
+        <xs:annotation>
+            <xs:documentation>
+                Значение контакта (номер телефона или адрес электронной почты)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PatContactValue">
+        <xs:annotation>
+            <xs:documentation>
+                Значение контакта
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="1000"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DocumentTypeId">
+        <xs:annotation>
+            <xs:documentation>
+                Код типа документа
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:int"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="DocumentTypeName">
+        <xs:annotation>
+            <xs:documentation>
+                Наименование типа документа. Заполняется на основании справочника ЕМИАС "Тип ДУЛ". Справочник синхронизируется с ПО Норма (DOC_TYPE)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="300"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DocumentSeries">
+        <xs:annotation>
+            <xs:documentation>
+                Серия документа
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DocumentNumber">
+        <xs:annotation>
+            <xs:documentation>
+                Номер документа
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="20"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Snils">
+        <xs:annotation>
+            <xs:documentation>
+                СНИЛС
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="11"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TerritoryCode">
+        <xs:annotation>
+            <xs:documentation>
+                Код округа/района по справочнику "ОМК ТЕ"
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="4"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TerritoryName">
+        <xs:annotation>
+            <xs:documentation>
+                Наименование округа/района. Заполняется на основании справочника "ОМК ТЕ". Справочник синхронизируется с ПО Норма (OMK_TE)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="StreetCode">
+        <xs:annotation>
+            <xs:documentation>
+                Код улицы по справочнику "ОМК УМ"
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="6"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="StreetName">
+        <xs:annotation>
+            <xs:documentation>
+                Наименование улицы. Заполняется на основании справочника "ОМК УМ". Справочник синхронизируется с ПО Норма (OMK_UM)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="200"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="FullAddr">
+        <xs:annotation>
+            <xs:documentation>
+                Адрес в одну строку. Варианты заполнения: 1. Значением, переданным из ЕМИАС и сохраненным в ЕМИАС.ЕРП; 2. Формируется на основании всех данных немосковского адреса (с использованием КЛАДР), если значение не было передано
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="1000"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Region">
+        <xs:annotation>
+            <xs:documentation>
+                Код региона по КЛАДР
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="13"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="District">
+        <xs:annotation>
+            <xs:documentation>
+                Код района по КЛАДР
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="13"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Locality">
+        <xs:annotation>
+            <xs:documentation>
+                Код населенного пункта по КЛАДР
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="13"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Street">
+        <xs:annotation>
+            <xs:documentation>
+                Улица
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="500"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="House">
+        <xs:annotation>
+            <xs:documentation>
+                Номер дома
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Corps">
+        <xs:annotation>
+            <xs:documentation>
+                Номер корпуса дома (при его наличии)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Structure">
+        <xs:annotation>
+            <xs:documentation>
+                Номер строения (при его наличии)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Apartment">
+        <xs:annotation>
+            <xs:documentation>
+                Номер квартиры
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="AttachNumber">
+        <xs:annotation>
+            <xs:documentation>
+                Номер прикрепления ЕМИАС
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="28"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="AttachFormID">
+        <xs:annotation>
+            <xs:documentation>
+                Код вида прикрепления. Заполняется в соответствии со справочником ЕМИАС "Вид прикрепления". Возможные значения: 10 – по участковому принципу (основное); 20 – по участковому принципу; 40 – по медицинским показаниям
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="3"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="AttachFormName">
+        <xs:annotation>
+            <xs:documentation>
+                Наименование вида прикрепления. Заполняется на основании справочника ЕМИАС "Вид прикрепления". Справочник синхронизируется с ПО Норма (ATTACHMENT_TYPE)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="200"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PatientsCount">
+        <xs:annotation>
+            <xs:documentation>
+                Количество пациентов
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="Page">
+        <xs:annotation>
+            <xs:documentation>
+                Номер страницы
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="PageSize">
+        <xs:annotation>
+            <xs:documentation>
+                Число записей на странице, не превышающее максимальное значение. Максимальное количество возвращаемых данных на странице определяется внутренним системным параметром
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="Total">
+        <xs:annotation>
+            <xs:documentation>
+                Общее количество записей
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long"/>
+    </xs:simpleType>
+
+    <!-- .. перечисления -->
+    <xs:simpleType name="Result">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="success"/>
+            <xs:enumeration value="failure"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RepContactType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="E"/>
+            <xs:enumeration value="T"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PatContactType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="E"/>
+            <xs:enumeration value="T"/>
+            <xs:enumeration value="M"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Gender">
+        <xs:annotation>
+            <xs:appinfo>
+                <jaxb:typesafeEnumClass>
+                    <jaxb:typesafeEnumMember name="GENDER_UNSPECIFIED" value="0"/>
+                    <jaxb:typesafeEnumMember name="MALE" value="1"/>
+                    <jaxb:typesafeEnumMember name="FEMALE" value="2"/>
+                </jaxb:typesafeEnumClass>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PolicyType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="S"/>
+            <xs:enumeration value="V"/>
+            <xs:enumeration value="N"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PolicyStatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Y"/>
+            <xs:enumeration value="N"/>
+            <xs:enumeration value="D"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ModeAddress">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="FACT"/>
+            <xs:enumeration value="RTEMP"/>
+            <xs:enumeration value="RCONST"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StudAttachType">
+        <xs:annotation>
+            <xs:appinfo>
+                <jaxb:typesafeEnumClass>
+                    <jaxb:typesafeEnumMember name="NOT_BASE" value="0"/>
+                    <jaxb:typesafeEnumMember name="BASE_THERAPEUTIC" value="1"/>
+                    <jaxb:typesafeEnumMember name="BASE_DENTAL" value="2"/>
+                    <jaxb:typesafeEnumMember name="EDUCATION_ORG" value="9"/>
+                </jaxb:typesafeEnumClass>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MinStudAttachType2">
+        <xs:annotation>
+            <xs:appinfo>
+                <jaxb:typesafeEnumClass>
+                    <jaxb:typesafeEnumMember name="EDUCATION_ORG" value="9"/>
+                </jaxb:typesafeEnumClass>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

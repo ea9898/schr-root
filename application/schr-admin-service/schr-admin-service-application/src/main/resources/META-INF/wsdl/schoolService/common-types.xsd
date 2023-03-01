@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<xs:schema version="1.0"
+           elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="1.0"
+           xmlns:tns="http://erp.ptnl.net/school/v1/school-service/model"
+           targetNamespace="http://erp.ptnl.net/school/v1/school-service/model">
+
+    <!--структура ошибок (узел Detail в Fault-пакетах) согласно https://wiki.emias.mos.ru/pages/viewpage.action?pageId=28934765-->
+    
+    <xs:simpleType name="ClassCode">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MethodCode">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ErrorCode">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AppFaultMessage">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AppFaultModule">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AppFaultFunction">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AppFaultResource">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="255"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:element name="appFaultInfo" type="tns:appFaultDetailType"/>
+    <xs:complexType name="faultInfo">
+        <xs:sequence>
+            <xs:element name="appFaultInfo" type="tns:appFaultDetailType" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="appFaultDetailType">
+        <xs:annotation>
+            <xs:documentation>Описание ошибки приложения</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="appFaultCode" type="tns:appFaultCodeType" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Код ошибки приложения</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="appFaultMessage" type="tns:AppFaultMessage" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Текст с развернутым описанием ошибки для пользователя или системного
+                        администратора
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="appFaultModule" type="tns:AppFaultModule" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Код модуля. Указывает программный модуль, в ходе работы которого возникла ошибка
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="appFaultFunction" type="tns:AppFaultFunction" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Код функции. Указывает функцию, которая выдала исключение, приведшее к сообщению
+                        об ошибке
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="appFaultResource" type="tns:AppFaultResource" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Код ресурса. Указывает информационный ресурс, к которому выполнялось обращение при
+                        вызове фукции
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="appFaultCodeType">
+        <xs:annotation>
+            <xs:documentation>Код ошибки приложения</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="classCode" type="tns:ClassCode">
+                <xs:annotation>
+                    <xs:documentation>Код класса, метод которого вызывался</xs:documentation>
+                </xs:annotation>
+
+            </xs:element>
+            <xs:element name="methodCode" type="tns:MethodCode">
+                <xs:annotation>
+                    <xs:documentation>Код метода, при вызове и работе которого было сформировано сообщение об ошибке
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="errorCode" type="tns:ErrorCode">
+                <xs:annotation>
+                    <xs:documentation>Код ошибки, который может быть типовым (например, нарушение поломочий
+                        пользователя) или специфичным для метода
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

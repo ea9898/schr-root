@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<xs:schema version="1.0"
+           elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="1.0"
+           xmlns:tns="http://erp.ptnl.net/school/v1/school-service/model"
+           targetNamespace="http://erp.ptnl.net/school/v1/school-service/model">
+
+    <xs:include schemaLocation="school-complex-types.xsd" />
+    
+    <xs:element name="getRepresentativesRequest" type="tns:GetRepresentativesRequest"/>
+    <xs:element name="getRepresentativesResponse" type="tns:GetRepresentativesResponse"/> 
+    <xs:element name="updateRepresentativesRequest" type="tns:UpdateRepresentativesRequest"/>
+    <xs:element name="updateRepresentativesResponse" type="tns:UpdateRepresentativesResponse"/>
+    <xs:element name="getPatientBannerRequest" type="tns:GetPatientBannerRequest"/>
+    <xs:element name="getPatientBannerResponse" type="tns:GetPatientBannerResponse"/>
+    <xs:element name="getStudentsListRequest" type="tns:GetStudentsListRequest"/>       
+    <xs:element name="getStudentsListResponse" type="tns:GetStudentsListResponse"/>        
+    <xs:element name="removeLinkStudentInfoRequest" type="tns:RemoveLinkStudentInfoRequest"/>
+    <xs:element name="removeLinkStudentInfoResponse" type="tns:RemoveLinkStudentInfoResponse"/>
+    <xs:element name="getClassStudentsCountRequest" type="tns:GetClassStudentsCountRequest"/>       
+    <xs:element name="getClassStudentsCountResponse" type="tns:GetClassStudentsCountResponse"/>
+    <xs:element name="getClassStudentsByGenderRequest" type="tns:GetClassStudentsByGenderRequest"/>       
+    <xs:element name="getClassStudentsByGenderResponse" type="tns:GetClassStudentsByGenderResponse"/>        
+    <xs:element name="getClassStudentsListRequest" type="tns:GetClassStudentsListRequest"/>
+    <xs:element name="getClassStudentsListResponse" type="tns:GetClassStudentsListResponse"/>        
+    <xs:element name="getStudentAttachmentsListRequest" type="tns:GetStudentAttachmentsListRequest"/>      
+    <xs:element name="getStudentAttachmentsListResponse" type="tns:GetStudentAttachmentsListResponse"/>      
+    <xs:element name="setLinkStudentInfoRequest" type="tns:SetLinkStudentInfoRequest"/>       
+    <xs:element name="setLinkStudentInfoResponse" type="tns:SetLinkStudentInfoResponse"/>
+    <xs:element name="getClassStudentsListByParamRequest" type="tns:GetClassStudentsListByParamRequest"/>
+    <xs:element name="getClassStudentsListByParamResponse" type="tns:GetClassStudentsListByParamResponse"/>
+    <xs:element name="getStudentIdRequest" type="tns:GetStudentIdRequest"/>
+    <xs:element name="getStudentIdResponse" type="tns:GetStudentIdResponse"/>
+</xs:schema>

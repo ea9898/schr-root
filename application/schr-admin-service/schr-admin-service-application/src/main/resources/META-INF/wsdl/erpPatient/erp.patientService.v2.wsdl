@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="patientService"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:nsf="http://emias.mos.ru/system/v1/faults/"
+                  xmlns:uctx="http://emias.mos.ru/system/v1/userContext/"
+                  xmlns:ns1="http://emias.mos.ru/erp/patientService/v2/types/"
+                  xmlns:tns="http://emias.mos.ru/erp/patientService/v2/"
+                  xmlns:wsp="http://www.w3.org/ns/ws-policy"
+                  targetNamespace="http://emias.mos.ru/erp/patientService/v2/">
+
+    <wsdl:documentation>version="4.2.0"</wsdl:documentation>
+
+    <wsp:Policy wsu:Id="authPolicy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+        <sp:SupportingTokens xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+            <wsp:Policy>
+                <sp:UsernameToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+                    <wsp:Policy>
+                        <sp:NoPassword/>
+                    </wsp:Policy>
+                </sp:UsernameToken>
+            </wsp:Policy>
+        </sp:SupportingTokens>
+    </wsp:Policy>
+
+    <wsdl:types>
+        <xs:schema>
+            <xs:import namespace="http://emias.mos.ru/system/v1/faults/" schemaLocation="../emias/emias.system.v1.faults.xsd"/>
+            <xs:import namespace="http://emias.mos.ru/system/v1/userContext/" schemaLocation="../emias/emias.system.v1.userContext.xsd"/>
+            <xs:import namespace="http://emias.mos.ru/erp/patientService/v2/types/" schemaLocation="erp.patientService.v2.types.xsd"/>
+        </xs:schema>
+
+    </wsdl:types>
+
+    <wsdl:message name="fault">
+        <wsdl:documentation>Ошибка</wsdl:documentation>
+        <wsdl:part name="body" element="nsf:fault"/>
+    </wsdl:message>
+    <wsdl:message name="userContext">
+        <wsdl:documentation>Контекст пользователя</wsdl:documentation>
+        <wsdl:part name="userContext" element="uctx:userContext"/>
+    </wsdl:message>
+    <wsdl:message name="RegisterNonresidentPatientInput">
+        <wsdl:documentation>Объект-запрос для метода "Регистрация нового иногороднего пациента"</wsdl:documentation>
+        <wsdl:part element="ns1:RegisterNonresidentPatientRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="RegisterNonresidentPatientOutput">
+        <wsdl:documentation>Объект-ответ для метода "Регистрация нового иногороднего пациента"</wsdl:documentation>
+        <wsdl:part element="ns1:RegisterNonresidentPatientResponse" name="result"/>
+    </wsdl:message>
+    <wsdl:message name="EditPatientInput">
+        <wsdl:documentation>Объект-запрос для метода "Редактирование информации о пациенте"</wsdl:documentation>
+        <wsdl:part element="ns1:EditPatientRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="EditPatientOutput">
+        <wsdl:documentation>Объект-ответ для метода "Редактирование информации о пациенте"</wsdl:documentation>
+        <wsdl:part element="ns1:EditPatientResponse" name="result"/>
+    </wsdl:message>
+    <wsdl:message name="GetPatientInput">
+        <wsdl:documentation>Объект-запрос для метода "Предоставление сведений о пациенте"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="GetPatientOutput">
+        <wsdl:documentation>Объект-ответ для метода "Предоставление сведений о пациенте"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientResponse" name="result"/>
+    </wsdl:message>
+    <wsdl:message name="GetPatientListInput">
+        <wsdl:documentation>Объект-запрос для метода "Предоставление списка пациентов"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientListRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="GetPatientListOutput">
+        <wsdl:documentation>Объект-ответ для метода "Предоставление списка пациентов"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientListResponse" name="result"/>
+    </wsdl:message>
+    <wsdl:message name="SearchPatientsInput">
+        <wsdl:documentation>Объект-запрос для метода "Поиск пациентов"</wsdl:documentation>
+        <wsdl:part element="ns1:SearchPatientsRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="SearchPatientsOutput">
+        <wsdl:documentation>Объект-ответ для метода "Поиск пациентов"</wsdl:documentation>
+        <wsdl:part element="ns1:SearchPatientsResponse" name="result"/>
+    </wsdl:message>
+    <wsdl:message name="GetPatientHistoryInput">
+        <wsdl:documentation>Объект-запрос для метода "Предоставление истории изменения пациента"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientHistoryRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="GetPatientHistoryOutput">
+        <wsdl:documentation>Объект-ответ для метода "Предоставление истории изменения пациента"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientHistoryResponse" name="result"/>
+    </wsdl:message>
+    <wsdl:message name="GetPatientIdentErzlInput">
+        <wsdl:documentation>Объект-запрос для метода "Предоставление сведений о пациенте с передачей иногороднего пациента в РС ЕРЗЛ"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientIdentErzlRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="GetPatientIdentErzlOutput">
+        <wsdl:documentation>Объект-ответ для метода "Предоставление сведений о пациенте с передачей иногороднего пациента в РС ЕРЗЛ"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientIdentErzlResponse" name="result"/>
+    </wsdl:message>
+    <wsdl:message name="EditPatientSnilsInput">
+        <wsdl:documentation>Объект-запрос для метода "Изменение СНИЛС пациента"</wsdl:documentation>
+        <wsdl:part element="ns1:EditPatientSnilsRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="EditPatientSnilsOutput">
+        <wsdl:documentation>Объект-ответ для метода "Изменение СНИЛС пациента"</wsdl:documentation>
+        <wsdl:part element="ns1:EditPatientSnilsResponse" name="result"/>
+    </wsdl:message>
+    <wsdl:message name="EditPatientContactsInput">
+        <wsdl:documentation>Объект-запрос для метода "Изменение контактных сведений пациента"</wsdl:documentation>
+        <wsdl:part element="ns1:EditPatientContactsRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="EditPatientContactsOutput">
+        <wsdl:documentation>Объект-ответ для метода "Изменение контактных сведений пациента"</wsdl:documentation>
+        <wsdl:part element="ns1:EditPatientContactsResponse" name="result"/>
+    </wsdl:message>
+    <wsdl:message name="GetPatientIdInput">
+        <wsdl:documentation>Объект-запрос для метода "Предоставление идентификатора пациента в ЕМИАС"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientIdRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="GetPatientIdOutput">
+        <wsdl:documentation>Объект-ответ для метода "Предоставление идентификатора пациента в ЕМИАС"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientIdResponse" name="result"/>
+    </wsdl:message>
+    <wsdl:message name="GetPatientExtInput">
+        <wsdl:documentation>Объект-запрос для метода "Предоставление сведений о пациенте для внешних потребителей"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientExtRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="GetPatientExtOutput">
+        <wsdl:documentation>Объект-ответ для метода "Предоставление сведений о пациенте для внешних потребителей"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientExtResponse" name="result"/>
+    </wsdl:message>
+    <wsdl:message name="EditPatientAddressInput">
+        <wsdl:documentation>Объект-запрос для метода "Изменение адреса пациента"</wsdl:documentation>
+        <wsdl:part element="ns1:EditPatientAddressRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="EditPatientAddressOutput">
+        <wsdl:documentation>Объект-ответ для метода "Изменение адреса пациента"</wsdl:documentation>
+        <wsdl:part element="ns1:EditPatientAddressResponse" name="result"/>
+    </wsdl:message>    
+    <wsdl:message name="GetPatientAdditionalSocialInfoInput">
+        <wsdl:documentation>Объект-запрос для метода "Предоставление дополнительной информации о социальном положении пациента"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientAdditionalSocialInfoRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="GetPatientAdditionalSocialInfoOutput">
+        <wsdl:documentation>Объект-ответ для метода "Предоставление дополнительной информации о социальном положении пациента"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientAdditionalSocialInfoResponse" name="result"/>
+    </wsdl:message>
+    <wsdl:message name="RegisterFakePatientInput">
+        <wsdl:documentation>Объект-запрос для метода "Регистрация пациентов с фейковыми полисами"</wsdl:documentation>
+        <wsdl:part element="ns1:RegisterFakePatientRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="RegisterFakePatientOutput">
+        <wsdl:documentation>Объект-ответ для метода "Регистрация пациентов с фейковыми полисами"</wsdl:documentation>
+        <wsdl:part element="ns1:RegisterFakePatientResponse" name="result"/>
+    </wsdl:message>
+    <wsdl:message name="GetPatientForQRInput">
+        <wsdl:documentation>Объект-запрос для метода "Предоставление в сведений о пациенте для генерации QR - кода"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientForQRRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="GetPatientForQROutput">
+        <wsdl:documentation>Объект-ответ для метода "Предоставление в сведений о пациенте для генерации QR - кода"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientForQRResponse" name="result"/>
+    </wsdl:message>
+     <wsdl:message name="GetPatientSnilsListInput">
+        <wsdl:documentation>Объект-запрос для метода "Предоставление СНИЛС пациентов"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientSnilsListRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="GetPatientSnilsListOutput">
+        <wsdl:documentation>Объект-ответ для метода "Предоставление СНИЛС пациентов"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientSnilsListResponse" name="result"/>
+    </wsdl:message>  
+      <wsdl:message name="GetPatientDoublesInput">
+        <wsdl:documentation>Объект-запрос для метода "Предоставление сведений о дублях записей о пациенте"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientDoublesRequest" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="GetPatientDoublesOutput">
+        <wsdl:documentation>Объект-ответ для метода "Предоставление сведений о дублях записей о пациенте"</wsdl:documentation>
+        <wsdl:part element="ns1:GetPatientDoublesResponse" name="result"/>
+    </wsdl:message>    
+
+    <wsdl:portType name="erpPatientPortTypeV2">
+        <wsdl:documentation>Операции(методы) сервиса ЕРП.Пациенты v2</wsdl:documentation>
+        <wsdl:operation name="registerNonresidentPatient">
+            <wsdl:documentation>Регистрация нового иногороднего пациента</wsdl:documentation>
+            <wsdl:input message="tns:RegisterNonresidentPatientInput"/>
+            <wsdl:output message="tns:RegisterNonresidentPatientOutput"/>
+            <wsdl:fault message="tns:fault" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="editPatient">
+            <wsdl:documentation>Редактирование информации о пациенте</wsdl:documentation>
+            <wsdl:input message="tns:EditPatientInput"/>
+            <wsdl:output message="tns:EditPatientOutput"/>
+            <wsdl:fault message="tns:fault" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="getPatient">
+            <wsdl:documentation>Предоставление сведений о пациенте</wsdl:documentation>
+            <wsdl:input message="tns:GetPatientInput"/>
+            <wsdl:output message="tns:GetPatientOutput"/>
+            <wsdl:fault message="tns:fault" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="getPatientList">
+            <wsdl:documentation>Предоставление списка пациентов</wsdl:documentation>
+            <wsdl:input message="tns:GetPatientListInput"/>
+            <wsdl:output message="tns:GetPatientListOutput"/>
+            <wsdl:fault message="tns:fault" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="searchPatients">
+            <wsdl:documentation>Поиск пациентов</wsdl:documentation>
+            <wsdl:input message="tns:SearchPatientsInput"/>
+            <wsdl:output message="tns:SearchPatientsOutput"/>
+            <wsdl:fault message="tns:fault" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="getPatientHistory">
+            <wsdl:documentation>Предоставление истории изменения пациента</wsdl:documentation>
+            <wsdl:input message="tns:GetPatientHistoryInput"/>
+            <wsdl:output message="tns:GetPatientHistoryOutput"/>
+            <wsdl:fault message="tns:fault" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="getPatientIdentErzl">
+            <wsdl:documentation>Предоставление сведений о пациенте с передачей иногороднего пациента в РС ЕРЗЛ</wsdl:documentation>
+            <wsdl:input message="tns:GetPatientIdentErzlInput"/>
+            <wsdl:output message="tns:GetPatientIdentErzlOutput"/>
+            <wsdl:fault message="tns:fault" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="editPatientSnils">
+            <wsdl:documentation>Изменение СНИЛС пациента</wsdl:documentation>
+            <wsdl:input message="tns:EditPatientSnilsInput"/>
+            <wsdl:output message="tns:EditPatientSnilsOutput"/>
+            <wsdl:fault message="tns:fault" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="editPatientContacts">
+            <wsdl:documentation>Изменение контактных сведений пациента</wsdl:documentation>
+            <wsdl:input message="tns:EditPatientContactsInput"/>
+            <wsdl:output message="tns:EditPatientContactsOutput"/>
+            <wsdl:fault message="tns:fault" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="getPatientId">
+            <wsdl:documentation>Предоставление идентификатора пациента в ЕМИАС</wsdl:documentation>
+            <wsdl:input message="tns:GetPatientIdInput"/>
+            <wsdl:output message="tns:GetPatientIdOutput"/>
+            <wsdl:fault message="tns:fault" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="getPatientExt">
+            <wsdl:documentation>Предоставление сведений о пациенте для внешних потребителей</wsdl:documentation>
+            <wsdl:input message="tns:GetPatientExtInput"/>
+            <wsdl:output message="tns:GetPatientExtOutput"/>
+            <wsdl:fault message="tns:fault" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="editPatientAddress">
+            <wsdl:documentation>Изменение адреса пациента</wsdl:documentation>
+            <wsdl:input message="tns:EditPatientAddressInput"/>
+            <wsdl:output message="tns:EditPatientAddressOutput"/>
+            <wsdl:fault message="tns:fault" name="fault"/>
+        </wsdl:operation> 
+        <wsdl:operation name="getPatientAdditionalSocialInfo">
+            <wsdl:documentation>Предоставление дополнительной информации о социальном положении пациента</wsdl:documentation>
+            <wsdl:input message="tns:GetPatientAdditionalSocialInfoInput"/>
+            <wsdl:output message="tns:GetPatientAdditionalSocialInfoOutput"/>
+            <wsdl:fault message="tns:fault" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="registerFakePatient">
+            <wsdl:documentation>Регистрация пациентов с фейковыми полисами</wsdl:documentation>
+            <wsdl:input message="tns:RegisterFakePatientInput"/>
+            <wsdl:output message="tns:RegisterFakePatientOutput"/>
+            <wsdl:fault message="tns:fault" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="getPatientForQR">
+            <wsdl:documentation>Предоставление в сведений о пациенте для генерации QR - кода</wsdl:documentation>
+            <wsdl:input message="tns:GetPatientForQRInput"/>
+            <wsdl:output message="tns:GetPatientForQROutput"/>
+            <wsdl:fault message="tns:fault" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="getPatientSnilsList">
+            <wsdl:documentation>Предоставление СНИЛС пациентов</wsdl:documentation>
+            <wsdl:input message="tns:GetPatientSnilsListInput"/>
+            <wsdl:output message="tns:GetPatientSnilsListOutput"/>
+            <wsdl:fault message="tns:fault" name="fault"/>
+        </wsdl:operation>
+        <wsdl:operation name="getPatientDoubles">
+            <wsdl:documentation>Предоставление сведений о дублях записей о пациенте</wsdl:documentation>
+            <wsdl:input message="tns:GetPatientDoublesInput"/>
+            <wsdl:output message="tns:GetPatientDoublesOutput"/>
+            <wsdl:fault message="tns:fault" name="fault"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="erpPatientBindingV2" type="tns:erpPatientPortTypeV2">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="registerNonresidentPatient">
+            <wsdl:documentation>Регистрация нового иногороднего пациента</wsdl:documentation>
+            <soap12:operation soapAction="registerNonresidentPatient" style="document"/>
+            <wsdl:input>
+                <soap12:header message="tns:userContext" part="userContext" use="literal"/>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap12:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="editPatient">
+            <wsdl:documentation>Редактирование информации о пациенте</wsdl:documentation>
+            <soap12:operation soapAction="editPatient" style="document"/>
+            <wsdl:input>
+                <soap12:header message="tns:userContext" part="userContext" use="literal"/>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap12:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPatient">
+            <wsdl:documentation>Предоставление сведений о пациенте</wsdl:documentation>
+            <soap12:operation soapAction="getPatient" style="document"/>
+            <wsdl:input>
+                <soap12:header message="tns:userContext" part="userContext" use="literal"/>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap12:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPatientList">
+            <wsdl:documentation>Предоставление списка пациентов</wsdl:documentation>
+            <soap12:operation soapAction="getPatientList" style="document"/>
+            <wsdl:input>
+                <soap12:header message="tns:userContext" part="userContext" use="literal"/>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap12:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="searchPatients">
+            <wsdl:documentation>Поиск пациентов</wsdl:documentation>
+            <soap12:operation soapAction="searchPatients" style="document"/>
+            <wsdl:input>
+                <soap12:header message="tns:userContext" part="userContext" use="literal"/>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap12:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPatientHistory">
+            <wsdl:documentation>Предоставление истории изменения пациента</wsdl:documentation>
+            <soap12:operation soapAction="getPatientHistory" style="document"/>
+            <wsdl:input>
+                <soap12:header message="tns:userContext" part="userContext" use="literal"/>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap12:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPatientIdentErzl">
+            <wsdl:documentation>Предоставление сведений о пациенте с передачей иногороднего пациента в РС ЕРЗЛ</wsdl:documentation>
+            <soap12:operation soapAction="getPatientIdentErzl" style="document"/>
+            <wsdl:input>
+                <soap12:header message="tns:userContext" part="userContext" use="literal"/>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap12:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="editPatientSnils">
+            <wsdl:documentation>Изменение СНИЛС пациента</wsdl:documentation>
+            <soap12:operation soapAction="editPatientSnils" style="document"/>
+            <wsdl:input>
+                <soap12:header message="tns:userContext" part="userContext" use="literal"/>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap12:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="editPatientContacts">
+            <wsdl:documentation>Изменение контактных сведений пациента</wsdl:documentation>
+            <soap12:operation soapAction="editPatientContacts" style="document"/>
+            <wsdl:input>
+                <soap12:header message="tns:userContext" part="userContext" use="literal"/>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap12:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPatientId">
+            <wsdl:documentation>Предоставление идентификатора пациента в ЕМИАС</wsdl:documentation>
+            <soap12:operation soapAction="getPatientId" style="document"/>
+            <wsdl:input>
+                <soap12:header message="tns:userContext" part="userContext" use="literal"/>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap12:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPatientExt">
+            <wsdl:documentation>Предоставление сведений о пациенте для внешних потребителей</wsdl:documentation>
+            <soap12:operation soapAction="getPatientExt" style="document"/>
+            <wsdl:input>
+                <soap12:header message="tns:userContext" part="userContext" use="literal"/>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap12:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="editPatientAddress">
+            <wsdl:documentation>Изменение адреса пациента</wsdl:documentation>
+            <soap12:operation soapAction="editPatientAddress" style="document"/>
+            <wsdl:input>
+                <soap12:header message="tns:userContext" part="userContext" use="literal"/>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap12:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>        
+        <wsdl:operation name="getPatientAdditionalSocialInfo">
+            <wsdl:documentation>Предоставление дополнительной информации о социальном положении пациента</wsdl:documentation>
+            <soap12:operation soapAction="getPatientAdditionalSocialInfo" style="document"/>
+            <wsdl:input>
+                <soap12:header message="tns:userContext" part="userContext" use="literal"/>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap12:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="registerFakePatient">
+            <wsdl:documentation>Регистрация пациентов с фейковыми полисами</wsdl:documentation>
+            <soap12:operation soapAction="registerFakePatient" style="document"/>
+            <wsdl:input>
+                <soap12:header message="tns:userContext" part="userContext" use="literal"/>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap12:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPatientForQR">
+            <wsdl:documentation>Предоставление в сведений о пациенте для генерации QR - кода</wsdl:documentation>
+            <soap12:operation soapAction="getPatientForQR" style="document"/>
+            <wsdl:input>
+                <soap12:header message="tns:userContext" part="userContext" use="literal"/>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap12:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPatientSnilsList">
+            <wsdl:documentation>Предоставление СНИЛС пациентов</wsdl:documentation>
+            <soap12:operation soapAction="getPatientSnilsList" style="document"/>
+            <wsdl:input>
+                <soap12:header message="tns:userContext" part="userContext" use="literal"/>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap12:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getPatientDoubles">
+            <wsdl:documentation>Предоставление сведений о дублях записей о пациенте</wsdl:documentation>
+            <soap12:operation soapAction="getPatientDoubles" style="document"/>
+            <wsdl:input>
+                <soap12:header message="tns:userContext" part="userContext" use="literal"/>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="fault">
+                <soap12:fault name="fault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="ErpPatientV2">
+        <wsp:PolicyReference URI="#authPolicy"/>
+        <wsdl:port name="erpPatientPortV2" binding="tns:erpPatientBindingV2">
+            <soap12:address location="http://localhost:8080/webservices/ErpPatientV2"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

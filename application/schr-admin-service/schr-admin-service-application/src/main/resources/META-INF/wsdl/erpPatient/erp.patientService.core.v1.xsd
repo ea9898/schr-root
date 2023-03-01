@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://emias.mos.ru/patientService/core/v1/"
+           targetNamespace="http://emias.mos.ru/patientService/core/v1/"
+           version="1.0.0">
+
+    <!--БЛОК: Базовые примитивные типы, перечисления-->
+
+    <xs:simpleType name="Code">
+        <xs:annotation>
+            <xs:documentation>Код элемента</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="256"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="StatusCodeWithRemove">
+        <xs:annotation>
+            <xs:documentation>Статус сущности с возможностью удаления</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Y">
+                <xs:annotation>
+                    <xs:documentation>действует</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="N">
+                <xs:annotation>
+                    <xs:documentation>не действует</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="R">
+                <xs:annotation>
+                    <xs:documentation>удалить</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="RecStatus">
+        <xs:annotation>
+            <xs:documentation>Статус записи</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Y">
+                <xs:annotation>
+                    <xs:documentation>Актуальная</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="N">
+                <xs:annotation>
+                    <xs:documentation>Не актуальная</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="OutputParameter">
+        <xs:annotation>
+            <xs:documentation>Наименование параметра</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="4000"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="LastName">
+        <xs:annotation>
+            <xs:documentation>Фамилия</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="FirstName">
+        <xs:annotation>
+            <xs:documentation>Имя</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="MiddleName">
+        <xs:annotation>
+            <xs:documentation>Отчество</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="BirthPlace">
+        <xs:annotation>
+            <xs:documentation>Место рождения</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="300"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Name">
+        <xs:annotation>
+            <xs:documentation>Наименование элемента в соответствии со справочником</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="1000"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DocumentSeries">
+        <xs:annotation>
+            <xs:documentation>Серия документа</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DocumentNumber">
+        <xs:annotation>
+            <xs:documentation>Номер документа</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="20"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DocumentTypeCode">
+        <xs:annotation>
+            <xs:documentation>Код типа документа</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DocumentSeriesNumber">
+        <xs:annotation>
+            <xs:documentation>Серия и номер документа</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PatentSeries">
+        <xs:annotation>
+            <xs:documentation>Серия патента</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PatentNumber">
+        <xs:annotation>
+            <xs:documentation>Номер патента</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DocumentDivisionCode">
+        <xs:annotation>
+            <xs:documentation>Код подразделения органа, выдавшего документ</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="100"/>
+        </xs:restriction>
+    </xs:simpleType>    
+
+    <xs:simpleType name="OksmCode">
+        <xs:annotation>
+            <xs:documentation>Цифровой код страны</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EthnicGroupCode">
+        <xs:annotation>
+            <xs:documentation>Этническая группа</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Ukl">
+        <xs:annotation>
+            <xs:documentation>УКЛ пациента в ЕРП</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="NumSnils">
+        <xs:annotation>
+            <xs:documentation>Страховой номер индивидуального лицевого счета</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="11"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="SocialStatusCode">
+        <xs:annotation>
+            <xs:documentation>Идентификатор социального статуса, в том числе занятости</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="3"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PolicyNumber">
+        <xs:annotation>
+            <xs:documentation>Номер полиса</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PolicyInsuranceTerritoryCode">
+        <xs:annotation>
+            <xs:documentation>Код территории страхования</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PolicySMOOGRN">
+        <xs:annotation>
+            <xs:documentation>Код страховой компании</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="13"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="SocioProfGroupCode">
+        <xs:annotation>
+            <xs:documentation>Социально-профессиональная группа</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ContactValue">
+        <xs:annotation>
+            <xs:documentation>Значение контакта</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="1000"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="WorkValue">
+        <xs:annotation>
+            <xs:documentation>Строка длиной 2000</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="2000"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="GenderCode">
+        <xs:annotation>
+            <xs:documentation>Пол</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PolicyOMSTypeCode">
+        <xs:annotation>
+            <xs:documentation>Вид полиса</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="V">
+                <xs:annotation>
+                    <xs:documentation>временное свидетельство ОМС</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="S">
+                <xs:annotation>
+                    <xs:documentation>полис ОМС старого образца</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="N">
+                <xs:annotation>
+                    <xs:documentation>полис ОМС единого образца</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PolicyStatusCode">
+        <xs:annotation>
+            <xs:documentation>Статус полиса</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Y">
+                <xs:annotation>
+                    <xs:documentation>действует</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="N">
+                <xs:annotation>
+                    <xs:documentation>не действует</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="D">
+                <xs:annotation>
+                    <xs:documentation>погашен по смерти</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="DisabilityCode">
+        <xs:annotation>
+            <xs:documentation>Группа инвалидности</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>нет</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>I гр</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="3">
+                <xs:annotation>
+                    <xs:documentation>II гр</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="4">
+                <xs:annotation>
+                    <xs:documentation>III гр</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="5">
+                <xs:annotation>
+                    <xs:documentation>ребенок-инвалид</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ResidentCode">
+        <xs:annotation>
+            <xs:documentation>Житель города/села</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>Город</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>Село</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="AddressModeCode">
+        <xs:annotation>
+            <xs:documentation>Тип адреса</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="FACT">
+                <xs:annotation>
+                    <xs:documentation>адрес фактического проживания</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RTEMP">
+                <xs:annotation>
+                    <xs:documentation>адрес временной регистрации</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RCONST">
+                <xs:annotation>
+                    <xs:documentation>адрес постоянной регистрации</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ContactTypeCode">
+        <xs:annotation>
+            <xs:documentation>Вид контакта</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="E">
+                <xs:annotation>
+                    <xs:documentation>Электронная почта</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="M">
+                <xs:annotation>
+                    <xs:documentation>Мобильный телефон</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="T">
+                <xs:annotation>
+                    <xs:documentation>Контактный телефон</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ErzStatus">
+        <xs:annotation>
+            <xs:documentation>Признак пациента</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Y">
+                <xs:annotation>
+                    <xs:documentation>московский, актуален в РС ЕРЗЛ</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="N">
+                <xs:annotation>
+                    <xs:documentation>московский, не актуален в РС ЕРЗЛ</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="D">
+                <xs:annotation>
+                    <xs:documentation>московский, погашен в РС ЕРЗЛ</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PatientRegionCode">
+        <xs:annotation>
+            <xs:documentation>Категория пациента</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Y">
+                <xs:annotation>
+                    <xs:documentation>московский, актуален в РС ЕРЗЛ (пациент на момент последний идентификации
+                        имеет действующий московский полис, сведения о полисе
+                        и личные данные пациента не подлежат редактированию)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="N">
+                <xs:annotation>
+                    <xs:documentation>московский, не актуален в РС ЕРЗЛ (бывший московский пациент, на момент последней идентификации
+                        сведений о действующем московском полисе не имеет,
+                        работа с ним возможна только, как с иногородним)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="D">
+                <xs:annotation>
+                    <xs:documentation>московский, погашен в РС ЕРЗЛ (пациент на момент последний идентификации имеет сведения о полисе,
+                        в РС ЕРЗЛ погашенном по смерти,
+                        сведения о полисе и личные данные пациента не подлежат редактированию)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="R">
+                <xs:annotation>
+                    <xs:documentation>иногородний, отсутствует в РС ЕРЗЛ (сведения о пациенте поступили из ЕМИАС)</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ReasonArchive">
+        <xs:annotation>
+            <xs:documentation>Причина перевода в архив</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="D">
+                <xs:annotation>
+                    <xs:documentation>Дубликат</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="N">
+                <xs:annotation>
+                    <xs:documentation>Неверные данные</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="R">
+                <xs:annotation>
+                    <xs:documentation>Удален из РС ЕРЗЛ</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ProcessOfAttachment">
+        <xs:annotation>
+            <xs:documentation>Способ прикрепления</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>По территориальному принципу</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>По заявлению</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="3">
+                <xs:annotation>
+                    <xs:documentation>По заявлению в электронном виде</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="VerificationResult">
+        <xs:annotation>
+            <xs:documentation>Результат синхронизации с РС ЕРЗЛ</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:int">
+            <xs:enumeration value="0">
+                <xs:annotation>
+                    <xs:documentation>синхронизация не проводилась</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>соответствует данным РС ЕРЗЛ</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>не соответствует данным РС ЕРЗЛ</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="3">
+                <xs:annotation>
+                    <xs:documentation>создано по данным РС ЕРЗЛ</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="MAttachOpen">
+        <xs:annotation>
+            <xs:documentation>Метка причины прикрепления (по заявлению)</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:long">
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>выбор/смена МО</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>смена места жительства/пребывания</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TypeSnils">
+        <xs:annotation>
+            <xs:documentation>Источник СНИЛС</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="EMIAS">
+                <xs:annotation>
+                    <xs:documentation>ЕМИАС</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SMO">
+                <xs:annotation>
+                    <xs:documentation>СМО</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ErzSync">
+        <xs:annotation>
+            <xs:documentation>Тип обновления</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:int">
+            <xs:enumeration value="0">
+                <xs:annotation>
+                    <xs:documentation>Не обновлять данные в РС ЕРЗЛ</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>Обновлять данные в РС ЕРЗЛ при наличии изменений в ЕМИАС.ЕРП</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>Обновлять данные в РС ЕРЗЛ если время, прошедшее после последнего обновления,
+                        превышает максимально допустимый интервал</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="3">
+                <xs:annotation>
+                    <xs:documentation>Обновлять принудительно</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="IsWorkStudyCode">
+        <xs:annotation>
+            <xs:documentation>Признак места работы/учебы</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="W">
+                <xs:annotation>
+                    <xs:documentation>место работы</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="S">
+                <xs:annotation>
+                    <xs:documentation>место учебы</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ClassOrGroup">
+        <xs:annotation>
+            <xs:documentation>Класс/группа обучения в образовательной организации</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="PartialSystemCode">
+        <xs:annotation>
+            <xs:documentation>Код системы-источника данных для пациентов с неполными данными</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="3"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!--КОНЕЦ БЛОКА: Базовые примитивные типы, перечисления-->
+
+
+    <!--БЛОК: Базовые комплексные типы-->
+
+    <xs:complexType name="DateRegistry">
+        <xs:sequence>
+            <xs:element name="dateRegistryFrom" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дата начала регистрации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="dateRegistryTo" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Дата окончания регистрации</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OutputParameters">
+        <xs:annotation>
+            <xs:documentation>Желаемые дополнительные параметры, возвращаемые в ответе</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="outputParameter" type="tns:OutputParameter" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="FullName">
+        <xs:annotation>
+            <xs:documentation>ФИО</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="lastName" type="tns:LastName" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Фамилия</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="firstName" type="tns:FirstName" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Имя</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="middleName" type="tns:MiddleName" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>Отчество</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--КОНЕЦ БЛОКА: Базовые комплексные типы-->
+</xs:schema>

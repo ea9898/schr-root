@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jxb:bindings xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+              xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+              xmlns:xs="http://www.w3.org/2001/XMLSchema"
+              version="2.1">
+
+    <jxb:globalBindings>
+        <xjc:javaType name="java.time.LocalDate" xmlType="xs:date"
+                      adapter="moscow.ptnl.erp.patient.infrastructure.util.LocalDateAdapter"/>
+        <xjc:javaType name="java.time.LocalDateTime" xmlType="xs:dateTime"
+                      adapter="moscow.ptnl.erp.patient.infrastructure.util.LocalDateTimeAdapter"/>
+    </jxb:globalBindings>
+
+</jxb:bindings>

@@ -18,6 +18,10 @@ public enum CustomErrorReason implements ErrorReason {
     REMOVING_RECORD_NOT_FOUND("SCHR_106", "Запись, которую необходимо удалить, не найдена"),
     INFORMATION_IS_OUTDATED("SCHR_107", "Получена более старая информация, чем содержится в индексе"),
     CREATE_NEW_PATIENT_EXCEPTION("SCHR_108", "Ошибка при создании нового пациента %s"),
+    SCHR_201("SCHR_201", "%s"),
+    SCHR_202("SCHR_202", "%s"),
+    SCHR_203("SCHR_203", "%s"),
+    SCHR_204("SCHR_204", "%s"),
     ;
 
     private final String description;

@@ -24,6 +24,7 @@
         <module>schr-mod-security</module>
         <module>schr-service</module>
         <module>schr-scheduler</module>
+        <module>schr-admin-service</module>
     </modules>
 
     <properties>

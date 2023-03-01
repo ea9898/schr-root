@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2022 rel. 2 (x64) (http://www.altova.com) by ss (ss) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:core="http://emias.mos.ru/consentInfo/core/v2/" xmlns:tns="http://emias.mos.ru/consentInfo/consentInfoService/v2/types/" xmlns:ns1="http://emias.mos.ru/consentInfo/consentInfoService/v2/types/" targetNamespace="http://emias.mos.ru/consentInfo/consentInfoService/v2/types/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://emias.mos.ru/consentInfo/core/v2/" schemaLocation="consentInfo.core.v2.xsd"/>
+	<xs:element name="findConsentInfoRequest" type="ns1:findConsentInfoRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода findConsentInfo</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="findConsentInfoResponse" type="ns1:findConsentInfoResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода findConsentInfo</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="findConsentInfoRequest">
+		<xs:annotation>
+			<xs:documentation>Входные параметры метода findConsentInfo</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="patientId" type="xs:long">
+				<xs:annotation>
+					<xs:documentation>Идентификатор пациента</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="issueDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата запроса информации о согласии</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="orgId" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор МО</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="locationId" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Идентификатор локации</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="consentForm" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Перечень ИД видов информированного добровольного согласия</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="consentFormId" type="xs:long" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>ИД вида информированного добровольного согласия</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="consentType" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>ИД типа согласия (решения)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice minOccurs="0">
+				<xs:element name="representativePhysicalId" type="core:ID" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Идентификатор законного представителя (физического лица)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="representativeLegalId" type="core:ID" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Идентификатор законного представителя (юридического лица)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="options" type="core:Options" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Доп. параметры вызова метода</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element ref="core:pagingOptions" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="findConsentInfoResponse">
+		<xs:annotation>
+			<xs:documentation>Выходные параметры метода findConsentInfo</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="result">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="core:PagingResults">
+							<xs:sequence>
+								<xs:element name="consentList" type="core:ConsentList" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

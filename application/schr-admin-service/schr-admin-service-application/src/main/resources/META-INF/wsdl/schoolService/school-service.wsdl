@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:sch="http://erp.ptnl.net/school/v1/school-service/model"
+                  xmlns:tns="http://erp.ptnl.net/school/v1/school-service"
+                  xmlns:uctx="http://emias.mos.ru/system/v1/userContext/"
+                  targetNamespace="http://erp.ptnl.net/school/v1/school-service"
+                  name="SchoolService">
+
+  <wsdl:documentation>Версия 1.0.1</wsdl:documentation>
+  <wsdl:types>
+    <xs:schema>
+      <xs:import namespace="http://erp.ptnl.net/school/v1/school-service/model" schemaLocation="school-wsdl-types.xsd"/>
+      <xs:import namespace="http://emias.mos.ru/system/v1/userContext/" schemaLocation="emias.system.v1.userContext.xsd"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="userContext">
+    <wsdl:documentation>Контекст пользователя</wsdl:documentation>
+    <wsdl:part name="userContext" element="uctx:userContext"/>
+  </wsdl:message>
+  <wsdl:message name="schoolFault">
+    <wsdl:part name="fault" element="sch:appFaultInfo"/>
+  </wsdl:message>
+  <wsdl:message name="getRepresentativesRequest">
+    <wsdl:part element="sch:getRepresentativesRequest" name="getRepresentativesRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getRepresentativesResponse">
+    <wsdl:part element="sch:getRepresentativesResponse" name="getRepresentativesResponse"/>
+  </wsdl:message>
+  <wsdl:message name="updateRepresentativesRequest">
+    <wsdl:part element="sch:updateRepresentativesRequest" name="updateRepresentativesRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateRepresentativesResponse">
+    <wsdl:part element="sch:updateRepresentativesResponse" name="updateRepresentativesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPatientBannerRequest">
+    <wsdl:part element="sch:getPatientBannerRequest" name="getPatientBannerRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getPatientBannerResponse">
+    <wsdl:part element="sch:getPatientBannerResponse" name="getPatientBannerResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getStudentsListRequest">
+    <wsdl:part element="sch:getStudentsListRequest" name="getStudentsListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getStudentsListResponse">
+    <wsdl:part element="sch:getStudentsListResponse" name="getStudentsListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="removeLinkStudentInfoRequest">
+    <wsdl:part element="sch:removeLinkStudentInfoRequest" name="removeLinkStudentInfoRequest"/>
+  </wsdl:message>
+  <wsdl:message name="removeLinkStudentInfoResponse">
+    <wsdl:part element="sch:removeLinkStudentInfoResponse" name="removeLinkStudentInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getClassStudentsCountRequest">
+    <wsdl:part element="sch:getClassStudentsCountRequest" name="getClassStudentsCountRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getClassStudentsCountResponse">
+    <wsdl:part element="sch:getClassStudentsCountResponse" name="getClassStudentsCountResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getClassStudentsByGenderRequest">
+    <wsdl:part element="sch:getClassStudentsByGenderRequest" name="getClassStudentsByGenderRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getClassStudentsByGenderResponse">
+    <wsdl:part element="sch:getClassStudentsByGenderResponse" name="getClassStudentsByGenderResponse"/>
+  </wsdl:message>  
+  <wsdl:message name="getClassStudentsListRequest">
+    <wsdl:part element="sch:getClassStudentsListRequest" name="getClassStudentsListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getClassStudentsListResponse">
+    <wsdl:part element="sch:getClassStudentsListResponse" name="getClassStudentsListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getStudentAttachmentsListRequest">
+    <wsdl:part element="sch:getStudentAttachmentsListRequest" name="getStudentAttachmentsListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getStudentAttachmentsListResponse">
+    <wsdl:part element="sch:getStudentAttachmentsListResponse" name="getStudentAttachmentsListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="setLinkStudentInfoRequest">
+    <wsdl:part element="sch:setLinkStudentInfoRequest" name="setLinkStudentInfoRequest"/>
+  </wsdl:message>
+  <wsdl:message name="setLinkStudentInfoResponse">
+    <wsdl:part element="sch:setLinkStudentInfoResponse" name="setLinkStudentInfoResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getClassStudentsListByParamRequest">
+    <wsdl:part element="sch:getClassStudentsListByParamRequest" name="getClassStudentsListByParamRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getClassStudentsListByParamResponse">
+    <wsdl:part element="sch:getClassStudentsListByParamResponse" name="getClassStudentsListByParamResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getStudentIdRequest">
+    <wsdl:part element="sch:getStudentIdRequest" name="getStudentIdRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getStudentIdResponse">
+    <wsdl:part element="sch:getStudentIdResponse" name="getStudentIdResponse"/>
+  </wsdl:message>
+
+  <wsdl:portType name="SchoolService">
+    <wsdl:documentation>WEB-сервис ЕРП.Школы</wsdl:documentation>
+    <wsdl:operation name="getRepresentatives">
+      <wsdl:documentation>Получение данных представителей идентифицированных учащихся</wsdl:documentation>
+      <wsdl:input message="tns:getRepresentativesRequest" name="getRepresentativesRequest"/>
+      <wsdl:output message="tns:getRepresentativesResponse" name="getRepresentativesResponse"/>
+      <wsdl:fault message="tns:schoolFault" name="fault"/>
+    </wsdl:operation>
+    <wsdl:operation name="updateRepresentatives">
+      <wsdl:documentation>Изменение данных представителей идентифицированных учащихся</wsdl:documentation>
+      <wsdl:input message="tns:updateRepresentativesRequest" name="updateRepresentativesRequest"/>
+      <wsdl:output message="tns:updateRepresentativesResponse" name="updateRepresentativesResponse"/>
+      <wsdl:fault message="tns:schoolFault" name="fault"/>
+    </wsdl:operation>
+    <wsdl:operation name="getPatientBanner">
+      <wsdl:documentation>Получение баннера учащегося</wsdl:documentation>
+      <wsdl:input message="tns:getPatientBannerRequest" name="getPatientBannerRequest"/>
+      <wsdl:output message="tns:getPatientBannerResponse" name="getPatientBannerResponse"/>
+      <wsdl:fault message="tns:schoolFault" name="fault"/>
+    </wsdl:operation>
+    <wsdl:operation name="getStudentsList">
+      <wsdl:documentation>Поиск пациента по параметрам</wsdl:documentation>
+      <wsdl:input message="tns:getStudentsListRequest" name="getStudentsListRequest"/>
+      <wsdl:output message="tns:getStudentsListResponse" name="getStudentsListResponse"/>
+      <wsdl:fault message="tns:schoolFault" name="fault"/>
+    </wsdl:operation>
+    <wsdl:operation name="removeLinkStudentInfo">
+      <wsdl:documentation>Удаление связи Учащийся - Пациент</wsdl:documentation>
+      <wsdl:input message="tns:removeLinkStudentInfoRequest" name="removeLinkStudentInfoRequest"/>
+      <wsdl:output message="tns:removeLinkStudentInfoResponse" name="removeLinkStudentInfoResponse"/>
+      <wsdl:fault message="tns:schoolFault" name="fault"/>
+    </wsdl:operation>
+    <wsdl:operation name="getClassStudentsCount">
+      <wsdl:documentation>Получение количества пациентов на участке по параметрам</wsdl:documentation>
+      <wsdl:input message="tns:getClassStudentsCountRequest" name="getClassStudentsCountRequest"/>
+      <wsdl:output message="tns:getClassStudentsCountResponse" name="getClassStudentsCountResponse"/>
+      <wsdl:fault message="tns:schoolFault" name="fault"/>
+    </wsdl:operation>
+    <wsdl:operation name="getClassStudentsByGender">
+      <wsdl:documentation>Получение списка идентифицированных учащихся с учетом гендерного признака на участке и их количества по заданным входным параметрам</wsdl:documentation>
+      <wsdl:input message="tns:getClassStudentsByGenderRequest" name="getClassStudentsByGenderRequest"/>
+      <wsdl:output message="tns:getClassStudentsByGenderResponse" name="getClassStudentsByGenderResponse"/>
+      <wsdl:fault message="tns:schoolFault" name="fault"/>
+    </wsdl:operation>    
+    <wsdl:operation name="getClassStudentsList">
+      <wsdl:documentation>Получение списка пациентов класса</wsdl:documentation>
+      <wsdl:input message="tns:getClassStudentsListRequest" name="getClassStudentsListRequest"/>
+      <wsdl:output message="tns:getClassStudentsListResponse" name="getClassStudentsListResponse"/>
+      <wsdl:fault message="tns:schoolFault" name="fault"/>
+    </wsdl:operation>
+    <wsdl:operation name="getStudentAttachmentsList">
+      <wsdl:documentation>Получение данных пациента по прикреплениям пациента</wsdl:documentation>
+      <wsdl:input message="tns:getStudentAttachmentsListRequest" name="getStudentAttachmentsListRequest"/>
+      <wsdl:output message="tns:getStudentAttachmentsListResponse" name="getStudentAttachmentsListResponse"/>
+      <wsdl:fault message="tns:schoolFault" name="fault"/>
+    </wsdl:operation>
+    <wsdl:operation name="setLinkStudentInfo">
+      <wsdl:documentation>Сведение пациента и учащегося в ЕМИАС</wsdl:documentation>
+      <wsdl:input message="tns:setLinkStudentInfoRequest" name="setLinkStudentInfoRequest"/>
+      <wsdl:output message="tns:setLinkStudentInfoResponse" name="setLinkStudentInfoResponse"/>
+      <wsdl:fault message="tns:schoolFault" name="fault"/>
+    </wsdl:operation>
+    <wsdl:operation name="getClassStudentsListByParam">
+      <wsdl:documentation>Получение списков пациентов классов по параметрам</wsdl:documentation>
+      <wsdl:input message="tns:getClassStudentsListByParamRequest" name="getClassStudentsListByParamRequest"/>
+      <wsdl:output message="tns:getClassStudentsListByParamResponse" name="getClassStudentsListByParamResponse"/>
+      <wsdl:fault message="tns:schoolFault" name="fault"/>
+    </wsdl:operation>
+    <wsdl:operation name="getStudentId">
+      <wsdl:documentation>Получение идентификатора учащегося в МЭШ</wsdl:documentation>
+      <wsdl:input message="tns:getStudentIdRequest" name="getStudentIdRequest"/>
+      <wsdl:output message="tns:getStudentIdResponse" name="getStudentIdResponse"/>
+      <wsdl:fault message="tns:schoolFault" name="fault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="SchoolServiceSoap12" type="tns:SchoolService">
+    <soap:binding style="document" transport="http://www.w3.org/2003/05/soap/bindings/HTTP/"/>
+    <wsdl:operation name="getRepresentatives">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getRepresentativesRequest">
+        <soap:header message="tns:userContext" part="userContext" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getRepresentativesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="schoolFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateRepresentatives">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="updateRepresentativesRequest">
+        <soap:header message="tns:userContext" part="userContext" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateRepresentativesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="schoolFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPatientBanner">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getPatientBannerRequest">
+        <soap:header message="tns:userContext" part="userContext" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getPatientBannerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="schoolFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="removeLinkStudentInfo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="removeLinkStudentInfoRequest">
+        <soap:header message="tns:userContext" part="userContext" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="removeLinkStudentInfoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="schoolFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getClassStudentsCount">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getClassStudentsCountRequest">
+        <soap:header message="tns:userContext" part="userContext" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getClassStudentsCountResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="schoolFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getClassStudentsByGender">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getClassStudentsByGenderRequest">
+        <soap:header message="tns:userContext" part="userContext" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getClassStudentsByGenderResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="schoolFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>    
+    <wsdl:operation name="getClassStudentsList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getClassStudentsListRequest">
+        <soap:header message="tns:userContext" part="userContext" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getClassStudentsListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="schoolFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getStudentAttachmentsList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getStudentAttachmentsListRequest">
+        <soap:header message="tns:userContext" part="userContext" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getStudentAttachmentsListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="schoolFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setLinkStudentInfo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="setLinkStudentInfoRequest">
+        <soap:header message="tns:userContext" part="userContext" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="setLinkStudentInfoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="schoolFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getStudentsList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getStudentsListRequest">
+        <soap:header message="tns:userContext" part="userContext" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getStudentsListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="schoolFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getClassStudentsListByParam">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getClassStudentsListByParamRequest">
+        <soap:header message="tns:userContext" part="userContext" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getClassStudentsListByParamResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="schoolFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getStudentId">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getStudentIdRequest">
+        <soap:header message="tns:userContext" part="userContext" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getStudentIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap:fault name="schoolFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <wsdl:service name="SchoolService">
+    <wsdl:port binding="tns:SchoolServiceSoap12" name="SchoolServiceSoap12">
+      <soap:address location="http://127.0.0.1:8081/school-services/webservices/schoolService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
