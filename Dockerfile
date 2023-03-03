@@ -92,3 +92,11 @@ ARG JAR_FILE=schr-service/schr-service-application/target/schr-service-*.jar
 COPY --from=build /opt/src/${JAR_FILE} /opt/schr-service.jar
 ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/schr-service.jar"]
 
+#
+# Веб-сервис "Административный сервис для взаимодействия с ElasticSearch" (AdminService)
+#
+FROM docker.artifactory.emias.mos.ru/emiasos-openjdk:17.0.4.1 as schregister-adminservice
+ARG JAR_FILE=schr-admin-service/schr-admin-service-application/target/schr-admin-service-*.jar
+COPY --from=build /opt/src/${JAR_FILE} /opt/schr-admin-service.jar
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar /opt/schr-admin-service.jar"]
+
