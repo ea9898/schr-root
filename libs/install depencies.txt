@@ -1,2 +1,1 @@
 mvn install:install-file -Dfile=client-lib-4.5.2.jar -DgroupId=ru.mos.emias.esu -DartifactId=client-lib -Dversion=4.5.2 -Dpackaging=jar
-

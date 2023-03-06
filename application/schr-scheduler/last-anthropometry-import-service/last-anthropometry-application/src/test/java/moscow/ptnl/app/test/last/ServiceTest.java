@@ -71,12 +71,12 @@ public class ServiceTest {
                 .lines()
                 .collect(Collectors.joining("\n"));
         Optional<String> validate = validator.validate(json);
-        int index = Integer.parseInt(validate.get().substring(61, 62));
+        int index = Integer.parseInt(validate.get().substring(60, 61));
 
         mapper.registerModule(new JavaTimeModule());
         LastAnthropometry readValue = mapper.readValue(json, LastAnthropometry.class);
 
-        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurements/" + index + "/measurementDate: expected type: String, found: Integer", validate.get());
+        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + index + "/measurementDate: expected type: String, found: Integer", validate.get());
     }
 
     @Test
@@ -90,9 +90,9 @@ public class ServiceTest {
         LastAnthropometry readValue = mapper.readValue(json, LastAnthropometry.class);
 
         Assertions.assertTrue(validate.isPresent());
-        for (int i = 0; i < readValue.getMeasurements().size(); i++) {
-            if (readValue.getMeasurements().get(i).getMeasurementDate() == null) {
-                Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurements/" + i + "/measurementDate: expected type: String, found: Null", validate.get());
+        for (int i = 0; i < readValue.getMeasurement().size(); i++) {
+            if (readValue.getMeasurement().get(i).getMeasurementDate() == null) {
+                Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + i + "/measurementDate: expected type: String, found: Null", validate.get());
             }
         }
     }
@@ -105,9 +105,9 @@ public class ServiceTest {
                 .collect(Collectors.joining("\n"));
         Optional<String> validate = validator.validate(json);
 
-        int index = Integer.parseInt(validate.get().substring(61, 62));
+        int index = Integer.parseInt(validate.get().substring(60, 61));
 
-        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurements/" + index + ": required key [measurementDate] not found", validate.get());
+        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + index + ": required key [measurementDate] not found", validate.get());
     }
 
     @Test
@@ -118,9 +118,9 @@ public class ServiceTest {
                 .collect(Collectors.joining("\n"));
         Optional<String> validate = validator.validate(json);
 
-        int index = Integer.parseInt(validate.get().substring(61, 62));
+        int index = Integer.parseInt(validate.get().substring(60, 61));
 
-        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurements/" + index + "/documentId: expected type: String, found: Integer", validate.get());
+        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + index + "/documentId: expected type: String, found: Integer", validate.get());
     }
 
     @Test
@@ -135,9 +135,9 @@ public class ServiceTest {
         LastAnthropometry readValue = mapper.readValue(json, LastAnthropometry.class);
 
         Assertions.assertTrue(validate.isPresent());
-        for (int i = 0; i < readValue.getMeasurements().size(); i++) {
-            if (readValue.getMeasurements().get(i).getDocumentId() == null) {
-                Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurements/" + i + "/documentId: expected type: String, found: Null", validate.get());
+        for (int i = 0; i < readValue.getMeasurement().size(); i++) {
+            if (readValue.getMeasurement().get(i).getDocumentId() == null) {
+                Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + i + "/documentId: expected type: String, found: Null", validate.get());
             }
         }
     }
@@ -150,9 +150,9 @@ public class ServiceTest {
                 .collect(Collectors.joining("\n"));
         Optional<String> validate = validator.validate(json);
 
-        int index = Integer.parseInt(validate.get().substring(61, 62));
+        int index = Integer.parseInt(validate.get().substring(60, 61));
 
-        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurements/" + index + ": required key [documentId] not found", validate.get());
+        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + index + ": required key [documentId] not found", validate.get());
     }
 
     @Test
@@ -163,9 +163,9 @@ public class ServiceTest {
                 .collect(Collectors.joining("\n"));
         Optional<String> validate = validator.validate(json);
 
-        int index = Integer.parseInt(validate.get().substring(61, 62));
+        int index = Integer.parseInt(validate.get().substring(60, 61));
 
-        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurements/" + index + "/measurementType: expected type: Number, found: String", validate.get());
+        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + index + "/measurementType: expected type: Number, found: String", validate.get());
     }
 
     @Test
@@ -179,9 +179,9 @@ public class ServiceTest {
         LastAnthropometry readValue = mapper.readValue(json, LastAnthropometry.class);
 
         Assertions.assertTrue(validate.isPresent());
-        for (int i = 0; i < readValue.getMeasurements().size(); i++) {
-            if (readValue.getMeasurements().get(i).getMeasurementType() == null) {
-                Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurements/" + i + "/measurementType: expected type: Number, found: Null", validate.get());
+        for (int i = 0; i < readValue.getMeasurement().size(); i++) {
+            if (readValue.getMeasurement().get(i).getMeasurementType() == null) {
+                Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + i + "/measurementType: expected type: Number, found: Null", validate.get());
             }
         }
     }
@@ -194,9 +194,9 @@ public class ServiceTest {
                 .collect(Collectors.joining("\n"));
         Optional<String> validate = validator.validate(json);
 
-        int index = Integer.parseInt(validate.get().substring(61, 62));
+        int index = Integer.parseInt(validate.get().substring(60, 61));
 
-        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurements/" + index + ": required key [measurementType] not found", validate.get());
+        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + index + ": required key [measurementType] not found", validate.get());
     }
 
     @Test
@@ -207,9 +207,9 @@ public class ServiceTest {
                 .collect(Collectors.joining("\n"));
         Optional<String> validate = validator.validate(json);
 
-        int index = Integer.parseInt(validate.get().substring(61, 62));
+        int index = Integer.parseInt(validate.get().substring(60, 61));
 
-        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurements/" + index + "/measurementValue: expected type: Number, found: String", validate.get());
+        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + index + "/measurementValue: expected type: Number, found: String", validate.get());
     }
 
     @Test
@@ -223,9 +223,9 @@ public class ServiceTest {
         LastAnthropometry readValue = mapper.readValue(json, LastAnthropometry.class);
 
         Assertions.assertTrue(validate.isPresent());
-        for (int i = 0; i < readValue.getMeasurements().size(); i++) {
-            if (readValue.getMeasurements().get(i).getMeasurementValue() == null) {
-                Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurements/" + i + "/measurementValue: expected type: Number, found: Null", validate.get());
+        for (int i = 0; i < readValue.getMeasurement().size(); i++) {
+            if (readValue.getMeasurement().get(i).getMeasurementValue() == null) {
+                Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + i + "/measurementValue: expected type: Number, found: Null", validate.get());
             }
         }
     }
@@ -238,9 +238,9 @@ public class ServiceTest {
                 .collect(Collectors.joining("\n"));
         Optional<String> validate = validator.validate(json);
 
-        int index = Integer.parseInt(validate.get().substring(61, 62));
+        int index = Integer.parseInt(validate.get().substring(60, 61));
 
-        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurements/" + index + ": required key [measurementValue] not found", validate.get());
+        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + index + ": required key [measurementValue] not found", validate.get());
     }
 
     @Test
@@ -252,7 +252,7 @@ public class ServiceTest {
         Optional<String> validate = validator.validate(json);
 
         Assertions.assertTrue(validate.isPresent());
-        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurements/0/centility: expected type: String, found: Integer", validate.get());
+        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/0/centility: expected type: String, found: Integer", validate.get());
     }
 
     @Test
@@ -267,9 +267,9 @@ public class ServiceTest {
         LastAnthropometry readValue = mapper.readValue(json, LastAnthropometry.class);
 
         Assertions.assertTrue(validate.isPresent());
-        for (int i = 0; i < readValue.getMeasurements().size(); i++) {
-            if (readValue.getMeasurements().get(i).getCentility() == null) {
-                Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurements/" + i + "/centility: expected type: String, found: Null", validate.get());
+        for (int i = 0; i < readValue.getMeasurement().size(); i++) {
+            if (readValue.getMeasurement().get(i).getCentility() == null) {
+                Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + i + "/centility: expected type: String, found: Null", validate.get());
             }
         }
     }

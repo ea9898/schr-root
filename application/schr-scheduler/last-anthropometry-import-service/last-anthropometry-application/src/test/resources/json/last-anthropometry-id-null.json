@@ -3,15 +3,15 @@
 	"measurement": [
 		{
 			"measurementDate": "2022-12-15",
-			"documentID": "872c407e-cbae-4db7-b8c9-34d2c5596253",
+			"documentId": "872c407e-cbae-4db7-b8c9-34d2c5596253",
 			"measurementType": 3,
 			"measurementValue": 55,
-			"centility": null,
+			"centility": "ожирение",
 			"resultAssessmentID": null
 		},
 		{
 			"measurementDate": "2022-12-15",
-			"documentID": "872c407e-cbae-4db7-b8c9-34d2c5596253",
+			"documentId": "872c407e-cbae-4db7-b8c9-34d2c5596253",
 			"measurementType": 1,
 			"measurementValue": 55,
 			"centility": "низкорослость",
@@ -19,7 +19,7 @@
 		},
 		{
 			"measurementDate": "2022-12-15",
-			"documentID": "872c407e-cbae-4db7-b8c9-34d2c5596253",
+			"documentId": "872c407e-cbae-4db7-b8c9-34d2c5596253",
 			"measurementType": 2,
 			"measurementValue": 55,
 			"centility": "ожирение",
@@ -27,10 +27,10 @@
 		},
 		{
 			"measurementDate": "2022-12-15",
-			"documentID": "872c407e-cbae-4db7-b8c9-34d2c5596253",
+			"documentId": "872c407e-cbae-4db7-b8c9-34d2c5596253",
 			"measurementType": 4,
 			"measurementValue": 181.8,
-			"centility": null,
+			"centility": "ожирение",
 			"resultAssessmentID": null
 		}
 	]

@@ -31,7 +31,7 @@ public class PatientInfo {
     private LocalDate birthDate;
 
     @Field(type = FieldType.Keyword, name = "genderCode")
-    private Long genderCode;
+    private String genderCode;
 
     @Field(type = FieldType.Date, format = DateFormat.date, name = "deathDate")
     private LocalDate deathDate;
@@ -95,11 +95,11 @@ public class PatientInfo {
         this.birthDate = birthDate;
     }
 
-    public Long getGenderCode() {
+    public String getGenderCode() {
         return genderCode;
     }
 
-    public void setGenderCode(Long genderCode) {
+    public void setGenderCode(String genderCode) {
         this.genderCode = genderCode;
     }
 

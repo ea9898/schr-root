@@ -13,7 +13,7 @@ public class PatientInfoDTO {
     private String patronymic;
     private String fullName;
     private LocalDate birthDate;
-    private Long genderCode;
+    private String genderCode;
 
     private List<Attachment> attachments;
 
@@ -78,11 +78,11 @@ public class PatientInfoDTO {
         this.birthDate = birthDate;
     }
 
-    public Long getGenderCode() {
+    public String getGenderCode() {
         return genderCode;
     }
 
-    public void setGenderCode(Long genderCode) {
+    public void setGenderCode(String genderCode) {
         this.genderCode = genderCode;
     }
 

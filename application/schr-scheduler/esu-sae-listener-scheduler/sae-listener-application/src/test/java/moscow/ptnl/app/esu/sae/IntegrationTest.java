@@ -500,7 +500,7 @@ public class IntegrationTest {
             Assertions.assertEquals(firstName, patientInfo.getFirstName());
             Assertions.assertEquals(patronymic, patientInfo.getPatronymic());
             Assertions.assertEquals(LocalDate.parse(birthDate), patientInfo.getBirthDate());
-            Assertions.assertEquals(1, patientInfo.getGenderCode());
+            Assertions.assertEquals("male", patientInfo.getGenderCode());
             Assertions.assertEquals(lastName + " " + firstName + " " + patronymic, patientInfo.getFullName());
 
             // Проверка attachments

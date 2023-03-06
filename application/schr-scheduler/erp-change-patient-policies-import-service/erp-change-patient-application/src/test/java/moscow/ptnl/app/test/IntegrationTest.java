@@ -234,6 +234,7 @@ public class IntegrationTest {
 
             Optional<EsuInput> esuInput = esuInputCRUDRepository.findById(esuMsgId);
             Assertions.assertEquals(EsuStatusType.NEW, esuInput.get().getStatus());
+//            Assertions.assertEquals(EsuStatusType.IN_PROGRESS, esuInput.get().getStatus());
             Assertions.assertNull(esuInput.get().getError());
 
             Optional<StudentPatientData> studentOpt = studentPatientDataRepository.findById(studentId.toString());

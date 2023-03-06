@@ -1,6 +1,6 @@
 {
 	"patientId": "10429370",
-	"measurements": [
+	"measurement": [
 		{
 			"measurementDate": "2022-12-15",
 			"documentId": "bb608811-0c01-4f2c-8c92-567317a5454b",

@@ -63,13 +63,13 @@ public class PatientServiceImpl implements PatientService {
                 patientInfoDTO.setBirthDate(BusinessUtil.convertGregorianToLocalDate(personalData.getBirthDate()));
                 switch (personalData.getGender().getCode()) {
                     case "MALE":
-                        patientInfoDTO.setGenderCode(1L);
+                        patientInfoDTO.setGenderCode("male");
                         break;
                     case "FEMALE":
-                        patientInfoDTO.setGenderCode(2L);
+                        patientInfoDTO.setGenderCode("female");
                         break;
                     case "UNDEFINED":
-                        patientInfoDTO.setGenderCode(3L);
+                        patientInfoDTO.setGenderCode("undefined");
                         break;
                 }
                 patientInfoDTO.setFullName(BusinessUtil.convertFullNameToString(firstName, lastName, middleName));

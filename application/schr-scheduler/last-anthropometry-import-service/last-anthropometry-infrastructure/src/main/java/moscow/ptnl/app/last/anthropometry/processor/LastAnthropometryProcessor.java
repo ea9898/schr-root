@@ -56,18 +56,18 @@ public class LastAnthropometryProcessor extends EsuConsumerProcessor {
             }
 
             boolean notEmptyContent = false;
-            if (content.getMeasurements() != null && !content.getMeasurements().isEmpty()) {
+            if (content.getMeasurement() != null && !content.getMeasurement().isEmpty()) {
                 notEmptyContent = true;
-                if (content.getMeasurements().stream().anyMatch(item -> item.getMeasurementValue() == null)) {
+                if (content.getMeasurement().stream().anyMatch(item -> item.getMeasurementValue() == null)) {
                     errorFields.add("lastAnthropometry.measurementValue");
                 }
-                if (content.getMeasurements().stream().anyMatch(item -> item.getMeasurementType() == null)) {
+                if (content.getMeasurement().stream().anyMatch(item -> item.getMeasurementType() == null)) {
                     errorFields.add("lastAnthropometry.measurementType");
                 }
-                if (content.getMeasurements().stream().anyMatch(item -> item.getDocumentId() == null)) {
+                if (content.getMeasurement().stream().anyMatch(item -> item.getDocumentId() == null)) {
                     errorFields.add("lastAnthropometry.documentId");
                 }
-                if (content.getMeasurements().stream().anyMatch(item -> item.getMeasurementDate() == null)) {
+                if (content.getMeasurement().stream().anyMatch(item -> item.getMeasurementDate() == null)) {
                     errorFields.add("lastAnthropometry.measurementDate");
                 }
             } else if (content.getAdditionalProperties() != null
@@ -79,7 +79,7 @@ public class LastAnthropometryProcessor extends EsuConsumerProcessor {
             }
 
             if (!notEmptyContent) {
-                errorFields.add("lastAnthropometry.measurements или lastAnthropometry.annuledMeasurementsTypeId");
+                errorFields.add("lastAnthropometry.measurement или lastAnthropometry.annuledMeasurementsTypeId");
             }
 
             if (!errorFields.isEmpty()) {

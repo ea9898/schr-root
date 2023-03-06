@@ -56,9 +56,9 @@ public class LastAnthropometryProcessTask extends BaseEsuProcessorTask {
                     || !Objects.equals(studentPatientData.get().getId(), String.valueOf(studentPatientData.get().getPatientInfo().getPatientId()))) {
                 return Optional.of(CustomErrorReason.PATIENT_NOT_FOUND.format(content.getPatientId()));
             }
-            if (content.getMeasurements() != null && !content.getMeasurements().isEmpty()) {
+            if (content.getMeasurement() != null && !content.getMeasurement().isEmpty()) {
                 //4.5 Добавление нового блока в элемент индекса существующего документа
-                for (Measurement measurement : content.getMeasurements()) {
+                for (Measurement measurement : content.getMeasurement()) {
                     boolean needToAddMeasurement = true;
                     Iterator<AnthropometryInfo> anthropometry = studentPatientData.get().getAnthropometryInfo().listIterator();
 

@@ -9,7 +9,7 @@
       "type": "string",
       "description": "Идентификатор пациента ЕМИАС"
     },
-    "measurements": {
+    "measurement": {
       "type": "array",
       "description": "Актуальные данные об измерениях пациента",
       "items": {
