@@ -66,23 +66,26 @@ public class AttachmentEventProcessTask extends BaseEsuProcessorTask {
             //4.5 Для документа найденного на шаге 4.4, выполняется поиск блоков в элементе индекса attachments
             boolean eventTypeClose = Event.EventType.CLOSE.equals(content.getEvent().getEventType());
             boolean attachmentsFound = false;
-            Iterator<Attachment> attachments = studentPatientData.get().getAttachments().listIterator();
 
-            while (attachments.hasNext()) {
-                Attachment attachment = attachments.next();
+            if (studentPatientData.get().getAttachments() != null) {
+                Iterator<Attachment> attachments = studentPatientData.get().getAttachments().listIterator();
 
-                if (Objects.equals(attachment.getAreaId(), content.getAttachmentNewValue().getAreaId())) {
-                    attachmentsFound = true;
-                    if (!DateHelper.convertToLocalDateTimeViaMilisecond(content.getEvent().getDateTime())
-                            .isAfter(attachment.getUpdateDate())) {
-                        return Optional.of(CustomErrorReason.INFORMATION_IS_OUTDATED.format());
+                while (attachments.hasNext()) {
+                    Attachment attachment = attachments.next();
+
+                    if (Objects.equals(attachment.getAreaId(), content.getAttachmentNewValue().getAreaId())) {
+                        attachmentsFound = true;
+                        if (!DateHelper.convertToLocalDateTimeViaMilisecond(content.getEvent().getDateTime())
+                                .isAfter(attachment.getUpdateDate())) {
+                            return Optional.of(CustomErrorReason.INFORMATION_IS_OUTDATED.format());
+                        }
+
+                        attachments.remove();
                     }
-
-                    attachments.remove();
                 }
-            }
-            if (studentPatientData.get().getAttachments().isEmpty()) {
-                studentPatientData.get().setAttachments(null);
+                if (studentPatientData.get().getAttachments().isEmpty()) {
+                    studentPatientData.get().setAttachments(null);
+                }
             }
             if (!attachmentsFound && eventTypeClose) {
                 return Optional.of(CustomErrorReason.REMOVING_RECORD_NOT_FOUND.format());
