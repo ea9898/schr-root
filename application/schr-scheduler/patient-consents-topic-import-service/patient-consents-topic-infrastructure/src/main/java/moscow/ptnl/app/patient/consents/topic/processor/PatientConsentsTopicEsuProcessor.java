@@ -53,51 +53,51 @@ public class PatientConsentsTopicEsuProcessor extends EsuConsumerProcessor {
             }
 
             errorFields.add(content.getConsentDetails().getConsentId() == null ? "consentId" : null);
-            errorFields.add(content.getConsentDetails().getDocumentedConsent().getDocumentId() == null ? "documentId" : null);
-            errorFields.add(content.getConsentDetails().getDocumentedConsent().getCreateDate() == null ? "createDate" : null);
-            errorFields.add(content.getConsentDetails().getDocumentedConsent().getLocationId() == null ? "locationId" : null);
-            errorFields.add(content.getConsentDetails().getDocumentedConsent().getLocationName() == null ? "locationName" : null);
-            errorFields.add(content.getConsentDetails().getDocumentedConsent().getAllMedicalIntervention() == null ? "allMedicalIntervention" : null);
-
-            if (checkArrayIsNullOrHasNulls(content.getConsentDetails().getDocumentedConsent().getInterventionDetails().getMedInterventionId())) {
-                errorFields.add("medInterventionId");
-            }
-
-            if (content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics() == null ||
-                    checkArrayIsNullOrHasNulls(content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic()) ||
-                    content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(Immunodiagnostic::getImmunoTestKind).anyMatch(Objects::isNull) ||
-                    content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(Immunodiagnostic::getImmunoTestKind).map(ImmunoTestKind::getImmunoKindCode).anyMatch(Objects::isNull)
-            ) {
-                errorFields.add("immunoKindCode");
-            }
-
-            if (content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics() == null ||
-                    checkArrayIsNullOrHasNulls(content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic()) ||
-                    content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(Immunodiagnostic::getImmunoTestKind).anyMatch(Objects::isNull) ||
-                    content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(Immunodiagnostic::getImmunoTestKind).map(ImmunoTestKind::getInfectionCode).anyMatch(Objects::isNull)
-            ) {
-                errorFields.add("infectionCode");
-            }
-
-            if (content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics() == null ||
-                    checkArrayIsNullOrHasNulls(content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic()) ||
-                    content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(Immunodiagnostic::getImmunoDrugsTns).anyMatch(Objects::isNull) ||
-                    content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(i -> i.getImmunoDrugsTns().getImmunoDrugsTnCode()).anyMatch(Objects::isNull)
-            ) {
-                errorFields.add("immunoDrugsTnCode");
-            }
-
-            errorFields.add(content.getConsentDetails().getDocumentedConsent().getRepresentativeDocumentId() == null ? "representativeDocumentId" : null);
-            errorFields.add(content.getConsentDetails().getDocumentedConsent().getSignedByPatient() == null ? "signedByPatient" : null);
-            errorFields.add(content.getConsentDetails().getDocumentedConsent().getCancelReasonId() == null ? "cancelReasonId" : null);
-            errorFields.add(content.getConsentDetails().getDocumentedConsent().getCancelReasonOther() == null ? "cancelReasonOther" : null);
-            errorFields.add(content.getConsentDetails().getDocumentedConsent().getMoId() == null ? "moId" : null);
-            errorFields.add(content.getConsentDetails().getDocumentedConsent().getMoName() == null ? "moName" : null);
+//            errorFields.add(content.getConsentDetails().getDocumentedConsent().getDocumentId() == null ? "documentId" : null);
+//            errorFields.add(content.getConsentDetails().getDocumentedConsent().getCreateDate() == null ? "createDate" : null);
+//            errorFields.add(content.getConsentDetails().getDocumentedConsent().getLocationId() == null ? "locationId" : null);
+//            errorFields.add(content.getConsentDetails().getDocumentedConsent().getLocationName() == null ? "locationName" : null);
+//            errorFields.add(content.getConsentDetails().getDocumentedConsent().getAllMedicalIntervention() == null ? "allMedicalIntervention" : null);
+//
+//            if (checkArrayIsNullOrHasNulls(content.getConsentDetails().getDocumentedConsent().getInterventionDetails().getMedInterventionId())) {
+//                errorFields.add("medInterventionId");
+//            }
+//
+//            if (content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics() == null ||
+//                    checkArrayIsNullOrHasNulls(content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic()) ||
+//                    content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(Immunodiagnostic::getImmunoTestKind).anyMatch(Objects::isNull) ||
+//                    content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(Immunodiagnostic::getImmunoTestKind).map(ImmunoTestKind::getImmunoKindCode).anyMatch(Objects::isNull)
+//            ) {
+//                errorFields.add("immunoKindCode");
+//            }
+//
+//            if (content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics() == null ||
+//                    checkArrayIsNullOrHasNulls(content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic()) ||
+//                    content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(Immunodiagnostic::getImmunoTestKind).anyMatch(Objects::isNull) ||
+//                    content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(Immunodiagnostic::getImmunoTestKind).map(ImmunoTestKind::getInfectionCode).anyMatch(Objects::isNull)
+//            ) {
+//                errorFields.add("infectionCode");
+//            }
+//
+//            if (content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics() == null ||
+//                    checkArrayIsNullOrHasNulls(content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic()) ||
+//                    content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(Immunodiagnostic::getImmunoDrugsTns).anyMatch(Objects::isNull) ||
+//                    content.getConsentDetails().getDocumentedConsent().getImmunodiagnostics().getImmunodiagnostic().stream().map(i -> i.getImmunoDrugsTns().getImmunoDrugsTnCode()).anyMatch(Objects::isNull)
+//            ) {
+//                errorFields.add("immunoDrugsTnCode");
+//            }
+//
+//            errorFields.add(content.getConsentDetails().getDocumentedConsent().getRepresentativeDocumentId() == null ? "representativeDocumentId" : null);
+//            errorFields.add(content.getConsentDetails().getDocumentedConsent().getSignedByPatient() == null ? "signedByPatient" : null);
+//            errorFields.add(content.getConsentDetails().getDocumentedConsent().getCancelReasonId() == null ? "cancelReasonId" : null);
+//            errorFields.add(content.getConsentDetails().getDocumentedConsent().getCancelReasonOther() == null ? "cancelReasonOther" : null);
+//            errorFields.add(content.getConsentDetails().getDocumentedConsent().getMoId() == null ? "moId" : null);
+//            errorFields.add(content.getConsentDetails().getDocumentedConsent().getMoName() == null ? "moName" : null);
             errorFields.add(content.getConsentDetails().getIssueDateTime() == null ? "issueDateTime" : null);
             errorFields.add(content.getConsentDetails().getConsentFormId() == null ? "consentFormId" : null);
             errorFields.add(content.getConsentDetails().getConsentTypeId() == null ? "consentTypeId" : null);
-            errorFields.add(content.getConsentDetails().getRepresentativePhysicalId() == null ? "representativePhysicalId" : null);
-            errorFields.add(content.getConsentDetails().getRepresentativeLegalId() == null ? "representativeLegalId" : null);
+//            errorFields.add(content.getConsentDetails().getRepresentativePhysicalId() == null ? "representativePhysicalId" : null);
+//            errorFields.add(content.getConsentDetails().getRepresentativeLegalId() == null ? "representativeLegalId" : null);
             errorFields.remove(null);
 
             if (!errorFields.isEmpty()) {
