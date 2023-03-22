@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class ErpChangePatientPolicies {
-    private Integer id;
+    private Long id;
     private LocalDateTime operationDate;
-    private Integer emiasId;
+    private Long emiasId;
     private String uklErp;
     private String patientType;
     private String patientRecStatus;
@@ -16,7 +16,7 @@ public class ErpChangePatientPolicies {
     public ErpChangePatientPolicies() {
     }
 
-    public ErpChangePatientPolicies(Integer id, LocalDateTime operationDate, Integer emiasId, String uklErp,
+    public ErpChangePatientPolicies(Long id, LocalDateTime operationDate, Long emiasId, String uklErp,
                                     String patientType, String patientRecStatus, String entityName, List<EntityData> entityData) {
         this.id = id;
         this.operationDate = operationDate;
@@ -36,19 +36,19 @@ public class ErpChangePatientPolicies {
         this.entityData = entityData;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getEmiasId() {
+    public Long getEmiasId() {
         return emiasId;
     }
 
-    public void setEmiasId(Integer emiasId) {
+    public void setEmiasId(Long emiasId) {
         this.emiasId = emiasId;
     }
 

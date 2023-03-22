@@ -64,9 +64,9 @@ public class ErpChangePatientPoliciesDeserializer implements Function<String, Er
         TypeRef<List<EntityData>> typeRef = new TypeRef<List<EntityData>>() {};
 
         return new ErpChangePatientPolicies(
-                extractSingle(value, "$.id", Integer.class),
+                extractSingle(value, "$.id", Long.class),
                 extractSingle(value, "$.operationDate", LocalDateTime.class),
-                extractSingle(value, "$.emiasId", Integer.class),
+                extractSingle(value, "$.emiasId", Long.class),
                 JsonPath.read(value, "$.uklErp"),
                 JsonPath.read(value, "$.patientType"),
                 JsonPath.read(value, "$.patientRecStatus"),
