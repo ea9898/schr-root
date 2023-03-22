@@ -19,12 +19,12 @@ public class PatientPersonalData {
 
     private String genderCode;
 
-    private LocalDate deathDate;
+    private LocalDateTime deathDate;
 
     private LocalDateTime updateDate;
 
     public static PatientPersonalData build(Long patientId, String ukl, String lastName, String firstName, String patronymic,
-                                            LocalDate birthDate, String genderCode, LocalDate deathDate, LocalDateTime updateDate) {
+                                            LocalDate birthDate, String genderCode, LocalDateTime deathDate, LocalDateTime updateDate) {
         PatientPersonalData newPersonalData = new PatientPersonalData();
 
         newPersonalData.patientId = patientId;
@@ -96,11 +96,11 @@ public class PatientPersonalData {
         this.genderCode = genderCode;
     }
 
-    public LocalDate getDeathDate() {
+    public LocalDateTime getDeathDate() {
         return deathDate;
     }
 
-    public void setDeathDate(LocalDate deathDate) {
+    public void setDeathDate(LocalDateTime deathDate) {
         this.deathDate = deathDate;
     }
 

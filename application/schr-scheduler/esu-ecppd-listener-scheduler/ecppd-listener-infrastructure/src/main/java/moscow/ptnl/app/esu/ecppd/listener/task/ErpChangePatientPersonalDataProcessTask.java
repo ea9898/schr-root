@@ -76,7 +76,7 @@ public class ErpChangePatientPersonalDataProcessTask extends BaseEsuProcessorTas
         patientInfo.setFullName(BusinessUtil.convertFullNameToString(newData.getFirstName(), newData.getLastName(), newData.getPatronymic()));
         patientInfo.setBirthDate(newData.getBirthDate());
         patientInfo.setGenderCode(newData.getGenderCode() == null ? null : newData.getGenderCode());
-        patientInfo.setDeathDate(newData.getDeathDate());
+        patientInfo.setDeathDate(newData.getDeathDate().toLocalDate());
         patientInfo.setUpdateDate(newData.getUpdateDate());
         entity.setPatientInfo(patientInfo);
         studentPatientDataRepository.save(entity);

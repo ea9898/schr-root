@@ -29,6 +29,7 @@ import moscow.ptnl.domain.service.SettingService;
 import moscow.ptnl.schr.repository.SettingsCRUDRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -133,11 +134,16 @@ public class IntegrationTest {
                     .replace("\"emiasId\": 30000012424827,", "\"emiasId\": " + studentId + ",")
                     .replace("\"operationDate\": \"2022-10-18T14:21:14.196+03:00\",", "\"operationDate\": \"2022-01-18T14:21:14.196+03:00\","));
         }
+        //event 4
+        try (InputStream inputStream = IntegrationTest.class.getClassLoader().getResourceAsStream("json/ErpChangePatientPersonalData - deathDateTime.json")) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+            buildMessage(reader.lines().collect(Collectors.joining("\n")));
+        }
         entityManager.flush();
 
         try {
             executor.submit(() -> Assertions.assertDoesNotThrow(() -> erpChangePatientPersonalDataProcessTask.runTask()));
-            Mockito.verify(settingService, Mockito.timeout(30000).times(2)).getSettingProperty(
+            Mockito.verify(settingService, Mockito.timeout(60000).times(2)).getSettingProperty(
                     Mockito.eq(PlannersEnum.I_SCHR_4.getPlannerName() + ".run.mode"), Mockito.any(), Mockito.anyBoolean());
             entityManager.flush();
             StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false).forEach(t -> {

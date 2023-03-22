@@ -1,0 +1,60 @@
+{
+  "id": 17234923,
+  "operationDate": "2022-10-18T14:21:14.196+03:00",
+  "emiasId": 30000012424827,
+  "uklErp": "F4491668",
+  "patientType": "P",
+  "systemCode": "vac",
+  "patientRecStatus": "Y",
+  "entityName": "personalData",
+  "entityData": [
+    {
+      "attributes": [
+        {
+          "name": "lastName",
+          "type": "string",
+          "value": {
+            "value": "Данг"
+          }
+        },
+        {
+          "name": "firstName",
+          "type": "string",
+          "value": {
+            "value": "Ван"
+          }
+        },
+        {
+          "name": "middleName",
+          "type": "string",
+          "value": {
+            "value": "Кхием"
+          }
+        },
+        {
+          "name": "birthDate",
+          "type": "date",
+          "value": {
+            "value": "1973-09-10"
+          }
+        },
+        {
+          "name": "gender",
+          "type": "dictionary",
+          "value": {
+            "id": 125677139,
+            "code": "1",
+            "value": "Мужской"
+          }
+        },
+        {
+          "name": "deathDateTime",
+          "type": "dateTime",
+          "value": {
+            "value": "2022-10-15T07:40:00+03:00"
+          }
+        }
+      ]
+    }
+  ]
+}

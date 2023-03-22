@@ -41,7 +41,7 @@ public class PatientPersonalDataDeserializer implements Function<String, Patient
                 extractSingleArray(value, "$.entityData[0].attributes[?(@.name==\"middleName\")].value.value", String.class),
                 extractSingleArray(value, "$.entityData[0].attributes[?(@.name==\"birthDate\")].value.value", LocalDate.class),
                 extractSingleArray(value, "$.entityData[0].attributes[?(@.name==\"gender\")].value.code", String.class),
-                extractSingleArray(value, "$.entityData[0].attributes[?(@.name==\"deathDateTime\")].value.value", LocalDate.class),
+                extractSingleArray(value, "$.entityData[0].attributes[?(@.name==\"deathDateTime\")].value.value", LocalDateTime.class),
                 mapper.convertValue(JsonPath.read(value, "$.operationDate"), LocalDateTime.class));
     }
 
