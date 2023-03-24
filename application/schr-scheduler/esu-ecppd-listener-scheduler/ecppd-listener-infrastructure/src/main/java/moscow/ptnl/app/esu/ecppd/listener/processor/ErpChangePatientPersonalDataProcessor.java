@@ -48,11 +48,11 @@ public class ErpChangePatientPersonalDataProcessor extends EsuConsumerProcessor 
                 return Optional.of(CustomErrorReason.INCORRECT_FORMAT_ESU_MESSAGE.format(ex.getMessage()));
             }
             errorFields.add(content.getPatientId() == null || content.getPatientId() < 0 ? "emiasId" : null);
-            errorFields.add(content.getUkl() == null ? "uklErp" : null);
-            errorFields.add(content.getLastName() == null ? "lastName" : null);
-            errorFields.add(content.getFirstName() == null ? "firstName" : null);
-            errorFields.add(content.getPatronymic() == null ? "middleName" : null);
-            errorFields.add(content.getGenderCode() == null ? "gender" : null);
+            errorFields.add(content.getUkl() == null || content.getUkl().trim().isEmpty() ? "uklErp" : null);
+            errorFields.add(content.getLastName() == null || content.getLastName().trim().isEmpty() ? "lastName" : null);
+            errorFields.add(content.getFirstName() == null || content.getFirstName().trim().isEmpty() ? "firstName" : null);
+//            errorFields.add(content.getPatronymic() == null ? "middleName" : null);
+            errorFields.add(content.getGenderCode() == null || content.getGenderCode().trim().isEmpty() ? "gender" : null);
             errorFields.add(content.getBirthDate() == null ? "birthDate" : null);
             errorFields.add(content.getUpdateDate() == null ? "operationDate" : null);
 
