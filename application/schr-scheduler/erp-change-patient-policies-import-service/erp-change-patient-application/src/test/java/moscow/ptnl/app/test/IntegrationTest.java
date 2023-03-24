@@ -227,14 +227,15 @@ public class IntegrationTest {
 
         try {
             executor.submit(() -> Assertions.assertDoesNotThrow(() -> erpChangePatientPoliciesProcessTask.runTask()));
-            Mockito.verify(settingService, Mockito.timeout(30000).times(1))
+            Mockito.verify(settingService, Mockito.timeout(30000).times(3))
                     .getSettingProperty(Mockito.eq(PlannersEnum.I_SCHR_6.getPlannerName() + ".run.mode"), Mockito.any(), Mockito.anyBoolean());
 
             entityManager.flush();
 
+            Thread.sleep(5000);
+
             Optional<EsuInput> esuInput = esuInputCRUDRepository.findById(esuMsgId);
-            Assertions.assertEquals(EsuStatusType.NEW, esuInput.get().getStatus());
-//            Assertions.assertEquals(EsuStatusType.IN_PROGRESS, esuInput.get().getStatus());
+            Assertions.assertEquals(EsuStatusType.PROCESSED, esuInput.get().getStatus());
             Assertions.assertNull(esuInput.get().getError());
 
             Optional<StudentPatientData> studentOpt = studentPatientDataRepository.findById(studentId.toString());
