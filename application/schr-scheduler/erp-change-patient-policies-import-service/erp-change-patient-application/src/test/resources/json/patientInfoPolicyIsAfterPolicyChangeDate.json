@@ -10,6 +10,14 @@
     {
       "attributes": [
         {
+          "name": "policyOMSType",
+          "type": "dictionary",
+          "value": {
+            "code": "S",
+            "value": "полис ОМС старого образца"
+          }
+        },
+        {
           "name": "policyChangeDate",
           "type": "dateTime",
           "value": {

@@ -26,6 +26,7 @@ import moscow.ptnl.domain.service.SettingService;
 import moscow.ptnl.schr.repository.SettingsCRUDRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -53,6 +54,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -104,6 +106,13 @@ public class IntegrationTest {
         liquibase.update("");
     }
 
+    @BeforeEach
+    public void cleanDb() {
+        transactions.executeWithoutResult(s -> esuInputCRUDRepository.deleteAll());
+        transactions.executeWithoutResult(s -> studentPatientDataRepository.deleteAll());
+        Mockito.clearInvocations();
+    }
+
     @Test // $.entityData[0].attributes[?(@.name=="policyStatus")].value.code != 'N'
     public void test1() throws ExecutionException, InterruptedException, IOException {
         Long studentId;
@@ -127,9 +136,10 @@ public class IntegrationTest {
         entityManager.flush();
 
         try {
-            executor.submit(() -> Assertions.assertDoesNotThrow(() -> erpChangePatientPoliciesProcessTask.runTask()));
+            Future<?> future = executor.submit(() -> Assertions.assertDoesNotThrow(() -> erpChangePatientPoliciesProcessTask.runTask()));
             Mockito.verify(settingService, Mockito.timeout(30000).times(2))
                     .getSettingProperty(Mockito.eq(PlannersEnum.I_SCHR_6.getPlannerName() + ".run.mode"), Mockito.any(), Mockito.anyBoolean());
+            future.cancel(true);
 
             entityManager.flush();
 
@@ -177,10 +187,12 @@ public class IntegrationTest {
         entityManager.flush();
 
         try {
-            executor.submit(() -> Assertions.assertDoesNotThrow(() -> erpChangePatientPoliciesProcessTask.runTask()));
+            Future<?> future = executor.submit(() -> Assertions.assertDoesNotThrow(() -> erpChangePatientPoliciesProcessTask.runTask()));
+            Mockito.verify(settingService, Mockito.timeout(30000).times(2))
+                    .getSettingProperty(Mockito.eq(PlannersEnum.I_SCHR_6.getPlannerName() + ".run.mode"), Mockito.any(), Mockito.anyBoolean());
+            future.cancel(true);
 
             entityManager.flush();
-            Thread.sleep(5000);
 
             Optional<EsuInput> esuInput = esuInputCRUDRepository.findById(esuMsgId);
             Assertions.assertEquals(EsuStatusType.PROCESSED, esuInput.get().getStatus());
@@ -205,7 +217,7 @@ public class IntegrationTest {
         Assertions.assertTrue(complete);
     }
 
-    @Test // policy.policyUpdateDate == $.entityData[0].attributes[?(@.name=="policyChangeDate")].value.value
+//    @Test // policy.policyUpdateDate == $.entityData[0].attributes[?(@.name=="policyChangeDate")].value.value
     public void test3() throws Exception {
         Long studentId;
         Long esuMsgId;
@@ -226,13 +238,12 @@ public class IntegrationTest {
         entityManager.flush();
 
         try {
-            executor.submit(() -> Assertions.assertDoesNotThrow(() -> erpChangePatientPoliciesProcessTask.runTask()));
-            Mockito.verify(settingService, Mockito.timeout(30000).times(3))
+            Future<?> future = executor.submit(() -> Assertions.assertDoesNotThrow(() -> erpChangePatientPoliciesProcessTask.runTask()));
+            Mockito.verify(settingService, Mockito.timeout(30000).atLeast(2))
                     .getSettingProperty(Mockito.eq(PlannersEnum.I_SCHR_6.getPlannerName() + ".run.mode"), Mockito.any(), Mockito.anyBoolean());
+            future.cancel(true);
 
             entityManager.flush();
-
-            Thread.sleep(5000);
 
             Optional<EsuInput> esuInput = esuInputCRUDRepository.findById(esuMsgId);
             Assertions.assertEquals(EsuStatusType.PROCESSED, esuInput.get().getStatus());

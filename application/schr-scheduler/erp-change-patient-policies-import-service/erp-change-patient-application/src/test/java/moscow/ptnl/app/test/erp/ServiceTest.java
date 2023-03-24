@@ -2,6 +2,7 @@ package moscow.ptnl.app.test.erp;
 
 import moscow.ptnl.app.ecppis.validator.ErpChangePatientPoliciesValidator;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,9 +18,10 @@ import java.util.stream.Collectors;
  *
  * @author sevgeniy
  */
-@SpringBootTest(classes = {
-        ErpChangePatientPoliciesValidator.class
-})
+//@SpringBootTest(classes = {
+//        ErpChangePatientPoliciesValidator.class
+//})
+@Disabled //Валидация в ErpChangePatientPoliciesValidator отключена по задаче SCHREGISTER-40
 public class ServiceTest {
 
     @Autowired

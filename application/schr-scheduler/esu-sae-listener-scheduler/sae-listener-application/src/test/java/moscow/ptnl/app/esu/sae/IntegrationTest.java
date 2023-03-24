@@ -87,6 +87,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -171,9 +172,10 @@ public class IntegrationTest {
         entityManager.flush();
 
         try {
-            executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
+            Future<?> future = executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
             Mockito.verify(settingService, Mockito.timeout(30000).times(2)).getSettingProperty(
                     Mockito.eq(PlannersEnum.I_SCHR_12.getPlannerName() + ".run.mode"), Mockito.any(), Mockito.anyBoolean());
+            future.cancel(true);
             entityManager.flush();
             StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false).forEach(t -> {
                 Assertions.assertEquals(EsuStatusType.PROCESSED, t.getStatus());
@@ -207,9 +209,10 @@ public class IntegrationTest {
         entityManager.flush();
 
         try {
-            executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
+            Future<?> future = executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
             Mockito.verify(settingService, Mockito.timeout(30000).times(2)).getSettingProperty(
                     Mockito.eq(PlannersEnum.I_SCHR_12.getPlannerName() + ".run.mode"), Mockito.any(), Mockito.anyBoolean());
+            future.cancel(true);
             entityManager.flush();
             StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false).forEach(t -> {
                 Assertions.assertEquals(EsuStatusType.PROCESSED, t.getStatus());
@@ -242,9 +245,10 @@ public class IntegrationTest {
         entityManager.flush();
 
         try {
-            executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
+            Future<?> future = executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
             Mockito.verify(settingService, Mockito.timeout(30000).times(2)).getSettingProperty(
                     Mockito.eq(PlannersEnum.I_SCHR_12.getPlannerName() + ".run.mode"), Mockito.any(), Mockito.anyBoolean());
+            future.cancel(true);
             entityManager.flush();
             StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false).forEach(t -> {
                 Assertions.assertEquals(EsuStatusType.PROCESSED, t.getStatus());
@@ -278,9 +282,10 @@ public class IntegrationTest {
         entityManager.flush();
 
         try {
-            executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
+            Future<?> future = executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
             Mockito.verify(settingService, Mockito.timeout(30000).times(2)).getSettingProperty(
                     Mockito.eq(PlannersEnum.I_SCHR_12.getPlannerName() + ".run.mode"), Mockito.any(), Mockito.anyBoolean());
+            future.cancel(true);
             entityManager.flush();
             StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false).forEach(t -> {
                 Assertions.assertEquals(EsuStatusType.PROCESSED, t.getStatus());
@@ -313,9 +318,10 @@ public class IntegrationTest {
         entityManager.flush();
 
         try {
-            executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
+            Future<?> future = executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
             Mockito.verify(settingService, Mockito.timeout(30000).times(2)).getSettingProperty(
                     Mockito.eq(PlannersEnum.I_SCHR_12.getPlannerName() + ".run.mode"), Mockito.any(), Mockito.anyBoolean());
+            future.cancel(true);
             entityManager.flush();
             StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false).forEach(t -> {
                 Assertions.assertEquals(EsuStatusType.PROCESSED, t.getStatus());
@@ -345,9 +351,10 @@ public class IntegrationTest {
         entityManager.flush();
 
         try {
-            executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
+            Future<?> future = executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
             Mockito.verify(settingService, Mockito.timeout(30000).times(2)).getSettingProperty(
                     Mockito.eq(PlannersEnum.I_SCHR_12.getPlannerName() + ".run.mode"), Mockito.any(), Mockito.anyBoolean());
+            future.cancel(true);
             entityManager.flush();
             StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false).forEach(t -> {
                 Assertions.assertEquals(EsuStatusType.PROCESSED, t.getStatus());
@@ -379,9 +386,10 @@ public class IntegrationTest {
         entityManager.flush();
 
         try {
-            executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
+            Future<?> future = executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
             Mockito.verify(settingService, Mockito.timeout(30000).times(2)).getSettingProperty(
                     Mockito.eq(PlannersEnum.I_SCHR_12.getPlannerName() + ".run.mode"), Mockito.any(), Mockito.anyBoolean());
+            future.cancel(true);
             entityManager.flush();
             StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false).forEach(t -> {
                 Assertions.assertEquals(EsuStatusType.PROCESSED, t.getStatus());
@@ -415,9 +423,10 @@ public class IntegrationTest {
         entityManager.flush();
 
         try {
-            executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
+            Future<?> future = executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
             Mockito.verify(settingService, Mockito.timeout(30000).times(2)).getSettingProperty(
                     Mockito.eq(PlannersEnum.I_SCHR_12.getPlannerName() + ".run.mode"), Mockito.any(), Mockito.anyBoolean());
+            future.cancel(true);
             entityManager.flush();
             StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false).forEach(t -> {
                 Assertions.assertEquals(EsuStatusType.PROCESSED, t.getStatus());
@@ -447,9 +456,10 @@ public class IntegrationTest {
         Mockito.when(erpPatientPortTypeV2.getPatient(Mockito.any())).thenThrow(new Fault("Test Error"));
 
         try {
-            executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
+            Future<?> future = executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
             Mockito.verify(settingService, Mockito.timeout(30000).times(2)).getSettingProperty(
                     Mockito.eq(PlannersEnum.I_SCHR_12.getPlannerName() + ".run.mode"), Mockito.any(), Mockito.anyBoolean());
+            future.cancel(true);
             entityManager.flush();
             StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false).forEach(t -> {
                 Assertions.assertEquals(EsuStatusType.PROCESSED, t.getStatus());
@@ -478,10 +488,10 @@ public class IntegrationTest {
         setConsentInfoServiceResponse();
 
         try {
-            executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
+            Future<?> future = executor.submit(() -> Assertions.assertDoesNotThrow(() -> schoolAttachmentEventProcessTask.runTask()));
             Mockito.verify(settingService, Mockito.timeout(30000).times(2)).getSettingProperty(
                     Mockito.eq(PlannersEnum.I_SCHR_12.getPlannerName() + ".run.mode"), Mockito.any(), Mockito.anyBoolean());
-
+            future.cancel(true);
             entityManager.flush();
             StreamSupport.stream(esuInputCRUDRepository.findAll().spliterator(), false).forEach(t -> {
                 Assertions.assertEquals(EsuStatusType.PROCESSED, t.getStatus());
