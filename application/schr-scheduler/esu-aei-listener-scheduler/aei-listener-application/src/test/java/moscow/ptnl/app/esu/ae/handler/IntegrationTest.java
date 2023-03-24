@@ -15,6 +15,7 @@ import moscow.ptnl.app.esu.ae.handler.configuration.MockConfiguration;
 import moscow.ptnl.app.esu.ae.handler.configuration.PersistenceConfiguration;
 import moscow.ptnl.app.esu.aei.listener.config.AsyncConfiguration;
 import moscow.ptnl.app.esu.aei.listener.config.RestConfiguration;
+import moscow.ptnl.app.esu.aei.listener.processor.AttachmentEventProcessor;
 import moscow.ptnl.app.esu.aei.listener.task.AttachmentEventProcessTask;
 import moscow.ptnl.app.infrastructure.repository.es.StudentPatientDataRepository;
 import moscow.ptnl.app.model.PlannersEnum;
@@ -43,17 +44,21 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+
 import javax.sql.DataSource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
@@ -61,8 +66,8 @@ import java.util.stream.StreamSupport;
 
 @ExtendWith(SpringExtension.class)
 @ExtendWith(MockitoExtension.class)
-@ContextConfiguration(classes = { PersistenceConfiguration.class, MockConfiguration.class, RestConfiguration.class,
-        AsyncConfiguration.class, ESConfiguration.class })
+@ContextConfiguration(classes = {PersistenceConfiguration.class, MockConfiguration.class, RestConfiguration.class,
+        AsyncConfiguration.class, ESConfiguration.class})
 @Transactional
 public class IntegrationTest {
 
@@ -92,6 +97,9 @@ public class IntegrationTest {
 
     @Autowired
     StudentPatientDataRepository studentPatientDataRepository;
+
+    @Autowired
+    AttachmentEventProcessor attachmentEventProcessor;
 
     @Autowired
     TransactionTemplate transactions;
@@ -165,9 +173,41 @@ public class IntegrationTest {
         }
     }
 
+    @Test
+    public void testValidate() throws ExecutionException, InterruptedException, IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        String text;
+        try (InputStream inputStream = IntegrationTest.class.getClassLoader().getResourceAsStream("json/AttachmentEvent-schr70.json")) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+            text = reader.lines().collect(Collectors.joining("\n"));
+        }
+        entityManager.flush();
+
+        Method method = attachmentEventProcessor.getClass().getDeclaredMethod("validate", String.class);
+        method.setAccessible(true);
+        Optional<String> r = (Optional<String>) method.invoke(attachmentEventProcessor, text);
+
+        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: Пустое или некорректное значение полей: attachmentNewValue.patientId", r.get());
+    }
+
+    @Test
+    public void testValidate1() throws ExecutionException, InterruptedException, IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        String text;
+        try (InputStream inputStream = IntegrationTest.class.getClassLoader().getResourceAsStream("json/AttachmentEvent-schr70-1.json")) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+            text = reader.lines().collect(Collectors.joining("\n"));
+        }
+        entityManager.flush();
+
+        Method method = attachmentEventProcessor.getClass().getDeclaredMethod("validate", String.class);
+        method.setAccessible(true);
+        Optional<String> r = (Optional<String>) method.invoke(attachmentEventProcessor, text);
+
+        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: Пустое или некорректное значение полей: attachmentNewValue.attachType.title, attachmentNewValue.attachType.code", r.get());
+    }
+
     private void buildMessage(String text) throws ExecutionException, InterruptedException {
         final IndexEsuInput indexEsuInput = new IndexEsuInput(10L,
-                LocalDateTime.now(),"1", TopicType.ATTACHMENT_EVENT.getName(), text);
+                LocalDateTime.now(), "1", TopicType.ATTACHMENT_EVENT.getName(), text);
         EsuInput testInput = new EsuInput();
         testInput.setStatus(EsuStatusType.NEW);
         testInput.setDateCreated(LocalDateTime.now());

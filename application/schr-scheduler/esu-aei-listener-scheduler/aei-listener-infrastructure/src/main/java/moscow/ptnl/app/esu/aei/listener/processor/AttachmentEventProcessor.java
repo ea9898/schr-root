@@ -2,6 +2,7 @@ package moscow.ptnl.app.esu.aei.listener.processor;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import moscow.ptnl.app.esu.aei.listener.validator.AttachmentEventValidator;
 import moscow.ptnl.app.error.CustomErrorReason;
@@ -49,19 +50,24 @@ public class AttachmentEventProcessor extends EsuConsumerProcessor {
             AttachmentEvent content;
 
             try {
-                content = mapper.readValue(message, AttachmentEvent.class);
+                content = mapper
+                        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                        .readValue(message, AttachmentEvent.class);
             } catch (JsonProcessingException ex) {
                 return Optional.of(CustomErrorReason.INCORRECT_FORMAT_ESU_MESSAGE.format(ex.getMessage()));
             }
-            errorFields.add(content.getAttachmentNewValue().getPatientId() == null ? "attachmentNewValue.patientId" : null);
+            errorFields.add(content.getAttachmentNewValue().getPatientId() == null || content.getAttachmentNewValue().getPatientId() < 0
+                    ? "attachmentNewValue.patientId" : null);
             errorFields.add(content.getAttachmentNewValue().getAttachId() == null ? "attachmentNewValue.attachId" : null);
 //            errorFields.add(content.getAttachmentNewValue().getAreaId() == null ? "attachmentNewValue.areaId" : null);
 //            errorFields.add(content.getAttachmentNewValue().getAreaTypeCode() == null ? "attachmentNewValue.areaTypeCode" : null);
             errorFields.add(content.getAttachmentNewValue().getAttachBeginDate() == null ? "attachmentNewValue.attachBeginDate" : null);
             errorFields.add(content.getAttachmentNewValue().getMoId() == null ? "attachmentNewValue.moId" : null);
 //            errorFields.add(content.getAttachmentNewValue().getMuId() == null ? "attachmentNewValue.muId" : null);
-            errorFields.add(content.getAttachmentNewValue().getAttachType().getCode() == null ? "attachmentNewValue.attachType.code" : null);
-            errorFields.add(content.getAttachmentNewValue().getAttachType().getTitle() == null ? "attachmentNewValue.attachType.title" : null);
+            errorFields.add(content.getAttachmentNewValue().getAttachType().getCode() == null ||
+                    content.getAttachmentNewValue().getAttachType().getCode().trim().isEmpty() ? "attachmentNewValue.attachType.code" : null);
+            errorFields.add(content.getAttachmentNewValue().getAttachType().getTitle() == null ||
+                    content.getAttachmentNewValue().getAttachType().getTitle().trim().isEmpty() ? "attachmentNewValue.attachType.title" : null);
 //            errorFields.add(content.getAttachmentNewValue().getProcessOfAttachment() == null || content.getAttachmentNewValue().getProcessOfAttachment().getCode() == null ? "attachmentNewValue.processOfAttachment.code" : null);
 //            errorFields.add(content.getAttachmentNewValue().getProcessOfAttachment() == null || content.getAttachmentNewValue().getProcessOfAttachment().getTitle() == null ? "attachmentNewValue.processOfAttachment.title" : null);
             errorFields.add(content.getEvent().getDateTime() == null ? "event.dateTime" : null);

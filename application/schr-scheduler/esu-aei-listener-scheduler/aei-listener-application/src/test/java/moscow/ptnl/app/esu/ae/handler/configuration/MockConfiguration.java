@@ -1,6 +1,8 @@
 package moscow.ptnl.app.esu.ae.handler.configuration;
 
+import moscow.ptnl.app.esu.aei.listener.processor.AttachmentEventProcessor;
 import moscow.ptnl.app.esu.aei.listener.task.AttachmentEventProcessTask;
+import moscow.ptnl.app.esu.aei.listener.validator.AttachmentEventValidator;
 import moscow.ptnl.domain.repository.SettingsRepository;
 import moscow.ptnl.domain.service.SettingService;
 import moscow.ptnl.domain.service.SettingServiceImpl;
@@ -46,6 +48,11 @@ public class MockConfiguration {
         return new AttachmentEventProcessTask();
     }
 
+    @Bean
+    public AttachmentEventProcessor attachmentEventProcessor() { return new AttachmentEventProcessor(); }
+
+    @Bean
+    public AttachmentEventValidator attachmentEventValidator() { return new AttachmentEventValidator(); }
 //    @Bean
 //    public Repositories repositories() { return new Repositories(applicationContext); }
 }
