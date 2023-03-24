@@ -205,6 +205,38 @@ public class IntegrationTest {
         Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: Пустое или некорректное значение полей: attachmentNewValue.attachType.title, attachmentNewValue.attachType.code", r.get());
     }
 
+    @Test
+    public void testValidateIncorrect() throws ExecutionException, InterruptedException, IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        String text;
+        try (InputStream inputStream = IntegrationTest.class.getClassLoader().getResourceAsStream("json/AttachmentEvent-schr60.json")) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+            text = reader.lines().collect(Collectors.joining("\n"));
+        }
+        entityManager.flush();
+
+        Method method = attachmentEventProcessor.getClass().getDeclaredMethod("validate", String.class);
+        method.setAccessible(true);
+        Optional<String> r = (Optional<String>) method.invoke(attachmentEventProcessor, text);
+
+        Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: Expected a ',' or '}' at 22 [character 9 line 3]", r.get());
+    }
+
+    @Test
+    public void testValidateIncorrectUnknownField() throws ExecutionException, InterruptedException, IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        String text;
+        try (InputStream inputStream = IntegrationTest.class.getClassLoader().getResourceAsStream("json/AttachmentEvent-schr60-1.json")) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+            text = reader.lines().collect(Collectors.joining("\n"));
+        }
+        entityManager.flush();
+
+        Method method = attachmentEventProcessor.getClass().getDeclaredMethod("validate", String.class);
+        method.setAccessible(true);
+        Optional<String> r = (Optional<String>) method.invoke(attachmentEventProcessor, text);
+
+        Assertions.assertTrue(r.isEmpty());
+    }
+
     private void buildMessage(String text) throws ExecutionException, InterruptedException {
         final IndexEsuInput indexEsuInput = new IndexEsuInput(10L,
                 LocalDateTime.now(), "1", TopicType.ATTACHMENT_EVENT.getName(), text);

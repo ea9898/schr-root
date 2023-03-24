@@ -10,6 +10,7 @@ import moscow.ptnl.app.esu.EsuConsumerProcessor;
 import moscow.ptnl.app.model.TopicType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import ru.mos.emias.esu.model.AttachmentEvent;
@@ -29,6 +30,7 @@ import java.util.Optional;
 public class AttachmentEventProcessor extends EsuConsumerProcessor {
 
     @Autowired
+    @Qualifier("objectMapperLocalTime")
     protected ObjectMapper mapper;
 
     @Autowired
@@ -51,7 +53,6 @@ public class AttachmentEventProcessor extends EsuConsumerProcessor {
 
             try {
                 content = mapper
-                        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                         .readValue(message, AttachmentEvent.class);
             } catch (JsonProcessingException ex) {
                 return Optional.of(CustomErrorReason.INCORRECT_FORMAT_ESU_MESSAGE.format(ex.getMessage()));

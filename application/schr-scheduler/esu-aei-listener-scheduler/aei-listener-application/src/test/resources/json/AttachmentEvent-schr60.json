@@ -1,0 +1,78 @@
+{
+  "event":
+    "id": -34126114,
+    "dateTime": "2023-03-21T09:34:21",
+    "eventType": "CHANGE"
+  },
+  "attachmentNewValue": {
+    "attachId": 128086897,
+    "patientId": -83872,
+    "isActual": true,
+    "attachPolType": {
+      "globalId": 125694322,
+      "code": "1",
+      "title": "Обязательное медицинское страхование"
+    },
+    "noSelfAppointment": false,
+    "moId": 10310805,
+    "muId": -333,
+    "areaId": 140,
+    "attachBeginDate": "2022-10-11",
+    "attachType": {
+      "globalId": 128619861,
+      "code": "1",
+      "title": "базовое терапевтическое"
+    },
+    "processOfAttachment": {
+      "globalId": 135857403,
+      "code": "10",
+      "title": "По заявлению"
+    },
+    "attachChangeType": {
+      "globalId": 128619933,
+      "code": "80",
+      "title": "По сведениям МГФОМС"
+    },
+    "attachForm": {
+      "globalId": 128620009,
+      "code": "10",
+      "title": "По участковому принципу (основное)"
+    },
+    "areaTypeCode": 10,
+    "areaNumber": 19
+  },
+  "attachmentOldValue": {
+    "attachId": 128086897,
+    "patientId": 83872,
+    "isActual": true,
+    "attachPolType": {
+      "globalId": 125694322,
+      "code": "1",
+      "title": "Обязательное медицинское страхование"
+    },
+    "noSelfAppointment": false,
+    "moId": 10310805,
+    "muId": -333,
+    "attachBeginDate": "2022-10-11",
+    "attachType": {
+      "globalId": 128619861,
+      "code": "1",
+      "title": "базовое терапевтическое"
+    },
+    "processOfAttachment": {
+      "globalId": 135857403,
+      "code": "  ",
+      "title": "По заявлению"
+    },
+    "attachChangeType": {
+      "globalId": 128619933,
+      "code": "80",
+      "title": "По сведениям МГФОМС"
+    },
+    "attachForm": {
+      "globalId": 128620009,
+      "code": "10",
+      "title": "По участковому принципу (основное)"
+    }
+  }
+}
