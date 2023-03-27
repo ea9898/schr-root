@@ -51,7 +51,9 @@ public class LastAnthropometryProcessor extends EsuConsumerProcessor {
                 return Optional.of(CustomErrorReason.INCORRECT_FORMAT_ESU_MESSAGE.format(ex.getMessage()));
             }
 
-            if (content.getPatientId() == null) {
+            long patientId = Long.parseLong(content.getPatientId());
+
+            if (content.getPatientId() == null || patientId < 0) {
                 errorFields.add("lastAnthropometry.patientId");
             }
 
