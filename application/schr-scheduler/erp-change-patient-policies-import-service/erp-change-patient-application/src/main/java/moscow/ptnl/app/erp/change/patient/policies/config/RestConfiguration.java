@@ -40,6 +40,8 @@ public class RestConfiguration {
         mapper.configure(DeserializationFeature.USE_LONG_FOR_INTS, true);
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        mapper.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE);
+        mapper.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
         mapper.setTimeZone(TimeZone.getDefault());
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 

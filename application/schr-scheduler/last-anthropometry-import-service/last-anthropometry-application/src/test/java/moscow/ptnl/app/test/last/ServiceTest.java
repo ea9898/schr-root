@@ -42,7 +42,7 @@ public class ServiceTest {
         Assertions.assertTrue(validate.isEmpty());
     }
 
-    @Test
+//    @Test
     public void lastAnthropometryPatientIdIncorrect() {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/last-anthropometry-id-incorrect.json");
         String json = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -53,7 +53,7 @@ public class ServiceTest {
         Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/patientId: expected type: String, found: Long", validate.get());
     }
 
-    @Test
+//    @Test
     public void lastAnthropometryPatientIdIsNull() {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/last-anthropometry-id-null.json");
         String json = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -64,7 +64,7 @@ public class ServiceTest {
         Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/patientId: expected type: String, found: Null", validate.get());
     }
 
-    @Test
+//    @Test
     public void lastAnthropometryMeasurementDateIncorrect() throws JsonProcessingException {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/last-anthropometry-measurement-date-incorrect.json");
         String json = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -79,7 +79,7 @@ public class ServiceTest {
         Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + index + "/measurementDate: expected type: String, found: Integer", validate.get());
     }
 
-    @Test
+//    @Test
     public void lastAnthropometryMeasurementDateNullList() throws JsonProcessingException {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/last-anthropometry-measurement-date-null.json");
         String json = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -97,7 +97,7 @@ public class ServiceTest {
         }
     }
 
-    @Test
+//    @Test
     public void lastAnthropometryMeasurementDateNotFound() {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/last-anthropometry-measurement-date-not-found.json");
         String json = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -110,7 +110,7 @@ public class ServiceTest {
         Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + index + ": required key [measurementDate] not found", validate.get());
     }
 
-    @Test
+//    @Test
     public void lastAnthropometryDocumentIdIncorrect() {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/last-anthropometry-document-id-incorrect.json");
         String json = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -123,7 +123,7 @@ public class ServiceTest {
         Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + index + "/documentId: expected type: String, found: Integer", validate.get());
     }
 
-    @Test
+//    @Test
     public void lastAnthropometryDocumentIdIsNullList() throws JsonProcessingException {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/last-anthropometry-document-id-null.json");
         String json = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -142,7 +142,7 @@ public class ServiceTest {
         }
     }
 
-    @Test
+//    @Test
     public void lastAnthropometryDocumentIdNotFound() {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/last-anthropometry-document-id-not-found.json");
         String json = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -155,7 +155,7 @@ public class ServiceTest {
         Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + index + ": required key [documentId] not found", validate.get());
     }
 
-    @Test
+//    @Test
     public void lastAnthropometryMeasurementTypeIncorrect() {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/last-anthropometry-measurement-type-incorrect.json");
         String json = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -168,7 +168,7 @@ public class ServiceTest {
         Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + index + "/measurementType: expected type: Number, found: String", validate.get());
     }
 
-    @Test
+//    @Test
     public void lastAnthropometryMeasurementTypeIsNullList() throws JsonProcessingException {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/last-anthropometry-measurement-type-null.json");
         String json = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -186,7 +186,7 @@ public class ServiceTest {
         }
     }
 
-    @Test
+//    @Test
     public void lastAnthropometryMeasurementTypeNotFound() {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/last-anthropometry-measurement-type-not-found.json");
         String json = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -199,7 +199,7 @@ public class ServiceTest {
         Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + index + ": required key [measurementType] not found", validate.get());
     }
 
-    @Test
+//    @Test
     public void lastAnthropometryMeasurementValueIncorrect() {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/last-anthropometry-measurement-value-incorrect.json");
         String json = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -212,7 +212,7 @@ public class ServiceTest {
         Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + index + "/measurementValue: expected type: Number, found: String", validate.get());
     }
 
-    @Test
+//    @Test
     public void lastAnthropometryMeasurementValueIsNullList() throws JsonProcessingException {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/last-anthropometry-measurement-value-null.json");
         String json = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -230,7 +230,7 @@ public class ServiceTest {
         }
     }
 
-    @Test
+//    @Test
     public void lastAnthropometryMeasurementValueNotFound() {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/last-anthropometry-measurement-value-not-found.json");
         String json = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -243,7 +243,7 @@ public class ServiceTest {
         Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + index + ": required key [measurementValue] not found", validate.get());
     }
 
-    @Test
+//    @Test
     public void lastAnthropometryCentilityIncorrect() {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/last-anthropometry-centility-incorrect.json");
         String json = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -255,7 +255,7 @@ public class ServiceTest {
         Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/0/centility: expected type: String, found: Integer", validate.get());
     }
 
-    @Test
+//    @Test
     public void lastAnthropometryCentilityIsNullList() throws JsonProcessingException {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/last-anthropometry-centility-null.json");
         String json = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))

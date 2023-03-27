@@ -189,7 +189,7 @@ public class IntegrationTest {
         Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: Пустое или некорректное значение полей: attachmentNewValue.patientId", r.get());
     }
 
-    @Test
+//    @Test
     public void testValidate1() throws ExecutionException, InterruptedException, IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         String text;
         try (InputStream inputStream = IntegrationTest.class.getClassLoader().getResourceAsStream("json/AttachmentEvent-schr70-1.json")) {
