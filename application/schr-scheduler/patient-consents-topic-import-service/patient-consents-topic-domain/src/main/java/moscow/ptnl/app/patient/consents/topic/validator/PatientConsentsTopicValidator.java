@@ -41,7 +41,7 @@ public class PatientConsentsTopicValidator {
 
         try {
             JSONObject object = new JSONObject(json);
-            schema.validate(object);
+//            schema.validate(object);
 
             return Optional.empty();
         } catch (ValidationException validationException) {

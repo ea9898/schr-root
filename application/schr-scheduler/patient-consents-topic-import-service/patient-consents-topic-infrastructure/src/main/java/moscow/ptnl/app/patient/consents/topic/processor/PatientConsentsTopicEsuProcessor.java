@@ -37,22 +37,22 @@ public class PatientConsentsTopicEsuProcessor extends EsuConsumerProcessor {
     }
 
     @Override
-    protected Optional<String> validate(String message) {
+    protected Optional<String> validate(String msg) {
         //4.1. Система проверяет, что сообщение соответствует формату JSON и возможно произвести его парсинг
-        Optional<String> errorMsg = patientConsentsTopicValidator.validate(message);
+        Optional<String> errorMsg = patientConsentsTopicValidator.validate(msg);
 
         if (errorMsg.isEmpty()) {
             HashSet<String> errorFields = new HashSet<>();
             //4.2. Проводится форматно-логический контроль полученных данных на наличие обязательных атрибутов
-            PatientConsents content;
+            PatientConsents message;
 
             try {
-                content = patientConsentsTopicDeserializer.apply(message);
+                message = patientConsentsTopicDeserializer.apply(msg);
             } catch (Exception ex) {
                 return Optional.of(CustomErrorReason.INCORRECT_FORMAT_ESU_MESSAGE.format(ex.getMessage()));
             }
 
-            errorFields.add(content.getConsentDetails().getConsentId() == null ? "consentId" : null);
+            errorFields.add(message.getConsentDetails().getConsentId() == null ? "consentId" : null);
 //            errorFields.add(content.getConsentDetails().getDocumentedConsent().getDocumentId() == null ? "documentId" : null);
 //            errorFields.add(content.getConsentDetails().getDocumentedConsent().getCreateDate() == null ? "createDate" : null);
 //            errorFields.add(content.getConsentDetails().getDocumentedConsent().getLocationId() == null ? "locationId" : null);
@@ -93,9 +93,9 @@ public class PatientConsentsTopicEsuProcessor extends EsuConsumerProcessor {
 //            errorFields.add(content.getConsentDetails().getDocumentedConsent().getCancelReasonOther() == null ? "cancelReasonOther" : null);
 //            errorFields.add(content.getConsentDetails().getDocumentedConsent().getMoId() == null ? "moId" : null);
 //            errorFields.add(content.getConsentDetails().getDocumentedConsent().getMoName() == null ? "moName" : null);
-            errorFields.add(content.getConsentDetails().getIssueDateTime() == null ? "issueDateTime" : null);
-            errorFields.add(content.getConsentDetails().getConsentFormId() == null ? "consentFormId" : null);
-            errorFields.add(content.getConsentDetails().getConsentTypeId() == null ? "consentTypeId" : null);
+            errorFields.add(message.getConsentDetails().getIssueDateTime() == null ? "issueDateTime" : null);
+            errorFields.add(message.getConsentDetails().getConsentFormId() == null ? "consentFormId" : null);
+            errorFields.add(message.getConsentDetails().getConsentTypeId() == null ? "consentTypeId" : null);
 //            errorFields.add(content.getConsentDetails().getRepresentativePhysicalId() == null ? "representativePhysicalId" : null);
 //            errorFields.add(content.getConsentDetails().getRepresentativeLegalId() == null ? "representativeLegalId" : null);
             errorFields.remove(null);
