@@ -52,6 +52,7 @@ public class PatientConsentsTopicEsuProcessor extends EsuConsumerProcessor {
                 return Optional.of(CustomErrorReason.INCORRECT_FORMAT_ESU_MESSAGE.format(ex.getMessage()));
             }
 
+            errorFields.add(message.getPatientId() == null || message.getPatientId() < 0 ? "patientId" : null);
             errorFields.add(message.getConsentDetails().getConsentId() == null ? "consentId" : null);
 //            errorFields.add(content.getConsentDetails().getDocumentedConsent().getDocumentId() == null ? "documentId" : null);
 //            errorFields.add(content.getConsentDetails().getDocumentedConsent().getCreateDate() == null ? "createDate" : null);
