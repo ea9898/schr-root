@@ -10,7 +10,7 @@ public enum PlannersEnum {
     I_SCHR_6(6, "erpChangePatientPoliciesHandlerService"),
     I_SCHR_7(7, "lastAnthropometryImportService"),
     I_SCHR_8(8, "lastAnthropometryHandlerService"),
-    I_SCHR_9(9, "patientConsentsImportService"),
+    I_SCHR_9(9, "patientConsentsTopicImportService"),
     I_SCHR_10(10, "patientConsentsTopicHandlerService"),
     I_SCHR_11(11, "schoolAttachmentEventImportService"),
     I_SCHR_12(12, "schoolAttachmentEventHandlerService")
