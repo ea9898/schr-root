@@ -136,7 +136,7 @@ public class ServiceTest {
 
         Assertions.assertTrue(validate.isPresent());
         for (int i = 0; i < readValue.getMeasurement().size(); i++) {
-            if (readValue.getMeasurement().get(i).getDocumentId() == null) {
+            if (readValue.getMeasurement().get(i).getDocumentID() == null) {
                 Assertions.assertEquals("SCHR_101 - Некорректный формат сообщения ЕСУ: #/measurement/" + i + "/documentId: expected type: String, found: Null", validate.get());
             }
         }

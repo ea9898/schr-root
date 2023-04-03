@@ -105,7 +105,7 @@ public class LastAnthropometryProcessTask extends BaseEsuProcessorTask {
         AnthropometryInfo newAnthropometryInfo = new AnthropometryInfo();
         newAnthropometryInfo.setMeasurementType(newData.getMeasurementType().intValue());
         newAnthropometryInfo.setMeasurementValue(newData.getMeasurementValue().floatValue());
-        newAnthropometryInfo.setDocumentId(newData.getDocumentId());
+        newAnthropometryInfo.setDocumentId(newData.getDocumentID());
         newAnthropometryInfo.setMeasurementDate(newData.getMeasurementDate());
         newAnthropometryInfo.setCentility(newData.getCentility());
         newAnthropometryInfo.setResultAssessmentId(newData.getResultAssessmentId() == null ? null : newData.getResultAssessmentId().longValue());

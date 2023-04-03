@@ -20,7 +20,7 @@
             "format": "date",
             "description": "Дата проведения измерения"
           },
-          "documentId": {
+          "documentID": {
             "type": "string",
             "description": "Идентификатор документа СИМИ"
           },
@@ -42,7 +42,7 @@
           }
         },
         "required": [
-          "measurementDate", "documentId", "measurementType", "measurementValue"
+          "measurementDate", "documentID", "measurementType", "measurementValue"
         ]
       }
     },

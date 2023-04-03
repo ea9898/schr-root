@@ -66,7 +66,7 @@ public class LastAnthropometryProcessor extends EsuConsumerProcessor {
                 if (content.getMeasurement().stream().anyMatch(item -> item.getMeasurementType() == null)) {
                     errorFields.add("lastAnthropometry.measurementType");
                 }
-                if (content.getMeasurement().stream().anyMatch(item -> item.getDocumentId() == null)) {
+                if (content.getMeasurement().stream().anyMatch(item -> item.getDocumentID() == null)) {
                     errorFields.add("lastAnthropometry.documentId");
                 }
                 if (content.getMeasurement().stream().anyMatch(item -> item.getMeasurementDate() == null)) {
