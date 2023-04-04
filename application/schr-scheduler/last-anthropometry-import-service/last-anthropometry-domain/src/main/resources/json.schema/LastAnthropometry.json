@@ -40,10 +40,7 @@
             "type": "number",
             "description": "Идентификатор результата оценки антропометрического показателя"
           }
-        },
-        "required": [
-          "measurementDate", "documentID", "measurementType", "measurementValue"
-        ]
+        }
       }
     },
     "annuledMeasurementsTypeId": {
@@ -53,6 +50,5 @@
         "type": "number"
       }
     }
-  },
-  "required": ["patientId"]
+  }
 }

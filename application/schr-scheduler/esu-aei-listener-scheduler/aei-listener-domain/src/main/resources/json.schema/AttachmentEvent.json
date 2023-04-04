@@ -18,10 +18,6 @@
     }
   },
   "additionalProperties": false,
-  "required": [
-    "event",
-    "attachmentNewValue"
-  ],
   "definitions": {
     "Event": {
       "type": "object",
@@ -39,11 +35,6 @@
           "$ref": "#/definitions/EventType"
         }
       },
-      "required": [
-        "id",
-        "dateTime",
-        "eventType"
-      ],
       "description": "Cобытие изменения прикрепления",
       "additionalProperties": false
     },
@@ -128,15 +119,7 @@
           "type": "integer",
           "description": "Номер участка"
         }
-      }, "required": [
-        "attachId",
-        "isActual",
-        "attachPolType",
-        "noSelfAppointment",
-        "moId",
-        "attachBeginDate",
-        "attachType"
-      ]
+      }
     },
     "EventType": {
       "type": "string",
@@ -163,11 +146,7 @@
           "type": "string",
           "description": "Наименование значения справочника"
         }
-      }, "required": [
-        "globalId",
-        "code",
-        "title"
-      ]
+      }
     }
   }
 }

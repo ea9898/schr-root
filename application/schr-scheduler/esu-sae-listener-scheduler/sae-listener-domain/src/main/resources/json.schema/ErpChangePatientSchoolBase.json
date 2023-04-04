@@ -59,16 +59,6 @@
       "description": "Сведения записи сущности"
     }
   },
-  "required": [
-    "id",
-    "operationDate",
-    "uklErp",
-    "studentId",
-    "patientStudentLinkStatus",
-    "patientType",
-    "patientRecStatus",
-    "entityName"
-  ],
   "definitions": {
     "RecStatus": {
       "type": "string",
@@ -116,11 +106,7 @@
           "$ref": "#/definitions/Value",
           "description": "Значение атрибута"
         }
-      },
-      "required": [
-        "name",
-        "type"
-      ]
+      }
     },
     "EntityData": {
       "type": "object",
@@ -132,10 +118,7 @@
           },
           "description": "Сведения записи сущности"
         }
-      },
-      "required": [
-        "attributes"
-      ]
+      }
     }
   }
 }

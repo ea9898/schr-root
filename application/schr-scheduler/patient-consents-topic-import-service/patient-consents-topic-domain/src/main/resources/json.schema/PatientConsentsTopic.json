@@ -6,10 +6,6 @@
   "description":"Схема, описывающая структуру данных о согласиях пациента",
   "properties":{
     "message":{
-      "required":[
-        "patientId",
-        "consentDetails"
-      ],
       "patientId":{
         "id":"#/properties/patientId",
         "type":"number",
@@ -19,12 +15,6 @@
         "id":"#/properties/consentDetails",
         "type":"object",
         "title":"Сведения о согласии (решении) пациента",
-        "required":[
-          "consentId",
-          "issueDateTime",
-          "consentFormId",
-          "consentTypeId"
-        ],
         "properties":{
           "consentId":{
             "id":"#/properties/consentDetails/properties/consentId",
@@ -35,14 +25,6 @@
             "id":"#/properties/consentDetails/properties/documentedConsent",
             "type":"object",
             "title":"Сведения о документе согласия",
-            "required":[
-              "documentId",
-              "createDate",
-              "allMedicalIntervention",
-              "signedByPatient",
-              "moId",
-              "moName"
-            ],
             "properties":{
               "documentId":{
                 "id":"#/properties/consentDetails/properties/documentedConsent/properties/documentId",
@@ -74,9 +56,6 @@
                 "id":"#/properties/consentDetails/properties/documentedConsent/properties/interventionDetails",
                 "type":"object",
                 "title":"Список видов мед. вмешательств",
-                "required":[
-                  "medInterventionId"
-                ],
                 "properties":{
                   "medInterventionId":{
                     "id":"#/properties/consentDetails/properties/documentedConsent/properties/interventionDetails/properties/medInterventionId",
@@ -92,9 +71,6 @@
                 "id":"#/properties/consentDetails/properties/documentedConsent/properties/Immunodiagnostics",
                 "type":"object",
                 "title":"Перечень иммунодиагностик",
-                "required":[
-                  "immunodiagnostic"
-                ],
                 "properties":{
                   "immunodiagnostic":{
                     "id":"#/properties/consentDetails/properties/documentedConsent/properties/Immunodiagnostics/properties/immunodiagnostic",
@@ -103,18 +79,11 @@
                     "contains":{
                       "type":"object"
                     },
-                    "required":[
-                      "immunoTestKind"
-                    ],
                     "properties":{
                       "immunoTestKind":{
                         "id":"#/properties/consentDetails/properties/documentedConsent/properties/Immunodiagnostics/properties/immunodiagnostic/properties/immunoTestKind",
                         "type":"object",
                         "title":"Сведения о виде иммунодиагностики",
-                        "required":[
-                          "immunoKindCode",
-                          "infectionCode"
-                        ],
                         "properties":{
                           "immunoKindCode":{
                             "id":"#/properties/consentDetails/properties/documentedConsent/properties/Immunodiagnostics/properties/immunodiagnostic/properties/immunoTestKind/properties/immunoKindCode",
@@ -132,9 +101,6 @@
                         "id":"#/properties/consentDetails/properties/documentedConsent/properties/Immunodiagnostics/properties/immunodiagnostic/properties/immunoDrugsTns",
                         "type":"array",
                         "title":"Сведения о препарате",
-                        "required":[
-                          "immunoDrugsTnCode"
-                        ],
                         "properties":{
                           "immunoDrugsTnCode":{
                             "id":"#/properties/consentDetails/properties/documentedConsent/properties/Immunodiagnostics/properties/immunodiagnostic/properties/immunoDrugsTns/properties/immunoDrugsTnCode",
@@ -224,9 +190,6 @@
             "id":"#/properties/consentDetails/properties/authorDetails",
             "type":"object",
             "title":"Сведения об авторе изменений",
-            "required":[
-              "muId"
-            ],
             "properties":{
               "medEmployeeLogin":{
                 "id":"#/properties/consentDetails/properties/medEmployeeLogin",
