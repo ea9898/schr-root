@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
 import ru.mos.emias.esu.model.Attribute;
 import ru.mos.emias.esu.model.ErpChangePatientPolicies;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.util.HashSet;
 import java.util.Optional;
 
@@ -57,13 +60,21 @@ public class ECPPProcessor extends EsuConsumerProcessor {
             if (!(content.getEntityData() == null || content.getEntityData().isEmpty() || content.getEntityData().get(0).getAttributes() == null)) {
                 Optional<Attribute> optionalAttribute = content.getEntityData().get(0).getAttributes()
                         .stream().filter(i -> i.getName().equals("policyChangeDate")).findFirst();
-                if (optionalAttribute.isEmpty() || optionalAttribute.get().getValue() == null ||
-                        optionalAttribute.get().getValue().getValue() == null || optionalAttribute.get().getValue().getValue().strip().length() == 0) {
+
+                if (optionalAttribute.isEmpty() ||
+                        optionalAttribute.get().getValue() == null ||
+                        optionalAttribute.get().getValue().getValue() == null ||
+                        optionalAttribute.get().getValue().getValue().strip().length() == 0) {
+                    errorFields.add("erpChangePatient.policyChangeDate");
+                }
+
+                String date = optionalAttribute.get().getValue().getValue();
+                if (!validateDate(date).isEmpty()) {
                     errorFields.add("erpChangePatient.policyChangeDate");
                 }
             }
 
-            // policyUpdateDate, $.entityData[0].attributes[?(@.name=="policyChangeDate")].value.value
+            // $.entityData[0].attributes[?(@.name=="policyNumber")].value.value
             if (!(content.getEntityData() == null || content.getEntityData().isEmpty() || content.getEntityData().get(0).getAttributes() == null)) {
                 Optional<Attribute> optionalAttribute = content.getEntityData().get(0).getAttributes()
                         .stream().filter(i -> i.getName().equals("policyNumber")).findFirst();
@@ -101,5 +112,30 @@ public class ECPPProcessor extends EsuConsumerProcessor {
             }
         }
         return errorMsg;
+    }
+
+    public static HashSet<String> validateDate(String input) {
+        HashSet<String> errorFields = new HashSet<>();
+        DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+                .parseCaseInsensitive()
+                .append(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+                .optionalStart()
+                .appendPattern(".SSSZ")
+                .optionalEnd()
+                .optionalStart()
+                .appendZoneOrOffsetId()
+                .optionalEnd()
+                .optionalStart()
+                .appendOffset("+HHMM", "0000")
+                .optionalEnd()
+                .toFormatter();
+
+        try {
+            formatter.parse(input);
+        } catch(DateTimeParseException e) {
+            errorFields.add("erpChangePatient.policyChangeDate");
+            return errorFields;
+        }
+        return errorFields;
     }
 }
