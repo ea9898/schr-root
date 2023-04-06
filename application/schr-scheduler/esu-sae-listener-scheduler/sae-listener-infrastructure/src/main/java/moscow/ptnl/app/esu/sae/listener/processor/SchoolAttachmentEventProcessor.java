@@ -60,18 +60,8 @@ public class SchoolAttachmentEventProcessor extends EsuConsumerProcessor {
             errorFields.add(!content.getAreaIdChecked() ? "areaId" : null);
             errorFields.add(!content.getAttachStartDateChecked() ? "attachStartDate" : null);
             errorFields.add(content.getStudentId() == null ? "studentId" : null);
-            errorFields.add(!content.getEducationFormChecked() ? "educationForm.id" : null);
-            errorFields.add(!content.getEducationFormNameChecked() ? "educationForm" : null);
-            errorFields.add(!content.getTrainingBeginDateChecked() ? "trainingBeginDate" : null);
-            errorFields.add(!content.getTrainingEndDateChecked() ? "trainingEndDate" : null);
             errorFields.add(content.getUpdateDate() == null ? "operationDate" : null);
             errorFields.add(!content.getActual() ? "isActual" : null);
-
-//            errorFields.add(content.getStudentPersonId() == null ? "studentPersonId" : null);
-//            errorFields.add(!content.getOrganizationIdChecked() ? "organizationId" : null);
-//            errorFields.add(!content.getClassUidChecked() ? "classUid" : null);
-//            errorFields.add(!content.getAcademicYearIdChecked() ? "academicYear.id" : null);
-//            errorFields.add(!content.getAcademicYearChecked() ? "academicYear" : null);
 
             errorFields.remove(null);
 
