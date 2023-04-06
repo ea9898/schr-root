@@ -60,7 +60,7 @@ public class PatientSchoolAttachment {
     private Boolean academicYearChecked;
 
 
-    public static PatientSchoolAttachment buildChecker(Long patientId, String studentId, String studentPersonId, LocalDateTime updateDate,
+    public static PatientSchoolAttachment buildChecker(Long patientId, String studentId, LocalDateTime updateDate,
                                                 Boolean attachmentId, Boolean organizationId, Boolean areaId, Boolean attachStartDate,
                                                 Boolean classUid, Boolean educationForm, Boolean educationFormName,
                                                 Boolean trainingBeginDate, Boolean trainingEndDate, Boolean academicYearId,
@@ -69,7 +69,6 @@ public class PatientSchoolAttachment {
 
         patientSchoolAttachment.patientId = patientId;
         patientSchoolAttachment.studentId = studentId;
-        patientSchoolAttachment.studentPersonId = studentPersonId;
         patientSchoolAttachment.updateDate = updateDate;
         patientSchoolAttachment.attachmentIdChecked = attachmentId;
         patientSchoolAttachment.organizationIdChecked = organizationId;

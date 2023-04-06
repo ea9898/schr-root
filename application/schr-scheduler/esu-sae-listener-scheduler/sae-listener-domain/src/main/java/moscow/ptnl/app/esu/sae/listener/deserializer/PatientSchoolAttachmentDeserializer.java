@@ -47,7 +47,6 @@ public class PatientSchoolAttachmentDeserializer implements Function<String, Pat
         return PatientSchoolAttachment.buildChecker(
                 value.read("$.emiasId"),
                 value.read("$.studentId"),
-                value.read("$.studentPersonId"),
                 mapper.convertValue(value.read("$.operationDate"), LocalDateTime.class),
                 checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"attachId\")].value.value", Long.class, attachNum),
                 checkReqFieldsArray(value, "$.entityData[*].attributes[?(@.name==\"organizationId\")].value.value", Long.class, attachNum),
