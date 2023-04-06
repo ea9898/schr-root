@@ -1,0 +1,118 @@
+{
+   "id": 613,
+   "operationDate": "2022-06-24T12:43:39.95+03:00",
+   "emiasId": 1155761388036,
+   "uklErp": "31583221",
+   "studentId": "c5d6951e-0cad-49c0-e053-0676020abc2e",
+   "studentPersonId": "2c7ac8f6-97a9-4b4e-9cb7-e7820559a8a2",
+   "patientStudentLinkStatus": "Y",
+   "patientType": "I",
+   "patientRecStatus": "Y",
+   "entityName": "schoolAttachment",
+   "entityData": [
+      {
+         "attributes": [
+            {
+               "name": "attachId",
+               "type": "integer",
+               "value": {
+                  "value": "test"
+               }
+            },
+            {
+               "name": "attachType",
+               "type": "dictionary",
+               "value": {
+                  "id": 128619874,
+                  "code": "9",
+                  "value": "школьное"
+               }
+            },
+            {
+               "name": "attachForm",
+               "type": "dictionary",
+               "value": {
+                  "id": 128620020,
+                  "code": "60",
+                  "value": "Прикрепление к классу"
+               }
+            },
+            {
+               "name": "organizationId",
+               "type": "integer",
+               "value": {
+                  "value": "200001565467"
+               }
+            },
+            {
+               "name": "areaId",
+               "type": "integer",
+               "value": {
+                  "value": "17411886030"
+               }
+            },
+            {
+               "name": "attachStartDate",
+               "type": "date",
+               "value": {
+                  "value": "2021-06-24"
+               }
+            },
+            {
+               "name": "attachEndDate",
+               "type": "date",
+               "value": {}
+            },
+            {
+               "name": "isActual",
+               "type": "long",
+               "value": {
+                  "value": "true"
+               }
+            },
+            {
+               "name": "classUid",
+               "type": "guid",
+               "value": {
+                  "value": "275fa2c3-ada3-4ad1-8d3d-0ac7dd0d99a7"
+               }
+            },
+            {
+               "name": "academicYear",
+               "type": "dictionary",
+               "value": {
+                  "id": 22,
+                  "value": "2021/2022"
+               }
+            },
+            {
+               "name": "educationForm",
+               "type": "dictionary",
+               "value": {
+                  "id": 1,
+                  "value": "Очная"
+               }
+            },
+            {
+               "name": "deductionReason",
+               "type": "dictionary",
+               "value": {}
+            },
+            {
+               "name": "trainingBeginDate",
+               "type": "date",
+               "value": {
+                  "value": "2021-06-24T00:00"
+               }
+            },
+            {
+               "name": "trainingEndDate",
+               "type": "date",
+               "value": {
+                  "value": "2099-01-01T00:00"
+               }
+            }
+         ]
+      }
+   ]
+}

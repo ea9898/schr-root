@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+
 import jakarta.annotation.PostConstruct;
 
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Component
 public class PatientSchoolAttachmentDeserializer implements Function<String, PatientSchoolAttachment> {
@@ -97,7 +99,14 @@ public class PatientSchoolAttachmentDeserializer implements Function<String, Pat
         if (array.isEmpty()) {
             return null;
         }
-        return array.size() == num;
+
+        return array.stream().map(elem -> {
+            try {
+                return mapper.convertValue(elem, clazz);
+            } catch (Exception e) {
+                return null;
+            }
+        }).filter(Objects::nonNull).toList().size() == num;
     }
 
     private <T> T extractSingleArray(Object value, String path, Class<T> clazz) {

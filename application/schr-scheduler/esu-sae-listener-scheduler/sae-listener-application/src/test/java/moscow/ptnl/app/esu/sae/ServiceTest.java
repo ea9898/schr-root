@@ -58,4 +58,15 @@ public class ServiceTest {
         Assertions.assertFalse(errors.isEmpty());
     }
 
+    @Test
+    public void testWrong92() {
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("json/SchoolAttachmentEventWrong92.json");
+        String json = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                .lines()
+                .collect(Collectors.joining("\n"));
+        Optional<String> errors = schoolAttachmentEventProcessor.validate(json);
+
+        Assertions.assertFalse(errors.isEmpty());
+    }
+
 }
